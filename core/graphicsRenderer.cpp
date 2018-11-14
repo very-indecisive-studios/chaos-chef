@@ -1,6 +1,5 @@
 #include "graphicsRenderer.h"
 #include "gameException.h"
-#include "../utils.h"
 
 void core::GraphicsRenderer::InitParamsD3D() {
 	// Initialize D3D presentation params
