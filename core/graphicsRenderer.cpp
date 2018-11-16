@@ -201,3 +201,36 @@ HRESULT core::GraphicsRenderer::Render() {
 
 	return result;
 }
+
+core::Texture * core::GraphicsRenderer::LoadTextureFromFile(std::string fileName) 
+{
+	HRESULT result = E_FAIL;
+
+	// Get image info from file.
+	D3DXIMAGE_INFO imageInfo;
+	result = D3DXGetImageInfoFromFile(fileName.c_str(), &imageInfo);
+	core::ThrowIfFailed(result);
+
+	// Create the new texture by loading from file.
+	LPDIRECT3DTEXTURE9 textureD3D = NULL;
+	result = D3DXCreateTextureFromFileEx(
+		deviceD3D,          //3D device
+		fileName.c_str(),	//image filename
+		imageInfo.Width,    //texture width
+		imageInfo.Height,   //texture height
+		1,                  //mip-map levels (1 for no chain)
+		0,                  //usage
+		D3DFMT_UNKNOWN,     //surface format (default)
+		D3DPOOL_DEFAULT,    //memory class for the texture
+		D3DX_DEFAULT,       //image filter
+		D3DX_DEFAULT,       //mip filter
+		0xFF000000,         //color key for transparency
+		&imageInfo,         //bitmap file info (from loaded file)
+		NULL,               //color palette
+		&textureD3D			//destination texture
+	);
+
+	core::ThrowIfFailed(result);
+
+	return new Texture(textureD3D, imageInfo.Width, imageInfo.Height);
+}

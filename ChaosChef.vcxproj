@@ -88,13 +88,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="core\context.cpp" />
     <ClCompile Include="core\graphicsRenderer.cpp" />
+    <ClCompile Include="core\resourceManager.cpp" />
+    <ClCompile Include="core\texture.cpp" />
     <ClCompile Include="winmain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="constants.h" />
+    <ClInclude Include="core\context.h" />
     <ClInclude Include="core\gameException.h" />
     <ClInclude Include="core\graphicsRenderer.h" />
+    <ClInclude Include="core\resourceManager.h" />
+    <ClInclude Include="core\texture.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

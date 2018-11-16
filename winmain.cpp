@@ -7,6 +7,7 @@
 #include <stdlib.h>             // for detecting memory leaks
 #include <crtdbg.h>             // for detecting memory leaks
 #include "constants.h"
+#include "core/context.h"
 #include "core/graphicsRenderer.h"
 
 // Function prototypes
@@ -15,7 +16,6 @@ bool CreateMainWindow(HWND &, HINSTANCE, int);
 LRESULT WINAPI WinProc(HWND, UINT, WPARAM, LPARAM); 
 
 HWND hwnd = NULL;
-core::GraphicsRenderer *gR = nullptr;
 
 //=============================================================================
 // Starting point for a Windows application
@@ -37,8 +37,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         return 1;
 	}
 
-	gR = new core::GraphicsRenderer;
-	gR->Init(hwnd, GAME_WIDTH, GAME_HEIGHT, false);
+	// Initialize application context.
+	core::Context::Initialize();
+
+	// Initialize graphics.
+	core::Context::Get()->GetGraphicsRenderer()->Init(hwnd, GAME_WIDTH, GAME_HEIGHT, FULLSCREEN);
 
 	// Main message loop.
     MSG msg;
@@ -56,10 +59,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			DispatchMessage(&msg);
 		}
 
-		gR->Render();
+		core::Context::Get()->GetGraphicsRenderer()->Render();
 	}
 	
-	delete gR;
+	core::Context::Get()->ReleaseAll();
 
 	return msg.wParam;
 }

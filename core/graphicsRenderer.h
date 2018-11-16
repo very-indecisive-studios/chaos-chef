@@ -2,6 +2,8 @@
 
 #include <d3d9.h>
 #include <d3dx9.h>
+#include <string>
+#include "texture.h"
 
 namespace core {
 	class GraphicsRenderer {
@@ -39,6 +41,8 @@ namespace core {
 		HRESULT HandleLostDevice();
 
 		HRESULT Render();
+
+		Texture * LoadTextureFromFile(std::string fileName);
 
 		void ReleaseAll();
 	};
