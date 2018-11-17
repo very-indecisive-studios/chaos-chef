@@ -4,10 +4,20 @@
 #include <d3dx9.h>
 #include <string>
 #include "texture.h"
+#include "sprite.h"
+#include <vector>
 
 namespace core {
+	struct SpriteDrawJob {
+		Sprite *sprite;
+		Vector2 pos;
+	};
+
 	class GraphicsRenderer {
 	private:
+		// Sprite draw queue.
+		std::vector<SpriteDrawJob *> *spriteDrawJobs;
+
 		// DirectX 3D pointers.
 		LPDIRECT3DDEVICE9	deviceD3D;
 		LPDIRECT3D9			d3d;
@@ -31,12 +41,16 @@ namespace core {
 
 		HRESULT Reset();
 
+		void ClearAllSpriteDrawJobs();
+
 	public:
 		GraphicsRenderer();
 
 		~GraphicsRenderer();
 
 		HRESULT Init(HWND hwnd, int width, int height, bool fullscreen);
+		
+		void QueueSpriteDrawJob(SpriteDrawJob *&job);
 
 		HRESULT HandleLostDevice();
 

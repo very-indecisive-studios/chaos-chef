@@ -32,6 +32,8 @@ void core::GraphicsRenderer::ReleaseAll()
 	spriteD3D->Release();
 	deviceD3D->Release();
 	d3d->Release();
+
+	ClearAllSpriteDrawJobs();
 }
 
 HRESULT core::GraphicsRenderer::Reset()
@@ -50,11 +52,15 @@ core::GraphicsRenderer::GraphicsRenderer()
 	deviceD3D = NULL;
 	spriteD3D = NULL;
 	d3d = NULL;
+
+	spriteDrawJobs = new std::vector<SpriteDrawJob *>;
 }
 
 core::GraphicsRenderer::~GraphicsRenderer()
 {
 	ReleaseAll();
+
+	delete spriteDrawJobs;
 }
 
 HRESULT core::GraphicsRenderer::Init(HWND hwnd, int width, int height, bool fullscreen)
@@ -187,8 +193,46 @@ HRESULT core::GraphicsRenderer::Render() {
 
 		core::ThrowIfFailed(deviceD3D->BeginScene());
 			core::ThrowIfFailed(spriteD3D->Begin(D3DXSPRITE_ALPHABLEND));
+				for (auto sprJob : *spriteDrawJobs) {
+					// Find center of sprite
+					D3DXVECTOR2 spriteCenter = D3DXVECTOR2(
+						(float)(sprJob->sprite->GetWidth() / 2 * sprJob->sprite->GetScale()),
+						(float)(sprJob->sprite->GetHeight() / 2 * sprJob->sprite->GetScale())
+					);
+					D3DXVECTOR2 translate = D3DXVECTOR2((float) sprJob->pos.x, (float) sprJob->pos.y);
+					D3DXVECTOR2 scaling(sprJob->sprite->GetScale(), sprJob->sprite->GetScale());
 
+					D3DXMATRIX matrix;
+					D3DXMatrixTransformation2D(
+						&matrix,                // the matrix
+						NULL,                   // keep origin at top left when scaling
+						0.0f,                   // no scaling rotation
+						&scaling,               // scale amount
+						&spriteCenter,          // rotation center
+						0,						// rotation angle
+						&translate);            // X,Y location
+
+
+					spriteD3D->SetTransform(&matrix);
+
+					// Draw the sprite
+					RECT rect;
+					rect.left = 0;       // used to select one frame from multi-frame image
+					rect.top = 0;
+					rect.right = sprJob->sprite->GetWidth();
+					rect.bottom = sprJob->sprite->GetHeight();
+					
+					spriteD3D->Draw(
+						sprJob->sprite->GetTexture()->GetTextureD3D(), 
+						&rect, 
+						NULL, 
+						NULL, 
+						0xFFFFFFFF
+					);
+				}
 			core::ThrowIfFailed(spriteD3D->End());
+
+			ClearAllSpriteDrawJobs();
 		core::ThrowIfFailed(deviceD3D->EndScene());
 
 		core::ThrowIfFailed(SwapBuffer());
@@ -233,4 +277,18 @@ core::Texture * core::GraphicsRenderer::LoadTextureFromFile(std::string fileName
 	core::ThrowIfFailed(result);
 
 	return new Texture(textureD3D, imageInfo.Width, imageInfo.Height);
+}
+
+void core::GraphicsRenderer::QueueSpriteDrawJob(SpriteDrawJob *&job) {
+	spriteDrawJobs->push_back(job);
+}
+
+void core::GraphicsRenderer::ClearAllSpriteDrawJobs() {
+	for (auto sprJob : *spriteDrawJobs) 
+	{
+		delete sprJob;
+		sprJob = nullptr;
+	}
+
+	spriteDrawJobs->clear();
 }

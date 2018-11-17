@@ -8,12 +8,12 @@
 #include <crtdbg.h>             // for detecting memory leaks
 #include "constants.h"
 #include "core/context.h"
-#include "core/graphicsRenderer.h"
+#include "core/math.h"
 
 // Function prototypes
-int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int); 
+int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int);
 bool CreateMainWindow(HWND &, HINSTANCE, int);
-LRESULT WINAPI WinProc(HWND, UINT, WPARAM, LPARAM); 
+LRESULT WINAPI WinProc(HWND, UINT, WPARAM, LPARAM);
 
 HWND hwnd = NULL;
 
@@ -23,18 +23,18 @@ HWND hwnd = NULL;
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 #if defined(DEBUG) | defined(_DEBUG)
-    // Check for memory leak if debug build.
-    _CrtSetDbgFlag( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );
-	
+	// Check for memory leak if debug build.
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
 	// Attach to console for debugging.
 	AllocConsole();
 	AttachConsole(GetCurrentProcessId());
 	freopen("CON", "w", stdout);
 #endif
 
-    // Try creating a window.
+	// Try creating a window.
 	if (!CreateMainWindow(hwnd, hInstance, nCmdShow)) {
-        return 1;
+		return 1;
 	}
 
 	// Initialize application context.
@@ -43,11 +43,16 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	// Initialize graphics.
 	core::Context::Get()->GetGraphicsRenderer()->Init(hwnd, GAME_WIDTH, GAME_HEIGHT, FULLSCREEN);
 
+	core::Sprite *sprite = core::Sprite::Create("sprites\\food\\plated food\\empty_plate.png");
+	int myX = 0;
+
 	// Main message loop.
-    MSG msg;
+	MSG msg;
 	int done = 0;
 	while (!done)
 	{
+		myX = myX > GAME_WIDTH ? 0 : myX + 1;
+
 		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
 		{
 			// look for quit message
@@ -58,11 +63,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
+		sprite->Draw(core::Vector2(myX, 10));
 
 		core::Context::Get()->GetGraphicsRenderer()->Render();
 	}
-	
+
 	core::Context::Get()->ReleaseAll();
+
+	delete sprite;
 
 	return msg.wParam;
 }
@@ -70,10 +78,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 //=============================================================================
 // window event callback function
 //=============================================================================
-LRESULT WINAPI WinProc( HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam )
+LRESULT WINAPI WinProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (msg) {
-    case WM_DESTROY:
+	case WM_DESTROY:
 		PostQuitMessage(0);
 		return 0;
 	}
@@ -86,72 +94,72 @@ LRESULT WINAPI WinProc( HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam )
 // Create the window
 // Returns: false on error
 //=============================================================================
-bool CreateMainWindow(HWND &hwnd, HINSTANCE hInstance, int nCmdShow) 
-{ 
-    WNDCLASSEX wcx; 
- 
-    // Fill in the window class structure with parameters 
-    // that describe the main window. 
-    wcx.cbSize = sizeof(wcx);           // size of structure 
-    wcx.style = CS_HREDRAW | CS_VREDRAW;    // redraw if size changes 
-    wcx.lpfnWndProc = WinProc;          // points to window procedure 
-    wcx.cbClsExtra = 0;                 // no extra class memory 
-    wcx.cbWndExtra = 0;                 // no extra window memory 
-    wcx.hInstance = hInstance;          // handle to instance 
-    wcx.hIcon = NULL; 
-    wcx.hCursor = LoadCursor(NULL,IDC_ARROW);   // predefined arrow 
-    wcx.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);    // black background 
-    wcx.lpszMenuName =  NULL;           // name of menu resource 
-    wcx.lpszClassName = CLASS_NAME;     // name of window class 
-    wcx.hIconSm = NULL;                 // small class icon 
- 
-    // Register the window class. 
-    // RegisterClassEx returns 0 on error.
-    if (RegisterClassEx(&wcx) == 0)    // if error
-        return false;
+bool CreateMainWindow(HWND &hwnd, HINSTANCE hInstance, int nCmdShow)
+{
+	WNDCLASSEX wcx;
 
-    //set up the screen in windowed or fullscreen mode?
-    DWORD style;
-    if (FULLSCREEN)
-        style = WS_EX_TOPMOST | WS_VISIBLE | WS_POPUP;
-    else
-        style = WS_OVERLAPPEDWINDOW;
+	// Fill in the window class structure with parameters 
+	// that describe the main window. 
+	wcx.cbSize = sizeof(wcx);           // size of structure 
+	wcx.style = CS_HREDRAW | CS_VREDRAW;    // redraw if size changes 
+	wcx.lpfnWndProc = WinProc;          // points to window procedure 
+	wcx.cbClsExtra = 0;                 // no extra class memory 
+	wcx.cbWndExtra = 0;                 // no extra window memory 
+	wcx.hInstance = hInstance;          // handle to instance 
+	wcx.hIcon = NULL;
+	wcx.hCursor = LoadCursor(NULL, IDC_ARROW);   // predefined arrow 
+	wcx.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);    // black background 
+	wcx.lpszMenuName = NULL;           // name of menu resource 
+	wcx.lpszClassName = CLASS_NAME;     // name of window class 
+	wcx.hIconSm = NULL;                 // small class icon 
 
-    // Create window
-    hwnd = CreateWindow(
-        CLASS_NAME,             // name of the window class
-        GAME_TITLE,             // title bar text
-        style,                  // window style
-        CW_USEDEFAULT,          // default horizontal position of window
-        CW_USEDEFAULT,          // default vertical position of window
-        GAME_WIDTH,             // width of window
-        GAME_HEIGHT,            // height of the window
-        (HWND) NULL,            // no parent window
-        (HMENU) NULL,           // no menu
-        hInstance,              // handle to application instance
-        (LPVOID) NULL);         // no window parameters
+	// Register the window class. 
+	// RegisterClassEx returns 0 on error.
+	if (RegisterClassEx(&wcx) == 0)    // if error
+		return false;
 
-    // if there was an error creating the window
-    if (!hwnd)
-        return false;
+	//set up the screen in windowed or fullscreen mode?
+	DWORD style;
+	if (FULLSCREEN)
+		style = WS_EX_TOPMOST | WS_VISIBLE | WS_POPUP;
+	else
+		style = WS_OVERLAPPEDWINDOW;
 
-    if(!FULLSCREEN)             // if window
-    {
-        // Adjust window size so client area is GAME_WIDTH x GAME_HEIGHT
-        RECT clientRect;
-        GetClientRect(hwnd, &clientRect);   // get size of client area of window
-        MoveWindow(
+	// Create window
+	hwnd = CreateWindow(
+		CLASS_NAME,             // name of the window class
+		GAME_TITLE,             // title bar text
+		style,                  // window style
+		CW_USEDEFAULT,          // default horizontal position of window
+		CW_USEDEFAULT,          // default vertical position of window
+		GAME_WIDTH,             // width of window
+		GAME_HEIGHT,            // height of the window
+		(HWND)NULL,            // no parent window
+		(HMENU)NULL,           // no menu
+		hInstance,              // handle to application instance
+		(LPVOID)NULL);         // no window parameters
+
+	// if there was an error creating the window
+	if (!hwnd)
+		return false;
+
+	if (!FULLSCREEN)             // if window
+	{
+		// Adjust window size so client area is GAME_WIDTH x GAME_HEIGHT
+		RECT clientRect;
+		GetClientRect(hwnd, &clientRect);   // get size of client area of window
+		MoveWindow(
 			hwnd,
 			0,												// Left
-            0,												// Top
-            GAME_WIDTH+(GAME_WIDTH-clientRect.right),		// Right
-			GAME_HEIGHT+(GAME_HEIGHT-clientRect.bottom),	// Bottom
+			0,												// Top
+			GAME_WIDTH + (GAME_WIDTH - clientRect.right),		// Right
+			GAME_HEIGHT + (GAME_HEIGHT - clientRect.bottom),	// Bottom
 			TRUE											// Repaint the window
-		);                                       
-    }
+		);
+	}
 
-    // Show the window
-    ShowWindow(hwnd, nCmdShow);
+	// Show the window
+	ShowWindow(hwnd, nCmdShow);
 
-    return true;
+	return true;
 }

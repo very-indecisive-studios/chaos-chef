@@ -91,6 +91,7 @@
     <ClCompile Include="core\context.cpp" />
     <ClCompile Include="core\graphicsRenderer.cpp" />
     <ClCompile Include="core\resourceManager.cpp" />
+    <ClCompile Include="core\sprite.cpp" />
     <ClCompile Include="core\texture.cpp" />
     <ClCompile Include="winmain.cpp" />
   </ItemGroup>
@@ -99,7 +100,9 @@
     <ClInclude Include="core\context.h" />
     <ClInclude Include="core\gameException.h" />
     <ClInclude Include="core\graphicsRenderer.h" />
+    <ClInclude Include="core\math.h" />
     <ClInclude Include="core\resourceManager.h" />
+    <ClInclude Include="core\sprite.h" />
     <ClInclude Include="core\texture.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
