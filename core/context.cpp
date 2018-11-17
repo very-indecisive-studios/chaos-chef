@@ -4,6 +4,7 @@ core::Context::Context()
 {
 	graphicsRenderer	= new GraphicsRenderer();
 	resourceManager		= new ResourceManager();
+	inputManager		= new InputManager();
 }
 
 core::Context::~Context()
@@ -13,6 +14,9 @@ core::Context::~Context()
 
 	delete resourceManager;
 	resourceManager = nullptr;
+
+	delete inputManager;
+	inputManager = nullptr;
 }
 
 core::GraphicsRenderer *const core::Context::GetGraphicsRenderer()
@@ -23,6 +27,11 @@ core::GraphicsRenderer *const core::Context::GetGraphicsRenderer()
 core::ResourceManager *const core::Context::GetResourceManager()
 {
 	return resourceManager;
+}
+
+core::InputManager *const core::Context::GetInputManager()
+{
+	return inputManager;
 }
 
 /*
