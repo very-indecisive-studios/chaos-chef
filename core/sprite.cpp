@@ -51,6 +51,5 @@ core::Sprite * core::Sprite::Create(const std::string& textureName, int scale) {
 	auto texture 
 		= core::Context::Get()->GetResourceManager()->GetTexture(textureName);
 
-	Sprite *sprite = new core::Sprite(texture, scale);
-	return sprite;
+	return new core::Sprite(texture, scale);
 }

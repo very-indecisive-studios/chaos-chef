@@ -15,17 +15,17 @@ core::ResourceManager::~ResourceManager() {
 	delete textureResourceMap;
 }
 
-core::Texture *& core::ResourceManager::GetTexture(std::string textureName) {
+core::Texture * core::ResourceManager::GetTexture(std::string textureName) {
 	auto itr = textureResourceMap->find(textureName);
 	
 	if (itr != textureResourceMap->end()) {
 		return itr->second;
 	}
 	else {
-		Texture *texture = core::Context::Get()->GetGraphicsRenderer()->LoadTextureFromFile(textureName);
-		
-		(*textureResourceMap)[textureName] = texture;
+		core::Texture *loadedTexture = core::Context::Get()->GetGraphicsRenderer()->LoadTextureFromFile(textureName);
 
-		return texture;
+		(*textureResourceMap)[textureName] = loadedTexture;
+
+		return loadedTexture;
 	}
 }

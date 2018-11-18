@@ -12,6 +12,6 @@ namespace core {
 		ResourceManager();
 		~ResourceManager();
 
-		core::Texture *& GetTexture(std::string textureName);
+		core::Texture * GetTexture(std::string textureName);
 	};
 }
