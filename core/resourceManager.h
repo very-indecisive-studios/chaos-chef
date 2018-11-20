@@ -7,7 +7,7 @@
 namespace core {
 	class ResourceManager {
 	private:
-		std::map<std::string, core::Texture*> *textureResourceMap;
+		std::map<std::string, core::Texture *> *textureResourceMap;
 	public:
 		ResourceManager();
 		~ResourceManager();

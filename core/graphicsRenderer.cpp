@@ -53,7 +53,7 @@ core::GraphicsRenderer::GraphicsRenderer()
 	spriteD3D = NULL;
 	d3d = NULL;
 
-	spriteDrawJobs = new std::vector<SpriteDrawJob *>;
+	spriteDrawJobs = new std::vector<DrawSpriteJob *>;
 }
 
 core::GraphicsRenderer::~GraphicsRenderer()
@@ -63,7 +63,7 @@ core::GraphicsRenderer::~GraphicsRenderer()
 	delete spriteDrawJobs;
 }
 
-HRESULT core::GraphicsRenderer::Init(HWND hwnd, int width, int height, bool fullscreen)
+HRESULT core::GraphicsRenderer::Initialize(HWND hwnd, int width, int height, bool fullscreen)
 {
 	this->hwnd = hwnd;
 	this->width = width;
@@ -210,21 +210,15 @@ HRESULT core::GraphicsRenderer::Render() {
 						&scaling,               // scale amount
 						&spriteCenter,          // rotation center
 						0,						// rotation angle
-						&translate);            // X,Y location
+						&translate				// X,Y location
+					);
 
 
 					spriteD3D->SetTransform(&matrix);
 
-					// Draw the sprite
-					RECT rect;
-					rect.left = 0;       // used to select one frame from multi-frame image
-					rect.top = 0;
-					rect.right = sprJob->sprite->GetWidth();
-					rect.bottom = sprJob->sprite->GetHeight();
-					
 					spriteD3D->Draw(
 						sprJob->sprite->GetTexture()->GetTextureD3D(), 
-						&rect, 
+						sprJob->sprite->GetDrawingArea(), 
 						NULL, 
 						NULL, 
 						0xFFFFFFFF
@@ -279,7 +273,7 @@ core::Texture * core::GraphicsRenderer::LoadTextureFromFile(std::string fileName
 	return new Texture(textureD3D, imageInfo.Width, imageInfo.Height);
 }
 
-void core::GraphicsRenderer::QueueSpriteDrawJob(SpriteDrawJob *&job) {
+void core::GraphicsRenderer::QueueSpriteDrawJob(DrawSpriteJob *job) {
 	spriteDrawJobs->push_back(job);
 }
 

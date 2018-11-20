@@ -8,7 +8,7 @@
 #include <vector>
 
 namespace core {
-	struct SpriteDrawJob {
+	struct DrawSpriteJob {
 		Sprite *sprite;
 		Vector2 pos;
 	};
@@ -16,7 +16,7 @@ namespace core {
 	class GraphicsRenderer {
 	private:
 		// Sprite draw queue.
-		std::vector<SpriteDrawJob *> *spriteDrawJobs;
+		std::vector<DrawSpriteJob *> *spriteDrawJobs;
 
 		// DirectX 3D pointers.
 		LPDIRECT3DDEVICE9	deviceD3D;
@@ -48,9 +48,9 @@ namespace core {
 
 		~GraphicsRenderer();
 
-		HRESULT Init(HWND hwnd, int width, int height, bool fullscreen);
+		HRESULT Initialize(HWND hwnd, int width, int height, bool fullscreen);
 		
-		void QueueSpriteDrawJob(SpriteDrawJob *&job);
+		void QueueSpriteDrawJob(DrawSpriteJob *job);
 
 		HRESULT HandleLostDevice();
 

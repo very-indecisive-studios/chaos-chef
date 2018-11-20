@@ -97,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="constants.h" />
+    <ClInclude Include="core\animatedSprite.h" />
     <ClInclude Include="core\context.h" />
     <ClInclude Include="core\gameException.h" />
     <ClInclude Include="core\graphicsRenderer.h" />

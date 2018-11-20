@@ -59,5 +59,8 @@
     <ClInclude Include="core\math.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="core\animatedSprite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
