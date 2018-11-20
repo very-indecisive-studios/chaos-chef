@@ -31,7 +31,7 @@ namespace core {
 		// Throws GameError
 		// Pre: hwnd = window handle
 		// capture = true to capture mouse.
-		void initialize(HWND hwnd, bool capture);
+		LRESULT proccessKeyMessage(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 		// Save key down state
 		void keyDown(WPARAM);
@@ -62,15 +62,15 @@ namespace core {
 		void clear(UCHAR what);
 
 		// Clears key and text input data
-		void clearAll() { clear(core::KEYS_TEXT); }
+		void clearAll();
 
 		// Clear text input buffer
-		void clearTextIn() { textIn.clear(); }
+		void clearTextIn();
 
 		// Return text input as a string
-		std::string getTextIn() { return textIn; }
+		std::string getTextIn();
 
 		// Return last character entered
-		char getCharIn() { return charIn; }
+		char getCharIn();
 	};
 }

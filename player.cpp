@@ -1,20 +1,24 @@
 #include "player.h"
 
-Player::Player()
+Player::Player(){}
+Player::~Player(){}
+
+void Player::up() 
 {
+	current->up(this);
 }
 
-
-Player::~Player()
+void Player::down()
 {
+	current->down(this);
 }
 
-void Player::initialize() 
+void Player::left()
 {
-
+	current->left(this);
 }
 
-void Player::update()
+void Player::right()
 {
-
+	current->right(this);
 }

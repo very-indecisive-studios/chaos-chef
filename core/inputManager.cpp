@@ -13,13 +13,26 @@ core::InputManager::InputManager()
 	charIn = 0;                         // clear charIn
 }
 
-core::InputManager::~InputManager() 
-{
+core::InputManager::~InputManager() {}
 
-}
-
-void core::InputManager::initialize(HWND hwnd, bool capture)
+LRESULT core::InputManager::proccessKeyMessage(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
+	switch (msg) 
+	{
+	case WM_DESTROY:
+		PostQuitMessage(0);					//tell Windows to kill this program
+		return 0;
+	case WM_KEYDOWN: case WM_SYSKEYDOWN:    // key down
+		keyDown(wParam);
+		return 0;
+	case WM_KEYUP: case WM_SYSKEYUP:        // key up
+		keyUp(wParam);
+		return 0;
+	case WM_CHAR:                           // character entered
+		keyIn(wParam);
+		return 0;
+	}
+	return DefWindowProc(hwnd, msg, wParam, lParam);    // let Windows handle it
 }
 
 // Set true in the keysDown and keysPessed array for this key
@@ -120,4 +133,24 @@ void core::InputManager::clear(UCHAR what)
 	}
 	if (what & core::TEXT_IN)
 		clearTextIn();
+}
+
+void core::InputManager::clearAll() 
+{
+	clear(core::KEYS_TEXT);
+}
+
+void core::InputManager::clearTextIn() 
+{
+	textIn.clear();
+}
+
+std::string core::InputManager::getTextIn()
+{
+	return textIn;
+}
+
+char core::InputManager::getCharIn() 
+{ 
+	return charIn;
 }
