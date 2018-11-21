@@ -6,8 +6,8 @@ core::AnimatedSprite::AnimatedSprite(
 	Texture * texture, int frameWidth, int frameHeight, int secondsPerFrame, int scale
 ) : Sprite(texture, scale)
 {
-	this->width = frameWidth * scale;
-	this->height = frameHeight * scale;
+	this->width = frameWidth;
+	this->height = frameHeight;
 	this->secondsPerFrame = secondsPerFrame;
 	
 	this->drawingArea = { 0 };
@@ -65,8 +65,6 @@ void core::AnimatedSprite::NextFrame()
 		currentFrameCol++;
 	}
 
-	int scale = this->GetScale();
-	
 	this->drawingArea.left		= currentFrameCol * width;
 	this->drawingArea.top		= currentFrameRow * height;
 	

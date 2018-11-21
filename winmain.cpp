@@ -62,9 +62,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		32,
 		32,
 		30,
-		1
-
-
+		3
 	);
 	animSprite->Play();
 

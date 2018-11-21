@@ -199,7 +199,7 @@ HRESULT core::GraphicsRenderer::Render() {
 						(float)(sprJob->sprite->GetWidth() / 2 * sprJob->sprite->GetScale()),
 						(float)(sprJob->sprite->GetHeight() / 2 * sprJob->sprite->GetScale())
 					);
-					D3DXVECTOR2 translate = D3DXVECTOR2((float) sprJob->pos.x, (float) sprJob->pos.y);
+					D3DXVECTOR2 translate = D3DXVECTOR2(sprJob->pos.x, sprJob->pos.y);
 					D3DXVECTOR2 scaling(sprJob->sprite->GetScale(), sprJob->sprite->GetScale());
 
 					D3DXMATRIX matrix;

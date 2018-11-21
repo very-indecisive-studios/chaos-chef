@@ -1,12 +1,13 @@
 #include "sprite.h"
 #include "context.h"
+#include <iostream>
 
 core::Sprite::Sprite(Texture *texture, int scale)
 {
 	this->texture = texture;
 	this->scale = scale;
-	this->width = texture->GetWidth() * scale;
-	this->height = texture->GetHeight() * scale;
+	this->width = texture->GetWidth();
+	this->height = texture->GetHeight();
 
 	this->drawingArea = { 0 };
 	this->drawingArea.right = this->width;
