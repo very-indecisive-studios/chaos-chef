@@ -130,6 +130,11 @@ LRESULT WINAPI WinProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		return 0;
 	}
 
+	if (core::Context::Get()->GetInputManager()->ProccessKeyMessage(msg, wParam)) 
+	{
+		return 0;
+	}
+
 	// Let Windows handle it instead.
 	return DefWindowProc(hwnd, msg, wParam, lParam);
 }

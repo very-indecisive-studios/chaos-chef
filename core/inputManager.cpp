@@ -15,29 +15,29 @@ core::InputManager::InputManager()
 
 core::InputManager::~InputManager() {}
 
-LRESULT core::InputManager::proccessKeyMessage(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+bool core::InputManager::ProccessKeyMessage(UINT msg, WPARAM wParam)
 {
 	switch (msg) 
 	{
-	case WM_DESTROY:
-		PostQuitMessage(0);					//tell Windows to kill this program
-		return 0;
-	case WM_KEYDOWN: case WM_SYSKEYDOWN:    // key down
-		keyDown(wParam);
-		return 0;
-	case WM_KEYUP: case WM_SYSKEYUP:        // key up
-		keyUp(wParam);
-		return 0;
+	case WM_KEYDOWN: 
+	case WM_SYSKEYDOWN:    // key down
+		KeyDown(wParam);
+		return true;
+	case WM_KEYUP: 
+	case WM_SYSKEYUP:        // key up
+		KeyUp(wParam);
+		return true;
 	case WM_CHAR:                           // character entered
-		keyIn(wParam);
-		return 0;
+		KeyIn(wParam);
+		return true;
 	}
-	return DefWindowProc(hwnd, msg, wParam, lParam);    // let Windows handle it
+
+	return false;
 }
 
 // Set true in the keysDown and keysPessed array for this key
 // Pre: wParam contains the virtual key code (0--255)
-void core::InputManager::keyDown(WPARAM wParam)
+void core::InputManager::KeyDown(WPARAM wParam)
 {
 	// make sure key code is within buffer range
 	if (wParam < core::KEYS_ARRAY_LEN)
@@ -50,7 +50,7 @@ void core::InputManager::keyDown(WPARAM wParam)
 
 // Set false in the keysDown array for this key
 // Pre: wParam contains the virtual key code (0--255)
-void core::InputManager::keyUp(WPARAM wParam)
+void core::InputManager::KeyUp(WPARAM wParam)
 {
 	// make sure key code is within buffer range
 	if (wParam < core::KEYS_ARRAY_LEN)
@@ -60,7 +60,7 @@ void core::InputManager::keyUp(WPARAM wParam)
 
 // Save the char just entered in textIn string
 // Pre: wParam contains the char
-void core::InputManager::keyIn(WPARAM wParam)
+void core::InputManager::KeyIn(WPARAM wParam)
 {
 	if (newLine)                            // if start of new line
 	{
@@ -84,7 +84,7 @@ void core::InputManager::keyIn(WPARAM wParam)
 }
 
 // Returns true if the specified VIRTUAL KEY is down, otherwise false.
-bool core::InputManager::isKeyDown(UCHAR vkey) const
+bool core::InputManager::IsKeyDown(UCHAR vkey) const
 {
 	if (vkey < core::KEYS_ARRAY_LEN)
 		return keysDown[vkey];
@@ -93,7 +93,7 @@ bool core::InputManager::isKeyDown(UCHAR vkey) const
 }
 
 // Return true if the specified VIRTUAL KEY has been pressed in the most recent frame. Key presses are erased at the end of each frame.
-bool core::InputManager::wasKeyPressed(UCHAR vkey) const
+bool core::InputManager::WasKeyPressed(UCHAR vkey) const
 {
 	if (vkey < core::KEYS_ARRAY_LEN)
 		return keysPressed[vkey];
@@ -103,7 +103,7 @@ bool core::InputManager::wasKeyPressed(UCHAR vkey) const
 
 // Return true if any key was pressed in the most recent frame.
 // Key presses are erased at the end of each frame.
-bool core::InputManager::anyKeyPressed() const
+bool core::InputManager::AnyKeyPressed() const
 {
 	for (size_t i = 0; i < core::KEYS_ARRAY_LEN; i++)
 		if (keysPressed[i] == true)
@@ -112,14 +112,14 @@ bool core::InputManager::anyKeyPressed() const
 }
 
 // Clear the specified key press
-void core::InputManager::clearKeyPress(UCHAR vkey)
+void core::InputManager::ClearKeyPress(UCHAR vkey)
 {
 	if (vkey < core::KEYS_ARRAY_LEN)
 		keysPressed[vkey] = false;
 }
 
 // Clear specified input buffers
-void core::InputManager::clear(UCHAR what)
+void core::InputManager::Clear(UCHAR what)
 {
 	if (what & core::KEYS_DOWN)       // if clear keys down
 	{
@@ -132,25 +132,27 @@ void core::InputManager::clear(UCHAR what)
 			keysPressed[i] = false;
 	}
 	if (what & core::TEXT_IN)
-		clearTextIn();
+	{
+		ClearTextIn();
+	}
 }
 
-void core::InputManager::clearAll() 
+void core::InputManager::ClearAll() 
 {
-	clear(core::KEYS_TEXT);
+	Clear(core::KEYS_TEXT);
 }
 
-void core::InputManager::clearTextIn() 
+void core::InputManager::ClearTextIn() 
 {
 	textIn.clear();
 }
 
-std::string core::InputManager::getTextIn()
+std::string core::InputManager::GetTextIn()
 {
 	return textIn;
 }
 
-char core::InputManager::getCharIn() 
+char core::InputManager::GetCharIn() 
 { 
 	return charIn;
 }

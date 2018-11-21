@@ -10,13 +10,8 @@ core::Context::Context()
 core::Context::~Context()
 {
 	delete graphicsRenderer;
-	graphicsRenderer = nullptr;
-
 	delete resourceManager;
-	resourceManager = nullptr;
-
 	delete inputManager;
-	inputManager = nullptr;
 }
 
 core::GraphicsRenderer *const core::Context::GetGraphicsRenderer()

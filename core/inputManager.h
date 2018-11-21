@@ -21,7 +21,14 @@ namespace core {
 		std::string textIn;                         // user entered text
 		char charIn;                                // last character entered
 		bool newLine;                               // true on start of new line
+		// Save key down state
+		void KeyDown(WPARAM);
 
+		// Save key up state
+		void KeyUp(WPARAM);
+
+		// Save the char just entered in textIn string
+		void KeyIn(WPARAM);
 	public:
 		InputManager();
 
@@ -31,46 +38,37 @@ namespace core {
 		// Throws GameError
 		// Pre: hwnd = window handle
 		// capture = true to capture mouse.
-		LRESULT proccessKeyMessage(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
-
-		// Save key down state
-		void keyDown(WPARAM);
-
-		// Save key up state
-		void keyUp(WPARAM);
-
-		// Save the char just entered in textIn string
-		void keyIn(WPARAM);
+		bool ProccessKeyMessage(UINT msg, WPARAM wParam);
 
 		// Returns true if the specified VIRTUAL KEY is down, otherwise false.
-		bool isKeyDown(UCHAR vkey) const;
+		bool IsKeyDown(UCHAR vkey) const;
 
 		// Return true if the specified VIRTUAL KEY has been pressed in the most recent frame.
 		// Key presses are erased at the end of each frame.
-		bool wasKeyPressed(UCHAR vkey) const;
+		bool WasKeyPressed(UCHAR vkey) const;
 
 		// Return true if any key was pressed in the most recent frame.
 		// Key presses are erased at the end of each frame.
-		bool anyKeyPressed() const;
+		bool AnyKeyPressed() const;
 
 		// Clear the specified key press
-		void clearKeyPress(UCHAR vkey);
+		void ClearKeyPress(UCHAR vkey);
 
 		// Clear specified input buffers where what is any combination of
 		// KEYS_DOWN, KEYS_PRESSED, MOUSE, TEXT_IN or KEYS_MOUSE_TEXT.
 		// Use OR '|' operator to combine parmeters.
-		void clear(UCHAR what);
+		void Clear(UCHAR what);
 
 		// Clears key and text input data
-		void clearAll();
+		void ClearAll();
 
 		// Clear text input buffer
-		void clearTextIn();
+		void ClearTextIn();
 
 		// Return text input as a string
-		std::string getTextIn();
+		std::string GetTextIn();
 
 		// Return last character entered
-		char getCharIn();
+		char GetCharIn();
 	};
 }
