@@ -90,6 +90,8 @@
   <ItemGroup>
     <ClCompile Include="core\animatedSprite.cpp" />
     <ClCompile Include="core\context.cpp" />
+    <ClCompile Include="core\game.cpp" />
+    <ClCompile Include="core\gameEntity.cpp" />
     <ClCompile Include="core\graphicsRenderer.cpp" />
     <ClCompile Include="core\resourceManager.cpp" />
     <ClCompile Include="core\sprite.cpp" />
@@ -101,6 +103,8 @@
     <ClInclude Include="constants.h" />
     <ClInclude Include="core\animatedSprite.h" />
     <ClInclude Include="core\context.h" />
+    <ClInclude Include="core\game.h" />
+    <ClInclude Include="core\gameEntity.h" />
     <ClInclude Include="core\gameException.h" />
     <ClInclude Include="core\graphicsRenderer.h" />
     <ClInclude Include="core\math.h" />

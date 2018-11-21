@@ -9,6 +9,8 @@
     <ClCompile Include="core\texture.cpp" />
     <ClCompile Include="core\inputManager.cpp" />
     <ClCompile Include="winmain.cpp" />
+    <ClCompile Include="core\gameEntity.cpp" />
+    <ClCompile Include="core\game.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="constants.h" />
@@ -21,5 +23,7 @@
     <ClInclude Include="core\sprite.h" />
     <ClInclude Include="core\texture.h" />
     <ClInclude Include="core\inputManager.h" />
+    <ClInclude Include="core\gameEntity.h" />
+    <ClInclude Include="core\game.h" />
   </ItemGroup>
 </Project>

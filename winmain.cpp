@@ -16,21 +16,8 @@
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int);
 bool CreateMainWindow(HWND &, HINSTANCE, int);
 LRESULT WINAPI WinProc(HWND, UINT, WPARAM, LPARAM);
-void Run();
 
 HWND hwnd = NULL;
-
-LARGE_INTEGER timeStart;    // Performance Counter start value
-LARGE_INTEGER timeEnd;      // Performance Counter end value
-LARGE_INTEGER timerFreq;    // Performance Counter frequency
-float   frameTime;          // time required for last frame
-DWORD   sleepTime;          // number of milli-seconds to sleep between frames
-const float FRAME_RATE = 200.0f;               // the target frame rate (frames/sec)
-const float MIN_FRAME_RATE = 10.0f;             // the minimum frame rate
-const float MIN_FRAME_TIME = 1.0f / FRAME_RATE;   // minimum desired time for 1 frame
-const float MAX_FRAME_TIME = 1.0f / MIN_FRAME_RATE; // maximum time used in calculations
-core::AnimatedSprite *animSprite;
-core::AnimatedSprite *animSprite2;
 
 //=============================================================================
 // Starting point for a Windows application
@@ -57,21 +44,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	// Initialize graphics.
 	core::Context::Get()->GetGraphicsRenderer()->Initialize(hwnd, GAME_WIDTH, GAME_HEIGHT, FULLSCREEN);
-
-	animSprite = core::AnimatedSprite::Create(
-		"assets\\player\\player_walk_south.png",
-		32,
-		32,
-		30
-	);
-	animSprite2 = core::AnimatedSprite::Create(
-		"assets\\player\\player_walk_south.png",
-		32,
-		32,
-		30
-	);
-	animSprite->Play();
-	animSprite2->Play();
+	
+	// Initialize game.
+	core::Context::Get()->GetGame()->Initialize();
 
 	// Main message loop.
 	MSG msg;
@@ -88,44 +63,16 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
-
-		Run();
+		else
+		{
+			// Run game.
+			core::Context::Get()->GetGame()->Run();
+		}
 	}
 
 	core::Context::Get()->ReleaseAll();
 
-	delete animSprite;
-	delete animSprite2;
-
 	return msg.wParam;
-}
-
-void Run()
-{
-	// calculate elapsed time of last frame, save in frameTime
-	QueryPerformanceCounter(&timeEnd);
-	frameTime = (float)(timeEnd.QuadPart - timeStart.QuadPart) / (float)timerFreq.QuadPart;
-
-	// Power saving code, requires winmm.lib
-	// if not enough time has elapsed for desired frame rate
-	if (frameTime < MIN_FRAME_TIME)
-	{
-		sleepTime = (DWORD)((MIN_FRAME_TIME - frameTime) * 1000);
-		timeBeginPeriod(1);         // Request 1mS resolution for windows timer
-		Sleep(sleepTime);           // release cpu for sleepTime
-		timeEndPeriod(1);           // End 1mS timer resolution
-		return;
-	}
-
-	if (frameTime > MAX_FRAME_TIME) // if frame rate is very slow
-		frameTime = MAX_FRAME_TIME; // limit maximum frameTime
-
-	timeStart = timeEnd;
-
-	animSprite->UpdateAndDraw(frameTime, core::Vector2(10, 10));
-	animSprite2->UpdateAndDraw(frameTime, core::Vector2(100, 10));
-
-	core::Context::Get()->GetGraphicsRenderer()->Render();
 }
 
 //=============================================================================
@@ -139,6 +86,7 @@ LRESULT WINAPI WinProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		return 0;
 	}
 
+	// Let input manager process any input messages.
 	if (
 		core::Context::Get() != nullptr && 
 		core::Context::Get()->GetInputManager()->ProccessKeyMessage(msg, wParam)

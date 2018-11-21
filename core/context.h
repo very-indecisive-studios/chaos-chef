@@ -2,6 +2,7 @@
 
 #include "graphicsRenderer.h"
 #include "resourceManager.h"
+#include "game.h"
 #include "inputManager.h"
 
 namespace core {
@@ -10,6 +11,7 @@ namespace core {
 		core::GraphicsRenderer	*graphicsRenderer;
 		core::ResourceManager	*resourceManager;
 		core::InputManager		*inputManager;
+		core::Game				*game;
 
 		Context();
 		~Context();
@@ -19,6 +21,7 @@ namespace core {
 		core::GraphicsRenderer	*const GetGraphicsRenderer();
 		core::ResourceManager	*const GetResourceManager();
 		core::InputManager		*const GetInputManager();
+		core::Game				*const GetGame();
 
 		static void ReleaseAll();
 
