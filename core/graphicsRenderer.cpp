@@ -52,15 +52,11 @@ core::GraphicsRenderer::GraphicsRenderer()
 	deviceD3D = NULL;
 	spriteD3D = NULL;
 	d3d = NULL;
-
-	spriteDrawJobs = new std::vector<DrawSpriteJob *>;
 }
 
 core::GraphicsRenderer::~GraphicsRenderer()
 {
 	ReleaseAll();
-
-	delete spriteDrawJobs;
 }
 
 HRESULT core::GraphicsRenderer::Initialize(HWND hwnd, int width, int height, bool fullscreen)
@@ -193,7 +189,7 @@ HRESULT core::GraphicsRenderer::Render() {
 
 		core::ThrowIfFailed(deviceD3D->BeginScene());
 			core::ThrowIfFailed(spriteD3D->Begin(D3DXSPRITE_ALPHABLEND));
-				for (auto sprJob : *spriteDrawJobs) {
+				for (auto sprJob : spriteDrawJobs) {
 					// Find center of sprite
 					D3DXVECTOR2 spriteCenter = D3DXVECTOR2(
 						(float)(sprJob->sprite->GetWidth() / 2 * sprJob->sprite->GetScale()),
@@ -274,15 +270,15 @@ core::Texture * core::GraphicsRenderer::LoadTextureFromFile(std::string fileName
 }
 
 void core::GraphicsRenderer::QueueSpriteDrawJob(DrawSpriteJob *job) {
-	spriteDrawJobs->push_back(job);
+	spriteDrawJobs.push_back(job);
 }
 
 void core::GraphicsRenderer::ClearAllSpriteDrawJobs() {
-	for (auto sprJob : *spriteDrawJobs) 
+	for (auto sprJob : spriteDrawJobs) 
 	{
 		delete sprJob;
 		sprJob = nullptr;
 	}
 
-	spriteDrawJobs->clear();
+	spriteDrawJobs.clear();
 }

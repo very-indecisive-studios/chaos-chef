@@ -16,7 +16,7 @@ namespace core {
 	class GraphicsRenderer {
 	private:
 		// Sprite draw queue.
-		std::vector<DrawSpriteJob *> *spriteDrawJobs;
+		std::vector<DrawSpriteJob *> spriteDrawJobs;
 
 		// DirectX 3D pointers.
 		LPDIRECT3DDEVICE9	deviceD3D;
