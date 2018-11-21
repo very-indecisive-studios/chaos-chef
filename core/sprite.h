@@ -8,16 +8,16 @@ namespace core {
 	typedef RECT DrawingArea;
 
 	class Sprite {
-	private:
-		Texture *texture;
+	protected:
 		int height;
 		int width;
+		DrawingArea drawingArea;
+	private:
 		int scale;
-		DrawingArea *drawingArea;
+		Texture *texture;
 	public:
 		Sprite(Texture *texture, int scale = 1);
-		virtual ~Sprite();
-		virtual void Draw(Vector2 position);
+		void Draw(Vector2 position);
 		Texture * GetTexture();
 		int GetHeight();
 		int GetWidth();
