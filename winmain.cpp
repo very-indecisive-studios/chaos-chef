@@ -30,6 +30,7 @@ const float MIN_FRAME_RATE = 10.0f;             // the minimum frame rate
 const float MIN_FRAME_TIME = 1.0f / FRAME_RATE;   // minimum desired time for 1 frame
 const float MAX_FRAME_TIME = 1.0f / MIN_FRAME_RATE; // maximum time used in calculations
 core::AnimatedSprite *animSprite;
+core::AnimatedSprite *animSprite2;
 
 //=============================================================================
 // Starting point for a Windows application
@@ -58,13 +59,19 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	core::Context::Get()->GetGraphicsRenderer()->Initialize(hwnd, GAME_WIDTH, GAME_HEIGHT, FULLSCREEN);
 
 	animSprite = core::AnimatedSprite::Create(
-		"sprites\\player\\player_walk_south.png",
+		"assets\\player\\player_walk_south.png",
 		32,
 		32,
-		30,
-		3
+		30
+	);
+	animSprite2 = core::AnimatedSprite::Create(
+		"assets\\player\\player_walk_south.png",
+		32,
+		32,
+		30
 	);
 	animSprite->Play();
+	animSprite2->Play();
 
 	// Main message loop.
 	MSG msg;
@@ -88,11 +95,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	core::Context::Get()->ReleaseAll();
 
 	delete animSprite;
+	delete animSprite2;
 
 	return msg.wParam;
 }
 
-void Run() 
+void Run()
 {
 	// calculate elapsed time of last frame, save in frameTime
 	QueryPerformanceCounter(&timeEnd);
@@ -115,6 +123,7 @@ void Run()
 	timeStart = timeEnd;
 
 	animSprite->UpdateAndDraw(frameTime, core::Vector2(10, 10));
+	animSprite2->UpdateAndDraw(frameTime, core::Vector2(100, 10));
 
 	core::Context::Get()->GetGraphicsRenderer()->Render();
 }
@@ -130,7 +139,10 @@ LRESULT WINAPI WinProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		return 0;
 	}
 
-	if (core::Context::Get()->GetInputManager()->ProccessKeyMessage(msg, wParam)) 
+	if (
+		core::Context::Get() != nullptr && 
+		core::Context::Get()->GetInputManager()->ProccessKeyMessage(msg, wParam)
+	)
 	{
 		return 0;
 	}
