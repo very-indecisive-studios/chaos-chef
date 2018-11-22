@@ -112,6 +112,7 @@
     <ClInclude Include="core\sprite.h" />
     <ClInclude Include="core\texture.h" />
     <ClInclude Include="core\inputManager.h" />
+    <ClInclude Include="game\resources.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
