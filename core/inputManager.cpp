@@ -13,7 +13,7 @@ core::InputManager::InputManager()
 	charIn = 0;                         // clear charIn
 }
 
-core::InputManager::~InputManager() {}
+core::InputManager::~InputManager() { }
 
 bool core::InputManager::ProccessKeyMessage(UINT msg, WPARAM wParam)
 {

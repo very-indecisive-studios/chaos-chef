@@ -5,8 +5,10 @@
 #include "game.h"
 #include "inputManager.h"
 
-namespace core {
-	class Context {
+namespace core 
+{
+	class Context 
+	{
 	private:
 		core::GraphicsRenderer	*graphicsRenderer;
 		core::ResourceManager	*resourceManager;

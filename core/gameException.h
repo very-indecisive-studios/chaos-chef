@@ -3,7 +3,8 @@
 #include <string>
 #include <windows.h>
 
-namespace core {
+namespace core 
+{
 	// Inherits from std::exception
 	class GameException : public std::exception
 	{
@@ -31,8 +32,10 @@ namespace core {
 		const char* getMessage() const throw() { return message.c_str(); }
 	};
 	
-	inline void ThrowIfFailed(HRESULT result, std::string msg = "Undefined error in game.") {
-		if (FAILED(result)) {
+	inline void ThrowIfFailed(HRESULT result, std::string msg = "Undefined error in game.") 
+	{
+		if (FAILED(result)) 
+		{
 			throw GameException(msg);
 		}
 	}

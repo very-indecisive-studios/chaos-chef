@@ -2,7 +2,8 @@
 
 #include "math.h"
 
-namespace core {
+namespace core 
+{
 	struct CollisionBounds
 	{
 		Vector2 topLeft;

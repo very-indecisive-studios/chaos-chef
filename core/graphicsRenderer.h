@@ -7,13 +7,16 @@
 #include "sprite.h"
 #include <vector>
 
-namespace core {
-	struct DrawSpriteJob {
+namespace core 
+{
+	struct DrawSpriteJob 
+	{
 		Sprite *sprite;
 		Vector2 pos;
 	};
 
-	class GraphicsRenderer {
+	class GraphicsRenderer 
+	{
 	private:
 		// Sprite draw queue.
 		std::vector<DrawSpriteJob *> spriteDrawJobs;

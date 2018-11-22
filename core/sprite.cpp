@@ -51,7 +51,8 @@ core::DrawingArea * core::Sprite::GetDrawingArea()
 	return &(this->drawingArea);
 }
 
-core::Sprite * core::Sprite::Create(const std::string& textureName, int scale) {
+core::Sprite * core::Sprite::Create(const std::string& textureName, int scale) 
+{
 	auto texture 
 		= core::Context::Get()->GetResourceManager()->GetTexture(textureName);
 

@@ -2,6 +2,7 @@
 
 #include <d3dx9math.h>
 
-namespace core {
+namespace core 
+{
 	typedef D3DXVECTOR2 Vector2;
 }

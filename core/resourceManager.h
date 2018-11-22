@@ -4,8 +4,10 @@
 #include <map>
 #include "texture.h"
 
-namespace core {
-	class ResourceManager {
+namespace core 
+{
+	class ResourceManager 
+	{
 	private:
 		std::map<std::string, core::Texture *> textureResourceMap;
 	public:

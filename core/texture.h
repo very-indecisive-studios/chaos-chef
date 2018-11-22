@@ -3,8 +3,10 @@
 #include <d3d9.h>
 #include <d3dx9.h>
 
-namespace core {
-	class Texture {
+namespace core 
+{
+	class Texture 
+	{
 	private:
 		LPDIRECT3DTEXTURE9 textureD3D;
 		int width;

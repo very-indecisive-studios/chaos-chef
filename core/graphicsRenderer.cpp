@@ -1,7 +1,8 @@
 #include "graphicsRenderer.h"
 #include "gameException.h"
 
-void core::GraphicsRenderer::InitParamsD3D() {
+void core::GraphicsRenderer::InitParamsD3D() 
+{
 	// Initialize D3D presentation params
 	ZeroMemory(&paramsD3D, sizeof(paramsD3D));              // fill the structure with 0
 
@@ -177,19 +178,23 @@ HRESULT core::GraphicsRenderer::HandleLostDevice()
 	return result;
 }
 
-HRESULT core::GraphicsRenderer::Render() {
+HRESULT core::GraphicsRenderer::Render() 
+{
 	HRESULT result = E_FAIL;
 
-	if (deviceD3D == nullptr || spriteD3D == nullptr) {
+	if (deviceD3D == nullptr || spriteD3D == nullptr) 
+	{
 		return result;
 	}
 	
-	try {
+	try 
+	{
 		core::ThrowIfFailed(deviceD3D->Clear(0, NULL, D3DCLEAR_TARGET, BACK_COLOUR, 1.0F, 0));
 
 		core::ThrowIfFailed(deviceD3D->BeginScene());
 			core::ThrowIfFailed(spriteD3D->Begin(D3DXSPRITE_ALPHABLEND));
-				for (auto sprJob : spriteDrawJobs) {
+				for (auto sprJob : spriteDrawJobs) 
+				{
 					// Find center of sprite
 					D3DXVECTOR2 spriteCenter = D3DXVECTOR2(
 						(float)(sprJob->sprite->GetWidth() / 2 * sprJob->sprite->GetScale()),
@@ -229,7 +234,8 @@ HRESULT core::GraphicsRenderer::Render() {
 
 		result = S_OK;
 	}
-	catch (GameException e) {
+	catch (GameException e) 
+	{
 		return result;
 	}
 
@@ -269,11 +275,13 @@ core::Texture * core::GraphicsRenderer::LoadTextureFromFile(std::string fileName
 	return new Texture(textureD3D, imageInfo.Width, imageInfo.Height);
 }
 
-void core::GraphicsRenderer::QueueSpriteDrawJob(DrawSpriteJob *job) {
+void core::GraphicsRenderer::QueueSpriteDrawJob(DrawSpriteJob *job) 
+{
 	spriteDrawJobs.push_back(job);
 }
 
-void core::GraphicsRenderer::ClearAllSpriteDrawJobs() {
+void core::GraphicsRenderer::ClearAllSpriteDrawJobs() 
+{
 	for (auto sprJob : spriteDrawJobs) 
 	{
 		delete sprJob;

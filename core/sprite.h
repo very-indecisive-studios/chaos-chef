@@ -4,10 +4,12 @@
 #include "texture.h"
 #include <string>
 
-namespace core {
+namespace core
+{
 	typedef RECT DrawingArea;
 
-	class Sprite {
+	class Sprite 
+	{
 	protected:
 		int height;
 		int width;

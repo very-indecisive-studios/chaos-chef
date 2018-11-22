@@ -5,7 +5,8 @@
 #include <string>
 #include <XInput.h>
 
-namespace core {
+namespace core 
+{
 	const int KEYS_ARRAY_LEN = 256;     // size of key arrays
 
    // what values for clear(), bit flag
@@ -14,7 +15,8 @@ namespace core {
 	const UCHAR TEXT_IN = 8;
 	const UCHAR KEYS_TEXT = KEYS_DOWN + KEYS_PRESSED + TEXT_IN;
 
-	class InputManager {
+	class InputManager 
+	{
 	private:
 		bool keysDown[KEYS_ARRAY_LEN];     // true if specified key is down
 		bool keysPressed[KEYS_ARRAY_LEN];  // true if specified key was pressed

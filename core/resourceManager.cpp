@@ -3,20 +3,25 @@
 
 core::ResourceManager::ResourceManager() { }
 
-core::ResourceManager::~ResourceManager() {
+core::ResourceManager::~ResourceManager() 
+{
 	// Deallocate all textures.
-	for (const auto& pair : textureResourceMap) {
+	for (const auto& pair : textureResourceMap) 
+	{
 		delete pair.second;
 	}
 }
 
-core::Texture * core::ResourceManager::GetTexture(std::string textureName) {
+core::Texture * core::ResourceManager::GetTexture(std::string textureName) 
+{
 	auto itr = textureResourceMap.find(textureName);
 	
-	if (itr != textureResourceMap.end()) {
+	if (itr != textureResourceMap.end()) 
+	{
 		return itr->second;
 	}
-	else {
+	else 
+	{
 		core::Texture *loadedTexture = core::Context::Get()->GetGraphicsRenderer()->LoadTextureFromFile(textureName);
 
 		textureResourceMap[textureName] = loadedTexture;

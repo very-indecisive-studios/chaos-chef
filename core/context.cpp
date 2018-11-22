@@ -42,12 +42,15 @@ core::Game *const core::Context::GetGame()
 
 core::Context * core::Context::instance = nullptr;
 
-core::Context *const core::Context::Get() {
+core::Context *const core::Context::Get() 
+{
 	return instance;
 }
 
-void core::Context::Initialize() {
-	if (instance == nullptr) {
+void core::Context::Initialize() 
+{
+	if (instance == nullptr) 
+	{
 		instance = new Context();
 	}
 }
