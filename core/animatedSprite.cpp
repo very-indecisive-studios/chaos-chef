@@ -3,7 +3,7 @@
 #include <iostream>
 
 core::AnimatedSprite::AnimatedSprite(
-	Texture * texture, int frameWidth, int frameHeight, int secondsPerFrame, int scale
+	Texture *texture, int frameWidth, int frameHeight, float secondsPerFrame, int scale
 ) : Sprite(texture, scale)
 {
 	this->width = frameWidth;
@@ -27,9 +27,7 @@ void core::AnimatedSprite::Update(float deltaTime)
 	
 	secondsPassed += deltaTime;
 
-	// std::cout << "seconds passed: " << secondsPassed << std::endl;
-
-	if ((int)secondsPassed >= secondsPerFrame) 
+	if (secondsPassed >= secondsPerFrame) 
 	{
 		secondsPassed = 0;
 
@@ -88,7 +86,7 @@ void core::AnimatedSprite::Stop()
 	this->isPlaying = false;
 }
 
-core::AnimatedSprite * core::AnimatedSprite::Create(const std::string & textureName, int frameWidth, int frameHeight, int secondsPerFrame, int scale)
+core::AnimatedSprite * core::AnimatedSprite::Create(const std::string & textureName, int frameWidth, int frameHeight, float secondsPerFrame, int scale)
 {
 	auto texture
 		= core::Context::Get()->GetResourceManager()->GetTexture(textureName);

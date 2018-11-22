@@ -21,7 +21,7 @@ void core::Game::Initialize()
 		"assets\\player\\player_walk_south.png",
 		32,
 		32,
-		1
+		0.2f
 	);
 	animSprite->Play();
 }
