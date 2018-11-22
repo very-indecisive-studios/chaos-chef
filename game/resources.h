@@ -62,10 +62,3 @@ const int  PLAYER_HEIGHT = 32;             // height of player image
 const std::string CUSTOMER_IMAGE = "assets\\customer\\customer.png";
 
 const std::string MAP_IMAGE = "assets\\map\\final_map.png";
-
-// window
-const std::string CLASS_NAME	= "Chaos Chef";
-const std::string GAME_TITLE	= "Chaos Chef";
-const bool FULLSCREEN = false;              // windowed or fullscreen
-const int GAME_WIDTH = 640;               // width of game in pixels
-const int GAME_HEIGHT = 360;               // height of game in pixels
