@@ -12,6 +12,7 @@
     <ClCompile Include="core\gameEntity.cpp" />
     <ClCompile Include="core\game.cpp" />
     <ClCompile Include="game\player.cpp" />
+    <ClCompile Include="core\scene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\animatedSprite.h" />
@@ -28,5 +29,6 @@
     <ClInclude Include="game\resources.h" />
     <ClInclude Include="game\player.h" />
     <ClInclude Include="constants.h" />
+    <ClInclude Include="core\scene.h" />
   </ItemGroup>
 </Project>

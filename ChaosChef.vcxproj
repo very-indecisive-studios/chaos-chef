@@ -94,6 +94,7 @@
     <ClCompile Include="core\gameEntity.cpp" />
     <ClCompile Include="core\graphicsRenderer.cpp" />
     <ClCompile Include="core\resourceManager.cpp" />
+    <ClCompile Include="core\scene.cpp" />
     <ClCompile Include="core\sprite.cpp" />
     <ClCompile Include="core\texture.cpp" />
     <ClCompile Include="core\inputManager.cpp" />
@@ -110,6 +111,7 @@
     <ClInclude Include="core\graphicsRenderer.h" />
     <ClInclude Include="core\math.h" />
     <ClInclude Include="core\resourceManager.h" />
+    <ClInclude Include="core\scene.h" />
     <ClInclude Include="core\sprite.h" />
     <ClInclude Include="core\texture.h" />
     <ClInclude Include="core\inputManager.h" />
