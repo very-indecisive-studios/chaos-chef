@@ -2,12 +2,13 @@
 #include "context.h"
 #include <iostream>
 
-core::Sprite::Sprite(Texture *texture, int scale)
+core::Sprite::Sprite(Texture *texture, SpriteLayer layer, int scale)
 {
 	this->texture = texture;
 	this->scale = scale;
 	this->width = texture->GetWidth();
 	this->height = texture->GetHeight();
+	this->layer = layer;
 
 	this->drawingArea = { 0 };
 	this->drawingArea.right = this->width;
@@ -51,10 +52,15 @@ core::DrawingArea * core::Sprite::GetDrawingArea()
 	return &(this->drawingArea);
 }
 
-core::Sprite * core::Sprite::Create(const std::string& textureName, int scale) 
+core::Sprite * core::Sprite::Create(const std::string& textureName, SpriteLayer layer, int scale)
 {
 	auto texture 
 		= core::Context::Get()->GetResourceManager()->GetTexture(textureName);
 
-	return new core::Sprite(texture, scale);
+	return new core::Sprite(texture, layer, scale);
+}
+
+core::SpriteLayer core::Sprite::GetLayer() 
+{
+	return layer;
 }

@@ -5,6 +5,7 @@
 #include "sprite.h"
 #include <iostream>
 #include <string>
+#include "../game/resources.h"
 
 core::Game::Game()
 {

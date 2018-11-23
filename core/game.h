@@ -4,6 +4,7 @@
 #include "animatedSprite.h"
 #include "gameEntity.h"
 #include "../game/player.h"
+#include "sprite.h"
 
 namespace core 
 {

@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "graphicsRenderer.h"
 #include "gameException.h"
 
@@ -192,44 +193,56 @@ HRESULT core::GraphicsRenderer::Render()
 		core::ThrowIfFailed(deviceD3D->Clear(0, NULL, D3DCLEAR_TARGET, BACK_COLOUR, 1.0F, 0));
 
 		core::ThrowIfFailed(deviceD3D->BeginScene());
-			core::ThrowIfFailed(spriteD3D->Begin(D3DXSPRITE_ALPHABLEND));
-				for (auto sprJob : spriteDrawJobs) 
-				{
-					// Find center of sprite
-					D3DXVECTOR2 spriteCenter = D3DXVECTOR2(
-						(float)(sprJob->sprite->GetWidth() / 2 * sprJob->sprite->GetScale()),
-						(float)(sprJob->sprite->GetHeight() / 2 * sprJob->sprite->GetScale())
-					);
-					D3DXVECTOR2 translate = D3DXVECTOR2(sprJob->pos.x, sprJob->pos.y);
-					D3DXVECTOR2 scaling(sprJob->sprite->GetScale(), sprJob->sprite->GetScale());
+		core::ThrowIfFailed(spriteD3D->Begin(D3DXSPRITE_ALPHABLEND));
+		
+		// Sort the jobs according to layers; ascending order.
+		std::sort(
+			spriteDrawJobs.begin(), 
+			spriteDrawJobs.end(), 
+			[](const core::DrawSpriteJob *lhs, const core::DrawSpriteJob *rhs)
+			{
+				return lhs->sprite->GetLayer() < rhs->sprite->GetLayer();
+			}
+		);
 
-					D3DXMATRIX matrix;
-					D3DXMatrixTransformation2D(
-						&matrix,                // the matrix
-						NULL,                   // keep origin at top left when scaling
-						0.0f,                   // no scaling rotation
-						&scaling,               // scale amount
-						&spriteCenter,          // rotation center
-						0,						// rotation angle
-						&translate				// X,Y location
-					);
+		for (auto sprJob : spriteDrawJobs) 
+		{
+			// Find center of sprite
+			D3DXVECTOR2 spriteCenter = D3DXVECTOR2(
+				(float)(sprJob->sprite->GetWidth() / 2 * sprJob->sprite->GetScale()),
+				(float)(sprJob->sprite->GetHeight() / 2 * sprJob->sprite->GetScale())
+			);
+			D3DXVECTOR2 translate = D3DXVECTOR2(sprJob->pos.x, sprJob->pos.y);
+			D3DXVECTOR2 scaling(sprJob->sprite->GetScale(), sprJob->sprite->GetScale());
+
+			D3DXMATRIX matrix;
+			D3DXMatrixTransformation2D(
+				&matrix,                // the matrix
+				NULL,                   // keep origin at top left when scaling
+				0.0f,                   // no scaling rotation
+				&scaling,               // scale amount
+				&spriteCenter,          // rotation center
+				0,						// rotation angle
+				&translate				// X,Y location
+			);
 
 
-					spriteD3D->SetTransform(&matrix);
+			spriteD3D->SetTransform(&matrix);
 
-					spriteD3D->Draw(
-						sprJob->sprite->GetTexture()->GetTextureD3D(), 
-						sprJob->sprite->GetDrawingArea(), 
-						NULL, 
-						NULL, 
-						0xFFFFFFFF
-					);
-				}
-			core::ThrowIfFailed(spriteD3D->End());
-
-			ClearAllSpriteDrawJobs();
+			spriteD3D->Draw(
+				sprJob->sprite->GetTexture()->GetTextureD3D(), 
+				sprJob->sprite->GetDrawingArea(), 
+				NULL, 
+				NULL, 
+				0xFFFFFFFF
+			);
+		}
+		
+		core::ThrowIfFailed(spriteD3D->End());
 		core::ThrowIfFailed(deviceD3D->EndScene());
 
+		ClearAllSpriteDrawJobs();
+		
 		core::ThrowIfFailed(SwapBuffer());
 
 		result = S_OK;

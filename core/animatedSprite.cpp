@@ -3,8 +3,8 @@
 #include <iostream>
 
 core::AnimatedSprite::AnimatedSprite(
-	Texture *texture, int frameWidth, int frameHeight, float secondsPerFrame, int scale
-) : Sprite(texture, scale)
+	Texture *texture, SpriteLayer layer, int frameWidth, int frameHeight, float secondsPerFrame, int scale
+) : Sprite(texture, layer, scale)
 {
 	this->width = frameWidth;
 	this->height = frameHeight;
@@ -86,10 +86,10 @@ void core::AnimatedSprite::Stop()
 	this->isPlaying = false;
 }
 
-core::AnimatedSprite * core::AnimatedSprite::Create(const std::string & textureName, int frameWidth, int frameHeight, float secondsPerFrame, int scale)
+core::AnimatedSprite * core::AnimatedSprite::Create(const std::string & textureName, SpriteLayer layer, int frameWidth, int frameHeight, float secondsPerFrame, int scale)
 {
 	auto texture
 		= core::Context::Get()->GetResourceManager()->GetTexture(textureName);
 
-	return new core::AnimatedSprite(texture, frameWidth, frameHeight, secondsPerFrame, scale);
+	return new core::AnimatedSprite(texture, layer, frameWidth, frameHeight, secondsPerFrame, scale);
 }

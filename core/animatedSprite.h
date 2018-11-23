@@ -18,13 +18,13 @@ namespace core {
 
 		void NextFrame();
 	public:
-		AnimatedSprite(Texture *texture, int frameWidth, int frameHeight, float secondsPerFrame, int scale = 1);
+		AnimatedSprite(Texture *texture, SpriteLayer layer, int frameWidth, int frameHeight, float secondsPerFrame, int scale = 1);
 		void Update(float deltaTime);
 		void UpdateAndDraw(float deltaTime, Vector2 position);
 		void Play();
 		void Reset();
 		void Stop();
 
-		static AnimatedSprite * Create(const std::string &textureName, int frameWidth, int frameHeight, float secondsPerFrame, int scale = 1);
+		static AnimatedSprite * Create(const std::string &textureName, SpriteLayer layer, int frameWidth, int frameHeight, float secondsPerFrame, int scale = 1);
 	};
 }
