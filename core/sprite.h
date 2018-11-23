@@ -8,9 +8,11 @@ namespace core
 {
 	typedef RECT DrawingArea;
 
-	typedef uint8_t SpriteLayer;
-	const SpriteLayer LAYER_BACKGROUND	= 1 << 0;
-	const SpriteLayer LAYER_ENTITIES	= 1 << 2;
+	enum SpriteLayer : uint8_t 
+	{
+		BACKGROUND	= 1 << 0,
+		ENTITIES	= 1 << 1
+	};
 
 	class Sprite 
 	{

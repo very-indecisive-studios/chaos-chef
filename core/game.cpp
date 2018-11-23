@@ -63,7 +63,6 @@ void core::Game::Initialize()
 		// Increment the Iterator to point to next entry
 		it++;
 	}
-
 }
 
 void core::Game::Run()
