@@ -54,7 +54,7 @@ const std::string PLAYER_SOUTH_IMAGE	= "assets\\player\\south.png";
 const std::string PLAYER_EAST_IMAGE		= "assets\\player\\east.png";
 const std::string PLAYER_WEST_IMAGE		= "assets\\player\\west.png";
 
-const float PLAYER_ANIMATION_DELAY = 0.2f; // time between frames of player animation
+const float PLAYER_ANIMATION_DELAY = 0.01f; // time between frames of player animation
 const int  PLAYER_WIDTH = 32;              // width of player image
 const int  PLAYER_HEIGHT = 32;             // height of player image
 

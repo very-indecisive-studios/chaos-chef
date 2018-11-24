@@ -20,20 +20,20 @@ void game::Player::Move(float deltaTime, core::AnimatedSprite *animSprite)
 {
 	if (!core::Context::Get()->GetInputManager()->AnyKeyPressed())
 	{
+		currentAnimSprite->Stop();
 		//std::cout << "no key pressed\n";
 	}
-	else if (core::Context::Get()->GetInputManager()->IsKeyDown(playerKeyDown)) 
+	else if (core::Context::Get()->GetInputManager()->IsKeyDown(playerKeyDown)) // SOUTH
 	{
 		currentAnimSprite = southAnimSprite;
 		y += (deltaTime * (playerSpeed + velocity));
-
 		if (y >= (360- animSprite->GetWidth())) // if off screen at bottom
 		{
 			y = 360 - animSprite->GetWidth(); // position back to the bottom limit
 		}
-		std::cout << "GOING DOWN " << "x: " << x << " y: " << y << "\n";
+		//std::cout << "GOING DOWN " << "x: " << x << " y: " << y << "\n";
 	}
-	else if (core::Context::Get()->GetInputManager()->IsKeyDown(playerKeyUp))
+	else if (core::Context::Get()->GetInputManager()->IsKeyDown(playerKeyUp)) // NORTH
 	{
 		currentAnimSprite = northAnimSprite;
 		y -= (deltaTime * (playerSpeed + velocity));
@@ -41,9 +41,9 @@ void game::Player::Move(float deltaTime, core::AnimatedSprite *animSprite)
 		{
 			y = 0; // position back to the top limit
 		}
-		std::cout << "GOING UP " << "x: " << x << " y: " << y << "\n";
+		//std::cout << "GOING UP " << "x: " << x << " y: " << y << "\n";
 	}
-	else if (core::Context::Get()->GetInputManager()->IsKeyDown(playerKeyRight))
+	else if (core::Context::Get()->GetInputManager()->IsKeyDown(playerKeyRight)) // EAST
 	{
 		currentAnimSprite = eastAnimSprite;
 		x += deltaTime * (playerSpeed + velocity);
@@ -51,9 +51,9 @@ void game::Player::Move(float deltaTime, core::AnimatedSprite *animSprite)
 		{
 			x = 640 - animSprite->GetWidth(); // position back to the right limit
 		}
-		std::cout << "GOING RIGHT " << "x: " << x << " y: " << y << " deltatime: "<< deltaTime << "\n";
+		//std::cout << "GOING RIGHT " << "x: " << x << " y: " << y << " deltatime: "<< deltaTime << "\n";
 	}
-	else if (core::Context::Get()->GetInputManager()->IsKeyDown(playerKeyLeft))
+	else if (core::Context::Get()->GetInputManager()->IsKeyDown(playerKeyLeft)) // WEST
 	{
 		currentAnimSprite = westAnimSprite;
 		x -= deltaTime * (playerSpeed + velocity);
@@ -61,17 +61,16 @@ void game::Player::Move(float deltaTime, core::AnimatedSprite *animSprite)
 		{
 			x = 0; // position back to the left limit
 		}
-		std::cout << "GOING LEFT " << "x: " << x << " y: " << y <<  "\n" ;
+		//std::cout << "GOING LEFT " << "x: " << x << " y: " << y <<  "\n" ;
 	}
 
-	
 	animSprite->UpdateAndDraw(deltaTime, core::Vector2(x, y));
 }
 
 void game::Player::Update(float deltaTime)
 {
-	currentAnimSprite->Play();
 	this->Move(deltaTime, currentAnimSprite);
+	currentAnimSprite->Play();
 }
 
 void game::Player::Collided(core::GameEntity &gameEntity)

@@ -16,9 +16,6 @@ namespace game
 		UCHAR playerKeyDown = VK_DOWN;
 		UCHAR playerKeyLeft = VK_LEFT;
 		UCHAR playerKeyRight = VK_RIGHT;
-		int playerWidth = 32;
-		int playerHeight = 32;
-		float secPerFrame = 0.2f;
 
 	public:
 		Player();
@@ -29,10 +26,10 @@ namespace game
 		float y;
 
 		core::AnimatedSprite *currentAnimSprite = NULL;
-		core::AnimatedSprite *northAnimSprite = core::AnimatedSprite::Create(PLAYER_NORTH_IMAGE, playerWidth, playerHeight, secPerFrame);
-		core::AnimatedSprite *eastAnimSprite = core::AnimatedSprite::Create(PLAYER_EAST_IMAGE, playerWidth, playerHeight, secPerFrame);
-		core::AnimatedSprite *southAnimSprite = core::AnimatedSprite::Create(PLAYER_SOUTH_IMAGE, playerWidth, playerHeight, secPerFrame);
-		core::AnimatedSprite *westAnimSprite = core::AnimatedSprite::Create(PLAYER_WEST_IMAGE, playerWidth, playerHeight, secPerFrame);
+		core::AnimatedSprite *northAnimSprite = core::AnimatedSprite::Create(PLAYER_NORTH_IMAGE, PLAYER_WIDTH, PLAYER_HEIGHT, PLAYER_ANIMATION_DELAY);
+		core::AnimatedSprite *eastAnimSprite = core::AnimatedSprite::Create(PLAYER_EAST_IMAGE, PLAYER_WIDTH, PLAYER_HEIGHT, PLAYER_ANIMATION_DELAY);
+		core::AnimatedSprite *southAnimSprite = core::AnimatedSprite::Create(PLAYER_SOUTH_IMAGE, PLAYER_WIDTH, PLAYER_HEIGHT, PLAYER_ANIMATION_DELAY);
+		core::AnimatedSprite *westAnimSprite = core::AnimatedSprite::Create(PLAYER_WEST_IMAGE, PLAYER_WIDTH, PLAYER_HEIGHT, PLAYER_ANIMATION_DELAY);
 
 		void SetCurrent(PlayerAnimator *s) 
 		{

@@ -18,6 +18,7 @@ void core::Game::Initialize()
 	QueryPerformanceFrequency(&timerFreq);
 	QueryPerformanceCounter(&timeStart);
 	player = new game::Player();
+	map->Create(MAP_IMAGE);
 }
 
 void core::Game::Run()
