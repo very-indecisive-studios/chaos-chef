@@ -1,4 +1,5 @@
 #include "context.h"
+#include "core/gameException.h"
 
 Context::Context()
 {
@@ -44,6 +45,11 @@ Context * Context::instance = nullptr;
 
 Context *const Context::Get() 
 {
+	if (instance)
+	{
+		throw GameException("Context was not initialized.");
+	}
+
 	return instance;
 }
 
