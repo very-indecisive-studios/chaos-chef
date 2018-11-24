@@ -3,6 +3,7 @@
 #include <string>
 #include "../core/gameEntity.h"
 #include "../core/animatedSprite.h"
+#include "../game/resources.h"
 
 namespace game
 {
@@ -23,17 +24,15 @@ namespace game
 		Player();
 		~Player();
 		float playerSpeed = 100.0f;
-		float velocity = 30.0f;
-		float changeOfY;
-		float changeOfX;
+		float velocity = 500.0f;
 		float x;
 		float y;
 
 		core::AnimatedSprite *currentAnimSprite = NULL;
-		core::AnimatedSprite *northAnimSprite = core::AnimatedSprite::Create("assets\\player\\north.png", playerWidth, playerHeight, secPerFrame);
-		core::AnimatedSprite *eastAnimSprite = core::AnimatedSprite::Create("assets\\player\\east.png", playerWidth, playerHeight, secPerFrame);
-		core::AnimatedSprite *southAnimSprite = core::AnimatedSprite::Create("assets\\player\\south.png", playerWidth, playerHeight, secPerFrame);
-		core::AnimatedSprite *westAnimSprite = core::AnimatedSprite::Create("assets\\player\\west.png", playerWidth, playerHeight, secPerFrame);
+		core::AnimatedSprite *northAnimSprite = core::AnimatedSprite::Create(PLAYER_NORTH_IMAGE, playerWidth, playerHeight, secPerFrame);
+		core::AnimatedSprite *eastAnimSprite = core::AnimatedSprite::Create(PLAYER_EAST_IMAGE, playerWidth, playerHeight, secPerFrame);
+		core::AnimatedSprite *southAnimSprite = core::AnimatedSprite::Create(PLAYER_SOUTH_IMAGE, playerWidth, playerHeight, secPerFrame);
+		core::AnimatedSprite *westAnimSprite = core::AnimatedSprite::Create(PLAYER_WEST_IMAGE, playerWidth, playerHeight, secPerFrame);
 
 		void SetCurrent(PlayerAnimator *s) 
 		{
