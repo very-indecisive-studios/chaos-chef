@@ -1,9 +1,9 @@
 #include "resourceManager.h"
 #include "context.h"
 
-core::ResourceManager::ResourceManager() { }
+ResourceManager::ResourceManager() { }
 
-core::ResourceManager::~ResourceManager() 
+ResourceManager::~ResourceManager() 
 {
 	// Deallocate all textures.
 	for (const auto& pair : textureResourceMap) 
@@ -12,7 +12,7 @@ core::ResourceManager::~ResourceManager()
 	}
 }
 
-core::Texture * core::ResourceManager::GetTexture(std::string textureName) 
+Texture * ResourceManager::GetTexture(std::string textureName) 
 {
 	auto itr = textureResourceMap.find(textureName);
 	
@@ -22,7 +22,7 @@ core::Texture * core::ResourceManager::GetTexture(std::string textureName)
 	}
 	else 
 	{
-		core::Texture *loadedTexture = core::Context::Get()->GetGraphicsRenderer()->LoadTextureFromFile(textureName);
+		Texture *loadedTexture = Context::Get()->GetGraphicsRenderer()->LoadTextureFromFile(textureName);
 
 		textureResourceMap[textureName] = loadedTexture;
 

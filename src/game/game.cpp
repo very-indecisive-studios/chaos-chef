@@ -5,19 +5,19 @@
 #include "sprite.h"
 #include <iostream>
 #include <string>
-#include "../game/resources.h"
+#include "game/resources.h"
 
-core::Game::Game()
+Game::Game()
 {
 }
 
-core::Game::~Game()
+Game::~Game()
 {
 	delete player;
 	delete map;
 }
 
-void core::Game::Initialize()
+void Game::Initialize()
 {
 	QueryPerformanceFrequency(&timerFreq);
 	QueryPerformanceCounter(&timeStart);
@@ -65,7 +65,7 @@ void core::Game::Initialize()
 	}
 }
 
-void core::Game::Run()
+void Game::Run()
 {
 	/*
 		Calculate delta time + limit frame rate.
@@ -103,18 +103,18 @@ void core::Game::Run()
 	/*
 		Render game.
 	*/
-	auto gR = core::Context::Get()->GetGraphicsRenderer();
+	auto gR = Context::Get()->GetGraphicsRenderer();
 	gR->Render();
 	gR->HandleLostDevice();
 
 	/*
 		Reset input.
 	*/
-	auto iM = core::Context::Get()->GetInputManager();
+	auto iM = Context::Get()->GetInputManager();
 	iM->ClearAll();
 }
 
-float core::Game::GetDeltaTime()
+float Game::GetDeltaTime()
 {
 	return deltaTime;
 }

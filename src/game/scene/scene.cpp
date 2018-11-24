@@ -1,10 +1,10 @@
 #include "scene.h"
 
-core::Scene::Scene(SceneType type)
+Scene::Scene(SceneType type)
 	:type(type)
 { }
 
-core::Scene::~Scene()
+Scene::~Scene()
 {
 	for (auto entity : entities) 
 	{
@@ -12,7 +12,7 @@ core::Scene::~Scene()
 	}
 }
 
-void core::Scene::Update(float deltaTime)
+void Scene::Update(float deltaTime)
 {
 	for (auto entity : entities)
 	{
@@ -20,12 +20,12 @@ void core::Scene::Update(float deltaTime)
 	}
 }
 
-void core::Scene::AddGameEntity(GameEntity *entity)
+void Scene::AddGameEntity(GameEntity *entity)
 {
 	entities.push_back(entity);
 }
 
-core::SceneType core::Scene::GetType() 
+SceneType Scene::GetType()
 {
 	return this->type;
 }

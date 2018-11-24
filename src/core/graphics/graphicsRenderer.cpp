@@ -1,8 +1,8 @@
 #include <algorithm>
 #include "graphicsRenderer.h"
-#include "gameException.h"
+#include "core/gameException.h"
 
-void core::GraphicsRenderer::InitParamsD3D() 
+void GraphicsRenderer::InitParamsD3D() 
 {
 	// Initialize D3D presentation params
 	ZeroMemory(&paramsD3D, sizeof(paramsD3D));              // fill the structure with 0
@@ -20,7 +20,7 @@ void core::GraphicsRenderer::InitParamsD3D()
 	paramsD3D.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
 }
 
-HRESULT core::GraphicsRenderer::SwapBuffer()
+HRESULT GraphicsRenderer::SwapBuffer()
 {
 	HRESULT result = E_FAIL;
 
@@ -29,7 +29,7 @@ HRESULT core::GraphicsRenderer::SwapBuffer()
 	return result;
 }
 
-void core::GraphicsRenderer::ReleaseAll()
+void GraphicsRenderer::ReleaseAll()
 {
 	spriteD3D->Release();
 	deviceD3D->Release();
@@ -38,7 +38,7 @@ void core::GraphicsRenderer::ReleaseAll()
 	ClearAllSpriteDrawJobs();
 }
 
-HRESULT core::GraphicsRenderer::Reset()
+HRESULT GraphicsRenderer::Reset()
 {
 	HRESULT result = E_FAIL;    // default to fail, replace on success
 
@@ -49,19 +49,19 @@ HRESULT core::GraphicsRenderer::Reset()
 	return result;
 }
 
-core::GraphicsRenderer::GraphicsRenderer()
+GraphicsRenderer::GraphicsRenderer()
 {
 	deviceD3D = NULL;
 	spriteD3D = NULL;
 	d3d = NULL;
 }
 
-core::GraphicsRenderer::~GraphicsRenderer()
+GraphicsRenderer::~GraphicsRenderer()
 {
 	ReleaseAll();
 }
 
-HRESULT core::GraphicsRenderer::Initialize(HWND hwnd, int width, int height, bool fullscreen)
+HRESULT GraphicsRenderer::Initialize(HWND hwnd, int width, int height, bool fullscreen)
 {
 	this->hwnd = hwnd;
 	this->width = width;
@@ -144,7 +144,7 @@ HRESULT core::GraphicsRenderer::Initialize(HWND hwnd, int width, int height, boo
 	return result;
 }
 
-HRESULT core::GraphicsRenderer::HandleLostDevice()
+HRESULT GraphicsRenderer::HandleLostDevice()
 {
 	HRESULT result = E_FAIL;
 
@@ -179,7 +179,7 @@ HRESULT core::GraphicsRenderer::HandleLostDevice()
 	return result;
 }
 
-HRESULT core::GraphicsRenderer::Render() 
+HRESULT GraphicsRenderer::Render() 
 {
 	HRESULT result = E_FAIL;
 
@@ -190,16 +190,16 @@ HRESULT core::GraphicsRenderer::Render()
 	
 	try 
 	{
-		core::ThrowIfFailed(deviceD3D->Clear(0, NULL, D3DCLEAR_TARGET, BACK_COLOUR, 1.0F, 0));
+		ThrowIfFailed(deviceD3D->Clear(0, NULL, D3DCLEAR_TARGET, BACK_COLOUR, 1.0F, 0));
 
-		core::ThrowIfFailed(deviceD3D->BeginScene());
-		core::ThrowIfFailed(spriteD3D->Begin(D3DXSPRITE_ALPHABLEND));
+		ThrowIfFailed(deviceD3D->BeginScene());
+		ThrowIfFailed(spriteD3D->Begin(D3DXSPRITE_ALPHABLEND));
 		
 		// Sort the jobs according to layers; ascending order.
 		std::sort(
 			spriteDrawJobs.begin(), 
 			spriteDrawJobs.end(), 
-			[](const core::DrawSpriteJob *lhs, const core::DrawSpriteJob *rhs)
+			[](const DrawSpriteJob *lhs, const DrawSpriteJob *rhs)
 			{
 				return lhs->sprite->GetLayer() < rhs->sprite->GetLayer();
 			}
@@ -238,12 +238,12 @@ HRESULT core::GraphicsRenderer::Render()
 			);
 		}
 		
-		core::ThrowIfFailed(spriteD3D->End());
-		core::ThrowIfFailed(deviceD3D->EndScene());
+		ThrowIfFailed(spriteD3D->End());
+		ThrowIfFailed(deviceD3D->EndScene());
 
 		ClearAllSpriteDrawJobs();
 		
-		core::ThrowIfFailed(SwapBuffer());
+		ThrowIfFailed(SwapBuffer());
 
 		result = S_OK;
 	}
@@ -255,14 +255,14 @@ HRESULT core::GraphicsRenderer::Render()
 	return result;
 }
 
-core::Texture * core::GraphicsRenderer::LoadTextureFromFile(std::string fileName) 
+Texture * GraphicsRenderer::LoadTextureFromFile(std::string fileName) 
 {
 	HRESULT result = E_FAIL;
 
 	// Get image info from file.
 	D3DXIMAGE_INFO imageInfo;
 	result = D3DXGetImageInfoFromFile(fileName.c_str(), &imageInfo);
-	core::ThrowIfFailed(result);
+	ThrowIfFailed(result);
 
 	// Create the new texture by loading from file.
 	LPDIRECT3DTEXTURE9 textureD3D = NULL;
@@ -283,17 +283,17 @@ core::Texture * core::GraphicsRenderer::LoadTextureFromFile(std::string fileName
 		&textureD3D			//destination texture
 	);
 
-	core::ThrowIfFailed(result);
+	ThrowIfFailed(result);
 
 	return new Texture(textureD3D, imageInfo.Width, imageInfo.Height);
 }
 
-void core::GraphicsRenderer::QueueSpriteDrawJob(DrawSpriteJob *job) 
+void GraphicsRenderer::QueueSpriteDrawJob(DrawSpriteJob *job) 
 {
 	spriteDrawJobs.push_back(job);
 }
 
-void core::GraphicsRenderer::ClearAllSpriteDrawJobs() 
+void GraphicsRenderer::ClearAllSpriteDrawJobs() 
 {
 	for (auto sprJob : spriteDrawJobs) 
 	{

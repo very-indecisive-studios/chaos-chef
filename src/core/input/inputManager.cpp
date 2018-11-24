@@ -1,21 +1,21 @@
 #include "inputManager.h"
 
-core::InputManager::InputManager() 
+InputManager::InputManager() 
 {
 	// clear key down array
-	for (size_t i = 0; i < core::KEYS_ARRAY_LEN; i++)
+	for (size_t i = 0; i < KEYS_ARRAY_LEN; i++)
 		keysDown[i] = false;
 	// clear key pressed array
-	for (size_t i = 0; i < core::KEYS_ARRAY_LEN; i++)
+	for (size_t i = 0; i < KEYS_ARRAY_LEN; i++)
 		keysPressed[i] = false;
 	newLine = true;                     // start new line
 	textIn = "";                        // clear textIn
 	charIn = 0;                         // clear charIn
 }
 
-core::InputManager::~InputManager() { }
+InputManager::~InputManager() { }
 
-bool core::InputManager::ProccessKeyMessage(UINT msg, WPARAM wParam)
+bool InputManager::ProccessKeyMessage(UINT msg, WPARAM wParam)
 {
 	switch (msg) 
 	{
@@ -37,10 +37,10 @@ bool core::InputManager::ProccessKeyMessage(UINT msg, WPARAM wParam)
 
 // Set true in the keysDown and keysPessed array for this key
 // Pre: wParam contains the virtual key code (0--255)
-void core::InputManager::KeyDown(WPARAM wParam)
+void InputManager::KeyDown(WPARAM wParam)
 {
 	// make sure key code is within buffer range
-	if (wParam < core::KEYS_ARRAY_LEN)
+	if (wParam < KEYS_ARRAY_LEN)
 	{
 		keysDown[wParam] = true;    // update keysDown array
 		// key has been "pressed, erased by clear()
@@ -50,17 +50,17 @@ void core::InputManager::KeyDown(WPARAM wParam)
 
 // Set false in the keysDown array for this key
 // Pre: wParam contains the virtual key code (0--255)
-void core::InputManager::KeyUp(WPARAM wParam)
+void InputManager::KeyUp(WPARAM wParam)
 {
 	// make sure key code is within buffer range
-	if (wParam < core::KEYS_ARRAY_LEN)
+	if (wParam < KEYS_ARRAY_LEN)
 		// update state table
 		keysDown[wParam] = false;
 }
 
 // Save the char just entered in textIn string
 // Pre: wParam contains the char
-void core::InputManager::KeyIn(WPARAM wParam)
+void InputManager::KeyIn(WPARAM wParam)
 {
 	if (newLine)                            // if start of new line
 	{
@@ -84,18 +84,18 @@ void core::InputManager::KeyIn(WPARAM wParam)
 }
 
 // Returns true if the specified VIRTUAL KEY is down, otherwise false.
-bool core::InputManager::IsKeyDown(UCHAR vkey) const
+bool InputManager::IsKeyDown(UCHAR vkey) const
 {
-	if (vkey < core::KEYS_ARRAY_LEN)
+	if (vkey < KEYS_ARRAY_LEN)
 		return keysDown[vkey];
 	else
 		return false;
 }
 
 // Return true if the specified VIRTUAL KEY has been pressed in the most recent frame. Key presses are erased at the end of each frame.
-bool core::InputManager::WasKeyPressed(UCHAR vkey) const
+bool InputManager::WasKeyPressed(UCHAR vkey) const
 {
-	if (vkey < core::KEYS_ARRAY_LEN)
+	if (vkey < KEYS_ARRAY_LEN)
 		return keysPressed[vkey];
 	else
 		return false;
@@ -103,56 +103,56 @@ bool core::InputManager::WasKeyPressed(UCHAR vkey) const
 
 // Return true if any key was pressed in the most recent frame.
 // Key presses are erased at the end of each frame.
-bool core::InputManager::AnyKeyPressed() const
+bool InputManager::AnyKeyPressed() const
 {
-	for (size_t i = 0; i < core::KEYS_ARRAY_LEN; i++)
+	for (size_t i = 0; i < KEYS_ARRAY_LEN; i++)
 		if (keysPressed[i] == true)
 			return true;
 	return false;
 }
 
 // Clear the specified key press
-void core::InputManager::ClearKeyPress(UCHAR vkey)
+void InputManager::ClearKeyPress(UCHAR vkey)
 {
-	if (vkey < core::KEYS_ARRAY_LEN)
+	if (vkey < KEYS_ARRAY_LEN)
 		keysPressed[vkey] = false;
 }
 
 // Clear specified input buffers
-void core::InputManager::Clear(UCHAR what)
+void InputManager::Clear(UCHAR what)
 {
-	if (what & core::KEYS_DOWN)       // if clear keys down
+	if (what & KEYS_DOWN)       // if clear keys down
 	{
-		for (size_t i = 0; i < core::KEYS_ARRAY_LEN; i++)
+		for (size_t i = 0; i < KEYS_ARRAY_LEN; i++)
 			keysDown[i] = false;
 	}
-	if (what & core::KEYS_PRESSED)    // if clear keys pressed
+	if (what & KEYS_PRESSED)    // if clear keys pressed
 	{
-		for (size_t i = 0; i < core::KEYS_ARRAY_LEN; i++)
+		for (size_t i = 0; i < KEYS_ARRAY_LEN; i++)
 			keysPressed[i] = false;
 	}
-	if (what & core::TEXT_IN)
+	if (what & TEXT_IN)
 	{
 		ClearTextIn();
 	}
 }
 
-void core::InputManager::ClearAll() 
+void InputManager::ClearAll() 
 {
-	Clear(core::KEYS_TEXT);
+	Clear(KEYS_TEXT);
 }
 
-void core::InputManager::ClearTextIn() 
+void InputManager::ClearTextIn() 
 {
 	textIn.clear();
 }
 
-std::string core::InputManager::GetTextIn()
+std::string InputManager::GetTextIn()
 {
 	return textIn;
 }
 
-char core::InputManager::GetCharIn() 
+char InputManager::GetCharIn() 
 { 
 	return charIn;
 }

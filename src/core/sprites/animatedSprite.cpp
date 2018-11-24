@@ -1,9 +1,11 @@
 #include "animatedSprite.h"
 #include "context.h"
+#include "core/graphics/texture.h"
+#include "math.h"
 #include <iostream>
 
-core::AnimatedSprite::AnimatedSprite(
-	Texture *texture, SpriteLayer layer, int frameWidth, int frameHeight, float secondsPerFrame, int scale
+AnimatedSprite::AnimatedSprite(
+	Texture *texture, uint8_t layer, int frameWidth, int frameHeight, float secondsPerFrame, int scale
 ) : Sprite(texture, layer, scale)
 {
 	this->width = frameWidth;
@@ -18,7 +20,7 @@ core::AnimatedSprite::AnimatedSprite(
 	this->framesPerRow = texture->GetHeight() / frameHeight;
 }
 
-void core::AnimatedSprite::Update(float deltaTime)
+void AnimatedSprite::Update(float deltaTime)
 {
 	if (!isPlaying)
 	{
@@ -35,14 +37,14 @@ void core::AnimatedSprite::Update(float deltaTime)
 	}
 }
 
-void core::AnimatedSprite::UpdateAndDraw(float deltaTime, core::Vector2 position) 
+void AnimatedSprite::UpdateAndDraw(float deltaTime, Vector2 position) 
 {
 	Update(deltaTime);
 
-	core::Sprite::Draw(position);
+	Sprite::Draw(position);
 }
 
-void core::AnimatedSprite::NextFrame() 
+void AnimatedSprite::NextFrame() 
 {
 	// Next frame.
 	if (this->currentFrameCol + 1 == framesPerCol) 
@@ -70,26 +72,26 @@ void core::AnimatedSprite::NextFrame()
 	this->drawingArea.bottom	= (currentFrameRow * height) + height;
 }
 
-void core::AnimatedSprite::Play()
+void AnimatedSprite::Play()
 {
 	this->isPlaying = true;
 }
 
-void core::AnimatedSprite::Reset()
+void AnimatedSprite::Reset()
 {
 	currentFrameCol = 0;
 	currentFrameRow = 0;
 }
 
-void core::AnimatedSprite::Stop()
+void AnimatedSprite::Stop()
 {
 	this->isPlaying = false;
 }
 
-core::AnimatedSprite * core::AnimatedSprite::Create(const std::string & textureName, SpriteLayer layer, int frameWidth, int frameHeight, float secondsPerFrame, int scale)
+AnimatedSprite * AnimatedSprite::Create(const std::string & textureName, uint8_t layer, int frameWidth, int frameHeight, float secondsPerFrame, int scale)
 {
 	auto texture
-		= core::Context::Get()->GetResourceManager()->GetTexture(textureName);
+		= Context::Get()->GetResourceManager()->GetTexture(textureName);
 
-	return new core::AnimatedSprite(texture, layer, frameWidth, frameHeight, secondsPerFrame, scale);
+	return new AnimatedSprite(texture, layer, frameWidth, frameHeight, secondsPerFrame, scale);
 }

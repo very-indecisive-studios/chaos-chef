@@ -8,9 +8,9 @@
 #include <crtdbg.h>             // for detecting memory leaks
 #include <Mmsystem.h>
 #include "constants.h"
-#include "core/context.h"
+#include "context.h"
 #include "core/math.h"
-#include "core/animatedSprite.h"
+#include "core/sprites/animatedSprite.h"
 
 // Function prototypes
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int);
@@ -40,13 +40,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	}
 
 	// Initialize application context.
-	core::Context::Initialize();
+	Context::Initialize();
 
 	// Initialize graphics.
-	core::Context::Get()->GetGraphicsRenderer()->Initialize(hwnd, GAME_WIDTH, GAME_HEIGHT, FULLSCREEN);
+	Context::Get()->GetGraphicsRenderer()->Initialize(hwnd, GAME_WIDTH, GAME_HEIGHT, FULLSCREEN);
 	
 	// Initialize game.
-	core::Context::Get()->GetGame()->Initialize();
+	Context::Get()->GetGame()->Initialize();
 
 	// Main message loop.
 	MSG msg;
@@ -66,11 +66,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		else
 		{
 			// Run game.
-			core::Context::Get()->GetGame()->Run();
+			Context::Get()->GetGame()->Run();
 		}
 	}
 
-	core::Context::Get()->ReleaseAll();
+	Context::Get()->ReleaseAll();
 
 	return msg.wParam;
 }
@@ -88,8 +88,8 @@ LRESULT WINAPI WinProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 	// Let input manager process any input messages.
 	if (
-		core::Context::Get() != nullptr && 
-		core::Context::Get()->GetInputManager()->ProccessKeyMessage(msg, wParam)
+		Context::Get() != nullptr && 
+		Context::Get()->GetInputManager()->ProccessKeyMessage(msg, wParam)
 	)
 	{
 		return 0;

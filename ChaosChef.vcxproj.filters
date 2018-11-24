@@ -1,34 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="core\animatedSprite.cpp" />
-    <ClCompile Include="core\context.cpp" />
-    <ClCompile Include="core\graphicsRenderer.cpp" />
-    <ClCompile Include="core\resourceManager.cpp" />
-    <ClCompile Include="core\sprite.cpp" />
-    <ClCompile Include="core\texture.cpp" />
-    <ClCompile Include="core\inputManager.cpp" />
-    <ClCompile Include="winmain.cpp" />
-    <ClCompile Include="core\gameEntity.cpp" />
-    <ClCompile Include="core\game.cpp" />
-    <ClCompile Include="game\player.cpp" />
-    <ClCompile Include="core\scene.cpp" />
+    <ClCompile Include="src\context.cpp" />
+    <ClCompile Include="src\winmain.cpp" />
+    <ClCompile Include="src\core\sprites\animatedSprite.cpp" />
+    <ClCompile Include="src\core\sprites\sprite.cpp" />
+    <ClCompile Include="src\core\graphics\graphicsRenderer.cpp" />
+    <ClCompile Include="src\core\graphics\texture.cpp" />
+    <ClCompile Include="src\core\input\inputManager.cpp" />
+    <ClCompile Include="src\core\resource\resourceManager.cpp" />
+    <ClCompile Include="src\game\game.cpp" />
+    <ClCompile Include="src\game\scene\scene.cpp" />
+    <ClCompile Include="src\game\entity\gameEntity.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="core\animatedSprite.h" />
-    <ClInclude Include="core\context.h" />
-    <ClInclude Include="core\gameException.h" />
-    <ClInclude Include="core\graphicsRenderer.h" />
-    <ClInclude Include="core\math.h" />
-    <ClInclude Include="core\resourceManager.h" />
-    <ClInclude Include="core\sprite.h" />
-    <ClInclude Include="core\texture.h" />
-    <ClInclude Include="core\inputManager.h" />
-    <ClInclude Include="core\gameEntity.h" />
-    <ClInclude Include="core\game.h" />
-    <ClInclude Include="game\resources.h" />
-    <ClInclude Include="game\player.h" />
-    <ClInclude Include="constants.h" />
-    <ClInclude Include="core\scene.h" />
+    <ClInclude Include="src\constants.h" />
+    <ClInclude Include="src\context.h" />
+    <ClInclude Include="src\core\sprites\animatedSprite.h" />
+    <ClInclude Include="src\core\sprites\sprite.h" />
+    <ClInclude Include="src\core\graphics\graphicsRenderer.h" />
+    <ClInclude Include="src\core\graphics\texture.h" />
+    <ClInclude Include="src\core\input\inputManager.h" />
+    <ClInclude Include="src\core\resource\resourceManager.h" />
+    <ClInclude Include="src\game\resources.h" />
+    <ClInclude Include="src\core\math.h" />
+    <ClInclude Include="src\core\gameException.h" />
+    <ClInclude Include="src\game\game.h" />
+    <ClInclude Include="src\game\scene\scene.h" />
+    <ClInclude Include="src\game\entity\gameEntity.h" />
   </ItemGroup>
 </Project>

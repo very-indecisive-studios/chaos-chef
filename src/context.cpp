@@ -1,6 +1,6 @@
 #include "context.h"
 
-core::Context::Context()
+Context::Context()
 {
 	graphicsRenderer	= new GraphicsRenderer();
 	resourceManager		= new ResourceManager();
@@ -8,7 +8,7 @@ core::Context::Context()
 	game				= new Game();
 }
 
-core::Context::~Context()
+Context::~Context()
 {
 	delete graphicsRenderer;
 	delete resourceManager;
@@ -16,22 +16,22 @@ core::Context::~Context()
 	delete game;
 }
 
-core::GraphicsRenderer *const core::Context::GetGraphicsRenderer()
+GraphicsRenderer *const Context::GetGraphicsRenderer()
 {
 	return graphicsRenderer;
 }
 
-core::ResourceManager *const core::Context::GetResourceManager()
+ResourceManager *const Context::GetResourceManager()
 {
 	return resourceManager;
 }
 
-core::InputManager *const core::Context::GetInputManager()
+InputManager *const Context::GetInputManager()
 {
 	return inputManager;
 }
 
-core::Game *const core::Context::GetGame()
+Game *const Context::GetGame()
 {
 	return game;
 }
@@ -40,14 +40,14 @@ core::Game *const core::Context::GetGame()
 	Static variables.
 */
 
-core::Context * core::Context::instance = nullptr;
+Context * Context::instance = nullptr;
 
-core::Context *const core::Context::Get() 
+Context *const Context::Get() 
 {
 	return instance;
 }
 
-void core::Context::Initialize() 
+void Context::Initialize() 
 {
 	if (instance == nullptr) 
 	{
@@ -55,7 +55,7 @@ void core::Context::Initialize()
 	}
 }
 
-void core::Context::ReleaseAll() 
+void Context::ReleaseAll() 
 {
 	delete instance;
 	instance = nullptr;
