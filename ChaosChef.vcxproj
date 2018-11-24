@@ -97,6 +97,7 @@
     <ClCompile Include="core\sprite.cpp" />
     <ClCompile Include="core\texture.cpp" />
     <ClCompile Include="core\inputManager.cpp" />
+    <ClCompile Include="game\player.cpp" />
     <ClCompile Include="winmain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -113,6 +114,7 @@
     <ClInclude Include="core\texture.h" />
     <ClInclude Include="core\inputManager.h" />
     <ClInclude Include="game\resources.h" />
+    <ClInclude Include="game\player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -2,6 +2,8 @@
 
 #include <winnt.h>
 #include "animatedSprite.h"
+#include "gameEntity.h"
+#include "../game/player.h"
 
 namespace core 
 {
@@ -20,6 +22,7 @@ namespace core
 		const float MIN_FRAME_TIME = 1.0f / MAX_FRAME_RATE;
 		
 		AnimatedSprite *animSprite;
+		GameEntity *player = NULL;
 	public:
 		Game();
 		~Game();

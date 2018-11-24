@@ -10,20 +10,14 @@ core::Game::Game()
 core::Game::~Game()
 {
 	delete animSprite;
+	delete player;
 }
 
 void core::Game::Initialize()
 {
 	QueryPerformanceFrequency(&timerFreq);
 	QueryPerformanceCounter(&timeStart);
-
-	animSprite = core::AnimatedSprite::Create(
-		"assets\\player\\player_walk_south.png",
-		32,
-		32,
-		0.2f
-	);
-	animSprite->Play();
+	player = new game::Player();
 }
 
 void core::Game::Run()
@@ -58,7 +52,7 @@ void core::Game::Run()
 	/*
 		Update game entities.
 	*/
-	animSprite->UpdateAndDraw(deltaTime, Vector2(10, 10));
+	player->Update(deltaTime);
 
 	/*
 		Render game.

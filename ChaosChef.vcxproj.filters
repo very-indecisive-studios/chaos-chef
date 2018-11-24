@@ -11,9 +11,9 @@
     <ClCompile Include="winmain.cpp" />
     <ClCompile Include="core\gameEntity.cpp" />
     <ClCompile Include="core\game.cpp" />
+    <ClCompile Include="game\player.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="constants.h" />
     <ClInclude Include="core\animatedSprite.h" />
     <ClInclude Include="core\context.h" />
     <ClInclude Include="core\gameException.h" />
@@ -26,5 +26,7 @@
     <ClInclude Include="core\gameEntity.h" />
     <ClInclude Include="core\game.h" />
     <ClInclude Include="game\resources.h" />
+    <ClInclude Include="game\player.h" />
+    <ClInclude Include="constants.h" />
   </ItemGroup>
 </Project>
