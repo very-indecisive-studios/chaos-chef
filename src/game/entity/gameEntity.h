@@ -30,11 +30,12 @@ class GameEntity
 {
 private:
 	GameEntityType type;
+
+	GameEntity(GameEntityType type);
 protected:
 	Vector2 position;
-	CollisionBounds collisionBounds;
+	CollisionBounds collisionBounds;	
 public:
-	GameEntity(GameEntityType type);
 	virtual ~GameEntity();
 	virtual void Update(float deltaTime) = 0;
 	virtual void Collided(GameEntity &gameEntity) = 0;

@@ -94,6 +94,7 @@
     <ClCompile Include="src\game\entity\gameEntity.cpp" />
     <ClCompile Include="src\core\graphics\graphicsRenderer.cpp" />
     <ClCompile Include="src\core\resource\resourceManager.cpp" />
+    <ClCompile Include="src\game\scene\gameScene.cpp" />
     <ClCompile Include="src\game\scene\scene.cpp" />
     <ClCompile Include="src\core\sprites\sprite.cpp" />
     <ClCompile Include="src\core\graphics\texture.cpp" />
@@ -110,6 +111,7 @@
     <ClInclude Include="src\core\graphics\graphicsRenderer.h" />
     <ClInclude Include="src\core\math.h" />
     <ClInclude Include="src\core\resource\resourceManager.h" />
+    <ClInclude Include="src\game\scene\gameScene.h" />
     <ClInclude Include="src\game\scene\scene.h" />
     <ClInclude Include="src\core\sprites\sprite.h" />
     <ClInclude Include="src\core\graphics\texture.h" />

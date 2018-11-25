@@ -1,7 +1,6 @@
 #include "scene.h"
 
-Scene::Scene(SceneType type)
-	:type(type)
+Scene::Scene()
 { }
 
 Scene::~Scene()
@@ -23,9 +22,4 @@ void Scene::Update(float deltaTime)
 void Scene::AddGameEntity(GameEntity *entity)
 {
 	entities.push_back(entity);
-}
-
-SceneType Scene::GetType()
-{
-	return this->type;
 }
