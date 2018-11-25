@@ -1,9 +1,7 @@
 #pragma once
 
 #include <winnt.h>
-#include "core/sprites/animatedSprite.h"
-#include "core/sprites/sprite.h"
-#include "game/player.h"
+#include "game/scene/scene.h"
 
 class Game 
 {
@@ -18,9 +16,8 @@ private:
 	const float MIN_FRAME_RATE = 30.0f;
 	const float MAX_FRAME_TIME = 1.0f / MIN_FRAME_RATE;
 	const float MIN_FRAME_TIME = 1.0f / MAX_FRAME_RATE;
-		
-	Player *player;
-	Sprite *map;
+
+	Scene *scene;
 public:
 	Game();
 	~Game();

@@ -6,6 +6,7 @@
 #include "core/sprites/sprite.h"
 #include "context.h"
 #include "game/resources.h"
+#include "game/scene/gameScene.h"
 
 Game::Game()
 {
@@ -13,8 +14,7 @@ Game::Game()
 
 Game::~Game()
 {
-	delete player;
-	delete map;
+	delete scene;
 }
 
 void Game::Initialize()
@@ -22,8 +22,8 @@ void Game::Initialize()
 	QueryPerformanceFrequency(&timerFreq);
 	QueryPerformanceCounter(&timeStart);
 
-	player = new Player();
-	map = Sprite::Create(MAP_IMAGE, 0);
+	scene = new GameScene();
+	scene->Begin();
 
 	// Leaderboard prototype
 	// References: https://thispointer.com/how-to-iterate-over-a-map-in-c/ & https://www.moderncplusplus.com/map/ & https://thispointer.com/how-to-iterate-a-map-in-reverse-order-c/
@@ -96,10 +96,9 @@ void Game::Run()
 	timeStart = timeEnd;
 
 	/*
-		Update game entities.
+		Update current scene.
 	*/
-	map->Draw(Vector2(0, 0));
-	player->Update(deltaTime);
+	scene->Update(deltaTime);
 
 	/*
 		Render game.
