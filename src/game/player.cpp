@@ -1,35 +1,35 @@
-#include "player.h"
-#include "../core/animatedSprite.h"
-#include "../core/context.h"
-#include "../core/math.h"
 #include <iostream>
+#include "player.h"
+#include "game/entity/gameEntity.h"
+#include "core/sprites/animatedSprite.h"
+#include "core/math.h"
+#include "context.h"
 
 /*REMINDER TO CHANGE 360 TO GAME_HEIGHT*/
 /*REMINDER TO CHANGE 640 TO GAME_WIDTH*/
 
-game::Player::Player():GameEntity(core::GameEntityType::PLAYER) 
+Player::Player() : GameEntity(GameEntityType::PLAYER) 
 {
 	x = 70;		// starting x
 	y = 140;	// starting y
 	currentAnimSprite = southAnimSprite; // starting direction
 }
 
-game::Player::~Player() 
+Player::~Player() 
 {
-	delete currentAnimSprite;
 	delete northAnimSprite;
 	delete eastAnimSprite;
 	delete southAnimSprite;
 	delete westAnimSprite;
 }
 
-void game::Player::Move(float deltaTime, core::AnimatedSprite *animSprite)
+void Player::Move(float deltaTime, AnimatedSprite *animSprite)
 {
-	if (!core::Context::Get()->GetInputManager()->AnyKeyPressed())
+	if (!Context::Get()->GetInputManager()->AnyKeyPressed())
 	{
 		currentAnimSprite->Stop();
 	}
-	else if (core::Context::Get()->GetInputManager()->IsKeyDown(playerKeyDown)) // SOUTH
+	else if (Context::Get()->GetInputManager()->IsKeyDown(playerKeyDown)) // SOUTH
 	{
 		currentAnimSprite = southAnimSprite;
 		y += (deltaTime * (playerSpeed + velocity));
@@ -38,7 +38,7 @@ void game::Player::Move(float deltaTime, core::AnimatedSprite *animSprite)
 			y = 360 - animSprite->GetWidth(); // position back to the bottom limit
 		}
 	}
-	else if (core::Context::Get()->GetInputManager()->IsKeyDown(playerKeyUp)) // NORTH
+	else if (Context::Get()->GetInputManager()->IsKeyDown(playerKeyUp)) // NORTH
 	{
 		currentAnimSprite = northAnimSprite;
 		y -= (deltaTime * (playerSpeed + velocity));
@@ -47,7 +47,7 @@ void game::Player::Move(float deltaTime, core::AnimatedSprite *animSprite)
 			y = 0; // position back to the top limit
 		}
 	}
-	else if (core::Context::Get()->GetInputManager()->IsKeyDown(playerKeyRight)) // EAST
+	else if (Context::Get()->GetInputManager()->IsKeyDown(playerKeyRight)) // EAST
 	{
 		currentAnimSprite = eastAnimSprite;
 		x += deltaTime * (playerSpeed + velocity);
@@ -56,7 +56,7 @@ void game::Player::Move(float deltaTime, core::AnimatedSprite *animSprite)
 			x = 640 - animSprite->GetWidth(); // position back to the right limit
 		}
 	}
-	else if (core::Context::Get()->GetInputManager()->IsKeyDown(playerKeyLeft)) // WEST
+	else if (Context::Get()->GetInputManager()->IsKeyDown(playerKeyLeft)) // WEST
 	{
 		currentAnimSprite = westAnimSprite;
 		x -= deltaTime * (playerSpeed + velocity);
@@ -66,16 +66,16 @@ void game::Player::Move(float deltaTime, core::AnimatedSprite *animSprite)
 		}
 	}
 
-	animSprite->UpdateAndDraw(deltaTime, core::Vector2(x, y));
+	animSprite->UpdateAndDraw(deltaTime, Vector2(x, y));
 }
 
-void game::Player::Update(float deltaTime)
+void Player::Update(float deltaTime)
 {
 	this->Move(deltaTime, currentAnimSprite);
 	currentAnimSprite->Play();
 }
 
-void game::Player::Collided(core::GameEntity &gameEntity)
+void Player::Collided(GameEntity &gameEntity)
 {
 
 }

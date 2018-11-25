@@ -1,10 +1,10 @@
 #include <windows.h>
 #include <Mmsystem.h>
-#include "game.h"
-#include "context.h"
-#include "sprite.h"
 #include <iostream>
 #include <string>
+#include "game.h"
+#include "core/sprites/sprite.h"
+#include "context.h"
 #include "game/resources.h"
 
 Game::Game()
@@ -21,8 +21,9 @@ void Game::Initialize()
 {
 	QueryPerformanceFrequency(&timerFreq);
 	QueryPerformanceCounter(&timeStart);
-	player = new game::Player();
-	map = core::Sprite::Create(MAP_IMAGE);
+
+	player = new Player();
+	map = Sprite::Create(MAP_IMAGE, 0);
 
 	// Leaderboard prototype
 	// References: https://thispointer.com/how-to-iterate-over-a-map-in-c/ & https://www.moderncplusplus.com/map/ & https://thispointer.com/how-to-iterate-a-map-in-reverse-order-c/
@@ -97,7 +98,7 @@ void Game::Run()
 	/*
 		Update game entities.
 	*/
-	map->Draw(core::Vector2(0, 0));
+	map->Draw(Vector2(0, 0));
 	player->Update(deltaTime);
 
 	/*

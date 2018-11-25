@@ -3,6 +3,7 @@
 #include <winnt.h>
 #include "core/sprites/animatedSprite.h"
 #include "core/sprites/sprite.h"
+#include "player.h"
 
 class Game 
 {
@@ -18,8 +19,8 @@ private:
 	const float MAX_FRAME_TIME = 1.0f / MIN_FRAME_RATE;
 	const float MIN_FRAME_TIME = 1.0f / MAX_FRAME_RATE;
 		
-	AnimatedSprite *animSprite;
-	Sprite *sprite;
+	Player *player;
+	Sprite *map;
 public:
 	Game();
 	~Game();

@@ -31,8 +31,9 @@ class GameEntity
 private:
 	GameEntityType type;
 
-	GameEntity(GameEntityType type);
 protected:
+	GameEntity(GameEntityType type);
+
 	Vector2 position;
 	CollisionBounds collisionBounds;	
 public:

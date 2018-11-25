@@ -2,7 +2,7 @@
 
 #include "sprite.h"
 
-class AnimatedSprite : Sprite 
+class AnimatedSprite : public Sprite 
 {
 private:
 	float secondsPerFrame = 60.0f;
