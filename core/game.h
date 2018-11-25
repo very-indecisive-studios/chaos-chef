@@ -21,9 +21,9 @@ namespace core
 		const float MAX_FRAME_TIME = 1.0f / MIN_FRAME_RATE;
 		const float MIN_FRAME_TIME = 1.0f / MAX_FRAME_RATE;
 		
-		Sprite *map;
-		AnimatedSprite *animSprite;
+		Sprite *map = NULL;
 		GameEntity *player = NULL;
+
 	public:
 		Game();
 		~Game();

@@ -6,3 +6,8 @@ core::GameEntity::GameEntity(GameEntityType type)
 
 core::GameEntity::~GameEntity()
 { }
+
+void core::GameEntity::Collided(GameEntity &gameEntity)
+{
+
+}

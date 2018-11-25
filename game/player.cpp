@@ -9,19 +9,25 @@
 
 game::Player::Player():GameEntity(core::GameEntityType::PLAYER) 
 {
-	x = 0;
-	y = 0;
-	currentAnimSprite = southAnimSprite;
+	x = 70;		// starting x
+	y = 140;	// starting y
+	currentAnimSprite = southAnimSprite; // starting direction
 }
 
-game::Player::~Player() {}
+game::Player::~Player() 
+{
+	delete currentAnimSprite;
+	delete northAnimSprite;
+	delete eastAnimSprite;
+	delete southAnimSprite;
+	delete westAnimSprite;
+}
 
 void game::Player::Move(float deltaTime, core::AnimatedSprite *animSprite)
 {
 	if (!core::Context::Get()->GetInputManager()->AnyKeyPressed())
 	{
 		currentAnimSprite->Stop();
-		//std::cout << "no key pressed\n";
 	}
 	else if (core::Context::Get()->GetInputManager()->IsKeyDown(playerKeyDown)) // SOUTH
 	{
@@ -31,7 +37,6 @@ void game::Player::Move(float deltaTime, core::AnimatedSprite *animSprite)
 		{
 			y = 360 - animSprite->GetWidth(); // position back to the bottom limit
 		}
-		//std::cout << "GOING DOWN " << "x: " << x << " y: " << y << "\n";
 	}
 	else if (core::Context::Get()->GetInputManager()->IsKeyDown(playerKeyUp)) // NORTH
 	{
@@ -41,7 +46,6 @@ void game::Player::Move(float deltaTime, core::AnimatedSprite *animSprite)
 		{
 			y = 0; // position back to the top limit
 		}
-		//std::cout << "GOING UP " << "x: " << x << " y: " << y << "\n";
 	}
 	else if (core::Context::Get()->GetInputManager()->IsKeyDown(playerKeyRight)) // EAST
 	{
@@ -51,7 +55,6 @@ void game::Player::Move(float deltaTime, core::AnimatedSprite *animSprite)
 		{
 			x = 640 - animSprite->GetWidth(); // position back to the right limit
 		}
-		//std::cout << "GOING RIGHT " << "x: " << x << " y: " << y << " deltatime: "<< deltaTime << "\n";
 	}
 	else if (core::Context::Get()->GetInputManager()->IsKeyDown(playerKeyLeft)) // WEST
 	{
@@ -61,7 +64,6 @@ void game::Player::Move(float deltaTime, core::AnimatedSprite *animSprite)
 		{
 			x = 0; // position back to the left limit
 		}
-		//std::cout << "GOING LEFT " << "x: " << x << " y: " << y <<  "\n" ;
 	}
 
 	animSprite->UpdateAndDraw(deltaTime, core::Vector2(x, y));
