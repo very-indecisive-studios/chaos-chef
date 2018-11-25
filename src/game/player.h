@@ -19,8 +19,7 @@ private:
 public:
 	Player();
 	~Player();
-	float playerSpeed = 100.0f;
-	float velocity = 500.0f;
+	float playerSpeed = 200.0f;
 	float x;
 	float y;
 

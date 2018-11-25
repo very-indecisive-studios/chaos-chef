@@ -5,9 +5,6 @@
 #include "core/math.h"
 #include "context.h"
 
-/*REMINDER TO CHANGE 360 TO GAME_HEIGHT*/
-/*REMINDER TO CHANGE 640 TO GAME_WIDTH*/
-
 Player::Player() : GameEntity(GameEntityType::PLAYER) 
 {
 	x = 70;		// starting x
@@ -25,44 +22,74 @@ Player::~Player()
 
 void Player::Move(float deltaTime, AnimatedSprite *animSprite)
 {
+	std::cout << x << std::endl;
+
 	if (!Context::Get()->GetInputManager()->AnyKeyPressed())
 	{
 		currentAnimSprite->Stop();
 	}
 	else if (Context::Get()->GetInputManager()->IsKeyDown(playerKeyDown)) // SOUTH
 	{
-		currentAnimSprite = southAnimSprite;
-		y += (deltaTime * (playerSpeed + velocity));
-		if (y >= (360- animSprite->GetWidth())) // if off screen at bottom
+		if (currentAnimSprite != southAnimSprite)
 		{
-			y = 360 - animSprite->GetWidth(); // position back to the bottom limit
+			currentAnimSprite = southAnimSprite;
+		}
+		else
+		{
+			y += deltaTime * playerSpeed;
+
+			if (y >= (MAP_HEIGHT - animSprite->GetWidth())) // if off screen at bottom
+			{
+				y = MAP_HEIGHT - animSprite->GetWidth(); // position back to the bottom limit
+			}
 		}
 	}
 	else if (Context::Get()->GetInputManager()->IsKeyDown(playerKeyUp)) // NORTH
 	{
-		currentAnimSprite = northAnimSprite;
-		y -= (deltaTime * (playerSpeed + velocity));
-		if (y <= 0) // if off screen at top
+		if (currentAnimSprite != northAnimSprite)
 		{
-			y = 0; // position back to the top limit
+			currentAnimSprite = northAnimSprite;
+		}
+		else
+		{
+			y -= deltaTime * playerSpeed;
+
+			if (y <= 0) // if off screen at top
+			{
+				y = 0; // position back to the top limit
+			}
 		}
 	}
 	else if (Context::Get()->GetInputManager()->IsKeyDown(playerKeyRight)) // EAST
 	{
-		currentAnimSprite = eastAnimSprite;
-		x += deltaTime * (playerSpeed + velocity);
-		if (x >= (640 - animSprite->GetWidth())) // if off screen at right
+		if (currentAnimSprite != eastAnimSprite)
 		{
-			x = 640 - animSprite->GetWidth(); // position back to the right limit
+			currentAnimSprite = eastAnimSprite;
+		}
+		else
+		{
+			x += deltaTime * playerSpeed;
+
+			if (x >= (MAP_WIDTH - animSprite->GetWidth())) // if off screen at right
+			{
+				x = MAP_WIDTH - animSprite->GetWidth(); // position back to the right limit
+			}
 		}
 	}
 	else if (Context::Get()->GetInputManager()->IsKeyDown(playerKeyLeft)) // WEST
 	{
-		currentAnimSprite = westAnimSprite;
-		x -= deltaTime * (playerSpeed + velocity);
-		if (x <= 0) // if off screen at left
+		if (currentAnimSprite != westAnimSprite)
 		{
-			x = 0; // position back to the left limit
+			currentAnimSprite = westAnimSprite;
+		}
+		else
+		{
+			x -= deltaTime * playerSpeed;
+
+			if (x <= 0) // if off screen at left
+			{
+				x = 0; // position back to the left limit
+			}
 		}
 	}
 
