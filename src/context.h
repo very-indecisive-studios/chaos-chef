@@ -3,13 +3,13 @@
 #include "core/graphics/graphicsRenderer.h"
 #include "core/resource/resourceManager.h"
 #include "core/input/inputManager.h"
-#include "game/game.h"
+#include "game.h"
 
 class Context 
 {
 private:
 	GraphicsRenderer	*graphicsRenderer;
-	ResourceManager	*resourceManager;
+	ResourceManager		*resourceManager;
 	InputManager		*inputManager;
 	Game				*game;
 

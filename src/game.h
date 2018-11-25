@@ -3,7 +3,7 @@
 #include <winnt.h>
 #include "core/sprites/animatedSprite.h"
 #include "core/sprites/sprite.h"
-#include "player.h"
+#include "game/player.h"
 
 class Game 
 {
