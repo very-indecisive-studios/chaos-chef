@@ -1,12 +1,14 @@
 #include <iostream>
 #include "player.h"
-#include "game/entity/gameEntity.h"
+#include "gameEntity.h"
 #include "core/sprites/animatedSprite.h"
 #include "core/math.h"
 #include "context.h"
 
 Player::Player() : GameEntity(GameEntityType::PLAYER) 
 {
+	collisionBounds.topLeft = Vector2(0,0);
+	collisionBounds.bottomRight = Vector2(32,32); 
 	position.x = 70;	// starting x
 	position.y = 140;	// starting y
 	currentAnimSprite = southAnimSprite; // starting direction
@@ -94,7 +96,7 @@ void Player::Move(float deltaTime)
 			}
 		}
 	}
-
+	//std::cout << "x: " << position.x << " y: " << position.y << std::endl;
 	currentAnimSprite->UpdateAndDraw(deltaTime, position);
 }
 
@@ -102,9 +104,4 @@ void Player::Update(float deltaTime)
 {
 	Move(deltaTime);
 	currentAnimSprite->Play();
-}
-
-void Player::Collided(GameEntity &gameEntity)
-{
-
 }

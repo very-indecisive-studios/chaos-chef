@@ -35,9 +35,10 @@ protected:
 	GameEntity(GameEntityType type);
 
 	Vector2 position;
-	CollisionBounds collisionBounds;	
+	CollisionBounds collisionBounds;
+
 public:
 	virtual ~GameEntity();
 	virtual void Update(float deltaTime) = 0;
-	virtual void Collided(GameEntity &gameEntity) = 0;
+	virtual bool CollidedWith(GameEntity &gameEntity, float thisHeight, float otherHeight, float thisWidth, float otherWidth);
 };

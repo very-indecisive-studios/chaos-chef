@@ -2,10 +2,9 @@
 
 #include <iostream>
 #include <string>
-#include "game/entity/gameEntity.h"
+#include "gameEntity.h"
 #include "core/sprites/animatedSprite.h"
 #include "game/resources.h"
-
 
 class Player : public GameEntity
 {
@@ -29,5 +28,4 @@ public:
 	~Player();
 
 	void Update(float deltaTime) override;
-	void Collided(GameEntity &gameEntity) override;
 };

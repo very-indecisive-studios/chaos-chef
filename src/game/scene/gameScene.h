@@ -1,7 +1,7 @@
 #pragma once
 
 #include "scene.h"
-#include "game/player.h"
+#include "game/entity/player.h"
 #include "core/sprites/sprite.h"
 
 class GameScene : public Scene

@@ -1,6 +1,6 @@
 #include "gameScene.h"
 #include "game/resources.h"
-
+#include <iostream>
 GameScene::GameScene()
 { }
 
@@ -31,5 +31,5 @@ void GameScene::End()
 
 void GameScene::CheckCollisions()
 {
-
+	//if (player->CollidedWith() ) {do something - e.g. reset player x,y so cant go thru crate?}
 }
