@@ -106,12 +106,6 @@ void Game::Run()
 	auto gR = Context::Get()->GetGraphicsRenderer();
 	gR->Render();
 	gR->HandleLostDevice();
-
-	/*
-		Reset input.
-	*/
-	auto iM = Context::Get()->GetInputManager();
-	iM->ClearAll();
 }
 
 float Game::GetDeltaTime()
