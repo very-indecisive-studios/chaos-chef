@@ -47,9 +47,8 @@ public:
 	// Key presses are erased at the end of each frame.
 	bool WasKeyPressed(UCHAR vkey) const;
 
-	// Return true if any key was pressed in the most recent frame.
-	// Key presses are erased at the end of each frame.
-	bool AnyKeyPressed() const;
+	// Return true if any key is down
+	bool AnyKeyDown() const;
 
 	// Clear the specified key press
 	void ClearKeyPress(UCHAR vkey);

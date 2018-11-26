@@ -103,10 +103,10 @@ bool InputManager::WasKeyPressed(UCHAR vkey) const
 
 // Return true if any key was pressed in the most recent frame.
 // Key presses are erased at the end of each frame.
-bool InputManager::AnyKeyPressed() const
+bool InputManager::AnyKeyDown() const
 {
 	for (size_t i = 0; i < KEYS_ARRAY_LEN; i++)
-		if (keysPressed[i] == true)
+		if (keysDown[i] == true)
 			return true;
 	return false;
 }

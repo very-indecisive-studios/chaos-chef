@@ -22,9 +22,7 @@ Player::~Player()
 
 void Player::Move(float deltaTime, AnimatedSprite *animSprite)
 {
-	std::cout << x << std::endl;
-
-	if (!Context::Get()->GetInputManager()->AnyKeyPressed())
+	if (!Context::Get()->GetInputManager()->AnyKeyDown())
 	{
 		currentAnimSprite->Stop();
 	}
