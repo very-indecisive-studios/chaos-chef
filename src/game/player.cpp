@@ -7,7 +7,7 @@
 
 Player::Player() : GameEntity(GameEntityType::PLAYER) 
 {
-	position.x = 70;		// starting x
+	position.x = 70;	// starting x
 	position.y = 140;	// starting y
 	currentAnimSprite = southAnimSprite; // starting direction
 }
@@ -22,7 +22,7 @@ Player::~Player()
 
 void Player::Move(float deltaTime)
 {
-	if (!Context::Get()->GetInputManager()->AnyKeyDown())
+	if (!Context::Get()->GetInputManager()->IsKeyDown(playerKeyDown) && !Context::Get()->GetInputManager()->IsKeyDown(playerKeyUp) && !Context::Get()->GetInputManager()->IsKeyDown(playerKeyLeft) && !Context::Get()->GetInputManager()->IsKeyDown(playerKeyRight))
 	{
 		currentAnimSprite->Stop();
 	}
@@ -95,14 +95,13 @@ void Player::Move(float deltaTime)
 		}
 	}
 
-	currentAnimSprite->Play();
+	currentAnimSprite->UpdateAndDraw(deltaTime, position);
 }
 
 void Player::Update(float deltaTime)
 {
 	Move(deltaTime);
-
-	currentAnimSprite->UpdateAndDraw(deltaTime, position);
+	currentAnimSprite->Play();
 }
 
 void Player::Collided(GameEntity &gameEntity)
