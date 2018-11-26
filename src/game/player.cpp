@@ -7,8 +7,8 @@
 
 Player::Player() : GameEntity(GameEntityType::PLAYER) 
 {
-	x = 70;		// starting x
-	y = 140;	// starting y
+	position.x = 70;		// starting x
+	position.y = 140;	// starting y
 	currentAnimSprite = southAnimSprite; // starting direction
 }
 
@@ -20,7 +20,7 @@ Player::~Player()
 	delete westAnimSprite;
 }
 
-void Player::Move(float deltaTime, AnimatedSprite *animSprite)
+void Player::Move(float deltaTime)
 {
 	if (!Context::Get()->GetInputManager()->AnyKeyDown())
 	{
@@ -30,15 +30,16 @@ void Player::Move(float deltaTime, AnimatedSprite *animSprite)
 	{
 		if (currentAnimSprite != southAnimSprite)
 		{
+			currentAnimSprite->Stop();
 			currentAnimSprite = southAnimSprite;
 		}
 		else
 		{
-			y += deltaTime * playerSpeed;
+			position.y += deltaTime * playerSpeed;
 
-			if (y >= (MAP_HEIGHT - animSprite->GetWidth())) // if off screen at bottom
+			if (position.y >= (MAP_HEIGHT - currentAnimSprite->GetWidth())) // if off screen at bottom
 			{
-				y = MAP_HEIGHT - animSprite->GetWidth(); // position back to the bottom limit
+				position.y = MAP_HEIGHT - currentAnimSprite->GetWidth(); // position back to the bottom limit
 			}
 		}
 	}
@@ -46,15 +47,16 @@ void Player::Move(float deltaTime, AnimatedSprite *animSprite)
 	{
 		if (currentAnimSprite != northAnimSprite)
 		{
+			currentAnimSprite->Stop();
 			currentAnimSprite = northAnimSprite;
 		}
 		else
 		{
-			y -= deltaTime * playerSpeed;
+			position.y -= deltaTime * playerSpeed;
 
-			if (y <= 0) // if off screen at top
+			if (position.y <= 0) // if off screen at top
 			{
-				y = 0; // position back to the top limit
+				position.y = 0; // position back to the top limit
 			}
 		}
 	}
@@ -62,15 +64,16 @@ void Player::Move(float deltaTime, AnimatedSprite *animSprite)
 	{
 		if (currentAnimSprite != eastAnimSprite)
 		{
+			currentAnimSprite->Stop();
 			currentAnimSprite = eastAnimSprite;
 		}
 		else
 		{
-			x += deltaTime * playerSpeed;
+			position.x += deltaTime * playerSpeed;
 
-			if (x >= (MAP_WIDTH - animSprite->GetWidth())) // if off screen at right
+			if (position.x >= (MAP_WIDTH - currentAnimSprite->GetWidth())) // if off screen at right
 			{
-				x = MAP_WIDTH - animSprite->GetWidth(); // position back to the right limit
+				position.x = MAP_WIDTH - currentAnimSprite->GetWidth(); // position back to the right limit
 			}
 		}
 	}
@@ -78,26 +81,28 @@ void Player::Move(float deltaTime, AnimatedSprite *animSprite)
 	{
 		if (currentAnimSprite != westAnimSprite)
 		{
+			currentAnimSprite->Stop();
 			currentAnimSprite = westAnimSprite;
 		}
 		else
 		{
-			x -= deltaTime * playerSpeed;
+			position.x -= deltaTime * playerSpeed;
 
-			if (x <= 0) // if off screen at left
+			if (position.x <= 0) // if off screen at left
 			{
-				x = 0; // position back to the left limit
+				position.x = 0; // position back to the left limit
 			}
 		}
 	}
 
-	animSprite->UpdateAndDraw(deltaTime, Vector2(x, y));
+	currentAnimSprite->Play();
 }
 
 void Player::Update(float deltaTime)
 {
-	this->Move(deltaTime, currentAnimSprite);
-	currentAnimSprite->Play();
+	Move(deltaTime);
+
+	currentAnimSprite->UpdateAndDraw(deltaTime, position);
 }
 
 void Player::Collided(GameEntity &gameEntity)
