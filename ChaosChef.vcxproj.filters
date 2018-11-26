@@ -46,5 +46,7 @@
     <ClInclude Include="src\core\math.h" />
     <ClInclude Include="src\game\entity\trashBinArea.h" />
     <ClInclude Include="src\game\entity\vehicle.h" />
+    <ClInclude Include="src\game\data\food.h" />
+    <ClInclude Include="src\game\data\spriteLayer.h" />
   </ItemGroup>
 </Project>

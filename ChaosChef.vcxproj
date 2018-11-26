@@ -118,6 +118,8 @@
     <ClInclude Include="src\game\entity\counterArea.h" />
     <ClInclude Include="src\game\entity\dispenser.h" />
     <ClInclude Include="src\game\entity\dispenserArea.h" />
+    <ClInclude Include="src\game\data\food.h" />
+    <ClInclude Include="src\game\data\spriteLayer.h" />
     <ClInclude Include="src\game\entity\gameEntity.h" />
     <ClInclude Include="src\core\gameException.h" />
     <ClInclude Include="src\core\graphics\graphicsRenderer.h" />

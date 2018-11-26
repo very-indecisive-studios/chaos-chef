@@ -1,6 +1,5 @@
 #pragma once
 
-#include <stdint.h>
 #include "core/math.h"
 
 struct CollisionBounds
@@ -9,7 +8,7 @@ struct CollisionBounds
 	Vector2 bottomRight;
 };
 	
-enum GameEntityType 
+enum class GameEntityType 
 {
 	PLAYER,
 	FOOD,
@@ -23,13 +22,7 @@ enum GameEntityType
 	VEHICLE
 };
 
-enum GameEntityLayer : uint8_t
-{
-	BACKGROUND = 0,
-	ENTITIES = 1
-};
-
-class GameEntity
+class GameEntity 
 {
 private:
 	GameEntityType type;
