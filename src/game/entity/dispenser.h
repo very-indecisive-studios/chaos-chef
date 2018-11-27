@@ -4,26 +4,23 @@
 #include <string>
 #include "gameEntity.h"
 #include "game/data/food.h"
+#include "core/sprites/sprite.h"
 
 class Dispenser : public GameEntity
 {
 private:
 	const PlatedFood *platedFood;
+	Sprite *platedFoodImage = nullptr;
 
 public:
 	Dispenser();
 	~Dispenser();
 
-	const PlatedFood *GetIngredient() { return platedFood; }
-	void SetIngredient(const PlatedFood *inputPlatedFood) { platedFood = inputPlatedFood; }
-	bool IsActive()
-	{
-		if (platedFood != NULL)
-		{
-			return true;
-		}
-		else return false;
-	}
+	const PlatedFood *GetIngredient();
+	void SetIngredient(const PlatedFood * inputPlatedFood);
+	Sprite *GetImage();
+	void SetImage();
+	bool IsActive();
 
 	void Update(float deltaTime) override;
 };

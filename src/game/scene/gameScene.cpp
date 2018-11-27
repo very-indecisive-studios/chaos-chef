@@ -37,16 +37,19 @@ void GameScene::Begin()
 	dispenser1->SetCollisionBounds(dispenserCB);
 	dispenser1->SetPosition(Vector2(0, 82));
 	dispenser1->SetIngredient(&PFOOD_SS_RICE); // temp
+	dispenser1->SetImage(); // temp
 	entities.push_back(dispenser1);
 
 	dispenser2->SetCollisionBounds(dispenserCB);
 	dispenser2->SetPosition(Vector2(0, 130));
 	dispenser2->SetIngredient(&PFOOD_SS_PRAWN); // temp
+	dispenser2->SetImage(); // temp
 	entities.push_back(dispenser2);
 
 	dispenser3->SetCollisionBounds(dispenserCB);
 	dispenser3->SetPosition(Vector2(0, 177));
 	dispenser3->SetIngredient(&PFOOD_SS_FISH); // temp
+	dispenser3->SetImage(); // temp
 	entities.push_back(dispenser3);
 
 	dispenser4->SetCollisionBounds(dispenserCB);
@@ -133,8 +136,6 @@ void GameScene::Begin()
 	entities.push_back(vehicle);
 
 	orderManager = new OrderManager(&FOOD_MENU_SS, 10);
-
-	map		= Sprite::Create(MAP_IMAGE, 0);
 }
 
 void GameScene::Update(float deltaTime)
@@ -151,6 +152,9 @@ void GameScene::Update(float deltaTime)
 	//std::cout << std::endl;
 
 	map->Draw(Vector2(0, 0));
+	dispenser1->GetImage()->Draw(Vector2(dispenser1->GetPosition()));
+	dispenser2->GetImage()->Draw(Vector2(dispenser2->GetPosition()));
+	dispenser3->GetImage()->Draw(Vector2(dispenser3->GetPosition()));
 	vehicle->Update(deltaTime);
 	player->Update(deltaTime);
 
