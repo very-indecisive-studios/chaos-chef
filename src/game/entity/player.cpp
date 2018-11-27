@@ -6,16 +6,16 @@
 #include "core/math.h"
 #include "context.h"
 
-Player::Player() : GameEntity(GameEntityType::PLAYER) 
+Player::Player() : GameEntity(GameEntityType::PLAYER)
 {
-	collisionBounds.topLeft = Vector2(0,0);
-	collisionBounds.bottomRight = Vector2(32,32);
+	collisionBounds.topLeft = Vector2(0, 0);
+	collisionBounds.bottomRight = Vector2(32, 32);
 	position.x = 70;	// starting x
 	position.y = 140;	// starting y
 	currentAnimSprite = southAnimSprite; // starting direction
 }
 
-Player::~Player() 
+Player::~Player()
 {
 	delete northAnimSprite;
 	delete eastAnimSprite;
@@ -25,9 +25,9 @@ Player::~Player()
 
 void Player::Move(float deltaTime)
 {
-	if (!Context::Get()->GetInputManager()->IsKeyDown(playerKeyDown) 
-		&& !Context::Get()->GetInputManager()->IsKeyDown(playerKeyUp) 
-		&& !Context::Get()->GetInputManager()->IsKeyDown(playerKeyLeft) 
+	if (!Context::Get()->GetInputManager()->IsKeyDown(playerKeyDown)
+		&& !Context::Get()->GetInputManager()->IsKeyDown(playerKeyUp)
+		&& !Context::Get()->GetInputManager()->IsKeyDown(playerKeyLeft)
 		&& !Context::Get()->GetInputManager()->IsKeyDown(playerKeyRight)) // if movement keys are not pressed
 	{
 		currentAnimSprite->Stop();
@@ -89,7 +89,7 @@ void Player::Move(float deltaTime)
 		{
 			currentAnimSprite = westAnimSprite;
 		}
-		else 
+		else
 		{
 			position.x -= deltaTime * playerSpeed;
 			if (position.x <= 0) // if off screen at left
@@ -102,15 +102,44 @@ void Player::Move(float deltaTime)
 	//std::cout << "x: " << position.x << " y: " << position.y << std::endl;
 }
 
-void Player::DrawPlateFood() 
+void Player::DrawPlatedFood()
 {
+	for (const PlatedFood *f : GetOnPlate())
+	{
+		if (f->layer == SpriteLayer::FOOD_1)
+		{
+			platedFoodImage1->Create(f->textureName, (uint8_t)SpriteLayer::FOOD_1);
+		}
+		else if (f->layer == SpriteLayer::FOOD_2)
+		{
+			platedFoodImage2->Create(f->textureName, (uint8_t)SpriteLayer::FOOD_2);
+		}
+		else if (f->layer == SpriteLayer::FOOD_3)
+		{
+			platedFoodImage3->Create(f->textureName, (uint8_t)SpriteLayer::FOOD_3);
+		}
+		else if (f->layer == SpriteLayer::FOOD_4)
+		{
+			platedFoodImage4->Create(f->textureName, (uint8_t)SpriteLayer::FOOD_4);
+		}
+		else if (f->layer == SpriteLayer::FOOD_5)
+		{
+			platedFoodImage5->Create(f->textureName, (uint8_t)SpriteLayer::FOOD_5);
+		}
 
+		platedFoodImage1->Draw(position);
+		platedFoodImage2->Draw(position);
+		platedFoodImage3->Draw(position);
+		platedFoodImage4->Draw(position);
+		platedFoodImage5->Draw(position);
+	}
 }
 
 void Player::Update(float deltaTime)
 {
 	Move(deltaTime);
 	currentAnimSprite->Play();
+	DrawPlatedFood();
 }
 
 void Player::HandleCollision(float deltaTime, GameEntity *entity)
@@ -176,7 +205,7 @@ void Player::GetPlatedFood(GameEntity *entity) // Move player back to their orig
 	DispenserArea *curentDispenserArea = (DispenserArea *)entity;
 	Dispenser *curentDispenser = curentDispenserArea->GetDispenser();
 
-	if (curentDispenser->IsActive()) 
+	if (curentDispenser->IsActive())
 	{
 		const PlatedFood *platedFood = curentDispenser->GetIngredient();
 
