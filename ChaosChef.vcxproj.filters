@@ -16,6 +16,8 @@
     <ClCompile Include="src\game\entity\player.cpp" />
     <ClCompile Include="src\game\entity\dispenser.cpp" />
     <ClCompile Include="src\game\entity\counter.cpp" />
+    <ClCompile Include="src\game\entity\dispenserArea.cpp" />
+    <ClCompile Include="src\game\entity\counterArea.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\constants.h" />
@@ -36,5 +38,7 @@
     <ClInclude Include="src\game\entity\player.h" />
     <ClInclude Include="src\game\entity\dispenser.h" />
     <ClInclude Include="src\game\entity\counter.h" />
+    <ClInclude Include="src\game\entity\dispenserArea.h" />
+    <ClInclude Include="src\game\entity\counterArea.h" />
   </ItemGroup>
 </Project>

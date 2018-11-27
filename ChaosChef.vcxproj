@@ -92,7 +92,9 @@
     <ClCompile Include="src\context.cpp" />
     <ClCompile Include="src\game.cpp" />
     <ClCompile Include="src\game\entity\counter.cpp" />
+    <ClCompile Include="src\game\entity\counterArea.cpp" />
     <ClCompile Include="src\game\entity\dispenser.cpp" />
+    <ClCompile Include="src\game\entity\dispenserArea.cpp" />
     <ClCompile Include="src\game\entity\gameEntity.cpp" />
     <ClCompile Include="src\core\graphics\graphicsRenderer.cpp" />
     <ClCompile Include="src\core\resource\resourceManager.cpp" />
@@ -110,7 +112,9 @@
     <ClInclude Include="src\context.h" />
     <ClInclude Include="src\game.h" />
     <ClInclude Include="src\game\entity\counter.h" />
+    <ClInclude Include="src\game\entity\counterArea.h" />
     <ClInclude Include="src\game\entity\dispenser.h" />
+    <ClInclude Include="src\game\entity\dispenserArea.h" />
     <ClInclude Include="src\game\entity\gameEntity.h" />
     <ClInclude Include="src\core\gameException.h" />
     <ClInclude Include="src\core\graphics\graphicsRenderer.h" />

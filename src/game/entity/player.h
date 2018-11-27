@@ -27,6 +27,7 @@ private:
 public:
 	Player();
 	~Player();
+	void BlockPlayer(float deltaTime);
 	void HandleCollision(float deltaTime, GameEntity *entity);
 
 	void Update(float deltaTime) override;
