@@ -5,7 +5,10 @@
 
 Dispenser::Dispenser() : GameEntity(GameEntityType::DISPENSER){}
 
-Dispenser::~Dispenser() {}
+Dispenser::~Dispenser()
+{
+	delete ingreImage;
+}
 
 const PlatedFood *Dispenser::GetIngredient() { return platedFood; }
 

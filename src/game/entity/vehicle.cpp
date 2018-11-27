@@ -8,7 +8,11 @@ Vehicle::Vehicle() : GameEntity(GameEntityType::VEHICLE)
 	currentAnimSprite = vehicleDownAnimSprite;
 }
 
-Vehicle::~Vehicle() {}
+Vehicle::~Vehicle()
+{
+	delete vehicleUpAnimSprite;
+	delete vehicleDownAnimSprite;
+}
 
 void Vehicle::Update(float deltaTime)
 {
