@@ -18,6 +18,9 @@
     <ClCompile Include="src\game\entity\counter.cpp" />
     <ClCompile Include="src\game\entity\dispenserArea.cpp" />
     <ClCompile Include="src\game\entity\counterArea.cpp" />
+    <ClCompile Include="src\game\entity\trashBin.cpp" />
+    <ClCompile Include="src\game\entity\trashBinArea.cpp" />
+    <ClCompile Include="src\game\entity\vehicle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\constants.h" />
@@ -29,7 +32,6 @@
     <ClInclude Include="src\core\input\inputManager.h" />
     <ClInclude Include="src\core\resource\resourceManager.h" />
     <ClInclude Include="src\game\resources.h" />
-    <ClInclude Include="src\core\math.h" />
     <ClInclude Include="src\core\gameException.h" />
     <ClInclude Include="src\game\scene\scene.h" />
     <ClInclude Include="src\game\entity\gameEntity.h" />
@@ -40,5 +42,9 @@
     <ClInclude Include="src\game\entity\counter.h" />
     <ClInclude Include="src\game\entity\dispenserArea.h" />
     <ClInclude Include="src\game\entity\counterArea.h" />
+    <ClInclude Include="src\game\entity\trashBin.h" />
+    <ClInclude Include="src\core\math.h" />
+    <ClInclude Include="src\game\entity\trashBinArea.h" />
+    <ClInclude Include="src\game\entity\vehicle.h" />
   </ItemGroup>
 </Project>

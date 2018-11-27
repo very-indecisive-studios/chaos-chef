@@ -108,11 +108,24 @@ void GameScene::Begin()
 	counter4Area->SetCollisionBounds(counterAreaCB);
 	counter4Area->SetPosition(Vector2(540,245));
 	entities.push_back(counter4Area);
+
+	// Vehicles
+	vehicle = new Vehicle();
+
+	CollisionBounds vehicleCB;
+	vehicleCB.topLeft = Vector2(0, 0);
+	vehicleCB.bottomRight = Vector2(32, 64);
+
+	vehicle->SetCollisionBounds(vehicleCB);
+	vehicle->SetPosition(Vector2(176, 0));
+	entities.push_back(vehicle);
+
 }
 
 void GameScene::Update(float deltaTime)
 {
 	map->Draw(Vector2(0, 0));
+	vehicle->Update(deltaTime);
 	player->Update(deltaTime);
 
 	ConductCollisionCheckingsButNotHandleIt(deltaTime);

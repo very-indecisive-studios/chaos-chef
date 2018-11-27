@@ -99,6 +99,9 @@
     <ClCompile Include="src\core\graphics\graphicsRenderer.cpp" />
     <ClCompile Include="src\core\resource\resourceManager.cpp" />
     <ClCompile Include="src\game\entity\player.cpp" />
+    <ClCompile Include="src\game\entity\trashBin.cpp" />
+    <ClCompile Include="src\game\entity\trashBinArea.cpp" />
+    <ClCompile Include="src\game\entity\vehicle.cpp" />
     <ClCompile Include="src\game\scene\gameScene.cpp" />
     <ClCompile Include="src\game\scene\scene.cpp" />
     <ClCompile Include="src\core\sprites\sprite.cpp" />
@@ -121,6 +124,9 @@
     <ClInclude Include="src\core\math.h" />
     <ClInclude Include="src\core\resource\resourceManager.h" />
     <ClInclude Include="src\game\entity\player.h" />
+    <ClInclude Include="src\game\entity\trashBin.h" />
+    <ClInclude Include="src\game\entity\trashBinArea.h" />
+    <ClInclude Include="src\game\entity\vehicle.h" />
     <ClInclude Include="src\game\scene\gameScene.h" />
     <ClInclude Include="src\game\scene\scene.h" />
     <ClInclude Include="src\core\sprites\sprite.h" />

@@ -8,7 +8,7 @@
 Player::Player() : GameEntity(GameEntityType::PLAYER) 
 {
 	collisionBounds.topLeft = Vector2(0,0);
-	collisionBounds.bottomRight = Vector2(32,32); 
+	collisionBounds.bottomRight = Vector2(32,32);
 	position.x = 70;	// starting x
 	position.y = 140;	// starting y
 	currentAnimSprite = southAnimSprite; // starting direction
@@ -98,7 +98,7 @@ void Player::Move(float deltaTime)
 		}
 	}
 	currentAnimSprite->UpdateAndDraw(deltaTime, position);
-	std::cout << "x: " << position.x << " y: " << position.y << std::endl;
+	//std::cout << "x: " << position.x << " y: " << position.y << std::endl;
 }
 
 void Player::Update(float deltaTime)
@@ -139,9 +139,9 @@ void Player::HandleCollision(float deltaTime, GameEntity *entity)
 		}
 	}
 
-	else if (entity->GetType() == GameEntityType::VEHICLE)
+	else if (entity->GetType() == GameEntityType::VEHICLE) // GAME OVER scene
 	{
-		//GAME OVER scene
+		PostQuitMessage(0);
 	}
 }
 

@@ -6,6 +6,9 @@
 #include "game/entity/dispenserArea.h"
 #include "game/entity/counter.h"
 #include "game/entity/counterArea.h"
+#include "game/entity/trashBin.h"
+#include "game/entity/trashBinArea.h"
+#include "game/entity/vehicle.h"
 #include "core/sprites/sprite.h"
 
 class GameScene : public Scene
@@ -31,8 +34,10 @@ private:
 	CounterArea *counter3Area;
 	CounterArea *counter4Area;
 
-	void ConductCollisionCheckingsButNotHandleIt(float deltaTime);
+	Vehicle *vehicle;
+	
 	std::vector<GameEntity *> entities;
+	void ConductCollisionCheckingsButNotHandleIt(float deltaTime);
 
 public:
 	GameScene();
