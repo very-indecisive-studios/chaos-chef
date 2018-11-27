@@ -7,7 +7,4 @@ DispenserArea::DispenserArea() : GameEntity(GameEntityType::DISPENSER_AREA) {}
 
 DispenserArea::~DispenserArea() {}
 
-void DispenserArea::Update(float deltaTime)
-{
-
-}
+void DispenserArea::Update(float deltaTime){}

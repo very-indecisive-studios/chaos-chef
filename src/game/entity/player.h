@@ -4,6 +4,7 @@
 #include "gameEntity.h"
 #include "core/sprites/animatedSprite.h"
 #include "game/resources.h"
+#include "game/data/food.h"
 
 class Player : public GameEntity
 {
@@ -23,9 +24,14 @@ private:
 	AnimatedSprite *westAnimSprite = AnimatedSprite::Create(PLAYER_WEST_IMAGE, 1, PLAYER_WIDTH, PLAYER_HEIGHT, PLAYER_ANIMATION_DELAY);
 
 	void Move(float deltatime);
+	std::vector<const PlatedFood *> onPlate;
+
 public:
 	Player();
 	~Player();
+	std::vector<const PlatedFood *> GetOnPlate() { return onPlate; }
+	void SetOnPlate(const PlatedFood *platedFood) { onPlate.push_back(platedFood); }
+	void GetPlatedFood(GameEntity *entity);
 	void BlockPlayer(float deltaTime);
 	void HandleCollision(float deltaTime, GameEntity *entity);
 

@@ -1,6 +1,7 @@
 #include <iostream>
 #include "player.h"
 #include "gameEntity.h"
+#include "game/entity/dispenserArea.h"
 #include "core/sprites/animatedSprite.h"
 #include "core/math.h"
 #include "context.h"
@@ -117,7 +118,7 @@ void Player::HandleCollision(float deltaTime, GameEntity *entity)
 	{
 		if (Context::Get()->GetInputManager()->IsKeyDown(actionKey))
 		{
-			std::cout << "Collected Food"  << std::endl;
+			GetPlatedFood(entity);
 		}
 	}
 
@@ -162,5 +163,32 @@ void Player::BlockPlayer(float deltaTime) // Move player back to their original 
 	else if (currentAnimSprite == westAnimSprite)
 	{
 		position.x += deltaTime * playerSpeed;
+	}
+}
+
+void Player::GetPlatedFood(GameEntity *entity) // Move player back to their original spot
+{
+	DispenserArea *curentDispenserArea = (DispenserArea *)entity;
+	Dispenser *curentDispenser = curentDispenserArea->GetDispenser();
+
+	if (curentDispenser->IsActive()) 
+	{
+		const PlatedFood *platedFood = curentDispenser->GetIngredient();
+
+		bool foodAlreadyOnPlate = false;
+
+		for (const PlatedFood *food : GetOnPlate())
+		{
+			if (food == platedFood)
+			{
+				foodAlreadyOnPlate = true;
+			}
+		}
+
+		if (!foodAlreadyOnPlate)
+		{
+			SetOnPlate(platedFood);
+			std::cout << "Picked up: " << platedFood->name << std::endl;
+		}
 	}
 }

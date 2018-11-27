@@ -36,14 +36,17 @@ void GameScene::Begin()
 
 	dispenser1->SetCollisionBounds(dispenserCB);
 	dispenser1->SetPosition(Vector2(0, 82));
+	dispenser1->SetIngredient(&PFOOD_SS_RICE); // temp
 	entities.push_back(dispenser1);
 
 	dispenser2->SetCollisionBounds(dispenserCB);
 	dispenser2->SetPosition(Vector2(0, 130));
+	dispenser2->SetIngredient(&PFOOD_SS_PRAWN); // temp
 	entities.push_back(dispenser2);
 
 	dispenser3->SetCollisionBounds(dispenserCB);
 	dispenser3->SetPosition(Vector2(0, 177));
+	dispenser3->SetIngredient(&PFOOD_SS_FISH); // temp
 	entities.push_back(dispenser3);
 
 	dispenser4->SetCollisionBounds(dispenserCB);
@@ -60,22 +63,27 @@ void GameScene::Begin()
 
 	dispenser1Area->SetCollisionBounds(dispenserCB);
 	dispenser1Area->SetPosition(Vector2(32, 82));
+	dispenser1Area->SetDispenser(dispenser1);
 	entities.push_back(dispenser1Area);
 
 	dispenser2Area->SetCollisionBounds(dispenserCB);
 	dispenser2Area->SetPosition(Vector2(32, 130));
+	dispenser2Area->SetDispenser(dispenser2);
 	entities.push_back(dispenser2Area);
 
 	dispenser3Area->SetCollisionBounds(dispenserCB);
 	dispenser3Area->SetPosition(Vector2(32, 177));
+	dispenser3Area->SetDispenser(dispenser3);
 	entities.push_back(dispenser3Area);
 
 	dispenser4Area->SetCollisionBounds(dispenserCB);
 	dispenser4Area->SetPosition(Vector2(32, 225));
+	dispenser4Area->SetDispenser(dispenser4);
 	entities.push_back(dispenser4Area);
 
 	dispenser5Area->SetCollisionBounds(dispenserCB);
 	dispenser5Area->SetPosition(Vector2(32, 274));
+	dispenser5Area->SetDispenser(dispenser5);
 	entities.push_back(dispenser5Area);
 
 	// Counters
@@ -133,14 +141,14 @@ void GameScene::Update(float deltaTime)
 {
 	orderManager->Update(deltaTime);
 
-	std::cout << std::endl;
+	//std::cout << std::endl;
 	for (Order *order : orderManager->GetOrders())
 	{	
-		std::cout << order->meal->name << std::endl;
-		std::cout << order->timeRemainingSeconds << std::endl << std::endl;
+		//std::cout << order->meal->name << std::endl;
+		//std::cout << order->timeRemainingSeconds << std::endl << std::endl;
 	}
-	std::cout << "has order missed? " << orderManager->HasMissedOrder() << std::endl;
-	std::cout << std::endl;
+	//std::cout << "has order missed? " << orderManager->HasMissedOrder() << std::endl;
+	//std::cout << std::endl;
 
 	map->Draw(Vector2(0, 0));
 	vehicle->Update(deltaTime);

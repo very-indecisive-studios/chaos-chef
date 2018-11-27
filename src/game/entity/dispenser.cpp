@@ -1,13 +1,10 @@
-#include <iostream>
+#include <string>
 #include "dispenser.h"
 #include "gameEntity.h"
 #include "core/math.h"
 
 Dispenser::Dispenser() : GameEntity(GameEntityType::DISPENSER){}
 
-Dispenser::~Dispenser(){}
+Dispenser::~Dispenser() {}
 
-void Dispenser::Update(float deltaTime)
-{
-
-}
+void Dispenser::Update(float deltaTime){}
