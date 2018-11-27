@@ -23,11 +23,11 @@ bool Dispenser::IsActive()
 	}
 }
 
-Sprite *Dispenser::GetImage() { return platedFoodImage; }
+Sprite *Dispenser::GetImage() { return ingreImage; }
 
 void Dispenser::SetImage()
 {
-	platedFoodImage = Sprite::Create(platedFood->textureName, 0); 
+	ingreImage = Sprite::Create(platedFood->ingredient->textureName, 0);
 }
 
 void Dispenser::Update(float deltaTime){}

@@ -102,6 +102,11 @@ void Player::Move(float deltaTime)
 	//std::cout << "x: " << position.x << " y: " << position.y << std::endl;
 }
 
+void Player::DrawPlateFood() 
+{
+
+}
+
 void Player::Update(float deltaTime)
 {
 	Move(deltaTime);

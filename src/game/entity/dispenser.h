@@ -10,7 +10,7 @@ class Dispenser : public GameEntity
 {
 private:
 	const PlatedFood *platedFood;
-	Sprite *platedFoodImage = nullptr;
+	Sprite *ingreImage = nullptr;
 
 public:
 	Dispenser();
