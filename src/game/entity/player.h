@@ -13,6 +13,7 @@ private:
 	UCHAR playerKeyDown = VK_DOWN;
 	UCHAR playerKeyLeft = VK_LEFT;
 	UCHAR playerKeyRight = VK_RIGHT;
+	UCHAR actionKey = VK_SPACE;
 
 	float playerSpeed = 200.0f;
 
@@ -26,6 +27,7 @@ private:
 public:
 	Player();
 	~Player();
+	void HandleCollision(float deltaTime, GameEntity *entity);
 
 	void Update(float deltaTime) override;
 };

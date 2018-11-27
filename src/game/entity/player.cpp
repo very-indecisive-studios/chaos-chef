@@ -72,10 +72,10 @@ void Player::Move(float deltaTime)
 		else
 		{
 			position.x += deltaTime * playerSpeed;
-
-			if (position.x >= (MAP_WIDTH - currentAnimSprite->GetWidth())) // if off screen at right
+			// (MAP_WIDTH - 95 ): for counter
+			if (position.x >= ((MAP_WIDTH - 95 ) - currentAnimSprite->GetWidth())) // if off screen at right
 			{
-				position.x = MAP_WIDTH - currentAnimSprite->GetWidth(); // position back to the right limit
+				position.x = (MAP_WIDTH - 95) - currentAnimSprite->GetWidth(); // position back to the right limit
 			}
 		}
 	}
@@ -89,19 +89,54 @@ void Player::Move(float deltaTime)
 		else
 		{
 			position.x -= deltaTime * playerSpeed;
-
-			if (position.x <= 0) // if off screen at left
+			// 32: for dispensers
+			if (position.x <= 32) // if off screen at left
 			{
-				position.x = 0; // position back to the left limit
+				position.x = 32; // position back to the left limit
 			}
 		}
 	}
-	//std::cout << "x: " << position.x << " y: " << position.y << std::endl;
 	currentAnimSprite->UpdateAndDraw(deltaTime, position);
+	std::cout << "x: " << position.x << " y: " << position.y << std::endl;
 }
 
 void Player::Update(float deltaTime)
 {
 	Move(deltaTime);
 	currentAnimSprite->Play();
+}
+
+void Player::HandleCollision(float deltaTime, GameEntity *entity)
+{
+	CollisionBounds entityCollisionBounds = entity->GetCollisionBounds();
+	Vector2 entityPosition = entity->GetPosition();
+
+	if (entity->GetType() == GameEntityType::DISPENSER) // area around DISPENSER - get food with actionKey
+	{
+		if (Context::Get()->GetInputManager()->IsKeyDown(actionKey))
+		{
+			std::cout << "GOT FOOD" << std::endl;
+		}
+	}
+	else if (entity->GetType() == GameEntityType::TRASH_BIN)
+	{
+		//block player
+	}
+	else if (entity->GetType() == GameEntityType::TRASH_BIN_AREA)
+	{
+		//remove food on action_button
+	}
+	else if (entity->GetType() == GameEntityType::COUNTER)
+	{
+		if (Context::Get()->GetInputManager()->IsKeyDown(actionKey))
+		{
+			std::cout << "GIVE FOOD" << std::endl;
+		}
+		
+		//if dish-on-hand == order {give dish}
+	}
+	else if (entity->GetType() == GameEntityType::VEHICLE)
+	{
+		//GAME OVER scene
+	}
 }

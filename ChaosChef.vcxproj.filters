@@ -14,6 +14,8 @@
     <ClCompile Include="src\game\scene\gameScene.cpp" />
     <ClCompile Include="src\game.cpp" />
     <ClCompile Include="src\game\entity\player.cpp" />
+    <ClCompile Include="src\game\entity\dispenser.cpp" />
+    <ClCompile Include="src\game\entity\counter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\constants.h" />
@@ -32,5 +34,7 @@
     <ClInclude Include="src\game\scene\gameScene.h" />
     <ClInclude Include="src\game.h" />
     <ClInclude Include="src\game\entity\player.h" />
+    <ClInclude Include="src\game\entity\dispenser.h" />
+    <ClInclude Include="src\game\entity\counter.h" />
   </ItemGroup>
 </Project>
