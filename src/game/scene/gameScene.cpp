@@ -151,14 +151,14 @@ void GameScene::Update(float deltaTime)
 
 void GameScene::End()
 {
-	if (player) delete player;
-	if (map) delete map;
-	if (dispenser1) delete dispenser1;
-	if (dispenser2) delete dispenser2;
-	if (dispenser3) delete dispenser3;
-	if (dispenser4) delete dispenser4;
-	if (dispenser5) delete dispenser5;
+	for (GameEntity *entity : entities)
+	{
+		delete entity;
+	}
+	entities.clear();
 
+	delete player;
+	delete map;
 	delete orderManager;
 }
 
