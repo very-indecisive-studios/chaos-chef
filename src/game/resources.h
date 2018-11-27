@@ -19,26 +19,26 @@ const std::string SPAGHETTI_IMAGE	= "assets\\food\\ingredients\\spaghetti.png";
 const std::string TOMATO_IMAGE		= "assets\\food\\ingredients\\tomato.png";
 
 // sprites for plated fried-basket
-const std::string PLATED_CHICKEN_IMAGE	= "assets\\food\\plated_food\\fried-basket\\chicken.png";
-const std::string PLATED_FRIES_IMAGE	= "assets\\food\\plated_food\\fried-basket\\fries.png";
+const std::string PLATED_CHICKEN_IMAGE	= "assets\\food\\plated food\\fried-basket\\chicken.png";
+const std::string PLATED_FRIES_IMAGE	= "assets\\food\\plated food\\fried-basket\\fries.png";
 
 // sprites for sashimi+sushi
-const std::string PLATED_SS_FISH_IMAGE		= "assets\\food\\plated_food\\sashimi+sushi\\fish.png";
-const std::string PLATED_SS_PRAWN_IMAGE		= "assets\\food\\plated_food\\sashimi+sushi\\prawn.png";
-const std::string PLATED_SS_RICE_IMAGE		= "assets\\food\\plated_food\\sashimi+sushi\\rice.png";
+const std::string PLATED_SS_FISH_IMAGE		= "assets\\food\\plated food\\sashimi+sushi\\fish.png";
+const std::string PLATED_SS_PRAWN_IMAGE		= "assets\\food\\plated food\\sashimi+sushi\\prawn.png";
+const std::string PLATED_SS_RICE_IMAGE		= "assets\\food\\plated food\\sashimi+sushi\\rice.png";
 
 // sprites for plated pizza
-const std::string PLATED_PIZZA_CHEESE_IMAGE		= "assets\\food\\plated_food\\pizza\\cheese.png";
-const std::string PLATED_PIZZA_DOUGH_IMAGE		= "assets\\food\\plated_food\\pizza\\dough.png";
-const std::string PLATED_PIZZA_MEAT_IMAGE		= "assets\\food\\plated_food\\pizza\\meat.png";
-const std::string PLATED_PIZZA_TOMATO_IMAGE		= "assets\\food\\plated_food\\pizza\\tomato.png";
+const std::string PLATED_PIZZA_CHEESE_IMAGE		= "assets\\food\\plated food\\pizza\\cheese.png";
+const std::string PLATED_PIZZA_DOUGH_IMAGE		= "assets\\food\\plated food\\pizza\\dough.png";
+const std::string PLATED_PIZZA_MEAT_IMAGE		= "assets\\food\\plated food\\pizza\\meat.png";
+const std::string PLATED_PIZZA_TOMATO_IMAGE		= "assets\\food\\plated food\\pizza\\tomato.png";
 
 // sprites for plated pasta
-const std::string PLATED_PASTA_CHEESE_IMAGE		= "assets\\food\\plated_food\\pasta\\cheese.png";
-const std::string PLATED_PASTA_FISH_IMAGE		= "assets\\food\\plated_food\\pasta\\fish.png";
-const std::string PLATED_PASTA_MEAT_IMAGE		= "assets\\food\\plated_food\\pasta\\meat.png";
-const std::string PLATED_PASTA_SPAGHETTI_IMAGE	= "assets\\food\\plated_food\\pasta\\spaghetti.png";
-const std::string PLATED_PASTA_TOMATO_IMAGE		= "assets\\food\\plated_food\\pasta\\tomato.png";
+const std::string PLATED_PASTA_CHEESE_IMAGE		= "assets\\food\\plated food\\pasta\\cheese.png";
+const std::string PLATED_PASTA_FISH_IMAGE		= "assets\\food\\plated food\\pasta\\fish.png";
+const std::string PLATED_PASTA_MEAT_IMAGE		= "assets\\food\\plated food\\pasta\\meat.png";
+const std::string PLATED_PASTA_SPAGHETTI_IMAGE	= "assets\\food\\plated food\\pasta\\spaghetti.png";
+const std::string PLATED_PASTA_TOMATO_IMAGE		= "assets\\food\\plated food\\pasta\\tomato.png";
 
 // sprites for vehicles
 const std::string VEHICLE1_UP_IMAGE		= "assets\\vehicle\\car1_up.png";
