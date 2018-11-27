@@ -1,7 +1,11 @@
+#include <iostream>
 #include "gameScene.h"
 #include "game/resources.h"
 #include <iostream>
-GameScene::GameScene(){ }
+#include "game/data/food.h"
+
+GameScene::GameScene()
+{ }
 
 GameScene::~GameScene()
 {
@@ -120,10 +124,24 @@ void GameScene::Begin()
 	vehicle->SetPosition(Vector2(176, 0));
 	entities.push_back(vehicle);
 
+	orderManager = new OrderManager(&FOOD_MENU_SS, 10);
+
+	map		= Sprite::Create(MAP_IMAGE, 0);
 }
 
 void GameScene::Update(float deltaTime)
 {
+	orderManager->Update(deltaTime);
+
+	std::cout << std::endl;
+	for (Order *order : orderManager->GetOrders())
+	{	
+		std::cout << order->meal->name << std::endl;
+		std::cout << order->timeRemainingSeconds << std::endl << std::endl;
+	}
+	std::cout << "has order missed? " << orderManager->HasMissedOrder() << std::endl;
+	std::cout << std::endl;
+
 	map->Draw(Vector2(0, 0));
 	vehicle->Update(deltaTime);
 	player->Update(deltaTime);
@@ -140,6 +158,8 @@ void GameScene::End()
 	if (dispenser3) delete dispenser3;
 	if (dispenser4) delete dispenser4;
 	if (dispenser5) delete dispenser5;
+
+	delete orderManager;
 }
 
 void GameScene::ConductCollisionCheckingsButNotHandleIt(float deltaTime)

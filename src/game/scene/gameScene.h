@@ -10,6 +10,8 @@
 #include "game/entity/trashBinArea.h"
 #include "game/entity/vehicle.h"
 #include "core/sprites/sprite.h"
+#include "game/order/orderManager.h"
+
 
 class GameScene : public Scene
 {
@@ -35,6 +37,7 @@ private:
 	CounterArea *counter4Area;
 
 	Vehicle *vehicle;
+	OrderManager *orderManager;
 	
 	std::vector<GameEntity *> entities;
 	void ConductCollisionCheckingsButNotHandleIt(float deltaTime);

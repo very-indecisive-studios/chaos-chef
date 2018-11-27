@@ -21,6 +21,7 @@
     <ClCompile Include="src\game\entity\trashBin.cpp" />
     <ClCompile Include="src\game\entity\trashBinArea.cpp" />
     <ClCompile Include="src\game\entity\vehicle.cpp" />
+    <ClCompile Include="src\game\order\orderManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\constants.h" />
@@ -48,5 +49,6 @@
     <ClInclude Include="src\game\entity\vehicle.h" />
     <ClInclude Include="src\game\data\food.h" />
     <ClInclude Include="src\game\data\spriteLayer.h" />
+    <ClInclude Include="src\game\order\orderManager.h" />
   </ItemGroup>
 </Project>

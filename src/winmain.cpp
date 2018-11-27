@@ -11,6 +11,7 @@
 #include "context.h"
 #include "core/math.h"
 #include "core/sprites/animatedSprite.h"
+#include "game/data/food.h"
 
 // Function prototypes
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int);
@@ -47,6 +48,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	
 	// Initialize game.
 	Context::Get()->GetGame()->Initialize();
+
+	std::cout << "cheese ingr address: " << &INGR_CHEESE << std::endl;
+	std::cout << "cheese ingr address from plated food (PIZZA): " << PFOOD_PIZZA_CHEESE.ingredient << std::endl;
+	std::cout << "cheese ingr address from plated food (PASTA): " << PFOOD_PASTA_CHEESE.ingredient << std::endl;
 
 	// Main message loop.
 	MSG msg;
