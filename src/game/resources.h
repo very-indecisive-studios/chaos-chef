@@ -82,3 +82,7 @@ const std::string FONT_TYPE = "Arial";
 const int FONT_SIZE = 24;
 const int FONT_COLOR_WHITE = 0xFFFFFFFF;
 const int FONT_COLOR_RED = 0xFFFF0000;
+// sprites for hud
+const std::string HUD_IMAGE = "assets\\map\\final_hud.png";
+const int  HUD_WIDTH	= 640;		// width of hud
+const int  HUD_HEIGHT	= 160;		// height of hud
