@@ -8,6 +8,9 @@ const int GAME_HEIGHT = 480;              // height of game in pixels
 //-----------------------------------------------
 //                  Constants
 //-----------------------------------------------
+// plate sprite
+const std::string EMPTY_PLATE_IMAGE = "assets\\food\\plated food\\plate.png";
+
 // sprites for dispenser
 const std::string CHEESE_IMAGE		= "assets\\food\\ingredients\\cheese.png";
 const std::string CHICKEN_IMAGE		= "assets\\food\\ingredients\\chicken.png";
@@ -86,3 +89,9 @@ const int FONT_COLOR_RED = 0xFFFF0000;
 const std::string HUD_IMAGE = "assets\\map\\final_hud.png";
 const int  HUD_WIDTH	= 640;		// width of hud
 const int  HUD_HEIGHT	= 160;		// height of hud
+const int  HAND_HUD_WIDTH = 64;
+const int  HAND_HUD_HEIGHT = 64;
+const int  HAND_SUB_HUD_WIDTH = 64;
+const int  HAND_SUB_HUD_HEIGHT = 32;
+const int  ORDER_HUD_WIDTH = 160;
+const int  ORDER_HUD_HEIGHT = 96;

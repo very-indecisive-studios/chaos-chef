@@ -18,6 +18,7 @@ class GameScene : public Scene
 private:
 	Player *player;
 	Sprite *map;
+	Sprite *hud;
 
 	Dispenser *dispenser1;
 	DispenserArea *dispenser1Area;

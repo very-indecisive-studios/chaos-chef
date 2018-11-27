@@ -13,6 +13,7 @@ GameScene::~GameScene()
 void GameScene::Begin()
 {
 	map = Sprite::Create(MAP_IMAGE, 0);
+	hud = Sprite::Create(HUD_IMAGE, 0);
 
 	player	= new Player();
 
@@ -153,6 +154,7 @@ void GameScene::Update(float deltaTime)
 	dispenser1->GetImage()->Draw(Vector2(dispenser1->GetPosition()));
 	dispenser2->GetImage()->Draw(Vector2(dispenser2->GetPosition()));
 	dispenser3->GetImage()->Draw(Vector2(dispenser3->GetPosition()));
+	hud->Draw(Vector2(0, MAP_HEIGHT));
 	vehicle->Update(deltaTime);
 	player->Update(deltaTime);
 
@@ -169,6 +171,7 @@ void GameScene::End()
 
 	delete player;
 	delete map;
+	delete hud;
 	delete orderManager;
 }
 

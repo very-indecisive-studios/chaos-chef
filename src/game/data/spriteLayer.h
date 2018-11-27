@@ -7,9 +7,10 @@ enum class SpriteLayer : uint8_t
 	OVERLAY		= 1,
 	VEHICLE		= 2,
 	PLAYER		= 3,
-	FOOD_1		= 4,
-	FOOD_2		= 5,
-	FOOD_3		= 6,
-	FOOD_4		= 7,
-	FOOD_5		= 8
+	PLATE		= 4,
+	FOOD_1		= 5,
+	FOOD_2		= 6,
+	FOOD_3		= 7,
+	FOOD_4		= 8,
+	FOOD_5		= 9
 };

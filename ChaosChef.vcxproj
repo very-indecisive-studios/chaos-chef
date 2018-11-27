@@ -103,6 +103,8 @@
     <ClCompile Include="src\game\entity\trashBin.cpp" />
     <ClCompile Include="src\game\entity\trashBinArea.cpp" />
     <ClCompile Include="src\game\entity\vehicle.cpp" />
+    <ClCompile Include="src\game\hud\hud.cpp" />
+    <ClCompile Include="src\game\hud\order\orderHud.cpp" />
     <ClCompile Include="src\game\order\orderManager.cpp" />
     <ClCompile Include="src\game\scene\gameScene.cpp" />
     <ClCompile Include="src\game\scene\leaderboardScene.cpp" />
@@ -138,6 +140,9 @@
     <ClInclude Include="src\game\entity\trashBin.h" />
     <ClInclude Include="src\game\entity\trashBinArea.h" />
     <ClInclude Include="src\game\entity\vehicle.h" />
+    <ClInclude Include="src\game\hud\hud.h" />
+    <ClInclude Include="src\game\hud\order\orderHud.h" />
+    <ClInclude Include="src\game\order\order.h" />
     <ClInclude Include="src\game\order\orderManager.h" />
     <ClInclude Include="src\game\scene\gameScene.h" />
     <ClInclude Include="src\game\scene\leaderboardScene.h" />
