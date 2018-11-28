@@ -6,6 +6,8 @@ OrderHud::OrderHud(Vector2 position)
 
 OrderHud::~OrderHud()
 {
+	delete plateSprite;
+	
 	ClearFoodSprites();
 
 	// Don't delete order. OrderManager will handle the deletion.

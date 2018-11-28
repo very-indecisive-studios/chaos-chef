@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <string>
-#include "gameEntity.h"
+#include "game/entity/gameEntity.h"
 #include "dispenser.h"
 
 class DispenserArea : public GameEntity
@@ -13,8 +13,8 @@ public:
 	DispenserArea();
 	~DispenserArea();
 
-	Dispenser* GetDispenser() { return dispenser; }
-	void SetDispenser(Dispenser* inputDispenser) { dispenser = inputDispenser; }
+	Dispenser* GetDispenser();
+	void SetDispenser(Dispenser *dispenser);
 
 	void Update(float deltaTime) override;
 };

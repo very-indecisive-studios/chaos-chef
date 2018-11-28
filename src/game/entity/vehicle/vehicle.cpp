@@ -1,6 +1,6 @@
 #include <iostream>
 #include "vehicle.h"
-#include "gameEntity.h"
+#include "game/entity/gameEntity.h"
 #include "core/math.h"
 
 Vehicle::Vehicle() : GameEntity(GameEntityType::VEHICLE) 

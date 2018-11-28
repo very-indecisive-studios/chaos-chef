@@ -2,13 +2,13 @@
 
 #include <iostream>
 #include <string>
-#include "gameEntity.h"
+#include "game/entity/gameEntity.h"
 
-class CounterArea : public GameEntity
+class Counter : public GameEntity
 {
 public:
-	CounterArea();
-	~CounterArea();
+	Counter();
+	~Counter();
 
 	void Update(float deltaTime) override;
 };

@@ -1,10 +1,10 @@
 #pragma once
 #include <iostream>
 #include <string>
-#include "gameEntity.h"
 #include "core/sprites/animatedSprite.h"
 #include "game/resources.h"
 #include "playerHand.h"
+#include "game/entity/gameEntity.h"
 
 class Player : public GameEntity
 {

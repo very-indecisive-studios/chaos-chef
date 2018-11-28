@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
-#include "gameEntity.h"
+#include "game/entity/gameEntity.h"
 #include "core/sprites/animatedSprite.h"
 #include "game/resources.h"
 

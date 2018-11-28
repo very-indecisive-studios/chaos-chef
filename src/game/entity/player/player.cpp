@@ -1,12 +1,13 @@
 #include <iostream>
 #include "player.h"
-#include "gameEntity.h"
-#include "game/entity/dispenserArea.h"
+#include "game/entity/gameEntity.h"
+#include "game/entity/dispenser/dispenserArea.h"
 #include "core/sprites/animatedSprite.h"
 #include "core/math.h"
 #include "context.h"
 
-Player::Player() : GameEntity(GameEntityType::PLAYER)
+Player::Player()  
+	: GameEntity(GameEntityType::PLAYER) 
 {
 	collisionBounds.topLeft = Vector2(0, 0);
 	collisionBounds.bottomRight = Vector2(32, 32);
@@ -204,12 +205,12 @@ void Player::BlockPlayer(float deltaTime) // Move player back to their original 
 
 void Player::GetPlatedFood(GameEntity *entity) // Move player back to their original spot
 {
-	DispenserArea *curentDispenserArea = (DispenserArea *)entity;
-	Dispenser *curentDispenser = curentDispenserArea->GetDispenser();
+	DispenserArea *currentDispenserArea = (DispenserArea *)entity;
+	Dispenser *currentDispenser = currentDispenserArea->GetDispenser();
 
-	if (curentDispenser->IsActive())
+	if (currentDispenser->IsActive()) 
 	{
-		const PlatedFood *platedFood = curentDispenser->GetIngredient();
+		const PlatedFood *platedFood = currentDispenser->GetPlatedFood();
 
 		hand.Add(platedFood);
 	}

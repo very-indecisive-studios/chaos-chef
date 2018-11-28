@@ -1,14 +1,13 @@
 #pragma once
-
 #include <iostream>
 #include <string>
-#include "gameEntity.h"
+#include "game/entity/gameEntity.h"
 
-class Counter : public GameEntity
+class TrashBin : public GameEntity
 {
 public:
-	Counter();
-	~Counter();
+	TrashBin();
+	~TrashBin();
 
 	void Update(float deltaTime) override;
 };
