@@ -13,11 +13,14 @@ OrderHud::~OrderHud()
 
 void OrderHud::Update(float deltaTime)
 {
-	plateSprite->Draw(position + relPlatePosition);
-
-	for (Sprite *foodSprite : foodSprites)
+	if (order != nullptr)
 	{
-		foodSprite->Draw(position + relPlatePosition);
+		plateSprite->Draw(position + relPlatePosition);
+
+		for (Sprite *foodSprite : foodSprites)
+		{
+			foodSprite->Draw(position + relPlatePosition);
+		}
 	}
 }
 
