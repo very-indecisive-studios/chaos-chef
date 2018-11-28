@@ -141,15 +141,6 @@ void GameScene::Update(float deltaTime)
 {
 	orderManager->Update(deltaTime);
 
-	//std::cout << std::endl;
-	for (Order *order : orderManager->GetOrders())
-	{	
-		//std::cout << order->meal->name << std::endl;
-		//std::cout << order->timeRemainingSeconds << std::endl << std::endl;
-	}
-	//std::cout << "has order missed? " << orderManager->HasMissedOrder() << std::endl;
-	//std::cout << std::endl;
-
 	map->Draw(Vector2(0, 0));
 	dispenser1->GetImage()->Draw(Vector2(dispenser1->GetPosition()));
 	dispenser2->GetImage()->Draw(Vector2(dispenser2->GetPosition()));

@@ -14,11 +14,6 @@ OrderManager::~OrderManager()
 		delete order;
 	}
 	orderQueue.clear();
-
-	for (OrderHud *orderHud : orderHuds)
-	{
-		delete orderHud;
-	}
 }
 
 void OrderManager::Update(float deltaTime)
@@ -46,19 +41,19 @@ void OrderManager::Update(float deltaTime)
 		timeElapsed = 0;
 
 		// Check for any available order hud to render an order.
-		for (OrderHud *oHud : orderHuds)
+		for (OrderHud &oHud : orderHuds)
 		{
-			if (oHud->GetOrder() == nullptr)
+			if (oHud.GetOrder() == nullptr)
 			{
-				oHud->SetOrder(newOrder);
+				oHud.SetOrder(newOrder);
 				break;
 			}
 		}
 	}
 
-	for (OrderHud *oHud : orderHuds)
+	for (OrderHud &oHud : orderHuds)
 	{
-		oHud->Update(deltaTime);
+		oHud.Update(deltaTime);
 	}
 }
 
