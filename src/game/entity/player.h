@@ -4,7 +4,7 @@
 #include "gameEntity.h"
 #include "core/sprites/animatedSprite.h"
 #include "game/resources.h"
-#include "game/data/food.h"
+#include "playerHand.h"
 
 class Player : public GameEntity
 {
@@ -29,10 +29,10 @@ private:
 	Sprite *platedFoodImage4;
 	Sprite *platedFoodImage5;
 
-	void DrawPlatedFood();
-	void Move(float deltatime);
-	std::vector<const PlatedFood *> onPlate;
+	PlayerHand hand;
 
+	void DrawPlateFood();
+	void Move(float deltatime);
 public:
 	Player();
 	~Player();

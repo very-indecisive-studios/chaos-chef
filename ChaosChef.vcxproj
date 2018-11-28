@@ -100,9 +100,12 @@
     <ClCompile Include="src\core\graphics\graphicsRenderer.cpp" />
     <ClCompile Include="src\core\resource\resourceManager.cpp" />
     <ClCompile Include="src\game\entity\player.cpp" />
+    <ClCompile Include="src\game\entity\playerHand.cpp" />
     <ClCompile Include="src\game\entity\trashBin.cpp" />
     <ClCompile Include="src\game\entity\trashBinArea.cpp" />
     <ClCompile Include="src\game\entity\vehicle.cpp" />
+    <ClCompile Include="src\game\hud\hand\handCombHud.cpp" />
+    <ClCompile Include="src\game\hud\hand\handIndvHud.cpp" />
     <ClCompile Include="src\game\hud\hud.cpp" />
     <ClCompile Include="src\game\hud\order\orderHud.cpp" />
     <ClCompile Include="src\game\order\orderManager.cpp" />
@@ -137,9 +140,12 @@
     <ClInclude Include="src\core\math.h" />
     <ClInclude Include="src\core\resource\resourceManager.h" />
     <ClInclude Include="src\game\entity\player.h" />
+    <ClInclude Include="src\game\entity\playerHand.h" />
     <ClInclude Include="src\game\entity\trashBin.h" />
     <ClInclude Include="src\game\entity\trashBinArea.h" />
     <ClInclude Include="src\game\entity\vehicle.h" />
+    <ClInclude Include="src\game\hud\hand\handCombHud.h" />
+    <ClInclude Include="src\game\hud\hand\handIndvHud.h" />
     <ClInclude Include="src\game\hud\hud.h" />
     <ClInclude Include="src\game\hud\order\orderHud.h" />
     <ClInclude Include="src\game\order\order.h" />

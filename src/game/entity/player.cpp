@@ -140,6 +140,8 @@ void Player::Update(float deltaTime)
 	Move(deltaTime);
 	currentAnimSprite->Play();
 	DrawPlatedFood();
+
+	hand.Update(deltaTime);
 }
 
 void Player::HandleCollision(float deltaTime, GameEntity *entity)
@@ -209,20 +211,6 @@ void Player::GetPlatedFood(GameEntity *entity) // Move player back to their orig
 	{
 		const PlatedFood *platedFood = curentDispenser->GetIngredient();
 
-		bool foodAlreadyOnPlate = false;
-
-		for (const PlatedFood *food : GetOnPlate())
-		{
-			if (food == platedFood)
-			{
-				foodAlreadyOnPlate = true;
-			}
-		}
-
-		if (!foodAlreadyOnPlate)
-		{
-			SetOnPlate(platedFood);
-			std::cout << "Picked up: " << platedFood->name << std::endl;
-		}
+		hand.Add(platedFood);
 	}
 }

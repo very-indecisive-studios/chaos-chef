@@ -30,6 +30,9 @@
     <ClCompile Include="src\core\text\text.cpp" />
     <ClCompile Include="src\game\hud\hud.cpp" />
     <ClCompile Include="src\game\hud\order\orderHud.cpp" />
+    <ClCompile Include="src\game\entity\playerHand.cpp" />
+    <ClCompile Include="src\game\hud\hand\handIndvHud.cpp" />
+    <ClCompile Include="src\game\hud\hand\handCombHud.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\constants.h" />
@@ -68,5 +71,8 @@
     <ClInclude Include="src\game\order\order.h" />
     <ClInclude Include="src\game\hud\hud.h" />
     <ClInclude Include="src\game\hud\order\orderHud.h" />
+    <ClInclude Include="src\game\entity\playerHand.h" />
+    <ClInclude Include="src\game\hud\hand\handCombHud.h" />
+    <ClInclude Include="src\game\hud\hand\handIndvHud.h" />
   </ItemGroup>
 </Project>
