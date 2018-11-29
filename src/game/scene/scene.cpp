@@ -1,6 +1,7 @@
 #include "scene.h"
 
-Scene::Scene()
+Scene::Scene(SceneType type)
+	: type(type)
 { }
 
 Scene::~Scene()

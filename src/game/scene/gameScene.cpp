@@ -1,11 +1,9 @@
 #include <iostream>
 #include "gameScene.h"
 #include "game/resources.h"
-#include <iostream>
 #include "game/data/food.h"
 
-GameScene::GameScene()
-{ }
+GameScene::GameScene() : Scene(SceneType::GAME){ }
 
 GameScene::~GameScene()
 {

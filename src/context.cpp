@@ -6,6 +6,7 @@ Context::Context()
 	graphicsRenderer	= new GraphicsRenderer();
 	resourceManager		= new ResourceManager();
 	inputManager		= new InputManager();
+	sceneManager		= new SceneManager();
 	game				= new Game();
 }
 
@@ -14,6 +15,7 @@ Context::~Context()
 	delete graphicsRenderer;
 	delete resourceManager;
 	delete inputManager;
+	delete sceneManager;
 	delete game;
 }
 
@@ -30,6 +32,11 @@ ResourceManager *const Context::GetResourceManager()
 InputManager *const Context::GetInputManager()
 {
 	return inputManager;
+}
+
+SceneManager *const Context::GetSceneManager()
+{
+	return sceneManager;
 }
 
 Game *const Context::GetGame()
