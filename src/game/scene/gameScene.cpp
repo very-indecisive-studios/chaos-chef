@@ -23,7 +23,8 @@ void GameScene::Begin()
 	Dispenser		*dispenser1 = new Dispenser();
 	DispenserArea	*dispenser1Area = new DispenserArea();
 	dispenser1->SetPosition(Vector2(0, 82));
-	dispenser1->SetPlatedFood(&PFOOD_PIZZA_CHEESE); // temp
+	dispenser1->SetPlatedFood(&PFOOD_FB_CHICKEN); // temp
+	dispenser1Area->SetPosition(Vector2(32, 82));
 	dispenser1Area->SetDispenser(dispenser1);
 	entities.push_back(dispenser1);
 	entities.push_back(dispenser1Area);
@@ -70,7 +71,7 @@ void GameScene::ConductCollisionCheckingsButNotHandleIt(float deltaTime)
 	{
 		if (player->CollidedWith(entity))
 		{
-			player->HandleCollision(deltaTime, entity);
+			player->HandleCollision(entity);
 		}
 	}
 }

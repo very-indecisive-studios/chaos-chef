@@ -26,15 +26,8 @@ Player::~Player()
 
 void Player::Move(float deltaTime)
 {
-	if (!Context::Get()->GetInputManager()->IsKeyDown(playerKeyDown)
-		&& !Context::Get()->GetInputManager()->IsKeyDown(playerKeyUp)
-		&& !Context::Get()->GetInputManager()->IsKeyDown(playerKeyLeft)
-		&& !Context::Get()->GetInputManager()->IsKeyDown(playerKeyRight)) // if movement keys are not pressed
-	{
-		currentAnimSprite->Stop();
-	}
 	// SOUTH == DOWN
-	else if (Context::Get()->GetInputManager()->IsKeyDown(playerKeyDown))
+	if (Context::Get()->GetInputManager()->IsKeyDown(playerKeyDown))
 	{
 		if (currentAnimSprite != southAnimSprite) // changing direction of player
 		{
@@ -49,6 +42,8 @@ void Player::Move(float deltaTime)
 				position.y = MAP_HEIGHT - currentAnimSprite->GetWidth(); // position back to the bottom limit
 			}
 		}
+
+		currentAnimSprite->Play();
 	}
 	// NORTH == UP
 	else if (Context::Get()->GetInputManager()->IsKeyDown(playerKeyUp))
@@ -66,6 +61,8 @@ void Player::Move(float deltaTime)
 				position.y = 0; // position back to the top limit
 			}
 		}
+
+		currentAnimSprite->Play();
 	}
 	// EAST == RIGHT
 	else if (Context::Get()->GetInputManager()->IsKeyDown(playerKeyRight))
@@ -82,6 +79,8 @@ void Player::Move(float deltaTime)
 				position.x = MAP_WIDTH - currentAnimSprite->GetWidth(); // position back to the right limit
 			}
 		}
+
+		currentAnimSprite->Play();
 	}
 	// WEST == LEFT
 	else if (Context::Get()->GetInputManager()->IsKeyDown(playerKeyLeft))
@@ -98,59 +97,30 @@ void Player::Move(float deltaTime)
 				position.x = 0; // position back to the left limit
 			}
 		}
+
+		currentAnimSprite->Play();
 	}
-	currentAnimSprite->UpdateAndDraw(deltaTime, position);
-	//std::cout << "x: " << position.x << " y: " << position.y << std::endl;
-}
-
-void Player::DrawPlatedFood()
-{
-	for (const PlatedFood *f : GetOnPlate())
+	else // if movement keys are not pressed
 	{
-		if (f->layer == SpriteLayer::FOOD_1)
-		{
-			platedFoodImage1->Create(f->textureName, (uint8_t)SpriteLayer::FOOD_1);
-		}
-		else if (f->layer == SpriteLayer::FOOD_2)
-		{
-			platedFoodImage2->Create(f->textureName, (uint8_t)SpriteLayer::FOOD_2);
-		}
-		else if (f->layer == SpriteLayer::FOOD_3)
-		{
-			platedFoodImage3->Create(f->textureName, (uint8_t)SpriteLayer::FOOD_3);
-		}
-		else if (f->layer == SpriteLayer::FOOD_4)
-		{
-			platedFoodImage4->Create(f->textureName, (uint8_t)SpriteLayer::FOOD_4);
-		}
-		else if (f->layer == SpriteLayer::FOOD_5)
-		{
-			platedFoodImage5->Create(f->textureName, (uint8_t)SpriteLayer::FOOD_5);
-		}
-
-		platedFoodImage1->Draw(position);
-		platedFoodImage2->Draw(position);
-		platedFoodImage3->Draw(position);
-		platedFoodImage4->Draw(position);
-		platedFoodImage5->Draw(position);
+		currentAnimSprite->Stop();
 	}
 }
 
 void Player::Update(float deltaTime)
 {
 	Move(deltaTime);
-	currentAnimSprite->Play();
-	DrawPlatedFood();
 
-	hand.Update(deltaTime);
+	currentAnimSprite->UpdateAndDraw(deltaTime, position);
+
+	hand.Update(deltaTime, position);
 }
 
-void Player::HandleCollision(float deltaTime, GameEntity *entity)
+void Player::HandleCollision(GameEntity *entity)
 {
 	CollisionBounds entityCollisionBounds = entity->GetCollisionBounds();
 	Vector2 entityPosition = entity->GetPosition();
 
-	if (entity->GetType() == GameEntityType::DISPENSER) { BlockPlayer(deltaTime); } // block player from actual solid DISPENSER
+	if (entity->GetType() == GameEntityType::DISPENSER) { BlockPlayer(entity); } // block player from actual solid DISPENSER
 	else if (entity->GetType() == GameEntityType::DISPENSER_AREA) // area around DISPENSER - get food with actionKey
 	{
 		if (Context::Get()->GetInputManager()->IsKeyDown(actionKey))
@@ -159,7 +129,7 @@ void Player::HandleCollision(float deltaTime, GameEntity *entity)
 		}
 	}
 
-	else if (entity->GetType() == GameEntityType::TRASH_BIN) { BlockPlayer(deltaTime); } // block player from actual solid TRASH_BIN
+	else if (entity->GetType() == GameEntityType::TRASH_BIN) { BlockPlayer(entity); } // block player from actual solid TRASH_BIN
 	else if (entity->GetType() == GameEntityType::TRASH_BIN_AREA) // remove food on action_button
 	{
 		if (Context::Get()->GetInputManager()->IsKeyDown(actionKey))
@@ -168,7 +138,7 @@ void Player::HandleCollision(float deltaTime, GameEntity *entity)
 		}
 	}
 
-	else if (entity->GetType() == GameEntityType::COUNTER) { BlockPlayer(deltaTime); } // block player from actual solid COUNTER
+	else if (entity->GetType() == GameEntityType::COUNTER) { BlockPlayer(entity); } // block player from actual solid COUNTER
 	else if (entity->GetType() == GameEntityType::COUNTER_AREA) // area around COUNTER - if dish-on-hand == order, give dish}
 	{
 		if (Context::Get()->GetInputManager()->IsKeyDown(actionKey))
@@ -183,23 +153,23 @@ void Player::HandleCollision(float deltaTime, GameEntity *entity)
 	}
 }
 
-void Player::BlockPlayer(float deltaTime) // Move player back to their original spot
+void Player::BlockPlayer(GameEntity *entity) // Move player back to their original spot
 {
 	if (currentAnimSprite == northAnimSprite)
 	{
-		position.y += deltaTime * playerSpeed;
-	}
-	else if (currentAnimSprite == eastAnimSprite)
-	{
-		position.x -= deltaTime * playerSpeed;
+		position.y = entity->GetPosition().y + entity->GetCollisionBounds().bottomRight.y + 0.1f;
 	}
 	else if (currentAnimSprite == southAnimSprite)
 	{
-		position.y -= deltaTime * playerSpeed;
+		position.y = entity->GetPosition().y - currentAnimSprite->GetWidth() - 0.1f;
 	}
 	else if (currentAnimSprite == westAnimSprite)
 	{
-		position.x += deltaTime * playerSpeed;
+		position.x = entity->GetPosition().x + entity->GetCollisionBounds().bottomRight.x + 0.1f;
+	}
+	else if (currentAnimSprite == eastAnimSprite)
+	{
+		position.x = entity->GetPosition().x - currentAnimSprite->GetHeight() - 0.1f;
 	}
 }
 

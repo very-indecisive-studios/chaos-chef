@@ -15,7 +15,6 @@ private:
 	UCHAR playerKeyRight = VK_RIGHT;
 	UCHAR actionKey = VK_SPACE;
 
-	float playerSpeed = 200.0f;
 
 	AnimatedSprite *currentAnimSprite = nullptr;
 	AnimatedSprite *northAnimSprite = AnimatedSprite::Create(PLAYER_NORTH_IMAGE, 1, PLAYER_WIDTH, PLAYER_HEIGHT, PLAYER_ANIMATION_DELAY);
@@ -23,25 +22,21 @@ private:
 	AnimatedSprite *southAnimSprite = AnimatedSprite::Create(PLAYER_SOUTH_IMAGE, 1, PLAYER_WIDTH, PLAYER_HEIGHT, PLAYER_ANIMATION_DELAY);
 	AnimatedSprite *westAnimSprite = AnimatedSprite::Create(PLAYER_WEST_IMAGE, 1, PLAYER_WIDTH, PLAYER_HEIGHT, PLAYER_ANIMATION_DELAY);
 
-	Sprite *platedFoodImage1;
-	Sprite *platedFoodImage2;
-	Sprite *platedFoodImage3;
-	Sprite *platedFoodImage4;
-	Sprite *platedFoodImage5;
-
 	PlayerHand hand;
 
-	void DrawPlateFood();
+	float playerSpeed = 200.0f;
+
 	void Move(float deltatime);
+
+	void GetPlatedFood(GameEntity *entity);
+	void BlockPlayer(GameEntity *entity);
 public:
 	Player();
 	~Player();
-	std::vector<const PlatedFood *> GetOnPlate() { return onPlate; }
+
 	UCHAR GetActionKey() { return actionKey; }
-	void SetOnPlate(const PlatedFood *platedFood) { onPlate.push_back(platedFood); }
-	void GetPlatedFood(GameEntity *entity);
-	void BlockPlayer(float deltaTime);
-	void HandleCollision(float deltaTime, GameEntity *entity);
+
+	void HandleCollision(GameEntity *entity) override;
 
 	void Update(float deltaTime) override;
 };

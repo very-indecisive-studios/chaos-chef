@@ -8,6 +8,37 @@ GameEntity::GameEntity(GameEntityType type)
 GameEntity::~GameEntity()
 { }
 
+GameEntityType GameEntity::GetType()
+{
+	return this->type;
+}
+
+Vector2 GameEntity::GetPosition()
+{
+	return this->position;
+}
+
+CollisionBounds GameEntity::GetCollisionBounds()
+{
+	return this->collisionBounds;
+}
+
+void GameEntity::SetPosition(Vector2 position)
+{
+	this->position = position;
+}
+
+void GameEntity::SetCollisionBounds(CollisionBounds collisionBounds)
+{
+	this->collisionBounds = collisionBounds;
+}
+
+void GameEntity::Update(float deltaTime)
+{ }
+
+void GameEntity::HandleCollision(GameEntity* gameEntity)
+{ }
+
 bool GameEntity::CollidedWith(GameEntity *gameEntity)
 {
 	float thisLeftEdge = position.x;

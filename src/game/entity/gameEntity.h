@@ -34,12 +34,14 @@ protected:
 
 public:
 	virtual ~GameEntity();
-	GameEntityType GetType() { return type; }
-	Vector2 GetPosition() { return position; }
-	CollisionBounds GetCollisionBounds() { return collisionBounds; }
-	void SetPosition(Vector2 inputPosition) { position = inputPosition; }
-	void SetCollisionBounds(CollisionBounds inputCollisionBounds) { collisionBounds = inputCollisionBounds; }
+	GameEntityType GetType();
+	Vector2 GetPosition();
+	CollisionBounds GetCollisionBounds();
+	void SetPosition(Vector2 position);
+	void SetCollisionBounds(CollisionBounds collisionBounds);
 
-	virtual void Update(float deltaTime) = 0;
+	virtual void Update(float deltaTime);
+
 	virtual bool CollidedWith(GameEntity *gameEntity);
+	virtual void HandleCollision(GameEntity *gameEntity);
 };
