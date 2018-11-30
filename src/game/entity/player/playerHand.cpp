@@ -4,7 +4,14 @@ PlayerHand::PlayerHand()
 { }
 
 PlayerHand::~PlayerHand()
-{ }
+{
+	// Delete all sprites.
+	for (Sprite *s : foodsOnPlateSprites)
+	{
+		delete s;
+	}
+	foodsOnPlateSprites.clear();
+}
 
 void PlayerHand::AddPlatedFoodToHuds(const PlatedFood * platedFood)
 {
@@ -31,47 +38,55 @@ void PlayerHand::ResetHuds()
 
 void PlayerHand::Add(const PlatedFood *platedFood)
 {
-	const PlatedFood **freePlatedFood = nullptr;
+	// Reject if > 5.
+	if (foodsOnPlate.size() == MAX_PLATED_FOODS)
+	{
+		return;
+	}
 
-	for (const PlatedFood *&pF : foodsOnPlate)
+	for (const PlatedFood *pF : foodsOnPlate)
 	{
 		// Reject if same food.
 		if (pF == platedFood)
 		{
 			return;
 		}
-
-		// Get pointer address in array that has not been assigned.
-		if (pF == nullptr)
-		{
-			freePlatedFood = &pF;
-		}
 	}
 
-	// Assign the plated food to a free space in array.
-	if (freePlatedFood != nullptr)
-	{
-		*freePlatedFood = platedFood;
+	foodsOnPlate.push_back(platedFood);
+	AddPlatedFoodToHuds(platedFood);
 
-		AddPlatedFoodToHuds(platedFood);
-	}
+	foodsOnPlateSprites.push_back(Sprite::Create(platedFood->textureName, (uint8_t)platedFood->layer));
 }
 
 void PlayerHand::Empty()
 {
-	for (const PlatedFood *&pF : foodsOnPlate)
-	{
-		pF = nullptr;
-	}
+	// Remove all foods.
+	foodsOnPlate.clear();
 
+	// Delete all sprites.
+	for (Sprite *s : foodsOnPlateSprites)
+	{
+		delete s;
+	}
+	foodsOnPlateSprites.clear();
+
+	// Reset HUDs.
 	ResetHuds();
 }
 
-void PlayerHand::Update(float deltaTime)
+void PlayerHand::Update(float deltaTime, Vector2 playerPosition)
 {
+	// Update HUDs.
 	handCombHud.Update(deltaTime);
 	for (HandIndvHud &hud : handIndvHuds)
 	{
 		hud.Update(deltaTime);
+	}
+
+	// Draw all food sprites on player.
+	for (Sprite *s : foodsOnPlateSprites)
+	{
+		s->Draw(playerPosition);
 	}
 }

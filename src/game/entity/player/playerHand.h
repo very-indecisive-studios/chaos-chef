@@ -8,10 +8,13 @@
 class PlayerHand
 {
 private:
-	const PlatedFood *foodsOnPlate[5] = { nullptr };
+	static const int MAX_PLATED_FOODS = 5;
+
+	std::vector<const PlatedFood *> foodsOnPlate;
+	std::vector<Sprite *> foodsOnPlateSprites;
 
 	HandCombHud handCombHud { Vector2(MAP_WIDTH - HAND_COMB_HUD_WIDTH, MAP_HEIGHT) };
-	HandIndvHud handIndvHuds[5]
+	std::vector<HandIndvHud> handIndvHuds
 	{
 		{ Vector2(MAP_WIDTH - HAND_INDV_HUD_WIDTH * 2, MAP_HEIGHT + (HAND_COMB_HUD_HEIGHT - HAND_INDV_HUD_HEIGHT)) },
 		{ Vector2(MAP_WIDTH - HAND_INDV_HUD_WIDTH * 3, MAP_HEIGHT + (HAND_COMB_HUD_HEIGHT - HAND_INDV_HUD_HEIGHT)) },
@@ -29,5 +32,5 @@ public:
 	void Add(const PlatedFood *platedFood);
 	void Empty();
 
-	void Update(float deltaTime);
+	void Update(float deltaTime, Vector2 playerPosition);
 };
