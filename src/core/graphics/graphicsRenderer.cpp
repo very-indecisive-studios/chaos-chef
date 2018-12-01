@@ -303,3 +303,66 @@ void GraphicsRenderer::ClearAllSpriteDrawJobs()
 
 	spriteDrawJobs.clear();
 }
+
+bool GraphicsRenderer::InitializeText(int height, bool bold, bool italic, const std::string & fontName)
+{
+	UINT weight = FW_NORMAL;
+	if (bold)
+		weight = FW_BOLD;
+
+	// create DirectX font
+	if (FAILED(D3DXCreateFont(deviceD3D, height, 0, weight, 1, italic,
+		DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, DEFAULT_QUALITY,
+		DEFAULT_PITCH | FF_DONTCARE, fontName.c_str(),
+		&dxFont))) return false;
+
+	// Create the tranformation matrix
+	D3DXMatrixTransformation2D(&matrix, NULL, 0.0f, NULL, NULL, 0.0f, NULL);
+
+	return true;
+}
+
+int GraphicsRenderer::Print(const std::string &str, int x, int y)
+{
+	if (dxFont == NULL)
+		return 0;
+	// set font position
+	fontRect.top = y;
+	fontRect.left = x;
+
+	// Rotation center
+	D3DXVECTOR2 rCenter = D3DXVECTOR2((float)x, (float)y);
+	// Setup matrix to rotate text by angle
+	D3DXMatrixTransformation2D(&matrix, NULL, 0.0f, NULL, &rCenter, angle, NULL);
+	// Tell the sprite about the matrix "Hello Neo"
+	spriteD3D->SetTransform(&matrix);
+	return dxFont->DrawTextA(spriteD3D, str.c_str(), -1, &fontRect, DT_LEFT, color);
+}
+
+int GraphicsRenderer::Print(const std::string &str, RECT &rect, UINT format)
+{
+	if (dxFont == NULL)
+		return 0;
+
+	// Setup matrix to not rotate text
+	D3DXMatrixTransformation2D(&matrix, NULL, 0.0f, NULL, NULL, NULL, NULL);
+	// Tell the sprite about the matrix "Hello Neo"
+	spriteD3D->SetTransform(&matrix);
+	return dxFont->DrawTextA(spriteD3D, str.c_str(), -1, &rect, format, color);
+}
+float GraphicsRenderer::GetDegrees() { return angle * (180.0f / (float)3.14159265); }
+float GraphicsRenderer::GetRadians() { return angle; }
+float GraphicsRenderer::GetFontColor() { return color; }
+void GraphicsRenderer::SetDegrees(float deg) { angle = deg * ((float)3.14159265 / 180.0f); }
+void GraphicsRenderer::SetRadians(float rad) { angle = rad; }
+void GraphicsRenderer::SetFontColor(COLOR_ARGB c) { color = c; }
+void GraphicsRenderer::OnResetDevice() {
+	if (dxFont == NULL)
+		return;
+	dxFont->OnLostDevice();
+}
+void GraphicsRenderer::OnLostDevice() {
+	if (dxFont == NULL)
+		return;
+	dxFont->OnResetDevice();
+}

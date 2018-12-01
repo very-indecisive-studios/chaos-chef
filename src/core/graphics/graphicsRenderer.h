@@ -8,6 +8,11 @@
 #include "core/math.h"
 #include "core/sprites/sprite.h"
 
+// Color defines
+#define COLOR_ARGB DWORD
+#define SETCOLOR_ARGB(a,r,g,b) \
+    ((COLOR_ARGB)((((a)&0xff)<<24)|(((r)&0xff)<<16)|(((g)&0xff)<<8)|((b)&0xff)))
+
 struct DrawSpriteJob 
 {
 	Sprite *sprite;
@@ -34,6 +39,7 @@ private:
 	bool        fullscreen;
 	int         width;
 	int         height;
+	COLOR_ARGB  backColor;      // background color
 
 	const D3DCOLOR BACK_COLOUR = 0xFF000000;
 
@@ -44,6 +50,13 @@ private:
 	HRESULT Reset();
 
 	void ClearAllSpriteDrawJobs();
+
+	// Text
+	LPD3DXFONT dxFont;
+	D3DXMATRIX matrix;
+	float angle;
+	COLOR_ARGB color;
+	RECT fontRect;
 
 public:
 	GraphicsRenderer();
@@ -61,4 +74,19 @@ public:
 	Texture * LoadTextureFromFile(std::string fileName);
 
 	void ReleaseAll();
+
+	void SetBackColor(COLOR_ARGB c) { backColor = c; }
+
+	// Text
+	bool InitializeText(int height, bool bold, bool italic, const std::string &fontName);
+	int Print(const std::string &str, int x, int y);
+	int Print(const std::string &str, RECT &rect, UINT format);
+	float GetDegrees();
+	float GetRadians();
+	float GetFontColor();
+	void SetDegrees(float deg);
+	void SetRadians(float rad);
+	void SetFontColor(COLOR_ARGB c);
+	void OnResetDevice();
+	void OnLostDevice();
 };

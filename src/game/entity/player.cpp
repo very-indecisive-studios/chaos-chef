@@ -176,7 +176,7 @@ void Player::HandleCollision(float deltaTime, GameEntity *entity)
 
 	else if (entity->GetType() == GameEntityType::VEHICLE) // GAME OVER scene
 	{
-		PostQuitMessage(0);
+		Context::Get()->GetSceneManager()->LoadLeaderboardScene();
 	}
 }
 
