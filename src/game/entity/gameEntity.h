@@ -16,10 +16,10 @@ enum class GameEntityType
 	DISPENSER_AREA,
 	TRASH_BIN,
 	TRASH_BIN_AREA,
-	COUNTER,
 	COUNTER_AREA,
 	CUSTOMER,
-	VEHICLE
+	VEHICLE,
+	PROP
 };
 
 class GameEntity 

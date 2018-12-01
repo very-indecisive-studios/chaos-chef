@@ -92,7 +92,6 @@
     <ClCompile Include="src\context.cpp" />
     <ClCompile Include="src\core\text\text.cpp" />
     <ClCompile Include="src\game.cpp" />
-    <ClCompile Include="src\game\entity\counter\counter.cpp" />
     <ClCompile Include="src\game\entity\counter\counterArea.cpp" />
     <ClCompile Include="src\game\entity\dispenser\dispenser.cpp" />
     <ClCompile Include="src\game\entity\dispenser\dispenserArea.cpp" />
@@ -101,7 +100,7 @@
     <ClCompile Include="src\core\resource\resourceManager.cpp" />
     <ClCompile Include="src\game\entity\player\player.cpp" />
     <ClCompile Include="src\game\entity\player\playerHand.cpp" />
-    <ClCompile Include="src\game\entity\trashBin\trashBin.cpp" />
+    <ClCompile Include="src\game\entity\prop.cpp" />
     <ClCompile Include="src\game\entity\trashBin\trashBinArea.cpp" />
     <ClCompile Include="src\game\entity\vehicle\vehicle.cpp" />
     <ClCompile Include="src\game\hud\hand\handCombHud.cpp" />
@@ -128,7 +127,7 @@
     <ClInclude Include="src\context.h" />
     <ClInclude Include="src\core\text\text.h" />
     <ClInclude Include="src\game.h" />
-    <ClInclude Include="src\game\entity\counter\counter.h" />
+    <ClInclude Include="src\game\data\map.h" />
     <ClInclude Include="src\game\entity\counter\counterArea.h" />
     <ClInclude Include="src\game\entity\dispenser\dispenser.h" />
     <ClInclude Include="src\game\entity\dispenser\dispenserArea.h" />
@@ -141,7 +140,7 @@
     <ClInclude Include="src\core\resource\resourceManager.h" />
     <ClInclude Include="src\game\entity\player\player.h" />
     <ClInclude Include="src\game\entity\player\playerHand.h" />
-    <ClInclude Include="src\game\entity\trashBin\trashBin.h" />
+    <ClInclude Include="src\game\entity\prop.h" />
     <ClInclude Include="src\game\entity\trashBin\trashBinArea.h" />
     <ClInclude Include="src\game\entity\vehicle\vehicle.h" />
     <ClInclude Include="src\game\hud\hand\handCombHud.h" />

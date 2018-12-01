@@ -117,28 +117,35 @@ void Player::Update(float deltaTime)
 
 void Player::HandleCollision(GameEntity *entity)
 {
-	CollisionBounds entityCollisionBounds = entity->GetCollisionBounds();
-	Vector2 entityPosition = entity->GetPosition();
-
-	if (entity->GetType() == GameEntityType::DISPENSER) { BlockPlayer(entity); } // block player from actual solid DISPENSER
+	std::cout << "player - x: " << position.x << " y :" << position.y << std::endl;
+	std::cout << "entity - x: " << entity->GetPosition().x << " y :" << entity->GetPosition().y << std::endl;
+	if (
+		entity->GetType() == GameEntityType::DISPENSER ||
+		entity->GetType() == GameEntityType::PROP
+	)
+	{
+		std::cout << "PROP/DISPENSER" << std::endl;
+		BlockPlayer(entity);
+	}
 	else if (entity->GetType() == GameEntityType::DISPENSER_AREA) // area around DISPENSER - get food with actionKey
 	{
+		std::cout << "DISPENSER AREA" << std::endl;
+
 		if (Context::Get()->GetInputManager()->IsKeyDown(actionKey))
 		{
 			GetPlatedFood(entity);
+			std::cout << "GET FOOD" << std::endl;
 		}
 	}
-
-	else if (entity->GetType() == GameEntityType::TRASH_BIN) { BlockPlayer(entity); } // block player from actual solid TRASH_BIN
 	else if (entity->GetType() == GameEntityType::TRASH_BIN_AREA) // remove food on action_button
 	{
+		std::cout << "TRASH BIN AREA" << std::endl;
+
 		if (Context::Get()->GetInputManager()->IsKeyDown(actionKey))
 		{
 			std::cout << "REMOVE FOOD" << std::endl;
 		}
 	}
-
-	else if (entity->GetType() == GameEntityType::COUNTER) { BlockPlayer(entity); } // block player from actual solid COUNTER
 	else if (entity->GetType() == GameEntityType::COUNTER_AREA) // area around COUNTER - if dish-on-hand == order, give dish}
 	{
 		if (Context::Get()->GetInputManager()->IsKeyDown(actionKey))
@@ -146,7 +153,6 @@ void Player::HandleCollision(GameEntity *entity)
 			std::cout << "GIVE FOOD" << std::endl;
 		}
 	}
-
 	else if (entity->GetType() == GameEntityType::VEHICLE) // GAME OVER scene
 	{
 		Context::Get()->GetSceneManager()->LoadLeaderboardScene();

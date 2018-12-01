@@ -4,6 +4,8 @@
 #include "game/data/food.h"
 #include "game/entity/dispenser/dispenser.h"
 #include "game/entity/dispenser/dispenserArea.h"
+#include "game/entity/prop.h"
+#include "game/entity/trashBin/trashBinArea.h"
 
 GameScene::GameScene() : Scene(SceneType::GAME){ }
 
@@ -19,15 +21,39 @@ void GameScene::Begin()
 
 	player	= new Player();
 
-	// Initializing a dispenser (same for counter)
-	Dispenser		*dispenser1 = new Dispenser();
-	DispenserArea	*dispenser1Area = new DispenserArea();
-	dispenser1->SetPosition(Vector2(0, 82));
-	dispenser1->SetPlatedFood(&PFOOD_FB_CHICKEN); // temp
-	dispenser1Area->SetPosition(Vector2(32, 82));
-	dispenser1Area->SetDispenser(dispenser1);
-	entities.push_back(dispenser1);
-	entities.push_back(dispenser1Area);
+	// Initialize dispensers & its area.
+	for (const auto &dispenserWAreaLocations : Map::DISPENSERS_W_AREA_LOCATIONS)
+	{
+		Dispenser *dispenser = new Dispenser();
+		dispenser->SetPosition(dispenserWAreaLocations.first);
+		dispenser->SetPlatedFood(&PFOOD_FB_CHICKEN);
+		entities.push_back(dispenser);
+		
+		DispenserArea *dispenserArea = new DispenserArea();
+		dispenserArea->SetPosition(dispenserWAreaLocations.second);
+		dispenserArea->SetDispenser(dispenser);
+		entities.push_back(dispenserArea);
+	}
+
+	// Initialize props.
+	for (const auto &propLocationBounds : Map::PROPS_LOCATION_BOUNDS)
+	{
+		Prop *prop = new Prop();
+		prop->SetPosition(propLocationBounds.first);
+		prop->SetCollisionBounds(propLocationBounds.second);
+		entities.push_back(prop);
+	}
+
+	// Initialize trash bin and its area.
+	Prop *trashBin = new Prop();
+	trashBin->SetPosition(Map::TRASH_BIN_LOCATION_BOUNDS.first);
+	trashBin->SetCollisionBounds(Map::TRASH_BIN_LOCATION_BOUNDS.second);
+	entities.push_back(trashBin);
+
+	TrashBinArea *trashBinArea = new TrashBinArea();
+	trashBinArea->SetPosition(Map::TRASH_BIN_AREA_LOCATION_BOUNDS.first);
+	trashBinArea->SetCollisionBounds(Map::TRASH_BIN_AREA_LOCATION_BOUNDS.second);
+	entities.push_back(trashBinArea);
 
 	orderManager = new OrderManager(&FOOD_MENU_SS, 10);
 }
