@@ -5,14 +5,14 @@
 #include "core/sprites/animatedSprite.h"
 #include "core/math.h"
 #include "context.h"
+#include "game/data/gameSceneData.h"
 
 Player::Player()  
 	: GameEntity(GameEntityType::PLAYER) 
 {
-	collisionBounds.topLeft = Vector2(0, 0);
+	collisionBounds.topLeft		= Vector2(0, 0);
 	collisionBounds.bottomRight = Vector2(32, 32);
-	position.x = 70;	// starting x
-	position.y = 140;	// starting y
+
 	currentAnimSprite = southAnimSprite; // starting direction
 }
 
@@ -37,9 +37,9 @@ void Player::Move(float deltaTime)
 		{
 			position.y += deltaTime * playerSpeed;
 
-			if (position.y >= (MAP_HEIGHT - currentAnimSprite->GetWidth())) // if off screen at bottom
+			if (position.y >= (GameSceneData::Map::BOUNDS.bottomRight.y - currentAnimSprite->GetHeight())) // if off screen at bottom
 			{
-				position.y = MAP_HEIGHT - currentAnimSprite->GetWidth(); // position back to the bottom limit
+				position.y = GameSceneData::Map::BOUNDS.bottomRight.y - currentAnimSprite->GetHeight(); // position back to the bottom limit
 			}
 		}
 
@@ -56,9 +56,9 @@ void Player::Move(float deltaTime)
 		{
 			position.y -= deltaTime * playerSpeed;
 
-			if (position.y <= 0) // if off screen at top
+			if (position.y <= GameSceneData::Map::BOUNDS.topLeft.y) // if off screen at top
 			{
-				position.y = 0; // position back to the top limit
+				position.y = GameSceneData::Map::BOUNDS.topLeft.y; // position back to the top limit
 			}
 		}
 
@@ -74,9 +74,9 @@ void Player::Move(float deltaTime)
 		else
 		{
 			position.x += deltaTime * playerSpeed;
-			if (position.x >= (MAP_WIDTH - currentAnimSprite->GetWidth())) // if off screen at right
+			if (position.x >= (GameSceneData::Map::BOUNDS.bottomRight.x - currentAnimSprite->GetWidth())) // if off screen at right
 			{
-				position.x = MAP_WIDTH - currentAnimSprite->GetWidth(); // position back to the right limit
+				position.x = GameSceneData::Map::BOUNDS.bottomRight.x - currentAnimSprite->GetWidth(); // position back to the right limit
 			}
 		}
 
@@ -92,9 +92,9 @@ void Player::Move(float deltaTime)
 		else
 		{
 			position.x -= deltaTime * playerSpeed;
-			if (position.x <= 0) // if off screen at left
+			if (position.x <= GameSceneData::Map::BOUNDS.topLeft.x) // if off screen at left
 			{
-				position.x = 0; // position back to the left limit
+				position.x = GameSceneData::Map::BOUNDS.topLeft.x; // position back to the left limit
 			}
 		}
 

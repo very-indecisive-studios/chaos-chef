@@ -1,4 +1,5 @@
 #include "orderHud.h"
+#include "game/data/gameSceneData.h"
 
 OrderHud::OrderHud(Vector2 position)
 	: Hud(position)
@@ -8,7 +9,7 @@ OrderHud::~OrderHud()
 {
 	delete plateSprite;
 	
-	ClearFoodSprites();
+	ClearSprites();
 
 	// Don't delete order. OrderManager will handle the deletion.
 }
@@ -17,11 +18,26 @@ void OrderHud::Update(float deltaTime)
 {
 	if (order != nullptr)
 	{
-		plateSprite->Draw(position + relPlatePosition);
+		plateSprite->Draw(position + GameSceneData::Hud::Bottom::ORDER_HUD_PF_REL_LOCATION);
 
-		for (Sprite *foodSprite : foodSprites)
+		for (Sprite *foodSprite : platedFoodSprites)
 		{
-			foodSprite->Draw(position + relPlatePosition);
+			foodSprite->Draw(position + GameSceneData::Hud::Bottom::ORDER_HUD_PF_REL_LOCATION);
+		}
+
+		auto ingreSpritesIt = ingreSprites.begin();
+		for (const Vector2 &ingreSpriteLocation : GameSceneData::Hud::Bottom::ORDER_HUD_ING_REL_LOCATIONS)
+		{
+			// End of vector.
+			if (ingreSpritesIt == ingreSprites.end())
+			{
+				break;
+			}
+
+			(*ingreSpritesIt)->Draw(position + ingreSpriteLocation);
+
+			// Increment vector iterator.
+			++ingreSpritesIt;
 		}
 	}
 }
@@ -30,8 +46,8 @@ void OrderHud::SetOrder(Order * order)
 {
 	this->order = order;
 
-	ClearFoodSprites();
-	InitFoodSprites();
+	ClearSprites();
+	InitSprites();
 }
 
 Order * OrderHud::GetOrder()
@@ -39,22 +55,29 @@ Order * OrderHud::GetOrder()
 	return this->order;
 }
 
-void OrderHud::InitFoodSprites()
+void OrderHud::InitSprites()
 {
 	for (const PlatedFood *pF : this->order->meal->foods)
 	{
-		Sprite *pFSprite = Sprite::Create(pF->textureName, (uint8_t) pF->layer, 3);
+		Sprite *pFSprite	= Sprite::Create(pF->textureName, pF->layer, GameSceneData::Hud::Bottom::ORDER_HUD_PF_SCALE);
+		Sprite *ingreSprite = Sprite::Create(pF->ingredient->textureName, Layer::FOOD_1, GameSceneData::Hud::Bottom::ORDER_HUD_IG_SCALE);
 
-		foodSprites.push_back(pFSprite);
+		platedFoodSprites.push_back(pFSprite);
+		ingreSprites.push_back(ingreSprite);
 	}
 }
 
-void OrderHud::ClearFoodSprites()
+void OrderHud::ClearSprites()
 {
-	for (Sprite *foodSprite : foodSprites)
+	for (Sprite *pFoodSprite : platedFoodSprites)
 	{
-		delete foodSprite;
+		delete pFoodSprite;
 	}
+	platedFoodSprites.clear();
 
-	foodSprites.clear();
+	for (Sprite *ingreSprite : ingreSprites)
+	{
+		delete ingreSprite;
+	}
+	ingreSprites.clear();
 }

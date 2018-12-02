@@ -127,12 +127,12 @@
     <ClInclude Include="src\context.h" />
     <ClInclude Include="src\core\text\text.h" />
     <ClInclude Include="src\game.h" />
-    <ClInclude Include="src\game\data\map.h" />
+    <ClInclude Include="src\game\data\gameSceneData.h" />
     <ClInclude Include="src\game\entity\counter\counterArea.h" />
     <ClInclude Include="src\game\entity\dispenser\dispenser.h" />
     <ClInclude Include="src\game\entity\dispenser\dispenserArea.h" />
     <ClInclude Include="src\game\data\food.h" />
-    <ClInclude Include="src\game\data\spriteLayer.h" />
+    <ClInclude Include="src\game\data\Layer.h" />
     <ClInclude Include="src\game\entity\gameEntity.h" />
     <ClInclude Include="src\core\gameException.h" />
     <ClInclude Include="src\core\graphics\graphicsRenderer.h" />

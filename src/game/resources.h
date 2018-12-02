@@ -76,22 +76,11 @@ const int  CUSTOMER_WIDTH = 32;              // width of customer image
 const int  CUSTOMER_HEIGHT = 32;             // height of customer image
 
 // sprites for map
-const std::string MAP_IMAGE = "assets\\map\\final_map.png";
-const int  MAP_WIDTH	= 640;		// width of map
-const int  MAP_HEIGHT	= 320;		// height of map
+const std::string GAME_SCENE_IMAGE = "assets\\map\\final_map.png";
 
 // texts
 const std::string FONT_TYPE = "Arial";
 const int FONT_SIZE = 24;
 const int FONT_COLOR_WHITE = 0xFFFFFFFF;
 const int FONT_COLOR_RED = 0xFFFF0000;
-// sprites for hud
-const std::string HUD_IMAGE = "assets\\map\\final_hud.png";
-const int  HUD_WIDTH	= 640;		// width of hud
-const int  HUD_HEIGHT	= 160;		// height of hud
-const int  HAND_COMB_HUD_WIDTH = 64;
-const int  HAND_COMB_HUD_HEIGHT = 64;
-const int  HAND_INDV_HUD_WIDTH = 64;
-const int  HAND_INDV_HUD_HEIGHT = 32;
-const int  ORDER_HUD_WIDTH = 160;
-const int  ORDER_HUD_HEIGHT = 96;
+

@@ -2,7 +2,7 @@
 
 #include <string>
 #include <vector>
-#include "spriteLayer.h"
+#include "Layer.h"
 #include "game/resources.h"
 
 struct Ingredient
@@ -26,28 +26,28 @@ static const Ingredient INGR_TOMATO		{ "Tomato", TOMATO_IMAGE };
 struct PlatedFood
 {
 	std::string name;
-	SpriteLayer layer;
+	uint8_t layer;
 	const Ingredient *ingredient;
 	std::string textureName;
 };
 
-static const PlatedFood PFOOD_FB_CHICKEN		{ "Fried Chicken", SpriteLayer::FOOD_1, &INGR_CHICKEN, PLATED_CHICKEN_IMAGE };
-static const PlatedFood PFOOD_FB_FRIES			{ "Fries", SpriteLayer::FOOD_1, &INGR_FRIES, PLATED_FRIES_IMAGE };
+static const PlatedFood PFOOD_FB_CHICKEN		{ "Fried Chicken", Layer::FOOD_1, &INGR_CHICKEN, PLATED_CHICKEN_IMAGE };
+static const PlatedFood PFOOD_FB_FRIES			{ "Fries", Layer::FOOD_1, &INGR_FRIES, PLATED_FRIES_IMAGE };
 
-static const PlatedFood PFOOD_SS_RICE			{ "Rice", SpriteLayer::FOOD_1, &INGR_RICE, PLATED_SS_RICE_IMAGE };
-static const PlatedFood PFOOD_SS_PRAWN			{ "Prawn", SpriteLayer::FOOD_2, &INGR_SHRIMP, PLATED_SS_PRAWN_IMAGE };
-static const PlatedFood PFOOD_SS_FISH			{ "Fish (Sushi)", SpriteLayer::FOOD_2, &INGR_FISH, PLATED_SS_FISH_IMAGE };
+static const PlatedFood PFOOD_SS_RICE			{ "Rice", Layer::FOOD_1, &INGR_RICE, PLATED_SS_RICE_IMAGE };
+static const PlatedFood PFOOD_SS_PRAWN			{ "Prawn", Layer::FOOD_2, &INGR_SHRIMP, PLATED_SS_PRAWN_IMAGE };
+static const PlatedFood PFOOD_SS_FISH			{ "Fish (Sushi)", Layer::FOOD_2, &INGR_FISH, PLATED_SS_FISH_IMAGE };
 
-static const PlatedFood PFOOD_PIZZA_DOUGH		{ "Dough", SpriteLayer::FOOD_1, &INGR_DOUGH, PLATED_PIZZA_DOUGH_IMAGE };
-static const PlatedFood PFOOD_PIZZA_TOMATO		{ "Tomato (Pizza)", SpriteLayer::FOOD_2, &INGR_TOMATO, PLATED_PIZZA_TOMATO_IMAGE };
-static const PlatedFood PFOOD_PIZZA_MEAT		{ "Meat (Pizza)", SpriteLayer::FOOD_3, &INGR_MEAT, PLATED_PIZZA_MEAT_IMAGE };
-static const PlatedFood PFOOD_PIZZA_CHEESE		{ "Cheese (Pizza)", SpriteLayer::FOOD_4, &INGR_CHEESE, PLATED_PIZZA_CHEESE_IMAGE };
+static const PlatedFood PFOOD_PIZZA_DOUGH		{ "Dough", Layer::FOOD_1, &INGR_DOUGH, PLATED_PIZZA_DOUGH_IMAGE };
+static const PlatedFood PFOOD_PIZZA_TOMATO		{ "Tomato (Pizza)", Layer::FOOD_2, &INGR_TOMATO, PLATED_PIZZA_TOMATO_IMAGE };
+static const PlatedFood PFOOD_PIZZA_MEAT		{ "Meat (Pizza)", Layer::FOOD_3, &INGR_MEAT, PLATED_PIZZA_MEAT_IMAGE };
+static const PlatedFood PFOOD_PIZZA_CHEESE		{ "Cheese (Pizza)", Layer::FOOD_4, &INGR_CHEESE, PLATED_PIZZA_CHEESE_IMAGE };
 
-static const PlatedFood PFOOD_PASTA_SPAGHETTI	{ "Spaghetti", SpriteLayer::FOOD_1, &INGR_SPAGHETTI, PLATED_PASTA_SPAGHETTI_IMAGE };
-static const PlatedFood PFOOD_PASTA_TOMATO		{ "Tomato (Pasta)", SpriteLayer::FOOD_2, &INGR_TOMATO, PLATED_PASTA_TOMATO_IMAGE };
-static const PlatedFood PFOOD_PASTA_FISH		{ "Fish (Pasta)", SpriteLayer::FOOD_3, &INGR_FISH, PLATED_PASTA_FISH_IMAGE };
-static const PlatedFood PFOOD_PASTA_MEAT		{ "Meat (Pasta)", SpriteLayer::FOOD_4, &INGR_MEAT, PLATED_PASTA_MEAT_IMAGE };
-static const PlatedFood PFOOD_PASTA_CHEESE		{ "Cheese (Pasta)", SpriteLayer::FOOD_5, &INGR_CHEESE, PLATED_PASTA_CHEESE_IMAGE };
+static const PlatedFood PFOOD_PASTA_SPAGHETTI	{ "Spaghetti", Layer::FOOD_1, &INGR_SPAGHETTI, PLATED_PASTA_SPAGHETTI_IMAGE };
+static const PlatedFood PFOOD_PASTA_TOMATO		{ "Tomato (Pasta)", Layer::FOOD_2, &INGR_TOMATO, PLATED_PASTA_TOMATO_IMAGE };
+static const PlatedFood PFOOD_PASTA_FISH		{ "Fish (Pasta)", Layer::FOOD_3, &INGR_FISH, PLATED_PASTA_FISH_IMAGE };
+static const PlatedFood PFOOD_PASTA_MEAT		{ "Meat (Pasta)", Layer::FOOD_4, &INGR_MEAT, PLATED_PASTA_MEAT_IMAGE };
+static const PlatedFood PFOOD_PASTA_CHEESE		{ "Cheese (Pasta)", Layer::FOOD_5, &INGR_CHEESE, PLATED_PASTA_CHEESE_IMAGE };
 
 struct Meal
 {

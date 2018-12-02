@@ -11,7 +11,6 @@ class GameScene : public Scene
 private:
 	Player *player;
 	Sprite *map;
-	Sprite *hud;
 
 	OrderManager *orderManager;
 	

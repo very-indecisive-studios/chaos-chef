@@ -4,6 +4,7 @@
 #include "game/hud/hand/handCombHud.h"
 #include "game/hud/hand/handIndvHud.h"
 #include "game/resources.h"
+#include "game/data/gameSceneData.h"
 
 class PlayerHand
 {
@@ -13,14 +14,14 @@ private:
 	std::vector<const PlatedFood *> foodsOnPlate;
 	std::vector<Sprite *> foodsOnPlateSprites;
 
-	HandCombHud handCombHud { Vector2(MAP_WIDTH - HAND_COMB_HUD_WIDTH, MAP_HEIGHT) };
+	HandCombHud handCombHud { GameSceneData::Hud::Top::HAND_COMB_HUD_LOCATION };
 	std::vector<HandIndvHud> handIndvHuds
 	{
-		{ Vector2(MAP_WIDTH - HAND_INDV_HUD_WIDTH * 2, MAP_HEIGHT + (HAND_COMB_HUD_HEIGHT - HAND_INDV_HUD_HEIGHT)) },
-		{ Vector2(MAP_WIDTH - HAND_INDV_HUD_WIDTH * 3, MAP_HEIGHT + (HAND_COMB_HUD_HEIGHT - HAND_INDV_HUD_HEIGHT)) },
-		{ Vector2(MAP_WIDTH - HAND_INDV_HUD_WIDTH * 4, MAP_HEIGHT + (HAND_COMB_HUD_HEIGHT - HAND_INDV_HUD_HEIGHT)) },
-		{ Vector2(MAP_WIDTH - HAND_INDV_HUD_WIDTH * 5, MAP_HEIGHT + (HAND_COMB_HUD_HEIGHT - HAND_INDV_HUD_HEIGHT)) },
-		{ Vector2(MAP_WIDTH - HAND_INDV_HUD_WIDTH * 6, MAP_HEIGHT + (HAND_COMB_HUD_HEIGHT - HAND_INDV_HUD_HEIGHT)) }
+		{ GameSceneData::Hud::Top::HAND_INDV_HUD_LOCATION_1 },
+		{ GameSceneData::Hud::Top::HAND_INDV_HUD_LOCATION_2 },
+		{ GameSceneData::Hud::Top::HAND_INDV_HUD_LOCATION_3 },
+		{ GameSceneData::Hud::Top::HAND_INDV_HUD_LOCATION_4 },
+		{ GameSceneData::Hud::Top::HAND_INDV_HUD_LOCATION_5 }
 	};
 
 	void AddPlatedFoodToHuds(const PlatedFood *platedFood);

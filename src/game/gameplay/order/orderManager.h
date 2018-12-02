@@ -4,6 +4,7 @@
 #include "game/data/food.h"
 #include "order.h"
 #include "game/hud/order/orderHud.h"
+#include "game/data/gameSceneData.h"
 
 class OrderManager
 {
@@ -17,10 +18,10 @@ private:
 	bool hasOrderMissed = false;
 
 	OrderHud orderHuds[4] = {
-		{ Vector2(0, MAP_HEIGHT + HAND_COMB_HUD_HEIGHT) },
-		{ Vector2(ORDER_HUD_WIDTH, MAP_HEIGHT + HAND_COMB_HUD_HEIGHT) },
-		{ Vector2(ORDER_HUD_WIDTH * 2, MAP_HEIGHT + HAND_COMB_HUD_HEIGHT) },
-		{ Vector2(ORDER_HUD_WIDTH * 3, MAP_HEIGHT + HAND_COMB_HUD_HEIGHT) }
+		{ GameSceneData::Hud::Bottom::ORDER_HUD_LOCATION_1 },
+		{ GameSceneData::Hud::Bottom::ORDER_HUD_LOCATION_2 },
+		{ GameSceneData::Hud::Bottom::ORDER_HUD_LOCATION_3 },
+		{ GameSceneData::Hud::Bottom::ORDER_HUD_LOCATION_4 }
 	};
 public:
 	OrderManager(const FoodMenu *foodMenu, float nextOrderIntervalSeconds);

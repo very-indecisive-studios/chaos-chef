@@ -56,7 +56,7 @@ void PlayerHand::Add(const PlatedFood *platedFood)
 	foodsOnPlate.push_back(platedFood);
 	AddPlatedFoodToHuds(platedFood);
 
-	foodsOnPlateSprites.push_back(Sprite::Create(platedFood->textureName, (uint8_t)platedFood->layer));
+	foodsOnPlateSprites.push_back(Sprite::Create(platedFood->textureName, platedFood->layer));
 }
 
 void PlayerHand::Empty()
