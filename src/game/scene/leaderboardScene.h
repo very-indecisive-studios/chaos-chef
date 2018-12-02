@@ -3,6 +3,7 @@
 #include "scene.h"
 #include <map>
 #include <string>
+#include "core/text/text.h"
 
 class LeaderboardScene : public Scene
 {
@@ -17,6 +18,7 @@ public:
 	int currentScore;
 	bool enterPressed = false;
 	bool playerAdded = false;
+	Text *text;
 
 	void AddPlayer();
 	void PrintLeaderboard();

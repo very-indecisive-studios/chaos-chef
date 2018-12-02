@@ -21,11 +21,9 @@ void Sprite::Draw(Vector2 position)
 	auto graphicsRenderer
 			= Context::Get()->GetGraphicsRenderer();
 
-	DrawSpriteJob *job = new DrawSpriteJob();
-	job->pos = position;
-	job->sprite = this;
+	DrawSpriteJob *job = new DrawSpriteJob(this, position, layer);
 
-	graphicsRenderer->QueueSpriteDrawJob(job);
+	graphicsRenderer->QueueDrawJob(job);
 }
 
 Texture * Sprite::GetTexture()

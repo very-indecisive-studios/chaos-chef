@@ -68,10 +68,8 @@ void LeaderboardScene::Begin()
 	leaderboard.insert(std::pair<int, std::string>(1, "Loser"));
 	leaderboard.insert(std::pair<int, std::string>(100, "John"));
 	leaderboard.insert(std::pair<int, std::string>(111, "Sam"));
-	Context::Get()->GetGraphicsRenderer()->SetBackColor(D3DCOLOR_ARGB(255, 255, 255, 255));
-	Context::Get()->GetGraphicsRenderer()->InitializeText(62, true, false, "Arial");
-	Context::Get()->GetGraphicsRenderer()->SetFontColor(D3DCOLOR_ARGB(255, 255, 255, 255));
-	Context::Get()->GetGraphicsRenderer()->Print("Melvin Ong", 0,0);
+
+	text = Text::Create("melvin this is how use text", "Arial", 0xFFFFFFFF, 24, 100, false, false);
 }
 
 void LeaderboardScene::Update(float deltaTime)
@@ -85,6 +83,8 @@ void LeaderboardScene::Update(float deltaTime)
 		PrintLeaderboard();
 		count += 1;
 	}
+
+	text->Draw(Vector2(0, 0));
 }
 
 void LeaderboardScene::End() {}

@@ -7,23 +7,43 @@
 #include "texture.h"
 #include "core/math.h"
 #include "core/sprites/sprite.h"
+#include "core/text/text.h"
 
-// Color defines
-#define COLOR_ARGB DWORD
-#define SETCOLOR_ARGB(a,r,g,b) \
-    ((COLOR_ARGB)((((a)&0xff)<<24)|(((r)&0xff)<<16)|(((g)&0xff)<<8)|((b)&0xff)))
+enum class DrawJobType { SPRITE, TEXT };
 
-struct DrawSpriteJob 
+struct DrawJob
+{
+	DrawJobType type;
+	Vector2 pos;
+	uint8_t layer;
+
+	DrawJob(DrawJobType type, Vector2 pos, uint8_t layer) 
+		: type(type), pos(pos), layer(layer) { }
+};
+
+struct DrawSpriteJob : public DrawJob
 {
 	Sprite *sprite;
-	Vector2 pos;
+
+	DrawSpriteJob(Sprite *sprite, Vector2 pos, uint8_t layer) 
+		: DrawJob(DrawJobType::SPRITE, pos, layer), sprite(sprite)
+	{ }
+};
+
+struct DrawTextJob : public DrawJob
+{
+	Text *text;
+
+	DrawTextJob(Text *text, Vector2 pos, uint8_t layer)
+		: DrawJob(DrawJobType::TEXT, pos, layer), text(text)
+	{ }
 };
 
 class GraphicsRenderer 
 {
 private:
 	// Sprite draw queue.
-	std::vector<DrawSpriteJob *> spriteDrawJobs;
+	std::vector<DrawJob *> drawJobs;
 
 	// DirectX 3D pointers.
 	LPDIRECT3DDEVICE9	deviceD3D;
@@ -39,7 +59,6 @@ private:
 	bool        fullscreen;
 	int         width;
 	int         height;
-	COLOR_ARGB  backColor;      // background color
 
 	const D3DCOLOR BACK_COLOUR = 0xFF000000;
 
@@ -49,15 +68,7 @@ private:
 
 	HRESULT Reset();
 
-	void ClearAllSpriteDrawJobs();
-
-	// Text
-	LPD3DXFONT dxFont;
-	D3DXMATRIX matrix;
-	float angle;
-	COLOR_ARGB color;
-	RECT fontRect;
-
+	void ClearAllDrawJobs();
 public:
 	GraphicsRenderer();
 
@@ -65,7 +76,7 @@ public:
 
 	HRESULT Initialize(HWND hwnd, int width, int height, bool fullscreen);
 		
-	void QueueSpriteDrawJob(DrawSpriteJob *job);
+	void QueueDrawJob(DrawJob *job);
 
 	HRESULT HandleLostDevice();
 
@@ -73,20 +84,7 @@ public:
 
 	Texture * LoadTextureFromFile(std::string fileName);
 
+	Font LoadFont(const std::string& fontName, int height, UINT weight, BOOL italic);
+
 	void ReleaseAll();
-
-	void SetBackColor(COLOR_ARGB c) { backColor = c; }
-
-	// Text
-	bool InitializeText(int height, bool bold, bool italic, const std::string &fontName);
-	int Print(const std::string &str, int x, int y);
-	int Print(const std::string &str, RECT &rect, UINT format);
-	float GetDegrees();
-	float GetRadians();
-	float GetFontColor();
-	void SetDegrees(float deg);
-	void SetRadians(float rad);
-	void SetFontColor(COLOR_ARGB c);
-	void OnResetDevice();
-	void OnLostDevice();
 };

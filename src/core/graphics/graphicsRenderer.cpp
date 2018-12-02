@@ -35,7 +35,7 @@ void GraphicsRenderer::ReleaseAll()
 	deviceD3D->Release();
 	d3d->Release();
 
-	ClearAllSpriteDrawJobs();
+	ClearAllDrawJobs();
 }
 
 HRESULT GraphicsRenderer::Reset()
@@ -197,51 +197,84 @@ HRESULT GraphicsRenderer::Render()
 		
 		// Sort the jobs according to layers; ascending order.
 		std::sort(
-			spriteDrawJobs.begin(), 
-			spriteDrawJobs.end(), 
-			[](const DrawSpriteJob *lhs, const DrawSpriteJob *rhs)
+			drawJobs.begin(), 
+			drawJobs.end(), 
+			[](const DrawJob *lhs, const DrawJob *rhs)
 			{
-				return lhs->sprite->GetLayer() < rhs->sprite->GetLayer();
+				return lhs->layer < rhs->layer;
 			}
 		);
 
-		for (auto sprJob : spriteDrawJobs) 
+		for (auto &job : drawJobs)
 		{
-			// Find center of sprite
-			D3DXVECTOR2 spriteCenter = D3DXVECTOR2(
-				(float)(sprJob->sprite->GetWidth() / 2 * sprJob->sprite->GetScale()),
-				(float)(sprJob->sprite->GetHeight() / 2 * sprJob->sprite->GetScale())
-			);
-			D3DXVECTOR2 translate = D3DXVECTOR2(sprJob->pos.x, sprJob->pos.y);
-			D3DXVECTOR2 scaling(sprJob->sprite->GetScale(), sprJob->sprite->GetScale());
-
-			D3DXMATRIX matrix;
-			D3DXMatrixTransformation2D(
-				&matrix,                // the matrix
-				NULL,                   // keep origin at top left when scaling
-				0.0f,                   // no scaling rotation
-				&scaling,               // scale amount
-				&spriteCenter,          // rotation center
-				0,						// rotation angle
-				&translate				// X,Y location
-			);
-
-
-			spriteD3D->SetTransform(&matrix);
-
-			spriteD3D->Draw(
-				sprJob->sprite->GetTexture()->GetTextureD3D(), 
-				sprJob->sprite->GetDrawingArea(), 
-				NULL, 
-				NULL, 
-				0xFFFFFFFF
-			);
+			if (job->type == DrawJobType::SPRITE)
+			{
+				auto sprJob = (DrawSpriteJob *)job;
+				
+				// Find center of sprite
+				D3DXVECTOR2 spriteCenter = D3DXVECTOR2(
+					(float)(sprJob->sprite->GetWidth() / 2 * sprJob->sprite->GetScale()),
+					(float)(sprJob->sprite->GetHeight() / 2 * sprJob->sprite->GetScale())
+				);
+				D3DXVECTOR2 translate = D3DXVECTOR2(sprJob->pos.x, sprJob->pos.y);
+				D3DXVECTOR2 scaling(sprJob->sprite->GetScale(), sprJob->sprite->GetScale());
+				
+				D3DXMATRIX matrix;
+				D3DXMatrixTransformation2D(
+					&matrix,                // the matrix
+					NULL,                   // keep origin at top left when scaling
+					0.0f,                   // no scaling rotation
+					&scaling,               // scale amount
+					&spriteCenter,          // rotation center
+					0,						// rotation angle
+					&translate				// X,Y location
+				);
+				
+				
+				spriteD3D->SetTransform(&matrix);
+				
+				spriteD3D->Draw(
+					sprJob->sprite->GetTexture()->GetTextureD3D(),
+					sprJob->sprite->GetDrawingArea(),
+					NULL,
+					NULL,
+					0xFFFFFFFF
+				);
+			}
+			else if (job->type == DrawJobType::TEXT)
+			{
+				auto textJob = (DrawTextJob *)job;
+				
+				RECT posRect;
+				posRect.top = textJob->pos.y;
+				posRect.left = textJob->pos.x;
+				posRect.right = 640;
+				posRect.bottom = 480;
+				
+				// Rotation center
+				D3DXVECTOR2 rCenter = D3DXVECTOR2((float)textJob->pos.x, (float)textJob->pos.y);
+				// Setup matrix to rotate text by angle.
+				D3DXMATRIX matrix;
+				D3DXMatrixTransformation2D(&matrix, NULL, 0.0f, NULL, &rCenter, textJob->text->GetAngleDegrees(), NULL);
+				
+				// Tell the sprite about the matrix.
+				spriteD3D->SetTransform(&matrix);
+				
+				textJob->text->GetFont()->DrawText(
+					spriteD3D,
+					textJob->text->GetText().c_str(),
+					-1,
+					&posRect,
+					DT_LEFT,
+					textJob->text->GetColor()
+				);
+			}
 		}
 		
 		ThrowIfFailed(spriteD3D->End());
 		ThrowIfFailed(deviceD3D->EndScene());
 
-		ClearAllSpriteDrawJobs();
+		ClearAllDrawJobs();
 		
 		ThrowIfFailed(SwapBuffer());
 
@@ -288,81 +321,43 @@ Texture * GraphicsRenderer::LoadTextureFromFile(std::string fileName)
 	return new Texture(textureD3D, imageInfo.Width, imageInfo.Height);
 }
 
-void GraphicsRenderer::QueueSpriteDrawJob(DrawSpriteJob *job) 
+Font GraphicsRenderer::LoadFont(const std::string& fontName, int height, UINT weight, BOOL italic)
 {
-	spriteDrawJobs.push_back(job);
+	HRESULT result = E_FAIL;
+	
+	LPD3DXFONT fontD3D = NULL;
+	result = D3DXCreateFont(
+		deviceD3D, 
+		height, 
+		0, 
+		weight, 
+		1, 
+		italic,
+		DEFAULT_CHARSET, 
+		OUT_DEFAULT_PRECIS, 
+		DEFAULT_QUALITY,
+		DEFAULT_PITCH | FF_DONTCARE, 
+		fontName.c_str(),
+		&fontD3D
+	);
+	
+	ThrowIfFailed(result);
+
+	return fontD3D;
 }
 
-void GraphicsRenderer::ClearAllSpriteDrawJobs() 
+void GraphicsRenderer::QueueDrawJob(DrawJob *job) 
 {
-	for (auto sprJob : spriteDrawJobs) 
+	drawJobs.push_back(job);
+}
+
+void GraphicsRenderer::ClearAllDrawJobs() 
+{
+	for (auto sprJob : drawJobs)
 	{
 		delete sprJob;
 		sprJob = nullptr;
 	}
 
-	spriteDrawJobs.clear();
-}
-
-bool GraphicsRenderer::InitializeText(int height, bool bold, bool italic, const std::string & fontName)
-{
-	UINT weight = FW_NORMAL;
-	if (bold)
-		weight = FW_BOLD;
-
-	// create DirectX font
-	if (FAILED(D3DXCreateFont(deviceD3D, height, 0, weight, 1, italic,
-		DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, DEFAULT_QUALITY,
-		DEFAULT_PITCH | FF_DONTCARE, fontName.c_str(),
-		&dxFont))) return false;
-
-	// Create the tranformation matrix
-	D3DXMatrixTransformation2D(&matrix, NULL, 0.0f, NULL, NULL, 0.0f, NULL);
-
-	return true;
-}
-
-int GraphicsRenderer::Print(const std::string &str, int x, int y)
-{
-	if (dxFont == NULL)
-		return 0;
-	// set font position
-	fontRect.top = y;
-	fontRect.left = x;
-
-	// Rotation center
-	D3DXVECTOR2 rCenter = D3DXVECTOR2((float)x, (float)y);
-	// Setup matrix to rotate text by angle
-	D3DXMatrixTransformation2D(&matrix, NULL, 0.0f, NULL, &rCenter, angle, NULL);
-	// Tell the sprite about the matrix "Hello Neo"
-	spriteD3D->SetTransform(&matrix);
-	return dxFont->DrawTextA(spriteD3D, str.c_str(), -1, &fontRect, DT_LEFT, color);
-}
-
-int GraphicsRenderer::Print(const std::string &str, RECT &rect, UINT format)
-{
-	if (dxFont == NULL)
-		return 0;
-
-	// Setup matrix to not rotate text
-	D3DXMatrixTransformation2D(&matrix, NULL, 0.0f, NULL, NULL, NULL, NULL);
-	// Tell the sprite about the matrix "Hello Neo"
-	spriteD3D->SetTransform(&matrix);
-	return dxFont->DrawTextA(spriteD3D, str.c_str(), -1, &rect, format, color);
-}
-float GraphicsRenderer::GetDegrees() { return angle * (180.0f / (float)3.14159265); }
-float GraphicsRenderer::GetRadians() { return angle; }
-float GraphicsRenderer::GetFontColor() { return color; }
-void GraphicsRenderer::SetDegrees(float deg) { angle = deg * ((float)3.14159265 / 180.0f); }
-void GraphicsRenderer::SetRadians(float rad) { angle = rad; }
-void GraphicsRenderer::SetFontColor(COLOR_ARGB c) { color = c; }
-void GraphicsRenderer::OnResetDevice() {
-	if (dxFont == NULL)
-		return;
-	dxFont->OnLostDevice();
-}
-void GraphicsRenderer::OnLostDevice() {
-	if (dxFont == NULL)
-		return;
-	dxFont->OnResetDevice();
+	drawJobs.clear();
 }

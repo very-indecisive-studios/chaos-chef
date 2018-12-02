@@ -90,6 +90,7 @@
   <ItemGroup>
     <ClCompile Include="src\core\sprites\animatedSprite.cpp" />
     <ClCompile Include="src\context.cpp" />
+    <ClCompile Include="src\core\text\text.cpp" />
     <ClCompile Include="src\game.cpp" />
     <ClCompile Include="src\game\entity\counter.cpp" />
     <ClCompile Include="src\game\entity\counterArea.cpp" />
@@ -117,8 +118,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\constants.h" />
+    <ClInclude Include="src\core\graphics\font.h" />
     <ClInclude Include="src\core\sprites\animatedSprite.h" />
     <ClInclude Include="src\context.h" />
+    <ClInclude Include="src\core\text\text.h" />
     <ClInclude Include="src\game.h" />
     <ClInclude Include="src\game\entity\counter.h" />
     <ClInclude Include="src\game\entity\counterArea.h" />

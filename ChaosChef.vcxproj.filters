@@ -27,6 +27,7 @@
     <ClCompile Include="src\game\scene\mainMenuScene.cpp" />
     <ClCompile Include="src\game\scene\levelSelectScene.cpp" />
     <ClCompile Include="src\game\scene\pausedMenuScene.cpp" />
+    <ClCompile Include="src\core\text\text.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\constants.h" />
@@ -60,5 +61,7 @@
     <ClInclude Include="src\game\scene\mainMenuScene.h" />
     <ClInclude Include="src\game\scene\levelSelectScene.h" />
     <ClInclude Include="src\game\scene\pausedMenuScene.h" />
+    <ClInclude Include="src\core\text\text.h" />
+    <ClInclude Include="src\core\graphics\font.h" />
   </ItemGroup>
 </Project>
