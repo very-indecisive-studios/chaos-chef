@@ -17,6 +17,7 @@ public:
 	Text *bodyText2;
 	Text *bodyText3;
 	Text *bodyText4;
+	Text *bodyText5;
 	Text *pointedButton;
 	bool delayPress = false;
 	int pointedButtonPos = 0;

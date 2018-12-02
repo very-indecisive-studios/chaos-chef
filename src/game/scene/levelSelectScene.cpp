@@ -62,6 +62,10 @@ void LevelSelectScene::CheckButtonClick()
 		{
 			Context::Get()->GetSceneManager()->LoadGameScene();
 		}
+		else if (pointedButton == bodyText5) // BACK
+		{
+			Context::Get()->GetSceneManager()->LoadMainMenuScene();
+		}
 	}
 }
 
@@ -72,21 +76,31 @@ void LevelSelectScene::Begin()
 	bodyText2 = Text::Create("Easy - Sashimi + Sushi", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
 	bodyText3 = Text::Create("Medium - Pasta", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
 	bodyText4 = Text::Create("Hard - Pizza", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
+	bodyText5 = Text::Create("BACK", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
 	buttons.push_back(bodyText1);
 	buttons.push_back(bodyText2);
 	buttons.push_back(bodyText3);
 	buttons.push_back(bodyText4);
+	buttons.push_back(bodyText5);
 	pointedButton = bodyText1;
 }
 
 void LevelSelectScene::Update(float deltaTime)
 {
+	int noOfLevels = buttons.size() - 1;
 	int count = 0;
 	topText->Draw(Vector2(0, 0));
 	
 	for (Text *button : buttons)
 	{
-		button->Draw(Vector2(0, (GAME_HEIGHT*0.5f) + (FONT_SIZE * count)));
+		if (count == noOfLevels) // last button - BACK button
+		{
+			button->Draw(Vector2(0, GAME_HEIGHT - FONT_SIZE));
+		}
+		else
+		{
+			button->Draw(Vector2(0, (GAME_HEIGHT*0.5f - (noOfLevels/2 * FONT_SIZE)) + (FONT_SIZE * count)));
+		}
 		count++;
 	}
 
