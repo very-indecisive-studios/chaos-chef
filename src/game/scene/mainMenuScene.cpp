@@ -2,6 +2,7 @@
 #include "mainMenuScene.h"
 #include "game/resources.h"
 #include "context.h"
+#include "constants.h"
 
 MainMenuScene::MainMenuScene() : Scene(SceneType::MAIN_MENU){ }
 

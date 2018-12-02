@@ -2,6 +2,7 @@
 #include "levelSelectScene.h"
 #include "game/resources.h"
 #include "context.h"
+#include "constants.h"
 
 LevelSelectScene::LevelSelectScene() : Scene(SceneType::LEVEL_SELECT){ }
 

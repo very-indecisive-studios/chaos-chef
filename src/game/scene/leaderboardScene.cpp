@@ -4,6 +4,7 @@
 #include "leaderboardScene.h"
 #include "game/resources.h"
 #include "context.h"
+#include "constants.h"
 
 LeaderboardScene::LeaderboardScene() : Scene(SceneType::LEADERBOARD){ }
 

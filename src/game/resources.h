@@ -2,9 +2,6 @@
 
 #include <string>
 
-const int GAME_WIDTH = 640;               // width of game in pixels
-const int GAME_HEIGHT = 480;              // height of game in pixels
-
 //-----------------------------------------------
 //                  Constants
 //-----------------------------------------------
