@@ -44,6 +44,7 @@ void MainMenuScene::CheckButtonClick()
 {
 	if (Context::Get()->GetInputManager()->IsKeyDown(VK_RETURN)) 
 	{
+		Context::Get()->GetInputManager()->ClearAll();
 		if (pointedButton == bodyText1) 
 		{
 			Context::Get()->GetSceneManager()->LoadSelectLevelScene();

@@ -44,6 +44,7 @@ void LevelSelectScene::CheckButtonClick()
 {
 	if (Context::Get()->GetInputManager()->IsKeyDown(VK_RETURN))
 	{
+		Context::Get()->GetInputManager()->ClearAll();
 		if (pointedButton == bodyText1) // Newbie - Fried Basket
 		{
 			Context::Get()->GetSceneManager()->LoadGameScene();
@@ -74,6 +75,7 @@ void LevelSelectScene::Begin()
 	buttons.push_back(bodyText2);
 	buttons.push_back(bodyText3);
 	buttons.push_back(bodyText4);
+	pointedButton = bodyText1;
 }
 
 void LevelSelectScene::Update(float deltaTime)
@@ -86,6 +88,9 @@ void LevelSelectScene::Update(float deltaTime)
 		button->Draw(Vector2(0, (GAME_HEIGHT*0.5f) + (FONT_SIZE * count)));
 		count++;
 	}
+
+	ManeuverMenu();
+	CheckButtonClick();
 }
 
 void LevelSelectScene::End() 
