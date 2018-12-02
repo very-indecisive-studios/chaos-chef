@@ -14,11 +14,13 @@ public:
 	~LeaderboardScene();
 	std::map<int, std::string> leaderboard;
 	std::string currentName;
-	int count = 0;
 	int currentScore;
+	bool delayEnter = true;
 	bool enterPressed = false;
 	bool playerAdded = false;
-	Text *text;
+	Text *topText;
+	Text *bodyText;
+	Text *bottomText;
 
 	void AddPlayer();
 	void PrintLeaderboard();

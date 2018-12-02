@@ -2,6 +2,9 @@
 
 #include <string>
 
+const int GAME_WIDTH = 640;               // width of game in pixels
+const int GAME_HEIGHT = 480;              // height of game in pixels
+
 //-----------------------------------------------
 //                  Constants
 //-----------------------------------------------
@@ -73,3 +76,9 @@ const int  CUSTOMER_HEIGHT = 32;             // height of customer image
 const std::string MAP_IMAGE = "assets\\map\\final_map.png";
 const int  MAP_WIDTH	= 640;		// width of map
 const int  MAP_HEIGHT	= 320;		// height of map
+
+// texts
+const std::string FONT_TYPE = "Arial";
+const int FONT_SIZE = 24;
+const int FONT_COLOR_WHITE = 0xFFFFFFFF;
+const int FONT_COLOR_RED = 0xFFFF0000;

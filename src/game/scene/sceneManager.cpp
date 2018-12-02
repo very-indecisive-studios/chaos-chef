@@ -8,7 +8,6 @@ SceneManager::SceneManager()
 	gameScene = new GameScene();
 	leaderboardScene = new LeaderboardScene();
 	pauseMenuScene = new PausedMenuScene();
-	currentScene = leaderboardScene;
 }
 
 SceneManager::~SceneManager()
@@ -21,14 +20,13 @@ SceneManager::~SceneManager()
 }
 
 void SceneManager::Begin() 
-{
-	gameScene->Begin();
+{	
+	mainMenuScene->Begin();
 	levelSelectScene->Begin();
 	gameScene->Begin();
 	leaderboardScene->Begin();
 	pauseMenuScene->Begin();
-	LoadGameScene();
-	currentScene = leaderboardScene;
+	currentScene = mainMenuScene;
 }
 
 void SceneManager::LoadMainMenuScene()
@@ -42,7 +40,10 @@ void SceneManager::LoadMainMenuScene()
 
 void SceneManager::LoadSelectLevelScene()
 {
-	currentScene->End();
+	if (currentScene != levelSelectScene)
+	{
+		currentScene->End();
+	}
 	currentScene = levelSelectScene;
 }
 
@@ -57,7 +58,10 @@ void SceneManager::LoadGameScene()
 
 void SceneManager::LoadPausedMenuScene()
 {
-	currentScene->End();
+	if (currentScene != pauseMenuScene)
+	{
+		currentScene->End();
+	}
 	currentScene = pauseMenuScene;
 }
 

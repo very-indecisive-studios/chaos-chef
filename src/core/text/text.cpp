@@ -27,6 +27,11 @@ int Text::GetColor()
 	return this->color;
 }
 
+void Text::SetColor(int color)
+{
+	this->color = color;
+}
+
 Font Text::GetFont()
 {
 	return this->font;

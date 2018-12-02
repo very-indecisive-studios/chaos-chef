@@ -18,6 +18,7 @@ public:
 
 	void SetText(const std::string &text);
 	const std::string GetText();
+	void SetColor(int color);
 	int GetColor();
 	Font GetFont();
 	float GetAngleDegrees();

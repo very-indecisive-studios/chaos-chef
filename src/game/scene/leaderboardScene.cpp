@@ -19,11 +19,14 @@ void LeaderboardScene::AddPlayer()
 	if (!enterPressed)
 	{
 		currentName = Context::Get()->GetInputManager()->GetTextIn();
-		std::cout << currentName << std::endl;
+
+		std::string addPlayerString = "Enter your name: " + currentName;
+
+		bodyText->SetText(addPlayerString);
 	}
 	else
 	{
-		currentScore = 30;
+		currentScore = 3110;
 		// when there are 2 players with the same score
 		if (leaderboard[currentScore] != "")
 		{
@@ -41,7 +44,9 @@ void LeaderboardScene::AddPlayer()
 
 void LeaderboardScene::PrintLeaderboard()
 {
+	std::string leaderboardString = "Leaderboard \n \n";
 	int position = 1;
+
 	// Create a map reverse_iterator and point to end of map
 	std::map<int, std::string>::reverse_iterator it = leaderboard.rbegin();
 
@@ -54,37 +59,50 @@ void LeaderboardScene::PrintLeaderboard()
 		// Accessing VALUE from element pointed by it
 		std::string name = it->second;
 
-		std::cout << "#" << position << "   " << name << ": " << score << std::endl;
+		// Adding each line
+		leaderboardString += "#" + std::to_string(position) + "     " + name + ": " + std::to_string(score) + " points\n";
 
 		// Increment the Iterator to point to next entry
 		it++;
 		position++;
 	}
+	bodyText->SetText(leaderboardString);
 }
 
-void LeaderboardScene::Begin() 
+void LeaderboardScene::Begin()
 {
-	leaderboard.insert(std::pair<int, std::string>(30, "Pam"));
-	leaderboard.insert(std::pair<int, std::string>(1, "Loser"));
-	leaderboard.insert(std::pair<int, std::string>(100, "John"));
-	leaderboard.insert(std::pair<int, std::string>(111, "Sam"));
+	topText = Text::Create("GAME OVER", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
+	bodyText = Text::Create("", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
+	bottomText = Text::Create("Press enter to continue", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
 
-	text = Text::Create("melvin this is how use text", "Arial", 0xFFFFFFFF, 24, 100, false, false);
+	leaderboard.insert(std::pair<int, std::string>(30, "Pam"));
+	leaderboard.insert(std::pair<int, std::string>(1, "Los"));
+	leaderboard.insert(std::pair<int, std::string>(100, "Jon"));
+	leaderboard.insert(std::pair<int, std::string>(111, "Sam"));
 }
 
 void LeaderboardScene::Update(float deltaTime)
 {
+	topText->Draw(Vector2(0, 0));
+	bottomText->Draw(Vector2(0, GAME_HEIGHT - FONT_SIZE));
 	if (!playerAdded) 
 	{
 		AddPlayer();
 	}
-	else if (count == 0)
+	else
 	{
+		if (delayEnter) 
+		{
+			Context::Get()->GetInputManager()->ClearAll();
+			delayEnter = false;
+		}
 		PrintLeaderboard();
-		count += 1;
+		if (Context::Get()->GetInputManager()->IsKeyDown(VK_RETURN))
+		{
+			Context::Get()->GetSceneManager()->LoadGameScene();
+		}
 	}
-
-	text->Draw(Vector2(0, 0));
+	bodyText->Draw(Vector2(0, 100));
 }
 
 void LeaderboardScene::End() {}

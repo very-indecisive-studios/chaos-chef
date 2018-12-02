@@ -265,7 +265,7 @@ HRESULT GraphicsRenderer::Render()
 					textJob->text->GetText().c_str(),
 					-1,
 					&posRect,
-					DT_LEFT,
+					DT_CENTER,
 					textJob->text->GetColor()
 				);
 			}

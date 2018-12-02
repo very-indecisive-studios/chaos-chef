@@ -37,6 +37,7 @@ public:
 	Player();
 	~Player();
 	std::vector<const PlatedFood *> GetOnPlate() { return onPlate; }
+	UCHAR GetActionKey() { return actionKey; }
 	void SetOnPlate(const PlatedFood *platedFood) { onPlate.push_back(platedFood); }
 	void GetPlatedFood(GameEntity *entity);
 	void BlockPlayer(float deltaTime);
