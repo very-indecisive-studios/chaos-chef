@@ -12,8 +12,6 @@ SceneManager::SceneManager()
 
 SceneManager::~SceneManager()
 { 
-	currentScene->End();
-
 	delete mainMenuScene;
 	delete levelSelectScene;
 	delete gameScene;
