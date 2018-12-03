@@ -5,6 +5,7 @@
 #include "game/data/food.h"
 #include "game/entity/dispenser/dispenser.h"
 #include "game/entity/dispenser/dispenserArea.h"
+#include "game/entity/counter/counterArea.h"
 #include "game/entity/prop.h"
 #include "game/entity/trashBin/trashBinArea.h"
 
@@ -39,6 +40,14 @@ GameScene::GameScene(const FoodMenu *foodMenu)
 			dispenser->SetPlatedFood(*plFoodIt);
 			++plFoodIt;
 		}
+	}
+
+	// Initialize counters.
+	for (const auto &counterAreaLocations : GameSceneData::Map::COUNTER_AREA)
+	{
+		CounterArea *counterArea = new CounterArea();
+		counterArea->SetPosition(counterAreaLocations);
+		entities.push_back(counterArea);
 	}
 
 	// Initialize props.

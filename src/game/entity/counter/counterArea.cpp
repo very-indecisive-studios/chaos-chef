@@ -6,9 +6,8 @@
 CounterArea::CounterArea() 
 	: GameEntity(GameEntityType::COUNTER_AREA)
 {
-	// TODO: define the collision
 	collisionBounds.topLeft = Vector2(0, 0);
-	collisionBounds.bottomRight = Vector2(0, 0);
+	collisionBounds.bottomRight = Vector2(10, 10);
 }
 
 CounterArea::~CounterArea()

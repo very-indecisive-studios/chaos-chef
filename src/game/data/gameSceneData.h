@@ -100,10 +100,10 @@ namespace GameSceneData
 
 		const std::vector<Vector2> COUNTER_AREA =
 		{
-			{ Vector2(32, 7) * TILE_SIZE },
-			{ Vector2(32, 11) * TILE_SIZE },
-			{ Vector2(32, 15) * TILE_SIZE },
-			{ Vector2(32, 19) * TILE_SIZE }
+			{ Vector2(32, 8) * TILE_SIZE },
+			{ Vector2(32, 12) * TILE_SIZE },
+			{ Vector2(32, 16) * TILE_SIZE },
+			{ Vector2(32, 20) * TILE_SIZE }
 		};
 
 		const std::pair<Vector2, CollisionBounds> TRASH_BIN_LOCATION_BOUNDS = { Vector2(6, 7) * TILE_SIZE, CollisionBounds { Vector2(0, 0) * TILE_SIZE, Vector2(1, 1) * TILE_SIZE } };
