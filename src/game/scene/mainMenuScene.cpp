@@ -74,7 +74,7 @@ void MainMenuScene::Update(float deltaTime)
 
 	for (Text *button : buttons) 
 	{
-		button->Draw(Vector2(0, (GAME_HEIGHT*0.5f) + (FONT_SIZE * count)));
+		button->Draw(Vector2(0, (GAME_HEIGHT*0.5f - (buttons.size() / 2 * FONT_SIZE)) + (FONT_SIZE * count)));
 		count++;
 	}
 
