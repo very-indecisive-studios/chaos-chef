@@ -37,7 +37,6 @@ public:
 	void AddPlayer();
 	void PrintLeaderboard();
 	void ProcessLeaderboard();
-	void Begin() override;
+
 	void Update(float deltaTime) override;
-	void End() override;
 };

@@ -7,11 +7,27 @@
 #include "context.h"
 #include "constants.h"
 
-LeaderboardScene::LeaderboardScene() : Scene(SceneType::LEADERBOARD){ }
+LeaderboardScene::LeaderboardScene() 
+	: Scene(SceneType::LEADERBOARD)
+{
+	topText = Text::Create("GAME OVER", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
+	bodyText = Text::Create("", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
+	bottomText = Text::Create("Press enter to continue", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
+	leaderboard.push_back(PlayerScore("Sam", 1));
+	leaderboard.push_back(PlayerScore("Tim", 100));
+	leaderboard.push_back(PlayerScore("Tom", 0));
+}
 
 LeaderboardScene::~LeaderboardScene()
 {
-	End();
+	delete topText;
+	topText = nullptr;
+
+	delete bodyText;
+	bodyText = nullptr;
+
+	delete bottomText;
+	bottomText = nullptr;
 }
 
 void LeaderboardScene::AddPlayer()
@@ -81,21 +97,10 @@ void LeaderboardScene::ProcessLeaderboard()
 	bodyText->Draw(Vector2(0, 100));
 }
 
-void LeaderboardScene::Begin()
-{
-	topText = Text::Create("GAME OVER", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
-	bodyText = Text::Create("", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
-	bottomText = Text::Create("Press enter to continue", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
-	leaderboard.push_back(PlayerScore("Sam",1));
-	leaderboard.push_back(PlayerScore("Tim", 100));
-	leaderboard.push_back(PlayerScore("Tom", 0));
-}
-
 void LeaderboardScene::Update(float deltaTime)
 {
+	ProcessLeaderboard();
+
 	topText->Draw(Vector2(0, 0));
 	bottomText->Draw(Vector2(0, GAME_HEIGHT - FONT_SIZE));
-	ProcessLeaderboard();
 }
-
-void LeaderboardScene::End() {}

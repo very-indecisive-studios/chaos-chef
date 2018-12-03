@@ -23,7 +23,6 @@ protected:
 public:
 	virtual ~Scene();
 	SceneType GetType() { return type; }
-	virtual void Begin() = 0;
+
 	virtual void Update(float deltaTime) = 0;
-	virtual void End() = 0;
 };

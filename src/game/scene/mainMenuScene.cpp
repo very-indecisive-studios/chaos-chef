@@ -4,11 +4,32 @@
 #include "context.h"
 #include "constants.h"
 
-MainMenuScene::MainMenuScene() : Scene(SceneType::MAIN_MENU){ }
+MainMenuScene::MainMenuScene() 
+	: Scene(SceneType::MAIN_MENU)
+{
+	topText = Text::Create("CHAOS CHEF", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
+
+	bodyText1 = Text::Create("PLAY", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
+	bodyText2 = Text::Create("HOW TO PLAY", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
+	bodyText3 = Text::Create("LEADERBOARD", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
+	bodyText4 = Text::Create("CREDITS", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
+
+	buttons.push_back(bodyText1);
+	buttons.push_back(bodyText2);
+	buttons.push_back(bodyText3);
+	buttons.push_back(bodyText4);
+
+	pointedButton = bodyText1;
+}
 
 MainMenuScene::~MainMenuScene()
 {
-	End();
+	for (Text *text : buttons)
+	{
+		delete text;
+	}
+
+	delete topText;
 }
 
 void MainMenuScene::ManeuverMenu() 
@@ -61,25 +82,11 @@ void MainMenuScene::CheckButtonClick()
 	}
 }
 
-void MainMenuScene::Begin()
-{
-	topText = Text::Create("CHAOS CHEF", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
-	bodyText1 = Text::Create("PLAY", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
-	bodyText2 = Text::Create("HOW TO PLAY", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
-	bodyText3 = Text::Create("LEADERBOARD", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
-	bodyText4 = Text::Create("CREDITS", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
-	buttons.push_back(bodyText1);
-	buttons.push_back(bodyText2);
-	buttons.push_back(bodyText3);
-	buttons.push_back(bodyText4);
-	pointedButton = bodyText1;
-}
-
 void MainMenuScene::Update(float deltaTime)
 {
 	ManeuverMenu();
 	CheckButtonClick();
-	
+
 	int count = 0;
 	topText->Draw(Vector2(0, 0));
 
@@ -88,13 +95,4 @@ void MainMenuScene::Update(float deltaTime)
 		button->Draw(Vector2(0, (GAME_HEIGHT*0.5f - (buttons.size() / 2 * FONT_SIZE)) + (FONT_SIZE * count)));
 		count++;
 	}
-}
-
-void MainMenuScene::End() 
-{
-	for (Text *text : buttons)
-	{
-		delete text;
-	}
-	buttons.clear();
 }

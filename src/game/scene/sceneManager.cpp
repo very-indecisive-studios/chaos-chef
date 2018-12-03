@@ -2,72 +2,67 @@
 #include "sceneManager.h"
 
 SceneManager::SceneManager()
-{
-	mainMenuScene		= new MainMenuScene();
-	levelSelectScene	= new LevelSelectScene();
-	gameScene			= new GameScene();
-	leaderboardScene	= new LeaderboardScene();
-	pauseMenuScene		= new PausedMenuScene();
-}
+{ }
 
 SceneManager::~SceneManager()
 { 
-	delete mainMenuScene;
-	delete levelSelectScene;
-	delete gameScene;
-	delete leaderboardScene;
-	delete pauseMenuScene;
+	delete currentScene;
 }
 
 void SceneManager::Initialize()
 {
+	Scene *mainMenuScene = new MainMenuScene();
+
 	currentScene = mainMenuScene;
-	mainMenuScene->Begin();
 }
 
 void SceneManager::LoadMainMenuScene()
 {
-	currentScene->End();
+	Scene *mainMenuScene = new MainMenuScene();
 
-	currentScene = mainMenuScene;
-	currentScene->Begin();
+	pendingSceneToLoad = mainMenuScene;
 }
 
 void SceneManager::LoadSelectLevelScene()
 {
-	currentScene->End();
+	Scene *levelSelectScene = new LevelSelectScene();
 
-	currentScene = levelSelectScene;
-	currentScene->Begin();
+	pendingSceneToLoad = levelSelectScene;
 }
 
 void SceneManager::LoadGameScene(const FoodMenu *foodMenu)
 {
-	currentScene->End();
+	Scene *gameScene = new GameScene(foodMenu);
 
-	gameScene->SetFoodMenu(foodMenu);
-	gameScene->Begin();
-	
-	currentScene = gameScene;
+	pendingSceneToLoad = gameScene;
 }
 
 void SceneManager::LoadPausedMenuScene()
 {
-	currentScene->End();
+	Scene *pausedMenuScene = new PausedMenuScene();
 
-	currentScene = pauseMenuScene;
-	currentScene->Begin();
+	pendingSceneToLoad = pausedMenuScene;
 }
 
 void SceneManager::LoadLeaderboardScene()
 {
-	currentScene->End();
+	Scene *leaderboardScene = new LeaderboardScene();
 
-	currentScene = leaderboardScene;
-	currentScene->Begin();
+	pendingSceneToLoad = leaderboardScene;
 }
 
 void SceneManager::Update(float deltaTime) 
 {
-	currentScene->Update(deltaTime);
+	if (pendingSceneToLoad != nullptr)
+	{
+		delete currentScene;
+
+		currentScene = pendingSceneToLoad;
+		
+		pendingSceneToLoad = nullptr;
+	}
+	else
+	{
+		currentScene->Update(deltaTime);
+	}
 }

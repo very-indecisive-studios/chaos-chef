@@ -20,12 +20,10 @@ private:
 
 	void ConductCollisionCheckingsButNotHandleIt(float deltaTime);
 public:
-	GameScene();
+	GameScene(const FoodMenu *foodMenu);
 	~GameScene();
 
 	void SetFoodMenu(const FoodMenu *foodMenu);
 
-	void Begin() override;
 	void Update(float deltaTime) override;
-	void End() override;
 };

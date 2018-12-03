@@ -8,26 +8,13 @@
 #include "game/entity/prop.h"
 #include "game/entity/trashBin/trashBinArea.h"
 
-GameScene::GameScene() 
+GameScene::GameScene(const FoodMenu *foodMenu) 
 	: Scene(SceneType::GAME)
-{ }
-
-GameScene::~GameScene()
-{
-	End();
-}
-
-void GameScene::SetFoodMenu(const FoodMenu *foodMenu)
-{
-	this->foodMenu = foodMenu;
-}
-
-void GameScene::Begin()
 {
 	map = Sprite::Create(GAME_SCENE_IMAGE, 0);
 
 	// Initialize player.
-	player	= new Player();
+	player = new Player();
 	player->SetPosition(GameSceneData::Map::PLAYER_SPAWN_LOCATION);
 
 	// Initialize dispensers & its area by using the food menu.
@@ -37,7 +24,7 @@ void GameScene::Begin()
 		Dispenser *dispenser = new Dispenser();
 		dispenser->SetPosition(dispenserWAreaLocations.first);
 		entities.push_back(dispenser);
-		
+
 		DispenserArea *dispenserArea = new DispenserArea();
 		dispenserArea->SetPosition(dispenserWAreaLocations.second);
 		dispenserArea->SetDispenser(dispenser);
@@ -77,6 +64,26 @@ void GameScene::Begin()
 	orderManager = new OrderManager(&FOOD_MENU_SS, 10);
 }
 
+GameScene::~GameScene()
+{
+	delete orderManager;
+
+	delete map;
+
+	delete player;
+
+	for (GameEntity *entity : entities)
+	{
+		delete entity;
+	}
+	entities.clear();
+}
+
+void GameScene::SetFoodMenu(const FoodMenu *foodMenu)
+{
+	this->foodMenu = foodMenu;
+}
+
 void GameScene::Update(float deltaTime)
 {
 	orderManager->Update(deltaTime);
@@ -91,21 +98,6 @@ void GameScene::Update(float deltaTime)
 	}
 
 	ConductCollisionCheckingsButNotHandleIt(deltaTime);
-}
-
-void GameScene::End()
-{
-	delete orderManager;
-
-	delete map;
-
-	delete player;
-
-	for (GameEntity *entity : entities)
-	{
-		delete entity;
-	}
-	entities.clear();
 }
 
 void GameScene::ConductCollisionCheckingsButNotHandleIt(float deltaTime)

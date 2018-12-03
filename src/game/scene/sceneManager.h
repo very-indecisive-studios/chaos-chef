@@ -9,13 +9,8 @@
 class SceneManager
 {
 private:
-	Scene *currentScene;
-
-	MainMenuScene *mainMenuScene;
-	LevelSelectScene *levelSelectScene;
-	GameScene *gameScene;
-	LeaderboardScene *leaderboardScene;
-	PausedMenuScene *pauseMenuScene;
+	Scene *currentScene = nullptr;
+	Scene *pendingSceneToLoad = nullptr;
 
 public:
 	SceneManager();
