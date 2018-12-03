@@ -81,9 +81,30 @@ struct FoodMenu
 {
 	std::string name;
 	std::vector<const Meal *> meals;
+	std::vector<const PlatedFood *> platedFoods;
 };
 
-static const FoodMenu FOOD_MENU_FB		{ "Fried Basket", { &MEAL_FB_COMBO_1, &MEAL_FB_COMBO_2, &MEAL_FB_COMBO_3 } };
-static const FoodMenu FOOD_MENU_SS		{ "Sashimi & Sushi", { &MEAL_SS_COMBO_1, &MEAL_SS_COMBO_2, &MEAL_SS_COMBO_3, &MEAL_SS_COMBO_4 } };
-static const FoodMenu FOOD_MENU_PIZZA	{ "Pizza", { &MEAL_PIZZA_COMBO_1, &MEAL_PIZZA_COMBO_2, &MEAL_PIZZA_COMBO_3, &MEAL_PIZZA_COMBO_4 } };
-static const FoodMenu FOOD_MENU_PASTA	{ "Pasta", { &MEAL_PASTA_COMBO_1, &MEAL_PASTA_COMBO_2, &MEAL_PASTA_COMBO_3, &MEAL_PASTA_COMBO_4, &MEAL_PASTA_COMBO_5, &MEAL_PASTA_COMBO_6 } };
+static const FoodMenu FOOD_MENU_FB		
+{ 
+	"Fried Basket", 
+	{ &MEAL_FB_COMBO_1, &MEAL_FB_COMBO_2, &MEAL_FB_COMBO_3 },
+	{ &PFOOD_FB_CHICKEN, &PFOOD_FB_FRIES }
+};
+static const FoodMenu FOOD_MENU_SS		
+{ 
+	"Sashimi & Sushi", 
+	{ &MEAL_SS_COMBO_1, &MEAL_SS_COMBO_2, &MEAL_SS_COMBO_3, &MEAL_SS_COMBO_4 },
+	{ &PFOOD_SS_RICE, &PFOOD_SS_PRAWN, &PFOOD_SS_FISH }
+};
+static const FoodMenu FOOD_MENU_PIZZA	
+{ 
+	"Pizza", 
+	{ &MEAL_PIZZA_COMBO_1, &MEAL_PIZZA_COMBO_2, &MEAL_PIZZA_COMBO_3, &MEAL_PIZZA_COMBO_4 },
+	{ &PFOOD_PIZZA_DOUGH, &PFOOD_PIZZA_TOMATO, &PFOOD_PIZZA_MEAT, &PFOOD_PIZZA_CHEESE }
+};
+static const FoodMenu FOOD_MENU_PASTA	
+{ 
+	"Pasta", 
+	{ &MEAL_PASTA_COMBO_1, &MEAL_PASTA_COMBO_2, &MEAL_PASTA_COMBO_3, &MEAL_PASTA_COMBO_4, &MEAL_PASTA_COMBO_5, &MEAL_PASTA_COMBO_6 }, 
+	{ &PFOOD_PASTA_SPAGHETTI, &PFOOD_PASTA_TOMATO, &PFOOD_PASTA_FISH, &PFOOD_PASTA_MEAT, &PFOOD_PASTA_CHEESE }
+};

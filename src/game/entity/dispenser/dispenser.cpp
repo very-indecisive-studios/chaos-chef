@@ -24,7 +24,10 @@ void Dispenser::SetPlatedFood(const PlatedFood *platedFood)
 {
 	this->platedFood = platedFood;
 
-	ingreSprite = Sprite::Create(platedFood->ingredient->textureName, 0);
+	if (platedFood != nullptr)
+	{
+		ingreSprite = Sprite::Create(platedFood->ingredient->textureName, 0);
+	}
 }
 
 bool Dispenser::IsActive() 

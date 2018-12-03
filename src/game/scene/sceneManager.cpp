@@ -3,15 +3,17 @@
 
 SceneManager::SceneManager()
 {
-	mainMenuScene = new MainMenuScene();
-	levelSelectScene = new LevelSelectScene();
-	gameScene = new GameScene();
-	leaderboardScene = new LeaderboardScene();
-	pauseMenuScene = new PausedMenuScene();
+	mainMenuScene		= new MainMenuScene();
+	levelSelectScene	= new LevelSelectScene();
+	gameScene			= new GameScene();
+	leaderboardScene	= new LeaderboardScene();
+	pauseMenuScene		= new PausedMenuScene();
 }
 
 SceneManager::~SceneManager()
 { 
+	currentScene->End();
+
 	delete mainMenuScene;
 	delete levelSelectScene;
 	delete gameScene;
@@ -19,59 +21,52 @@ SceneManager::~SceneManager()
 	delete pauseMenuScene;
 }
 
-void SceneManager::Begin() 
-{	
-	mainMenuScene->Begin();
-	levelSelectScene->Begin();
-	gameScene->Begin();
-	leaderboardScene->Begin();
-	pauseMenuScene->Begin();
+void SceneManager::Initialize()
+{
 	currentScene = mainMenuScene;
+	mainMenuScene->Begin();
 }
 
 void SceneManager::LoadMainMenuScene()
 {
-	if (currentScene != mainMenuScene) 
-	{
-		currentScene->End();
-	}
+	currentScene->End();
+
 	currentScene = mainMenuScene;
+	currentScene->Begin();
 }
 
 void SceneManager::LoadSelectLevelScene()
 {
-	if (currentScene != levelSelectScene)
-	{
-		currentScene->End();
-	}
+	currentScene->End();
+
 	currentScene = levelSelectScene;
+	currentScene->Begin();
 }
 
-void SceneManager::LoadGameScene()
+void SceneManager::LoadGameScene(const FoodMenu *foodMenu)
 {
-	if (currentScene != gameScene)
-	{
-		currentScene->End();
-	}
+	currentScene->End();
+
+	gameScene->SetFoodMenu(foodMenu);
+	gameScene->Begin();
+	
 	currentScene = gameScene;
 }
 
 void SceneManager::LoadPausedMenuScene()
 {
-	if (currentScene != pauseMenuScene)
-	{
-		currentScene->End();
-	}
+	currentScene->End();
+
 	currentScene = pauseMenuScene;
+	currentScene->Begin();
 }
 
 void SceneManager::LoadLeaderboardScene()
 {
-	if (currentScene != leaderboardScene)
-	{
-		currentScene->End();
-	}
+	currentScene->End();
+
 	currentScene = leaderboardScene;
+	currentScene->Begin();
 }
 
 void SceneManager::Update(float deltaTime) 

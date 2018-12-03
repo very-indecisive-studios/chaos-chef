@@ -10,6 +10,7 @@ class SceneManager
 {
 private:
 	Scene *currentScene;
+
 	MainMenuScene *mainMenuScene;
 	LevelSelectScene *levelSelectScene;
 	GameScene *gameScene;
@@ -20,11 +21,13 @@ public:
 	SceneManager();
 	~SceneManager();
 
-	void Begin();
+	void Initialize();
+
 	void LoadMainMenuScene();
 	void LoadSelectLevelScene();
-	void LoadGameScene();
+	void LoadGameScene(const FoodMenu *foodMenu);
 	void LoadPausedMenuScene();
 	void LoadLeaderboardScene();
+
 	void Update(float deltaTime);
 };

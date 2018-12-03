@@ -9,18 +9,21 @@
 class GameScene : public Scene
 {
 private:
-	Player *player;
-	Sprite *map;
+	Player *player = nullptr;
+	Sprite *map = nullptr;
 
-	OrderManager *orderManager;
+	OrderManager *orderManager = nullptr;
 	
 	std::vector<GameEntity *> entities;
 
-	void ConductCollisionCheckingsButNotHandleIt(float deltaTime);
+	const FoodMenu *foodMenu = &FOOD_MENU_SS;
 
+	void ConductCollisionCheckingsButNotHandleIt(float deltaTime);
 public:
 	GameScene();
 	~GameScene();
+
+	void SetFoodMenu(const FoodMenu *foodMenu);
 
 	void Begin() override;
 	void Update(float deltaTime) override;

@@ -13,6 +13,7 @@ OrderManager::~OrderManager()
 	{
 		delete order;
 	}
+
 	orderQueue.clear();
 }
 

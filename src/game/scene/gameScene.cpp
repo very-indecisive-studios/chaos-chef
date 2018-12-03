@@ -8,11 +8,18 @@
 #include "game/entity/prop.h"
 #include "game/entity/trashBin/trashBinArea.h"
 
-GameScene::GameScene() : Scene(SceneType::GAME){ }
+GameScene::GameScene() 
+	: Scene(SceneType::GAME)
+{ }
 
 GameScene::~GameScene()
 {
 	End();
+}
+
+void GameScene::SetFoodMenu(const FoodMenu *foodMenu)
+{
+	this->foodMenu = foodMenu;
 }
 
 void GameScene::Begin()
@@ -23,18 +30,28 @@ void GameScene::Begin()
 	player	= new Player();
 	player->SetPosition(GameSceneData::Map::PLAYER_SPAWN_LOCATION);
 
-	// Initialize dispensers & its area.
+	// Initialize dispensers & its area by using the food menu.
+	auto plFoodIt = foodMenu->platedFoods.begin();
 	for (const auto &dispenserWAreaLocations : GameSceneData::Map::DISPENSERS_W_AREA_LOCATIONS)
 	{
 		Dispenser *dispenser = new Dispenser();
 		dispenser->SetPosition(dispenserWAreaLocations.first);
-		dispenser->SetPlatedFood(&PFOOD_FB_CHICKEN);
 		entities.push_back(dispenser);
 		
 		DispenserArea *dispenserArea = new DispenserArea();
 		dispenserArea->SetPosition(dispenserWAreaLocations.second);
 		dispenserArea->SetDispenser(dispenser);
 		entities.push_back(dispenserArea);
+
+		if (plFoodIt == foodMenu->platedFoods.end())
+		{
+			dispenser->SetPlatedFood(nullptr);
+		}
+		else
+		{
+			dispenser->SetPlatedFood(*plFoodIt);
+			++plFoodIt;
+		}
 	}
 
 	// Initialize props.

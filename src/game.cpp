@@ -21,7 +21,7 @@ void Game::Initialize()
 	QueryPerformanceFrequency(&timerFreq);
 	QueryPerformanceCounter(&timeStart);
 
-	Context::Get()->GetSceneManager()->Begin();
+	Context::Get()->GetSceneManager()->Initialize();
 }
 
 void Game::Run()

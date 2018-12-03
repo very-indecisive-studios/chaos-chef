@@ -77,6 +77,9 @@ void MainMenuScene::Begin()
 
 void MainMenuScene::Update(float deltaTime)
 {
+	ManeuverMenu();
+	CheckButtonClick();
+	
 	int count = 0;
 	topText->Draw(Vector2(0, 0));
 
@@ -85,11 +88,13 @@ void MainMenuScene::Update(float deltaTime)
 		button->Draw(Vector2(0, (GAME_HEIGHT*0.5f - (buttons.size() / 2 * FONT_SIZE)) + (FONT_SIZE * count)));
 		count++;
 	}
-
-	ManeuverMenu();
-	CheckButtonClick();
 }
 
-void MainMenuScene::End() {
-
+void MainMenuScene::End() 
+{
+	for (Text *text : buttons)
+	{
+		delete text;
+	}
+	buttons.clear();
 }

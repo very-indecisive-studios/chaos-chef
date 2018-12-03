@@ -42,19 +42,19 @@ void LevelSelectScene::CheckButtonClick()
 		Context::Get()->GetInputManager()->ClearAll();
 		if (pointedButton == bodyText1) // Newbie - Fried Basket
 		{
-			Context::Get()->GetSceneManager()->LoadGameScene();
+			Context::Get()->GetSceneManager()->LoadGameScene(&FOOD_MENU_FB);
 		}
 		else if (pointedButton == bodyText2) // Easy - Sashimi + Sushi
 		{
-			Context::Get()->GetSceneManager()->LoadGameScene();
+			Context::Get()->GetSceneManager()->LoadGameScene(&FOOD_MENU_SS);
 		}
 		else if (pointedButton == bodyText3) // Medium - Pasta
 		{
-			Context::Get()->GetSceneManager()->LoadGameScene();
+			Context::Get()->GetSceneManager()->LoadGameScene(&FOOD_MENU_PASTA);
 		}
 		else if (pointedButton == bodyText4) // Hard - Pizza
 		{
-			Context::Get()->GetSceneManager()->LoadGameScene();
+			Context::Get()->GetSceneManager()->LoadGameScene(&FOOD_MENU_PIZZA);
 		}
 		else if (pointedButton == bodyText5) // BACK
 		{
@@ -81,6 +81,9 @@ void LevelSelectScene::Begin()
 
 void LevelSelectScene::Update(float deltaTime)
 {
+	ManeuverMenu();
+	CheckButtonClick();
+
 	int noOfLevels = buttons.size() - 1;
 	int count = 0;
 	topText->Draw(Vector2(0, 0));
@@ -97,12 +100,13 @@ void LevelSelectScene::Update(float deltaTime)
 		}
 		count++;
 	}
-
-	ManeuverMenu();
-	CheckButtonClick();
 }
 
 void LevelSelectScene::End() 
 {
-
+	for (Text *text : buttons)
+	{
+		delete text;
+	}
+	buttons.clear();
 }
