@@ -7,9 +7,10 @@
 #include "context.h"
 #include "constants.h"
 
-LeaderboardScene::LeaderboardScene() 
+LeaderboardScene::LeaderboardScene(bool needAddPlayer)
 	: Scene(SceneType::LEADERBOARD)
 {
+	requireAdditionOfPlayer = needAddPlayer;
 	topText = Text::Create("GAME OVER", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
 	bodyText = Text::Create("", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
 	bottomText = Text::Create("Press enter to continue", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
@@ -80,7 +81,7 @@ void LeaderboardScene::PrintLeaderboard()
 
 void LeaderboardScene::ProcessLeaderboard() 
 {
-	if (!playerAdded)
+	if (!playerAdded && requireAdditionOfPlayer)
 	{
 		AddPlayer();
 	}

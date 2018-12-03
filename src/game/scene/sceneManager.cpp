@@ -44,9 +44,9 @@ void SceneManager::LoadPausedMenuScene()
 	pendingSceneToLoad = pausedMenuScene;
 }
 
-void SceneManager::LoadLeaderboardScene()
+void SceneManager::LoadLeaderboardScene(bool needAddPlayer)
 {
-	Scene *leaderboardScene = new LeaderboardScene();
+	Scene *leaderboardScene = new LeaderboardScene(needAddPlayer);
 
 	pendingSceneToLoad = leaderboardScene;
 }

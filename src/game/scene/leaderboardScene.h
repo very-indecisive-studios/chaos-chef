@@ -23,10 +23,11 @@ class LeaderboardScene : public Scene
 private:
 
 public:
-	LeaderboardScene();
+	LeaderboardScene(bool needAddPlayer);
 	~LeaderboardScene();
 	std::vector<PlayerScore> leaderboard;
 	std::string currentName;
+	bool requireAdditionOfPlayer;
 	int noOfChar = 0;
 	bool enterPressed = false;
 	bool playerAdded = false;

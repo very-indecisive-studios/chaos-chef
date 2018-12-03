@@ -34,8 +34,6 @@ MainMenuScene::~MainMenuScene()
 
 void MainMenuScene::ManeuverMenu() 
 {
-
-
 	if (Context::Get()->GetInputManager()->IsKeyDown(VK_DOWN))
 	{
 		if (pointedButtonPos < buttons.size() - 1) 
@@ -73,7 +71,7 @@ void MainMenuScene::CheckButtonClick()
 		}
 		else if (pointedButton == bodyText3) //transition to leaderboard scene
 		{
-			Context::Get()->GetSceneManager()->LoadLeaderboardScene();
+			Context::Get()->GetSceneManager()->LoadLeaderboardScene(false);
 		}
 		else if (pointedButton == bodyText4) //transition to credits menu
 		{

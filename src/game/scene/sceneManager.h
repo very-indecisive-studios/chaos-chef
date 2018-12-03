@@ -22,7 +22,7 @@ public:
 	void LoadSelectLevelScene();
 	void LoadGameScene(const FoodMenu *foodMenu);
 	void LoadPausedMenuScene();
-	void LoadLeaderboardScene();
+	void LoadLeaderboardScene(bool needAddPlayer);
 
 	void Update(float deltaTime);
 };

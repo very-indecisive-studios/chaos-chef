@@ -155,7 +155,7 @@ void Player::HandleCollision(GameEntity *entity)
 	}
 	else if (entity->GetType() == GameEntityType::VEHICLE) // GAME OVER scene
 	{
-		Context::Get()->GetSceneManager()->LoadLeaderboardScene();
+		Context::Get()->GetSceneManager()->LoadLeaderboardScene(true);
 	}
 }
 
