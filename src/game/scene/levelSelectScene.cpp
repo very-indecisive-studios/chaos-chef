@@ -13,18 +13,12 @@ LevelSelectScene::~LevelSelectScene()
 
 void LevelSelectScene::ManeuverMenu()
 {
-	if (delayPress == true)
-	{
-		Context::Get()->GetInputManager()->ClearAll();
-		delayPress = false;
-	}
-
 	if (Context::Get()->GetInputManager()->IsKeyDown(VK_DOWN))
 	{
 		if (pointedButtonPos < buttons.size() - 1)
 		{
 			pointedButtonPos += 1;
-			delayPress = true;
+			Context::Get()->GetInputManager()->ClearAll();
 		}
 	}
 
@@ -33,7 +27,7 @@ void LevelSelectScene::ManeuverMenu()
 		if (pointedButtonPos > 0)
 		{
 			pointedButtonPos -= 1;
-			delayPress = true;
+			Context::Get()->GetInputManager()->ClearAll();
 		}
 	}
 	pointedButton->SetColor(FONT_COLOR_WHITE);

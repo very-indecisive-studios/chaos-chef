@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include <algorithm>
 #include "leaderboardScene.h"
 #include "game/resources.h"
 #include "context.h"
@@ -15,11 +16,15 @@ LeaderboardScene::~LeaderboardScene()
 
 void LeaderboardScene::AddPlayer()
 {
-	if (Context::Get()->GetInputManager()->IsKeyDown(VK_RETURN)) { enterPressed = true; }
+	if (Context::Get()->GetInputManager()->IsKeyDown(VK_RETURN)) 
+	{
+		enterPressed = true;
+		Context::Get()->GetInputManager()->ClearAll();
+	}
 
 	if (!enterPressed)
 	{
-		currentName = Context::Get()->GetInputManager()->GetTextIn();
+		currentName = Context::Get()->GetInputManager()->GetTextInWithLimit(NAME_INPUT_LIMIT);
 
 		std::string addPlayerString = "Enter your name: " + currentName;
 
@@ -27,47 +32,53 @@ void LeaderboardScene::AddPlayer()
 	}
 	else
 	{
-		currentScore = 3110;
-		// when there are 2 players with the same score
-		if (leaderboard[currentScore] != "")
-		{
-			std::string newName = leaderboard[currentScore] + " & " + currentName;
-			leaderboard[currentScore] = newName;
-		}
-		else
-		{
-			//leaderboard.insert(std::pair<int, std::string>(currentScore, currentName));
-			leaderboard[currentScore] = currentName;
-		}
+		leaderboard.push_back(PlayerScore(currentName, 100)); //REMEMBER TO CHANGE - score needs to be added dynamically
+
 		playerAdded = true;
+		enterPressed = false;
 	}
 }
 
 void LeaderboardScene::PrintLeaderboard()
 {
 	std::string leaderboardString = "Leaderboard \n \n";
-	int position = 1;
+	int position = 0;
+	int previousPlayerScore = NULL;
 
-	// Create a map reverse_iterator and point to end of map
-	std::map<int, std::string>::reverse_iterator it = leaderboard.rbegin();
+	std::sort(leaderboard.begin(), leaderboard.end());
 
-	// Iterate over the map using Iterator till the beginning of map
-	while (it != leaderboard.rend())
+	for (PlayerScore playerInLeaderboard : leaderboard)
 	{
-		// Accessing KEY from element pointed by it
-		int score = it->first;
+		if (playerInLeaderboard.score != previousPlayerScore) // if current player has same score as previous player, position do not change
+		{
+			position++;
+		}
 
-		// Accessing VALUE from element pointed by it
-		std::string name = it->second;
+		previousPlayerScore = playerInLeaderboard.score; // keep track of player score to check if next player has the same score
 
-		// Adding each line
-		leaderboardString += "#" + std::to_string(position) + "     " + name + ": " + std::to_string(score) + " points\n";
-
-		// Increment the Iterator to point to next entry
-		it++;
-		position++;
+		leaderboardString += "#" + std::to_string(position) + "     " + playerInLeaderboard.name + ": " + std::to_string(playerInLeaderboard.score) + " points\n";
 	}
+
 	bodyText->SetText(leaderboardString);
+}
+
+void LeaderboardScene::ProcessLeaderboard() 
+{
+	if (!playerAdded)
+	{
+		AddPlayer();
+	}
+	else
+	{
+		PrintLeaderboard();
+		if (Context::Get()->GetInputManager()->IsKeyDown(VK_RETURN))
+		{
+			Context::Get()->GetInputManager()->ClearAll();
+			playerAdded = false;
+			Context::Get()->GetSceneManager()->LoadMainMenuScene();
+		}
+	}
+	bodyText->Draw(Vector2(0, 100));
 }
 
 void LeaderboardScene::Begin()
@@ -75,35 +86,16 @@ void LeaderboardScene::Begin()
 	topText = Text::Create("GAME OVER", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
 	bodyText = Text::Create("", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
 	bottomText = Text::Create("Press enter to continue", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
-
-	leaderboard.insert(std::pair<int, std::string>(30, "Pam"));
-	leaderboard.insert(std::pair<int, std::string>(1, "Los"));
-	leaderboard.insert(std::pair<int, std::string>(100, "Jon"));
-	leaderboard.insert(std::pair<int, std::string>(111, "Sam"));
+	leaderboard.push_back(PlayerScore("Sam",1));
+	leaderboard.push_back(PlayerScore("Tim", 100));
+	leaderboard.push_back(PlayerScore("Tom", 0));
 }
 
 void LeaderboardScene::Update(float deltaTime)
 {
 	topText->Draw(Vector2(0, 0));
 	bottomText->Draw(Vector2(0, GAME_HEIGHT - FONT_SIZE));
-	if (!playerAdded) 
-	{
-		AddPlayer();
-	}
-	else
-	{
-		if (delayEnter) 
-		{
-			Context::Get()->GetInputManager()->ClearAll();
-			delayEnter = false;
-		}
-		PrintLeaderboard();
-		if (Context::Get()->GetInputManager()->IsKeyDown(VK_RETURN))
-		{
-			Context::Get()->GetSceneManager()->LoadGameScene();
-		}
-	}
-	bodyText->Draw(Vector2(0, 100));
+	ProcessLeaderboard();
 }
 
 void LeaderboardScene::End() {}

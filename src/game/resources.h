@@ -81,3 +81,5 @@ const int FONT_SIZE = 24;
 const int FONT_COLOR_WHITE = 0xFFFFFFFF;
 const int FONT_COLOR_RED = 0xFFFF0000;
 
+// leaderboard
+const int NAME_INPUT_LIMIT = 3;

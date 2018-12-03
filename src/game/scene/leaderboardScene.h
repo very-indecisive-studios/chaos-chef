@@ -5,6 +5,19 @@
 #include <string>
 #include "core/text/text.h"
 
+struct PlayerScore
+{
+	std::string name;
+	int score;
+
+	PlayerScore(const std::string& n, int s) : score(s), name(n) {}
+
+	bool operator < (const PlayerScore& str) const
+	{
+		return (score > str.score);
+	}
+};
+
 class LeaderboardScene : public Scene
 {
 private:
@@ -12,10 +25,9 @@ private:
 public:
 	LeaderboardScene();
 	~LeaderboardScene();
-	std::map<int, std::string> leaderboard;
+	std::vector<PlayerScore> leaderboard;
 	std::string currentName;
-	int currentScore;
-	bool delayEnter = true;
+	int noOfChar = 0;
 	bool enterPressed = false;
 	bool playerAdded = false;
 	Text *topText;
@@ -24,6 +36,7 @@ public:
 
 	void AddPlayer();
 	void PrintLeaderboard();
+	void ProcessLeaderboard();
 	void Begin() override;
 	void Update(float deltaTime) override;
 	void End() override;

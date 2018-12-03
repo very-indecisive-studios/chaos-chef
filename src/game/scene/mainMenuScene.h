@@ -15,8 +15,9 @@ public:
 	Text *topText;
 	Text *bodyText1;
 	Text *bodyText2;
+	Text *bodyText3;
+	Text *bodyText4;
 	Text *pointedButton;
-	bool delayPress = false;
 	int pointedButtonPos = 0;
 
 	void ManeuverMenu();
