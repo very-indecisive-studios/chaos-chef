@@ -8,13 +8,13 @@ AnimatedSprite::AnimatedSprite(
 	Texture *texture, uint8_t layer, int frameWidth, int frameHeight, float secondsPerFrame, int scale
 ) : Sprite(texture, layer, scale)
 {
-	this->width = frameWidth;
-	this->height = frameHeight;
+	this->frameWidth = frameWidth;
+	this->frameHeight = frameHeight;
 	this->secondsPerFrame = secondsPerFrame;
 	
 	this->drawingArea = { 0 };
-	this->drawingArea.right = this->width;
-	this->drawingArea.bottom = this->height;
+	this->drawingArea.right = this->frameWidth;
+	this->drawingArea.bottom = this->frameHeight;
 
 	this->framesPerCol = texture->GetWidth() / frameWidth;
 	this->framesPerRow = texture->GetHeight() / frameHeight;
@@ -65,11 +65,11 @@ void AnimatedSprite::NextFrame()
 		currentFrameCol++;
 	}
 
-	this->drawingArea.left		= currentFrameCol * width;
-	this->drawingArea.top		= currentFrameRow * height;
+	this->drawingArea.left		= currentFrameCol * frameWidth;
+	this->drawingArea.top		= currentFrameRow * frameHeight;
 	
-	this->drawingArea.right		= (currentFrameCol * width) + width;
-	this->drawingArea.bottom	= (currentFrameRow * height) + height;
+	this->drawingArea.right		= (currentFrameCol * frameWidth) + frameWidth;
+	this->drawingArea.bottom	= (currentFrameRow * frameHeight) + frameHeight;
 }
 
 void AnimatedSprite::Play()

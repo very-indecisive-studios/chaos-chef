@@ -7,13 +7,11 @@ Sprite::Sprite(Texture *texture, uint8_t layer, int scale)
 {
 	this->texture = texture;
 	this->scale = scale;
-	this->width = texture->GetWidth();
-	this->height = texture->GetHeight();
 	this->layer = layer;
 
 	this->drawingArea = { 0 };
-	this->drawingArea.right = this->width;
-	this->drawingArea.bottom = this->height;
+	this->drawingArea.right = this->texture->GetWidth();
+	this->drawingArea.bottom = this->texture->GetHeight();
 }
 
 void Sprite::Draw(Vector2 position)
@@ -21,7 +19,14 @@ void Sprite::Draw(Vector2 position)
 	auto graphicsRenderer
 			= Context::Get()->GetGraphicsRenderer();
 
-	DrawSpriteJob *job = new DrawSpriteJob(this, position, layer);
+	DrawTextureJob *job = new DrawTextureJob 
+	{
+		texture,
+		scale,
+		drawingArea,
+		position,
+		layer
+	};
 
 	graphicsRenderer->QueueDrawJob(job);
 }
@@ -33,12 +38,12 @@ Texture * Sprite::GetTexture()
 
 int Sprite::GetHeight()
 {
-	return this->height;
+	return this->texture->GetHeight();
 }
 
 int Sprite::GetWidth()
 {
-	return this->width;
+	return this->texture->GetWidth();
 }
 
 int Sprite::GetScale()

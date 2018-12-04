@@ -7,6 +7,9 @@ class AnimatedSprite : public Sprite
 private:
 	float secondsPerFrame = 60.0f;
 	bool isPlaying = false;
+
+	int frameWidth;
+	int frameHeight;
 		
 	int totalFrames;
 	int framesPerCol;

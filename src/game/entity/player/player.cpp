@@ -144,6 +144,7 @@ void Player::HandleCollision(GameEntity *entity)
 		if (Context::Get()->GetInputManager()->IsKeyDown(actionKey))
 		{
 			std::cout << "REMOVE FOOD" << std::endl;
+			hand.Empty();
 		}
 	}
 	else if (entity->GetType() == GameEntityType::COUNTER_AREA) // area around COUNTER - if dish-on-hand == order, give dish}

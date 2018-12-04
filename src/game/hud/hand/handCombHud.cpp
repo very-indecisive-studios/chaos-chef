@@ -27,9 +27,10 @@ void HandCombHud::AddPlatedFood(const PlatedFood * food)
 
 void HandCombHud::ClearAllPlatedFood()
 {
-	for (Sprite *s : platedFoodSprites)
+	for (Sprite *&s : platedFoodSprites)
 	{
 		delete s;
+		s = nullptr;
 	}
 }
 

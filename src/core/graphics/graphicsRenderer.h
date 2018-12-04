@@ -9,7 +9,7 @@
 #include "core/sprites/sprite.h"
 #include "core/text/text.h"
 
-enum class DrawJobType { SPRITE, TEXT };
+enum class DrawJobType { TEXTURE, FONT };
 
 struct DrawJob
 {
@@ -17,29 +17,55 @@ struct DrawJob
 	Vector2 pos;
 	uint8_t layer;
 
-	DrawJob(DrawJobType type, Vector2 pos, uint8_t layer) 
+	DrawJob(DrawJobType type, Vector2 pos, uint8_t layer)
 		: type(type), pos(pos), layer(layer) { }
 };
 
-struct DrawSpriteJob : public DrawJob
+struct DrawTextureJob : public DrawJob
 {
-	Sprite *sprite;
+	Texture *texture;
+	int scale;
+	DrawingArea drawingArea;
 
-	DrawSpriteJob(Sprite *sprite, Vector2 pos, uint8_t layer) 
-		: DrawJob(DrawJobType::SPRITE, pos, layer), sprite(sprite)
+	DrawTextureJob
+	(
+		Texture *texture,
+		int scale,
+		DrawingArea drawingArea,
+		Vector2 pos,
+		uint8_t layer
+	) : DrawJob(DrawJobType::TEXTURE, pos, layer),
+		texture(texture),
+		scale(scale),
+		drawingArea(drawingArea)
 	{ }
 };
 
-struct DrawTextJob : public DrawJob
+struct DrawFontJob : public DrawJob
 {
-	Text *text;
+	Font font;
+	std::string text;
+	float angleDegrees = 0;
+	int color = 0xFFFFFFFF;
+	uint8_t layer;
 
-	DrawTextJob(Text *text, Vector2 pos, uint8_t layer)
-		: DrawJob(DrawJobType::TEXT, pos, layer), text(text)
+	DrawFontJob
+	(
+		Font font, 
+		std::string text, 
+		float angleDegrees, 
+		int color, 
+		Vector2 pos, 
+		uint8_t layer
+	) : DrawJob(DrawJobType::FONT, pos, layer),
+		font(font),
+		text(text),
+		angleDegrees(angleDegrees),
+		color(color)
 	{ }
 };
 
-class GraphicsRenderer 
+class GraphicsRenderer
 {
 private:
 	// Sprite draw queue.
@@ -75,7 +101,7 @@ public:
 	~GraphicsRenderer();
 
 	HRESULT Initialize(HWND hwnd, int width, int height, bool fullscreen);
-		
+
 	void QueueDrawJob(DrawJob *job);
 
 	HRESULT HandleLostDevice();

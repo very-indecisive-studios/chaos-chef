@@ -22,7 +22,11 @@ void HandIndvHud::RemovePlatedFood()
 {
 	this->platedFood = nullptr;
 
-	delete foodSprite;
+	if (foodSprite != nullptr)
+	{
+		delete foodSprite;
+		foodSprite = nullptr;
+	}
 }
 
 const PlatedFood * HandIndvHud::GetPlatedFood()

@@ -207,17 +207,17 @@ HRESULT GraphicsRenderer::Render()
 
 		for (auto &job : drawJobs)
 		{
-			if (job->type == DrawJobType::SPRITE)
+			if (job->type == DrawJobType::TEXTURE)
 			{
-				auto sprJob = (DrawSpriteJob *)job;
+				auto sprJob = (DrawTextureJob *)job;
 				
 				// Find center of sprite
 				D3DXVECTOR2 spriteCenter = D3DXVECTOR2(
-					(float)(sprJob->sprite->GetWidth() / 2 * sprJob->sprite->GetScale()),
-					(float)(sprJob->sprite->GetHeight() / 2 * sprJob->sprite->GetScale())
+					(float)(sprJob->drawingArea.right / 2 * sprJob->scale),
+					(float)(sprJob->drawingArea.bottom / 2 * sprJob->scale)
 				);
 				D3DXVECTOR2 translate = D3DXVECTOR2(sprJob->pos.x, sprJob->pos.y);
-				D3DXVECTOR2 scaling(sprJob->sprite->GetScale(), sprJob->sprite->GetScale());
+				D3DXVECTOR2 scaling(sprJob->scale, sprJob->scale);
 				
 				D3DXMATRIX matrix;
 				D3DXMatrixTransformation2D(
@@ -230,20 +230,19 @@ HRESULT GraphicsRenderer::Render()
 					&translate				// X,Y location
 				);
 				
-				
 				spriteD3D->SetTransform(&matrix);
 				
 				spriteD3D->Draw(
-					sprJob->sprite->GetTexture()->GetTextureD3D(),
-					sprJob->sprite->GetDrawingArea(),
+					sprJob->texture->GetTextureD3D(),
+					&sprJob->drawingArea,
 					NULL,
 					NULL,
 					0xFFFFFFFF
 				);
 			}
-			else if (job->type == DrawJobType::TEXT)
+			else if (job->type == DrawJobType::FONT)
 			{
-				auto textJob = (DrawTextJob *)job;
+				auto textJob = (DrawFontJob *)job;
 				
 				RECT posRect;
 				posRect.top = textJob->pos.y;
@@ -255,18 +254,18 @@ HRESULT GraphicsRenderer::Render()
 				D3DXVECTOR2 rCenter = D3DXVECTOR2((float)textJob->pos.x, (float)textJob->pos.y);
 				// Setup matrix to rotate text by angle.
 				D3DXMATRIX matrix;
-				D3DXMatrixTransformation2D(&matrix, NULL, 0.0f, NULL, &rCenter, textJob->text->GetAngleDegrees(), NULL);
+				D3DXMatrixTransformation2D(&matrix, NULL, 0.0f, NULL, &rCenter, textJob->angleDegrees, NULL);
 				
 				// Tell the sprite about the matrix.
 				spriteD3D->SetTransform(&matrix);
 				
-				textJob->text->GetFont()->DrawText(
+				textJob->font->DrawText(
 					spriteD3D,
-					textJob->text->GetText().c_str(),
+					textJob->text.c_str(),
 					-1,
 					&posRect,
 					DT_CENTER,
-					textJob->text->GetColor()
+					textJob->color
 				);
 			}
 		}

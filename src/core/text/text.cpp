@@ -7,7 +7,15 @@ Text::Text(const std::string &text, uint8_t layer, int color, Font font)
 
 void Text::Draw(Vector2 position)
 {
-	DrawTextJob *job = new DrawTextJob(this, position, layer);
+	DrawFontJob *job = new DrawFontJob 
+	{
+		font,
+		text,
+		angleDegrees,
+		color,
+		position,
+		layer
+	};
 
 	Context::Get()->GetGraphicsRenderer()->QueueDrawJob(job);
 }
