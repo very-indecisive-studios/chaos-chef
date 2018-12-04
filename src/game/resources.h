@@ -83,3 +83,4 @@ const int FONT_COLOR_RED = 0xFFFF0000;
 
 // leaderboard
 const int NAME_INPUT_LIMIT = 3;
+const std::string LEADERBOARD_DATA = "assets\\leaderboard\\data.txt";

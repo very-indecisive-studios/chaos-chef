@@ -2,6 +2,7 @@
 #include <string>
 #include <map>
 #include <algorithm>
+#include <fstream>
 #include "leaderboardScene.h"
 #include "game/resources.h"
 #include "context.h"
@@ -14,9 +15,6 @@ LeaderboardScene::LeaderboardScene(bool needAddPlayer)
 	topText = Text::Create("GAME OVER", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
 	bodyText = Text::Create("", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
 	bottomText = Text::Create("Press enter to continue", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
-	leaderboard.push_back(PlayerScore("Sam", 1));
-	leaderboard.push_back(PlayerScore("Tim", 100));
-	leaderboard.push_back(PlayerScore("Tom", 0));
 }
 
 LeaderboardScene::~LeaderboardScene()
@@ -49,7 +47,10 @@ void LeaderboardScene::AddPlayer()
 	}
 	else
 	{
-		leaderboard.push_back(PlayerScore(currentName, 100)); //REMEMBER TO CHANGE - score needs to be added dynamically
+		std::ofstream leaderboardFile; // ofstream - write to file
+		leaderboardFile.open(LEADERBOARD_DATA,std::ios_base::app); // app - append
+		leaderboardFile << currentName + "100\n"; //TO DO- score needs to be added dynamically
+		leaderboardFile.close();
 
 		playerAdded = true;
 		enterPressed = false;
@@ -62,7 +63,33 @@ void LeaderboardScene::PrintLeaderboard()
 	int position = 0;
 	int previousPlayerScore = NULL;
 
-	std::sort(leaderboard.begin(), leaderboard.end());
+	std::string currentLine;
+
+	leaderboard.clear();
+
+	std::ifstream leaderboardFile; // ifstream - read from file
+	leaderboardFile.open(LEADERBOARD_DATA);
+	while (std::getline(leaderboardFile, currentLine))
+	{
+		std::string currentName;
+		std::string currentScore;
+		int count = 0;
+		for (char c : currentLine) 
+		{
+			if (count < NAME_INPUT_LIMIT)
+			{
+				currentName += c;
+			}
+			else 
+			{
+				currentScore += c;
+			}
+			count++;
+		}
+		leaderboard.push_back(PlayerScore(currentName, std::stoi(currentScore)));
+	}
+
+	std::sort(leaderboard.begin(), leaderboard.end(), std::greater<PlayerScore>());
 
 	for (PlayerScore playerInLeaderboard : leaderboard)
 	{

@@ -12,7 +12,7 @@ struct PlayerScore
 
 	PlayerScore(const std::string& n, int s) : score(s), name(n) {}
 
-	bool operator < (const PlayerScore& str) const
+	bool operator > (const PlayerScore& str) const // overriding operator >
 	{
 		return (score > str.score);
 	}
