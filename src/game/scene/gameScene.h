@@ -12,6 +12,8 @@ class GameScene : public Scene
 private:
 	Player *player = nullptr;
 	Sprite *map = nullptr;
+	Text *handText = nullptr;
+	Text *ordersText = nullptr;
 
 	OrderManager *orderManager = nullptr;
 	VehicleSpawner *vehicleSpawner = nullptr;
