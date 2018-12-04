@@ -14,6 +14,7 @@ private:
 
 public:
 	Text(const std::string &text, uint8_t layer, int color, Font font);
+	~Text();
 	void Draw(Vector2 position);
 
 	void SetText(const std::string &text);

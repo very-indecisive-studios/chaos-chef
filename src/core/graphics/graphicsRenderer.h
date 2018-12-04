@@ -19,6 +19,7 @@ struct DrawJob
 
 	DrawJob(DrawJobType type, Vector2 pos, uint8_t layer)
 		: type(type), pos(pos), layer(layer) { }
+	virtual ~DrawJob() { }
 };
 
 struct DrawTextureJob : public DrawJob
@@ -39,6 +40,7 @@ struct DrawTextureJob : public DrawJob
 		scale(scale),
 		drawingArea(drawingArea)
 	{ }
+	~DrawTextureJob() { }
 };
 
 struct DrawFontJob : public DrawJob
@@ -63,6 +65,7 @@ struct DrawFontJob : public DrawJob
 		angleDegrees(angleDegrees),
 		color(color)
 	{ }
+	~DrawFontJob() { }
 };
 
 class GraphicsRenderer

@@ -5,6 +5,9 @@ Text::Text(const std::string &text, uint8_t layer, int color, Font font)
 	: text(text), layer(layer), color(color), font(font)
 { }
 
+Text::~Text()
+{ }
+
 void Text::Draw(Vector2 position)
 {
 	DrawFontJob *job = new DrawFontJob 
