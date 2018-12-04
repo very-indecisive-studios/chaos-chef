@@ -21,10 +21,6 @@ struct PlayerScore
 class LeaderboardScene : public Scene
 {
 private:
-
-public:
-	LeaderboardScene(bool needAddPlayer);
-	~LeaderboardScene();
 	std::vector<PlayerScore> leaderboard;
 	std::string currentName;
 	bool requireAdditionOfPlayer;
@@ -34,6 +30,10 @@ public:
 	Text *topText;
 	Text *bodyText;
 	Text *bottomText;
+
+public:
+	LeaderboardScene(bool needAddPlayer);
+	~LeaderboardScene();
 
 	void AddPlayer();
 	void PrintLeaderboard();

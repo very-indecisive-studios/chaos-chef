@@ -5,11 +5,6 @@
 class LevelSelectScene : public Scene
 {
 private:
-
-public:
-	LevelSelectScene();
-	~LevelSelectScene();
-
 	std::vector<Text *> buttons;
 
 	Text *topText;
@@ -23,6 +18,10 @@ public:
 	Text *pointedButton;
 
 	int pointedButtonPos = 0;
+
+public:
+	LevelSelectScene();
+	~LevelSelectScene();
 
 	void ManeuverMenu();
 	void CheckButtonClick();
