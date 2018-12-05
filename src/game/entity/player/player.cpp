@@ -140,7 +140,7 @@ void Player::HandleCollision(GameEntity *entity)
 		if (Context::Get()->GetInputManager()->IsKeyDown(actionKey))
 		{
 			std::cout << "REMOVE FOOD" << std::endl;
-			if (hand.GetPlatedFood().size())
+			if (hand.GetCurrentPlatedFood().size())
 			{
 				hand.Empty();
 				
