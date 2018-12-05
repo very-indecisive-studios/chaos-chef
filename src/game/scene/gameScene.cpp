@@ -71,11 +71,15 @@ GameScene::GameScene(const FoodMenu *foodMenu)
 	entities.push_back(trashBinArea);
 
 	orderManager = new OrderManager(&FOOD_MENU_SS, 10);
+
+	vehicleSpawner = new VehicleSpawner();
 }
 
 GameScene::~GameScene()
 {
 	delete orderManager;
+
+	delete vehicleSpawner;
 
 	delete map;
 
@@ -96,6 +100,8 @@ void GameScene::SetFoodMenu(const FoodMenu *foodMenu)
 void GameScene::Update(float deltaTime)
 {
 	orderManager->Update(deltaTime);
+
+	vehicleSpawner->Update(deltaTime);
 
 	map->Draw(Vector2(0, 0));
 	

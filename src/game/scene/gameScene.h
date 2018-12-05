@@ -4,6 +4,7 @@
 #include "game/entity/player/player.h"
 #include "core/sprites/sprite.h"
 #include "game/gameplay/order/orderManager.h"
+#include "game/gameplay/vehicleSpawn/vehicleSpawner.h"
 
 
 class GameScene : public Scene
@@ -13,10 +14,12 @@ private:
 	Sprite *map = nullptr;
 
 	OrderManager *orderManager = nullptr;
+	VehicleSpawner *vehicleSpawner = nullptr;
 	
 	std::vector<GameEntity *> entities;
 
 	const FoodMenu *foodMenu = &FOOD_MENU_SS;
+
 
 	void ConductCollisionCheckingsButNotHandleIt(float deltaTime);
 public:
