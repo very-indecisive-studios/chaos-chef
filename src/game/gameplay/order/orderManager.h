@@ -5,12 +5,13 @@
 #include "order.h"
 #include "game/hud/order/orderHud.h"
 #include "game/data/gameSceneData.h"
+#include "game/entity/customer/customer.h" 
 
 class OrderManager
 {
 private:
 	std::vector<Order *> orderQueue;
-
+	std::vector<Customer *> customers;
 	const FoodMenu *foodMenu;
 	
 	float nextOrderIntervalSeconds;

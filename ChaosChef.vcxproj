@@ -93,6 +93,7 @@
     <ClCompile Include="src\core\text\text.cpp" />
     <ClCompile Include="src\game.cpp" />
     <ClCompile Include="src\game\entity\counter\counterArea.cpp" />
+    <ClCompile Include="src\game\entity\customer\customer.cpp" />
     <ClCompile Include="src\game\entity\dispenser\dispenser.cpp" />
     <ClCompile Include="src\game\entity\dispenser\dispenserArea.cpp" />
     <ClCompile Include="src\game\entity\gameEntity.cpp" />
@@ -129,6 +130,7 @@
     <ClInclude Include="src\game.h" />
     <ClInclude Include="src\game\data\gameSceneData.h" />
     <ClInclude Include="src\game\entity\counter\counterArea.h" />
+    <ClInclude Include="src\game\entity\customer\customer.h" />
     <ClInclude Include="src\game\entity\dispenser\dispenser.h" />
     <ClInclude Include="src\game\entity\dispenser\dispenserArea.h" />
     <ClInclude Include="src\game\data\food.h" />

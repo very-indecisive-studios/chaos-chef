@@ -35,7 +35,10 @@ void OrderManager::Update(float deltaTime)
 		nextOrderIntervalSeconds -= 1;
 		totalTime = 0;
 	}
-
+	//if (timeElapsed >= nextOrderIntervalSeconds-2)
+	//{
+		//customers[]
+	//}
 	if (timeElapsed >= nextOrderIntervalSeconds)
 	{
 		int pos = rand() % foodMenu->meals.size();

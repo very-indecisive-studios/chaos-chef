@@ -86,7 +86,12 @@ namespace GameSceneData
 
 		static const Vector2 PLAYER_SPAWN_LOCATION = Vector2(7, 14) * TILE_SIZE;
 
-		static const std::map<Vector2, CollisionBounds> PROPS_LOCATION_BOUNDS =
+		const Vector2 CUSTOMER_SPAWN_LOCATION1 = Vector2(40, 4) * TILE_SIZE;
+		const Vector2 CUSTOMER_SPAWN_LOCATION2 = Vector2(40, 4) * TILE_SIZE;
+		const Vector2 CUSTOMER_SPAWN_LOCATION3 = Vector2(40, 4) * TILE_SIZE;
+		const Vector2 CUSTOMER_SPAWN_LOCATION4 = Vector2(40, 4) * TILE_SIZE;
+
+		const std::map<Vector2, CollisionBounds> PROPS_LOCATION_BOUNDS =
 		{
 			// Top wall.
 			{ Vector2(0, 4)  * TILE_SIZE, CollisionBounds { Vector2(0, 0), (Vector2(8, 2) * TILE_SIZE) } },

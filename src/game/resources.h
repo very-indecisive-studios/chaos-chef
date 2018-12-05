@@ -66,7 +66,8 @@ const int  PLAYER_WIDTH	= 32;              // width of player image
 const int  PLAYER_HEIGHT = 32;             // height of player image
 
 // sprites for customer
-const std::string CUSTOMER_IMAGE = "assets\\customer\\customer.png";
+const std::string CUSTOMER_LEFT_IMAGE = "assets\\customer\\customer.png";
+const std::string CUSTOMER_RIGHT_IMAGE = "assets\\customer\\customer1.png";
 
 const float CUSTOMER_ANIMATION_DELAY = 0.1f; // time between frames of customer animation
 const int  CUSTOMER_WIDTH = 32;              // width of customer image
