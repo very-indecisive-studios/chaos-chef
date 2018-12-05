@@ -37,13 +37,6 @@ void SceneManager::LoadGameScene(const FoodMenu *foodMenu)
 	pendingSceneToLoad = gameScene;
 }
 
-void SceneManager::LoadPausedMenuScene()
-{
-	Scene *pausedMenuScene = new PausedMenuScene();
-
-	pendingSceneToLoad = pausedMenuScene;
-}
-
 void SceneManager::LoadLeaderboardScene(bool needAddPlayer, int playerScore)
 {
 	Scene *leaderboardScene = new LeaderboardScene(needAddPlayer, playerScore);
