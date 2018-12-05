@@ -8,6 +8,7 @@
 #include "game/entity/counter/counterArea.h"
 #include "game/entity/prop.h"
 #include "game/entity/trashBin/trashBinArea.h"
+#include "game/gameplay/vehicleSpawn/vehicleSpawner.h"
 
 GameScene::GameScene(const FoodMenu *foodMenu) 
 	: Scene(SceneType::GAME)
@@ -127,4 +128,6 @@ void GameScene::ConductCollisionCheckingsButNotHandleIt(float deltaTime)
 			player->HandleCollision(entity);
 		}
 	}
+
+	vehicleSpawner->CheckCollisionWithVehicles(player);
 }

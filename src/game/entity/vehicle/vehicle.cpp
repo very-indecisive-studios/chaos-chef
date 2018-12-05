@@ -5,6 +5,12 @@
 
 Vehicle::Vehicle(std::string textureName, VehicleDirection vd) : GameEntity(GameEntityType::VEHICLE)
 {
+	vehicleD = vd;
+	
+	collisionBounds.topLeft = Vector2(0, 0);
+	collisionBounds.bottomRight = Vector2(32, 64);
+
+
 	if (textureName == VEHICLE1_UP_IMAGE)
 	{
 		currentUpAnimSprite = vehicleUpAnimSprite1;
@@ -13,9 +19,21 @@ Vehicle::Vehicle(std::string textureName, VehicleDirection vd) : GameEntity(Game
 	{
 		currentUpAnimSprite = vehicleUpAnimSprite2;
 	}
-	else
+	else if (textureName == VEHICLE3_UP_IMAGE)
 	{
 		currentUpAnimSprite = vehicleUpAnimSprite3;
+	}
+	if (textureName == VEHICLE1_DOWN_IMAGE)
+	{
+		currentDownAnimSprite = vehicleDownAnimSprite1;
+	}
+	else if (textureName == VEHICLE2_DOWN_IMAGE)
+	{
+		currentDownAnimSprite = vehicleDownAnimSprite2;
+	}
+	else if (textureName == VEHICLE3_DOWN_IMAGE)
+	{
+		currentDownAnimSprite = vehicleDownAnimSprite3;
 	}
 }
 
@@ -26,28 +44,16 @@ Vehicle::~Vehicle()
 
 void Vehicle::Update(float deltaTime)
 {
-	if (position.x == 176)
+	if (vehicleD == VehicleDirection::UP)
 	{
 		currentUpAnimSprite->Play();
 		position.y -= deltaTime * vehicleSpeed;
 		currentUpAnimSprite->UpdateAndDraw(deltaTime, position);
 	}
-	if (position.x == 464)
+	if (vehicleD == VehicleDirection::DOWN)
 	{
-		currentUpAnimSprite->Play();
+		currentDownAnimSprite->Play();
 		position.y += deltaTime * vehicleSpeed;
-		currentUpAnimSprite->UpdateAndDraw(deltaTime, position);
-	}
-	if (position.x == 272)
-	{
-		currentUpAnimSprite->Play();
-		position.y += deltaTime * vehicleSpeed;
-		currentUpAnimSprite->UpdateAndDraw(deltaTime, position);
-	}
-	if (position.x == 368)
-	{
-		currentUpAnimSprite->Play();
-		position.y -= deltaTime * vehicleSpeed;
-		currentUpAnimSprite->UpdateAndDraw(deltaTime, position);
+		currentDownAnimSprite->UpdateAndDraw(deltaTime, position);
 	}
 }

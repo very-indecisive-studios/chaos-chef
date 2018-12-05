@@ -19,6 +19,7 @@ private:
 	AnimatedSprite *vehicleUpAnimSprite3 = AnimatedSprite::Create(VEHICLE3_UP_IMAGE, 1, VEHICLE_WIDTH, VEHICLE_HEIGHT, VEHICLE_ANIMATION_DELAY);
 	AnimatedSprite *vehicleDownAnimSprite3 = AnimatedSprite::Create(VEHICLE3_DOWN_IMAGE, 1, VEHICLE_WIDTH, VEHICLE_HEIGHT, VEHICLE_ANIMATION_DELAY);
 	CollisionBounds vehicleCB;
+	VehicleDirection vehicleD;
 	float vehicleSpeed = 75.0f;
 
 public:
