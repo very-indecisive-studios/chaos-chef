@@ -11,6 +11,7 @@ private:
 	Scene *currentScene = nullptr;
 	Scene *pendingSceneToLoad = nullptr;
 
+
 public:
 	SceneManager();
 	~SceneManager();

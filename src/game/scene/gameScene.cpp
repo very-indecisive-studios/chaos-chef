@@ -75,7 +75,7 @@ GameScene::GameScene(const FoodMenu *foodMenu)
 	trashBin->SetCollisionBounds(GameSceneData::Map::TRASH_BIN_LOCATION_BOUNDS.second);
 	entities.push_back(trashBin);
 
-	TrashBinArea *trashBinArea = new TrashBinArea();
+	trashBinArea = new TrashBinArea();
 	trashBinArea->SetPosition(GameSceneData::Map::TRASH_BIN_AREA_LOCATION_BOUNDS.first);
 	trashBinArea->SetCollisionBounds(GameSceneData::Map::TRASH_BIN_AREA_LOCATION_BOUNDS.second);
 	entities.push_back(trashBinArea);

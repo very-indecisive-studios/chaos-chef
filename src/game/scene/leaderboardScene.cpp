@@ -11,6 +11,7 @@
 LeaderboardScene::LeaderboardScene(bool needAddPlayer, int totalScore)
 	: Scene(SceneType::LEADERBOARD)
 {
+	playerScore = totalScore;
 	requireAdditionOfPlayer = needAddPlayer;
 	playerScore = score;
 	topText = Text::Create("GAME OVER", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);

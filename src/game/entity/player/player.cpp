@@ -158,7 +158,6 @@ void Player::HandleCollision(GameEntity *entity)
 	else if (entity->GetType() == GameEntityType::VEHICLE) // GAME OVER scene
 	{
 		playerDead = true;
-		Context::Get()->GetSceneManager()->LoadLeaderboardScene(true, 100);
 	}
 }
 
@@ -199,6 +198,7 @@ bool Player::isDead()
 {
 	return playerDead;
 }
+
 std::vector<const PlatedFood *> Player::Give()
 {
 	return hand.GetCurrentPlatedFood();
