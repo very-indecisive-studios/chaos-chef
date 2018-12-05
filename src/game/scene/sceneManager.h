@@ -21,7 +21,7 @@ public:
 	void LoadSelectLevelScene();
 	void LoadGameScene(const FoodMenu *foodMenu);
 	void LoadPausedMenuScene();
-	void LoadLeaderboardScene(bool needAddPlayer);
+	void LoadLeaderboardScene(bool needAddPlayer, int playerScore);
 
 	void Update(float deltaTime);
 };

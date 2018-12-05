@@ -8,7 +8,7 @@
 #include "context.h"
 #include "constants.h"
 
-LeaderboardScene::LeaderboardScene(bool needAddPlayer, int score)
+LeaderboardScene::LeaderboardScene(bool needAddPlayer, int totalScore)
 	: Scene(SceneType::LEADERBOARD)
 {
 	requireAdditionOfPlayer = needAddPlayer;
@@ -30,7 +30,7 @@ LeaderboardScene::~LeaderboardScene()
 	bottomText = nullptr;
 }
 
-void LeaderboardScene::AddPlayer()
+void LeaderboardScene::AddPlayer(int playerScore)
 {
 	topText->Draw(Vector2(0, 0));
 	if (Context::Get()->GetInputManager()->IsKeyDown(VK_RETURN)) 
@@ -116,11 +116,11 @@ void LeaderboardScene::PrintLeaderboard()
 	bodyText->SetText(leaderboardString);
 }
 
-void LeaderboardScene::ProcessLeaderboard() 
+void LeaderboardScene::ProcessLeaderboard(int playerScore) 
 {
 	if (!playerAdded && requireAdditionOfPlayer)
 	{
-		AddPlayer();
+		AddPlayer(playerScore);
 	}
 	else
 	{
@@ -137,7 +137,7 @@ void LeaderboardScene::ProcessLeaderboard()
 
 void LeaderboardScene::Update(float deltaTime)
 {
-	ProcessLeaderboard();
+	ProcessLeaderboard(playerScore);
 
 	bottomText->Draw(Vector2(0, GAME_HEIGHT - FONT_SIZE));
 }

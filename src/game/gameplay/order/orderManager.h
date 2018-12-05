@@ -16,6 +16,7 @@ private:
 	float nextOrderIntervalSeconds;
 	float timeElapsed = 0;
 	bool hasOrderMissed = false;
+	int score = 0;
 
 	OrderHud orderHuds[4] = {
 		{ GameSceneData::Hud::Bottom::ORDER_HUD_LOCATION_1 },
@@ -34,4 +35,5 @@ public:
 	std::vector<Order *> GetOrders();
 	std::vector<const PlatedFood *> GetCounterOrder(int counterNo);
 	void ClearCounterOrder(int counterNo);
+	int GetScore();
 };

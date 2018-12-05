@@ -7,6 +7,7 @@
 #include "context.h"
 #include "game/data/gameSceneData.h"
 #include "game/entity/counter/counterArea.h"
+#include "game/entity/trashBin/trashBinArea.h"
 
 Player::Player()  
 	: GameEntity(GameEntityType::PLAYER) 
@@ -139,6 +140,8 @@ void Player::HandleCollision(GameEntity *entity)
 		if (Context::Get()->GetInputManager()->IsKeyDown(actionKey))
 		{
 			hand.Empty();
+			TrashBinArea *trash = (TrashBinArea *)entity;
+			trash->PlayerClearedPlate();
 		}
 	}
 	else if (entity->GetType() == GameEntityType::COUNTER_AREA) // area around COUNTER
@@ -154,7 +157,8 @@ void Player::HandleCollision(GameEntity *entity)
 	}
 	else if (entity->GetType() == GameEntityType::VEHICLE) // GAME OVER scene
 	{
-		Context::Get()->GetSceneManager()->LoadLeaderboardScene(true);
+		playerDead = true;
+		Context::Get()->GetSceneManager()->LoadLeaderboardScene(true, 100);
 	}
 }
 
@@ -191,6 +195,10 @@ void Player::GetPlatedFood(GameEntity *entity)
 	}
 }
 
+bool Player::isDead()
+{
+	return playerDead;
+}
 std::vector<const PlatedFood *> Player::Give()
 {
 	return hand.GetCurrentPlatedFood();

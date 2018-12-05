@@ -23,7 +23,7 @@ private:
 	AnimatedSprite *westAnimSprite = AnimatedSprite::Create(PLAYER_WEST_IMAGE, 1, PLAYER_WIDTH, PLAYER_HEIGHT, PLAYER_ANIMATION_DELAY);
 
 	PlayerHand hand;
-
+	bool playerDead = false;
 	float playerSpeed = 200.0f;
 
 	void Move(float deltatime);
@@ -38,6 +38,6 @@ public:
 	std::vector<const PlatedFood *> Give();
 
 	void HandleCollision(GameEntity *entity) override;
-
+	bool isDead();
 	void Update(float deltaTime) override;
 };

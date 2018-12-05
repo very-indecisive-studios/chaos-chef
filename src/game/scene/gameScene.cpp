@@ -9,6 +9,9 @@
 #include "game/entity/prop.h"
 #include "game/entity/trashBin/trashBinArea.h"
 #include "game/gameplay/vehicleSpawn/vehicleSpawner.h"
+#include "context.h"
+#include "core/text/text.h"
+#include "constants.h"
 
 GameScene::GameScene(const FoodMenu *foodMenu) 
 	: Scene(SceneType::GAME)
@@ -17,6 +20,7 @@ GameScene::GameScene(const FoodMenu *foodMenu)
 	handText = Text::Create("Hand", "Arial", 0xFF000000, 16, 100, false, false, DT_LEFT);
 	ordersText = Text::Create("Orders", "Arial", 0xFF000000, 16, 100, false, false, DT_LEFT);
 
+	pauseText = Text::Create("PAUSED", FONT_TYPE, FONT_COLOR_WHITE, 64, 100, false, false);
 	orderManager = new OrderManager(foodMenu, 10);
 
 	// Initialize player.
@@ -105,6 +109,22 @@ void GameScene::SetFoodMenu(const FoodMenu *foodMenu)
 
 void GameScene::Update(float deltaTime)
 {
+	if (Context::Get()->GetInputManager()->IsKeyDown(VK_ESCAPE)) 
+	{
+		Context::Get()->GetInputManager()->ClearAll();
+		isPaused = !isPaused;
+		
+	}
+	if (isPaused) 
+	{
+		pauseText->Draw(Vector2(0, GAME_HEIGHT / 2));
+		return;
+	}
+	if (orderManager->HasMissedOrder()||player->isDead())
+	{
+		int playerScore = orderManager->GetScore() - trashBinArea->GetTrashScore();
+		Context::Get()->GetSceneManager()->LoadLeaderboardScene(true, playerScore);
+	}
 	orderManager->Update(deltaTime);
 
 	vehicleSpawner->Update(deltaTime);

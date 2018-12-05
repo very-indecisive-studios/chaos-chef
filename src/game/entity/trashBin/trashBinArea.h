@@ -5,9 +5,13 @@
 
 class TrashBinArea : public GameEntity
 {
+private:
+	int trashScore = 0;
+
 public:
 	TrashBinArea();
 	~TrashBinArea();
-
+	void PlayerClearedPlate();
 	void Update(float deltaTime) override;
+	int GetTrashScore();
 };

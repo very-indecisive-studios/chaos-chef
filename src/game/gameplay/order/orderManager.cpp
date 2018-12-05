@@ -94,6 +94,12 @@ std::vector<const PlatedFood *> OrderManager::GetCounterOrder(int counterNo)
 
 void OrderManager::ClearCounterOrder(int counterNo)
 {
+	score += 100;
 	currentOrder[counterNo] = nullptr;
 	orderHuds[counterNo].ClearOrder();
+}
+
+int OrderManager::GetScore()
+{
+	return score;
 }

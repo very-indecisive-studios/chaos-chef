@@ -5,6 +5,8 @@
 #include "core/sprites/sprite.h"
 #include "game/gameplay/order/orderManager.h"
 #include "game/gameplay/vehicleSpawn/vehicleSpawner.h"
+#include "core/text/text.h"
+#include "game/entity/trashBin/trashBinArea.h"
 
 
 class GameScene : public Scene
@@ -18,10 +20,12 @@ private:
 	OrderManager *orderManager = nullptr;
 	VehicleSpawner *vehicleSpawner = nullptr;
 	
+	TrashBinArea *trashBinArea = nullptr;
 	std::vector<GameEntity *> entities;
 
 	const FoodMenu *foodMenu = &FOOD_MENU_SS;
-
+	bool isPaused = false;
+	Text *pauseText;
 
 	void ConductCollisionCheckingsButNotHandleIt(float deltaTime);
 public:

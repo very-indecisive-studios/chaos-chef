@@ -31,14 +31,15 @@ private:
 	Text *topText;
 	Text *bodyText;
 	Text *bottomText;
+	int playerScore;
 
 public:
-	LeaderboardScene(bool needAddPlayer, int score);
+	LeaderboardScene(bool needAddPlayer, int totalScore);
 	~LeaderboardScene();
 
-	void AddPlayer();
+	void AddPlayer(int playerScore);
 	void PrintLeaderboard();
-	void ProcessLeaderboard();
+	void ProcessLeaderboard(int playerScore);
 
 	void Update(float deltaTime) override;
 };
