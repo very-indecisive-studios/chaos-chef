@@ -139,9 +139,14 @@ void Player::HandleCollision(GameEntity *entity)
 	{
 		if (Context::Get()->GetInputManager()->IsKeyDown(actionKey))
 		{
-			hand.Empty();
-			TrashBinArea *trash = (TrashBinArea *)entity;
-			trash->PlayerClearedPlate();
+			std::cout << "REMOVE FOOD" << std::endl;
+			if (hand.GetPlatedFood().size())
+			{
+				hand.Empty();
+				
+				TrashBinArea *trash = (TrashBinArea *)entity;
+				trash->PlayerClearedPlate();
+			}
 		}
 	}
 	else if (entity->GetType() == GameEntityType::COUNTER_AREA) // area around COUNTER
