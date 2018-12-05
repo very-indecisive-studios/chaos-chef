@@ -31,7 +31,6 @@ private:
 	Text *topText;
 	Text *bodyText;
 	Text *bottomText;
-	int playerScore = 0;
 
 public:
 	LeaderboardScene(bool needAddPlayer, int totalScore);

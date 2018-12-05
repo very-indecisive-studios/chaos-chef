@@ -13,7 +13,6 @@ LeaderboardScene::LeaderboardScene(bool needAddPlayer, int totalScore)
 {
 	playerScore = totalScore;
 	requireAdditionOfPlayer = needAddPlayer;
-	playerScore = score;
 	topText = Text::Create("GAME OVER", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
 	bodyText = Text::Create("", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
 	bottomText = Text::Create("Press enter to continue", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
