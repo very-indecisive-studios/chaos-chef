@@ -88,6 +88,16 @@ void AnimatedSprite::Stop()
 	this->isPlaying = false;
 }
 
+int AnimatedSprite::GetHeight()
+{
+	return this->frameHeight;
+}
+
+int AnimatedSprite::GetWidth()
+{
+	return this->frameWidth;
+}
+
 AnimatedSprite * AnimatedSprite::Create(const std::string & textureName, uint8_t layer, int frameWidth, int frameHeight, float secondsPerFrame, int scale)
 {
 	auto texture

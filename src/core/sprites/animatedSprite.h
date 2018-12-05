@@ -27,6 +27,9 @@ public:
 	void Play();
 	void Reset();
 	void Stop();
+	
+	int GetHeight() override;
+	int GetWidth() override;
 
 	static AnimatedSprite * Create(const std::string &textureName, uint8_t layer, int frameWidth, int frameHeight, float secondsPerFrame, int scale = 1);
 };
