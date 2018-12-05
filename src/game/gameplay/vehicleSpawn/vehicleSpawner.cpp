@@ -18,6 +18,7 @@ VehicleSpawner::~VehicleSpawner()
 
 void VehicleSpawner::Update(float deltaTime)
 {
+	totalTime += deltaTime;
 	if (!vehiclesUp1.empty())
 	{
 		for (int i = 0; i < vehiclesUp1.size(); i++)
@@ -65,6 +66,11 @@ void VehicleSpawner::Update(float deltaTime)
 				vehiclesDown2.erase(vehiclesDown2.begin() + i);
 			}
 		}
+	}
+	if (totalTime >= 15)
+	{
+		spawnTime -= 0.2;
+		totalTime = 0;
 	}
 	elapsedTime1 += deltaTime;
 	elapsedTime2 += deltaTime;

@@ -15,6 +15,7 @@ private:
 	
 	float nextOrderIntervalSeconds;
 	float timeElapsed = 0;
+	float totalTime = 0;
 	bool hasOrderMissed = false;
 	int score = 0;
 

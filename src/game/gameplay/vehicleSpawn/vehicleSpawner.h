@@ -9,12 +9,11 @@
 class VehicleSpawner
 {
 private:
+	float totalTime = 0;
 	float elapsedTime1 = 0;
 	float elapsedTime2 = 1;
 	float elapsedTime3 = 2;
-	float vehicleSpeed = 75.0f;
 	float spawnTime = 3.0;
-	CollisionBounds vehicleCB;
 	std::vector <Vehicle *> vehiclesUp1;
 	std::vector <Vehicle *> vehiclesDown1;
 	std::vector <Vehicle *> vehiclesUp2;

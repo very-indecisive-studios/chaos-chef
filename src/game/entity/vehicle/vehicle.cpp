@@ -44,6 +44,12 @@ Vehicle::~Vehicle()
 
 void Vehicle::Update(float deltaTime)
 {
+	totalTime += deltaTime;
+	if(totalTime >= 15)
+	{
+		vehicleSpeed += 5;
+		totalTime = 0;
+	}
 	if (vehicleD == VehicleDirection::UP)
 	{
 		currentUpAnimSprite->Play();

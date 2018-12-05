@@ -28,8 +28,13 @@ void OrderManager::Update(float deltaTime)
 			hasOrderMissed = true;
 		}
 	}
-
+	totalTime += deltaTime;
 	timeElapsed += deltaTime;
+	if(totalTime >= 30)
+	{
+		nextOrderIntervalSeconds -= 1;
+		totalTime = 0;
+	}
 
 	if (timeElapsed >= nextOrderIntervalSeconds)
 	{

@@ -21,6 +21,7 @@ private:
 	CollisionBounds vehicleCB;
 	VehicleDirection vehicleD;
 	float vehicleSpeed = 75.0f;
+	float totalTime = 0;
 
 public:
 	Vehicle(std::string textureName, VehicleDirection vd);
