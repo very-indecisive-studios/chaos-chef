@@ -8,7 +8,6 @@ enum SceneType
 	MAIN_MENU,
 	LEVEL_SELECT,
 	GAME,
-	PAUSED_MENU,
 	LEADERBOARD
 };
 

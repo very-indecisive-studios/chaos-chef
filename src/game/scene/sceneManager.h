@@ -2,7 +2,6 @@
 #include "scene.h"
 #include "mainMenuScene.h"
 #include "levelSelectScene.h"
-#include "pausedMenuScene.h"
 #include "gameScene.h"
 #include "leaderboardScene.h"
 
