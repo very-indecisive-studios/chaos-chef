@@ -19,15 +19,19 @@ OrderManager::~OrderManager()
 
 void OrderManager::Update(float deltaTime)
 {
-	for (Order *order : orderQueue)
+	for (Order *order : currentOrder)
 	{
-		order->timeRemainingSeconds -= deltaTime;
-
-		if (order->timeRemainingSeconds <= 0)
+		if (order != nullptr)
 		{
-			hasOrderMissed = true;
+			order->timeRemainingSeconds -= deltaTime;
+
+			if (order->timeRemainingSeconds <= 0)
+			{
+				hasOrderMissed = true;
+			}
 		}
 	}
+
 	totalTime += deltaTime;
 	timeElapsed += deltaTime;
 	if(totalTime >= 30)
