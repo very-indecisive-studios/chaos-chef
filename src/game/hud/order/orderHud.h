@@ -25,5 +25,6 @@ public:
 	void Update(float deltaTime) override;
 
 	void SetOrder(Order *order);
+	void ClearOrder();
 	Order * GetOrder();
 };

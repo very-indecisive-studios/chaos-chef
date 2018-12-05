@@ -152,9 +152,14 @@ std::string InputManager::GetTextIn()
 	return textIn;
 }
 
-std::string InputManager::GetTextInWithLimit(int limit)
+std::string InputManager::GetTextInWithLimit(int limit, char charLimit)
 {
 	if (textIn.length() > limit ) // erase last character entered if past limit
+	{
+		textIn.erase(textIn.size() - 1);
+	}
+	
+	if (charIn == charLimit) 
 	{
 		textIn.erase(textIn.size() - 1);
 	}

@@ -50,6 +50,13 @@ void OrderHud::SetOrder(Order * order)
 	InitSprites();
 }
 
+void OrderHud::ClearOrder()
+{
+	this->order == nullptr;
+
+	ClearSprites();
+}
+
 Order * OrderHud::GetOrder()
 {
 	return this->order;

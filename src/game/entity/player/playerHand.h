@@ -32,6 +32,7 @@ public:
 
 	void Add(const PlatedFood *platedFood);
 	void Empty();
+	std::vector<const PlatedFood *> GetPlatedFood();
 
 	void Update(float deltaTime, Vector2 playerPosition);
 };

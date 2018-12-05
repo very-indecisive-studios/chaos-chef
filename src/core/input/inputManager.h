@@ -68,7 +68,7 @@ public:
 	std::string GetTextIn();
 
 	// Return text input as a string with a limit no of char
-	std::string GetTextInWithLimit(int limit);
+	std::string GetTextInWithLimit(int limit, char charLimit);
 
 	// Return last character entered
 	char GetCharIn();

@@ -35,6 +35,7 @@ public:
 	~Player();
 
 	UCHAR GetActionKey() { return actionKey; }
+	std::vector<const PlatedFood *> Give();
 
 	void HandleCollision(GameEntity *entity) override;
 

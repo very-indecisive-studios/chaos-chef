@@ -42,13 +42,24 @@ void OrderManager::Update(float deltaTime)
 		timeElapsed = 0;
 
 		// Check for any available order hud to render an order.
-		for (OrderHud &oHud : orderHuds)
+		//for (OrderHud &oHud : orderHuds)
+		//{
+		//	if (oHud.GetOrder() == nullptr)
+		//	{
+		//		oHud.SetOrder(newOrder);
+		//		break;
+		//	}
+		//}
+	}
+
+	for (int i = 0; i < 4; i++) 
+	{
+		if (currentOrder[i] == nullptr && orderQueue.size() > 0) 
 		{
-			if (oHud.GetOrder() == nullptr)
-			{
-				oHud.SetOrder(newOrder);
-				break;
-			}
+			Order *newOrder = orderQueue.back();
+			orderQueue.pop_back();
+			currentOrder[i] = newOrder;
+			orderHuds[i].SetOrder(newOrder);
 		}
 	}
 
@@ -66,4 +77,23 @@ bool OrderManager::HasMissedOrder()
 std::vector<Order *> OrderManager::GetOrders()
 {
 	return orderQueue;
+}
+
+std::vector<const PlatedFood *> OrderManager::GetCounterOrder(int counterNo)
+{
+	std::vector<const PlatedFood *> counterOrder;
+	if (currentOrder[counterNo] != nullptr)
+	{
+		for (const PlatedFood *p : currentOrder[counterNo]->meal->foods)
+		{
+			counterOrder.push_back(p);
+		}
+	}
+	return counterOrder;
+}
+
+void OrderManager::ClearCounterOrder(int counterNo)
+{
+	currentOrder[counterNo] = nullptr;
+	orderHuds[counterNo].ClearOrder();
 }

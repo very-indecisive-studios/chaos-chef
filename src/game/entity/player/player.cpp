@@ -6,6 +6,7 @@
 #include "core/math.h"
 #include "context.h"
 #include "game/data/gameSceneData.h"
+#include "game/entity/counter/counterArea.h"
 
 Player::Player()  
 	: GameEntity(GameEntityType::PLAYER) 
@@ -151,7 +152,11 @@ void Player::HandleCollision(GameEntity *entity)
 	{
 		if (Context::Get()->GetInputManager()->IsKeyDown(actionKey))
 		{
-			std::cout << "GIVE FOOD" << std::endl;
+			CounterArea *counterArea = (CounterArea *)entity;
+			if (counterArea->OrderSubmit(this->Give()))
+			{
+				hand.Empty();
+			}
 		}
 	}
 	else if (entity->GetType() == GameEntityType::VEHICLE) // GAME OVER scene
@@ -191,4 +196,9 @@ void Player::GetPlatedFood(GameEntity *entity) // Move player back to their orig
 
 		hand.Add(platedFood);
 	}
+}
+
+std::vector<const PlatedFood *> Player::Give()
+{
+	return hand.GetPlatedFood();
 }

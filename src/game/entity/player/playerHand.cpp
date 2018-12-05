@@ -90,3 +90,8 @@ void PlayerHand::Update(float deltaTime, Vector2 playerPosition)
 		s->Draw(playerPosition);
 	}
 }
+
+std::vector<const PlatedFood *> PlayerHand::GetPlatedFood()
+{
+	return foodsOnPlate;
+}

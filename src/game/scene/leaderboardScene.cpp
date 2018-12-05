@@ -39,7 +39,7 @@ void LeaderboardScene::AddPlayer()
 
 	if (!enterPressed)
 	{
-		currentName = Context::Get()->GetInputManager()->GetTextInWithLimit(NAME_INPUT_LIMIT);
+		currentName = Context::Get()->GetInputManager()->GetTextInWithLimit(NAME_INPUT_LIMIT, CHAR_LIMIT);
 
 		std::string addPlayerString = "Enter your name: " + currentName;
 
@@ -49,7 +49,7 @@ void LeaderboardScene::AddPlayer()
 	{
 		std::ofstream leaderboardFile; // ofstream - write to file
 		leaderboardFile.open(LEADERBOARD_DATA,std::ios_base::app); // app - append
-		leaderboardFile << currentName + "100\n"; //TO DO- score needs to be added dynamically
+		leaderboardFile << currentName + ",100\n"; //TO DO- score needs to be added dynamically
 		leaderboardFile.close();
 
 		playerAdded = true;
@@ -69,22 +69,31 @@ void LeaderboardScene::PrintLeaderboard()
 
 	std::ifstream leaderboardFile; // ifstream - read from file
 	leaderboardFile.open(LEADERBOARD_DATA);
+
 	while (std::getline(leaderboardFile, currentLine))
 	{
 		std::string currentName;
 		std::string currentScore;
-		int count = 0;
+		bool reachedCHAR_LIMIT = false;
+
 		for (char c : currentLine) 
 		{
-			if (count < NAME_INPUT_LIMIT)
+			std::cout << c << std::endl;
+			if (c == CHAR_LIMIT)
 			{
-				currentName += c;
+				reachedCHAR_LIMIT = true;
 			}
-			else 
+			else
 			{
-				currentScore += c;
+				if (!reachedCHAR_LIMIT)
+				{
+					currentName += c;
+				}
+				else
+				{
+					currentScore += c;
+				}
 			}
-			count++;
 		}
 		leaderboard.push_back(PlayerScore(currentName, std::stoi(currentScore)));
 	}

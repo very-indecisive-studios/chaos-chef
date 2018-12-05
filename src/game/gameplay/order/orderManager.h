@@ -23,6 +23,8 @@ private:
 		{ GameSceneData::Hud::Bottom::ORDER_HUD_LOCATION_3 },
 		{ GameSceneData::Hud::Bottom::ORDER_HUD_LOCATION_4 }
 	};
+
+	Order *currentOrder[4]{ nullptr };
 public:
 	OrderManager(const FoodMenu *foodMenu, float nextOrderIntervalSeconds);
 	~OrderManager();
@@ -30,4 +32,6 @@ public:
 	void Update(float deltaTime);
 	bool HasMissedOrder();
 	std::vector<Order *> GetOrders();
+	std::vector<const PlatedFood *> GetCounterOrder(int counterNo);
+	void ClearCounterOrder(int counterNo);
 };

@@ -14,6 +14,8 @@ GameScene::GameScene(const FoodMenu *foodMenu)
 {
 	map = Sprite::Create(GAME_SCENE_IMAGE, 0);
 
+	orderManager = new OrderManager(foodMenu, 10);
+
 	// Initialize player.
 	player = new Player();
 	player->SetPosition(GameSceneData::Map::PLAYER_SPAWN_LOCATION);
@@ -41,13 +43,14 @@ GameScene::GameScene(const FoodMenu *foodMenu)
 			++plFoodIt;
 		}
 	}
-
+	int counterNo = 0;
 	// Initialize counters.
 	for (const auto &counterAreaLocations : GameSceneData::Map::COUNTER_AREA)
 	{
-		CounterArea *counterArea = new CounterArea();
+		CounterArea *counterArea = new CounterArea(counterNo, orderManager);
 		counterArea->SetPosition(counterAreaLocations);
 		entities.push_back(counterArea);
+		counterNo++;
 	}
 
 	// Initialize props.
