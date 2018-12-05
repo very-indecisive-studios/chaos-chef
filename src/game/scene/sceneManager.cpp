@@ -46,7 +46,7 @@ void SceneManager::LoadPausedMenuScene()
 
 void SceneManager::LoadLeaderboardScene(bool needAddPlayer)
 {
-	Scene *leaderboardScene = new LeaderboardScene(needAddPlayer);
+	Scene *leaderboardScene = new LeaderboardScene(needAddPlayer, 100);//TODO:pass in score, 100 just a temp score
 
 	pendingSceneToLoad = leaderboardScene;
 }

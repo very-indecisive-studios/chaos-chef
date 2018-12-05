@@ -125,35 +125,28 @@ void Player::HandleCollision(GameEntity *entity)
 		entity->GetType() == GameEntityType::PROP
 	)
 	{
-		std::cout << "PROP/DISPENSER" << std::endl;
 		BlockPlayer(entity);
 	}
 	else if (entity->GetType() == GameEntityType::DISPENSER_AREA) // area around DISPENSER - get food with actionKey
 	{
-		std::cout << "DISPENSER AREA" << std::endl;
-
 		if (Context::Get()->GetInputManager()->IsKeyDown(actionKey))
 		{
 			GetPlatedFood(entity);
-			std::cout << "GET FOOD" << std::endl;
 		}
 	}
 	else if (entity->GetType() == GameEntityType::TRASH_BIN_AREA) // remove food on action_button
 	{
-		std::cout << "TRASH BIN AREA" << std::endl;
-
 		if (Context::Get()->GetInputManager()->IsKeyDown(actionKey))
 		{
-			std::cout << "REMOVE FOOD" << std::endl;
 			hand.Empty();
 		}
 	}
-	else if (entity->GetType() == GameEntityType::COUNTER_AREA) // area around COUNTER - if dish-on-hand == order, give dish}
+	else if (entity->GetType() == GameEntityType::COUNTER_AREA) // area around COUNTER
 	{
 		if (Context::Get()->GetInputManager()->IsKeyDown(actionKey))
 		{
 			CounterArea *counterArea = (CounterArea *)entity;
-			if (counterArea->OrderSubmit(this->Give()))
+			if (counterArea->OrderSubmit(this->Give())) // if correct order - remove plated food on hand
 			{
 				hand.Empty();
 			}
@@ -185,7 +178,7 @@ void Player::BlockPlayer(GameEntity *entity) // Move player back to their origin
 	}
 }
 
-void Player::GetPlatedFood(GameEntity *entity) // Move player back to their original spot
+void Player::GetPlatedFood(GameEntity *entity)
 {
 	DispenserArea *currentDispenserArea = (DispenserArea *)entity;
 	Dispenser *currentDispenser = currentDispenserArea->GetDispenser();
@@ -200,5 +193,5 @@ void Player::GetPlatedFood(GameEntity *entity) // Move player back to their orig
 
 std::vector<const PlatedFood *> Player::Give()
 {
-	return hand.GetPlatedFood();
+	return hand.GetCurrentPlatedFood();
 }

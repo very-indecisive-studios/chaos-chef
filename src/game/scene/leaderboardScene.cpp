@@ -8,10 +8,11 @@
 #include "context.h"
 #include "constants.h"
 
-LeaderboardScene::LeaderboardScene(bool needAddPlayer)
+LeaderboardScene::LeaderboardScene(bool needAddPlayer, int score)
 	: Scene(SceneType::LEADERBOARD)
 {
 	requireAdditionOfPlayer = needAddPlayer;
+	playerScore = score;
 	topText = Text::Create("GAME OVER", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
 	bodyText = Text::Create("", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
 	bottomText = Text::Create("Press enter to continue", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
@@ -31,6 +32,7 @@ LeaderboardScene::~LeaderboardScene()
 
 void LeaderboardScene::AddPlayer()
 {
+	topText->Draw(Vector2(0, 0));
 	if (Context::Get()->GetInputManager()->IsKeyDown(VK_RETURN)) 
 	{
 		enterPressed = true;
@@ -49,7 +51,7 @@ void LeaderboardScene::AddPlayer()
 	{
 		std::ofstream leaderboardFile; // ofstream - write to file
 		leaderboardFile.open(LEADERBOARD_DATA,std::ios_base::app); // app - append
-		leaderboardFile << currentName + ",100\n"; //TO DO- score needs to be added dynamically
+		leaderboardFile << currentName + "," + std::to_string(playerScore) + "\n";
 		leaderboardFile.close();
 
 		playerAdded = true;
@@ -78,7 +80,6 @@ void LeaderboardScene::PrintLeaderboard()
 
 		for (char c : currentLine) 
 		{
-			std::cout << c << std::endl;
 			if (c == CHAR_LIMIT)
 			{
 				reachedCHAR_LIMIT = true;
@@ -131,13 +132,12 @@ void LeaderboardScene::ProcessLeaderboard()
 			Context::Get()->GetSceneManager()->LoadMainMenuScene();
 		}
 	}
-	bodyText->Draw(Vector2(0, 100));
+	bodyText->Draw(Vector2(0, FONT_SIZE));
 }
 
 void LeaderboardScene::Update(float deltaTime)
 {
 	ProcessLeaderboard();
 
-	topText->Draw(Vector2(0, 0));
 	bottomText->Draw(Vector2(0, GAME_HEIGHT - FONT_SIZE));
 }

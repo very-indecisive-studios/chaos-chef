@@ -74,8 +74,6 @@ GameScene::GameScene(const FoodMenu *foodMenu)
 	trashBinArea->SetCollisionBounds(GameSceneData::Map::TRASH_BIN_AREA_LOCATION_BOUNDS.second);
 	entities.push_back(trashBinArea);
 
-	orderManager = new OrderManager(&FOOD_MENU_SS, 10);
-
 	vehicleSpawner = new VehicleSpawner();
 }
 
