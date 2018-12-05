@@ -1,8 +1,8 @@
 #include "text.h"
 #include "context.h"
 
-Text::Text(const std::string &text, uint8_t layer, int color, Font font)
-	: text(text), layer(layer), color(color), font(font)
+Text::Text(const std::string &text, uint8_t layer, int color, int alignment, Font font)
+	: text(text), layer(layer), color(color), alignment(alignment), font(font)
 { }
 
 Text::~Text()
@@ -16,6 +16,7 @@ void Text::Draw(Vector2 position)
 		text,
 		angleDegrees,
 		color,
+		alignment,
 		position,
 		layer
 	};
@@ -54,13 +55,14 @@ float Text::GetAngleDegrees()
 }
 
 Text * Text::Create(
-	const std::string& text, 
+	const std::string& text,
 	const std::string& fontName,
 	int color,
-	uint8_t size,  
+	uint8_t size,
 	uint8_t layer,
 	bool bold,
-	bool italic
+	bool italic,
+	int alignment
 )
 {
 	UINT weight = FW_NORMAL;
@@ -70,5 +72,5 @@ Text * Text::Create(
 	}
 
 	Font font = Context::Get()->GetGraphicsRenderer()->LoadFont(fontName, size, weight, italic);
-	return new Text(text, layer, color, font);
+	return new Text(text, layer, color, alignment, font);
 }

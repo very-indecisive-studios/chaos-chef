@@ -49,6 +49,7 @@ struct DrawFontJob : public DrawJob
 	std::string text;
 	float angleDegrees = 0;
 	int color = 0xFFFFFFFF;
+	int alignment;
 	uint8_t layer;
 
 	DrawFontJob
@@ -56,14 +57,16 @@ struct DrawFontJob : public DrawJob
 		Font font, 
 		std::string text, 
 		float angleDegrees, 
-		int color, 
+		int color,
+		int alignment,
 		Vector2 pos, 
 		uint8_t layer
 	) : DrawJob(DrawJobType::FONT, pos, layer),
 		font(font),
 		text(text),
 		angleDegrees(angleDegrees),
-		color(color)
+		color(color),
+		alignment(alignment)
 	{ }
 	~DrawFontJob() { }
 };

@@ -11,9 +11,9 @@ private:
 	int color = 0xFFFFFFFF;
 	uint8_t layer;
 	Font font;
-
+	int alignment;
 public:
-	Text(const std::string &text, uint8_t layer, int color, Font font);
+	Text(const std::string &text, uint8_t layer, int color, int alignment, Font font);
 	~Text();
 	void Draw(Vector2 position);
 
@@ -24,5 +24,5 @@ public:
 	Font GetFont();
 	float GetAngleDegrees();
 
-	static Text * Create(const std::string & text, const std::string & fontName, int color, uint8_t size, uint8_t layer, bool bold, bool italic);
+	static Text * Create(const std::string& text, const std::string& fontName, int color, uint8_t size, uint8_t layer, bool bold, bool italic, int alignment = DT_CENTER);
 };

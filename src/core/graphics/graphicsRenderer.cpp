@@ -264,7 +264,7 @@ HRESULT GraphicsRenderer::Render()
 					textJob->text.c_str(),
 					-1,
 					&posRect,
-					DT_CENTER,
+					textJob->alignment,
 					textJob->color
 				);
 			}

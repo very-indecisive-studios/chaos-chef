@@ -38,25 +38,25 @@ namespace GameSceneData
 
 		namespace Bottom
 		{
-			static const Vector2 LOCATION = Vector2(0, 25) * TILE_SIZE;
+			static const Vector2 LOCATION = Vector2(0, 24) * TILE_SIZE;
 			static const Vector2 ORDER_TEXT_LOCATION = Vector2(0, 24) * TILE_SIZE;
 
 			static const Vector2	ORDER_HUD_NEXT			= Vector2(10, 0) * TILE_SIZE;
-			static const Vector2	ORDER_HUD_LOCATION_1	= Vector2(0, 25) * TILE_SIZE;
+			static const Vector2	ORDER_HUD_LOCATION_1	= Vector2(0, 24) * TILE_SIZE;
 			static const Vector2	ORDER_HUD_LOCATION_2	= ORDER_HUD_LOCATION_1 + ORDER_HUD_NEXT;
 			static const Vector2	ORDER_HUD_LOCATION_3	= ORDER_HUD_LOCATION_2 + ORDER_HUD_NEXT;
 			static const Vector2	ORDER_HUD_LOCATION_4	= ORDER_HUD_LOCATION_3 + ORDER_HUD_NEXT;
 
-			static const int	ORDER_HUD_PF_SCALE = 2;
-			static const int	ORDER_HUD_IG_SCALE = 1;
+			static const int		ORDER_HUD_PF_SCALE			= 2;
+			static const Vector2	ORDER_HUD_PF_REL_LOCATION	= Vector2(0.5, 1) * TILE_SIZE;
+
 			static const int	ORDER_HUD_TEXT_SIZE = 16;
 
+			static const Vector2	ORDER_HUD_TIME_REL_LOCATION = Vector2(5.5, 1) * TILE_SIZE;
 
-			static const Vector2	ORDER_HUD_TIME_REL_LOCATION = Vector2(5, 1) * TILE_SIZE;
-			static const Vector2	ORDER_HUD_PF_REL_LOCATION	= Vector2(0.5, 0.5) * TILE_SIZE;
-
+			static const int	ORDER_HUD_IG_SCALE = 1;
 			static const Vector2	ORDER_HUD_ING_REL_NEXT			= Vector2(2, 0) * TILE_SIZE;
-			static const Vector2	ORDER_HUD_ING_REL_LOCATION_1	= Vector2(0, 3.5) * TILE_SIZE;
+			static const Vector2	ORDER_HUD_ING_REL_LOCATION_1	= Vector2(0, 4.5) * TILE_SIZE;
 			static const Vector2	ORDER_HUD_ING_REL_LOCATION_2	= ORDER_HUD_ING_REL_LOCATION_1 + ORDER_HUD_ING_REL_NEXT;
 			static const Vector2	ORDER_HUD_ING_REL_LOCATION_3	= ORDER_HUD_ING_REL_LOCATION_2 + ORDER_HUD_ING_REL_NEXT;
 			static const Vector2	ORDER_HUD_ING_REL_LOCATION_4	= ORDER_HUD_ING_REL_LOCATION_3 + ORDER_HUD_ING_REL_NEXT;

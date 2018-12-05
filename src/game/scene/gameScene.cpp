@@ -14,8 +14,8 @@ GameScene::GameScene(const FoodMenu *foodMenu)
 	: Scene(SceneType::GAME)
 {
 	map = Sprite::Create(GAME_SCENE_IMAGE, 0);
-	handText = Text::Create("Hand", "Arial", 0xFFFFFFFF, 16, 100, false, false);
-	ordersText = Text::Create("Orders", "Arial", 0xFFFFFFFF, 16, 100, false, false);
+	handText = Text::Create("Hand", "Arial", 0xFF000000, 16, 100, false, false, DT_LEFT);
+	ordersText = Text::Create("Orders", "Arial", 0xFF000000, 16, 100, false, false, DT_LEFT);
 
 	orderManager = new OrderManager(foodMenu, 10);
 

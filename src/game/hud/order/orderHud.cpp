@@ -11,6 +11,8 @@ OrderHud::~OrderHud()
 	
 	ClearSprites();
 
+	delete timerText;
+
 	// Don't delete order. OrderManager will handle the deletion.
 }
 
@@ -39,6 +41,13 @@ void OrderHud::Update(float deltaTime)
 			// Increment vector iterator.
 			++ingreSpritesIt;
 		}
+		
+		int minutes = (int) order->timeRemainingSeconds / 60;
+		int seconds = (int) order->timeRemainingSeconds % 60;
+		std::string timeString = std::to_string(minutes) + ":" + (seconds >= 10 ? std::to_string(seconds) : "0" + std::to_string(seconds));
+		timerText->SetText(timeString);
+
+		timerText->Draw(position + GameSceneData::Hud::Bottom::ORDER_HUD_TIME_REL_LOCATION);
 	}
 }
 
