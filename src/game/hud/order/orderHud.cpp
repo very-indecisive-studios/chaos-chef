@@ -61,7 +61,7 @@ void OrderHud::SetOrder(Order * order)
 
 void OrderHud::ClearOrder()
 {
-	this->order == nullptr;
+	this->order = nullptr;
 
 	ClearSprites();
 }
