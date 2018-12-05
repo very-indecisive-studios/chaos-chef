@@ -103,6 +103,7 @@
     <ClCompile Include="src\game\entity\prop.cpp" />
     <ClCompile Include="src\game\entity\trashBin\trashBinArea.cpp" />
     <ClCompile Include="src\game\entity\vehicle\vehicle.cpp" />
+    <ClCompile Include="src\game\gameplay\vehicleSpawn\vehicleSpawner.cpp" />
     <ClCompile Include="src\game\hud\hand\handCombHud.cpp" />
     <ClCompile Include="src\game\hud\hand\handIndvHud.cpp" />
     <ClCompile Include="src\game\hud\hud.cpp" />
@@ -143,6 +144,7 @@
     <ClInclude Include="src\game\entity\prop.h" />
     <ClInclude Include="src\game\entity\trashBin\trashBinArea.h" />
     <ClInclude Include="src\game\entity\vehicle\vehicle.h" />
+    <ClInclude Include="src\game\gameplay\vehicleSpawn\vehicleSpawner.h" />
     <ClInclude Include="src\game\hud\hand\handCombHud.h" />
     <ClInclude Include="src\game\hud\hand\handIndvHud.h" />
     <ClInclude Include="src\game\hud\hud.h" />

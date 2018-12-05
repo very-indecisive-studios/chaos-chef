@@ -13,15 +13,6 @@
     <ClCompile Include="src\game\entity\gameEntity.cpp" />
     <ClCompile Include="src\game\scene\gameScene.cpp" />
     <ClCompile Include="src\game.cpp" />
-    <ClCompile Include="src\game\entity\player.cpp" />
-    <ClCompile Include="src\game\entity\dispenser.cpp" />
-    <ClCompile Include="src\game\entity\counter.cpp" />
-    <ClCompile Include="src\game\entity\dispenserArea.cpp" />
-    <ClCompile Include="src\game\entity\counterArea.cpp" />
-    <ClCompile Include="src\game\entity\trashBin.cpp" />
-    <ClCompile Include="src\game\entity\trashBinArea.cpp" />
-    <ClCompile Include="src\game\entity\vehicle.cpp" />
-    <ClCompile Include="src\game\order\orderManager.cpp" />
     <ClCompile Include="src\game\scene\leaderboardScene.cpp" />
     <ClCompile Include="src\game\scene\sceneManager.cpp" />
     <ClCompile Include="src\game\scene\mainMenuScene.cpp" />
@@ -41,6 +32,7 @@
     <ClCompile Include="src\game\entity\vehicle\vehicle.cpp" />
     <ClCompile Include="src\game\gameplay\order\orderManager.cpp" />
     <ClCompile Include="src\game\entity\prop.cpp" />
+    <ClCompile Include="src\game\gameplay\vehicleSpawn\vehicleSpawner.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\constants.h" />
@@ -59,7 +51,6 @@
     <ClInclude Include="src\game.h" />
     <ClInclude Include="src\core\math.h" />
     <ClInclude Include="src\game\data\food.h" />
-    <ClInclude Include="src\game\order\orderManager.h" />
     <ClInclude Include="src\game\scene\leaderboardScene.h" />
     <ClInclude Include="src\game\scene\sceneManager.h" />
     <ClInclude Include="src\game\scene\mainMenuScene.h" />
@@ -67,7 +58,6 @@
     <ClInclude Include="src\game\scene\pausedMenuScene.h" />
     <ClInclude Include="src\core\text\text.h" />
     <ClInclude Include="src\core\graphics\font.h" />
-    <ClInclude Include="src\game\order\order.h" />
     <ClInclude Include="src\game\hud\hud.h" />
     <ClInclude Include="src\game\hud\order\orderHud.h" />
     <ClInclude Include="src\game\hud\hand\handCombHud.h" />
@@ -84,5 +74,6 @@
     <ClInclude Include="src\game\entity\prop.h" />
     <ClInclude Include="src\game\data\gameSceneData.h" />
     <ClInclude Include="src\game\data\Layer.h" />
+    <ClInclude Include="src\game\gameplay\vehicleSpawn\vehicleSpawner.h" />
   </ItemGroup>
 </Project>
