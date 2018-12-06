@@ -71,7 +71,7 @@ void MainMenuScene::CheckButtonClick()
 		}
 		else if (pointedButton == bodyText3) //transition to leaderboard scene
 		{
-			Context::Get()->GetSceneManager()->LoadLeaderboardScene(true, 100);
+			Context::Get()->GetSceneManager()->LoadLeaderboardScene(false, 0);
 		}
 		else if (pointedButton == bodyText4) //transition to credits menu
 		{
