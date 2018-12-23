@@ -195,6 +195,10 @@ HRESULT GraphicsRenderer::Render()
 		ThrowIfFailed(deviceD3D->BeginScene());
 		ThrowIfFailed(spriteD3D->Begin(D3DXSPRITE_ALPHABLEND));
 		
+		// Use nearest filtering because we using pixel art.
+		deviceD3D->SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_POINT);
+		deviceD3D->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_POINT);
+
 		// Sort the jobs according to layers; ascending order.
 		std::sort(
 			drawJobs.begin(), 
