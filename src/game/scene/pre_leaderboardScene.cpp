@@ -1,13 +1,13 @@
 #include <iostream>
-#include "levelSelectScene.h"
+#include "pre_leaderboardScene.h"
 #include "game/resources.h"
 #include "context.h"
 #include "constants.h"
 
-LevelSelectScene::LevelSelectScene() 
-	: Scene(SceneType::LEVEL_SELECT)
+PreLeaderboardScene::PreLeaderboardScene()
+	: Scene(SceneType::PRE_LEADERBOARD)
 {
-	topText = Text::Create("Select a level", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
+	topText = Text::Create("Leaderboard Levels", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
 
 	bodyText1 = Text::Create("Newbie - Fried Basket", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
 	bodyText2 = Text::Create("Easy - Sashimi + Sushi", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
@@ -24,7 +24,7 @@ LevelSelectScene::LevelSelectScene()
 	pointedButton = bodyText1;
 }
 
-LevelSelectScene::~LevelSelectScene()
+PreLeaderboardScene::~PreLeaderboardScene()
 {
 	for (Text *text : buttons)
 	{
@@ -34,7 +34,7 @@ LevelSelectScene::~LevelSelectScene()
 	delete topText;
 }
 
-void LevelSelectScene::ManeuverMenu()
+void PreLeaderboardScene::ManeuverMenu()
 {
 	if (Context::Get()->GetInputManager()->IsKeyDown(VK_DOWN))
 	{
@@ -58,43 +58,43 @@ void LevelSelectScene::ManeuverMenu()
 	pointedButton->SetColor(FONT_COLOR_RED);
 }
 
-void LevelSelectScene::CheckButtonClick()
+void PreLeaderboardScene::CheckButtonClick()
 {
 	if (Context::Get()->GetInputManager()->IsKeyDown(VK_RETURN))
 	{
 		Context::Get()->GetInputManager()->ClearAll();
-		if (pointedButton == bodyText1) // Newbie - Fried Basket
+		if (pointedButton == bodyText1)
 		{
-			Context::Get()->GetSceneManager()->LoadGameScene(&FOOD_MENU_FB);
+			Context::Get()->GetSceneManager()->LoadLeaderboardScene(false, 0, "Fried Basket");
 		}
-		else if (pointedButton == bodyText2) // Easy - Sashimi + Sushi
+		else if (pointedButton == bodyText2)
 		{
-			Context::Get()->GetSceneManager()->LoadGameScene(&FOOD_MENU_SS);
+			Context::Get()->GetSceneManager()->LoadLeaderboardScene(false, 0, "Sashimi & Sushi");
 		}
-		else if (pointedButton == bodyText3) // Medium - Pizza
+		else if (pointedButton == bodyText3)
 		{
-			Context::Get()->GetSceneManager()->LoadGameScene(&FOOD_MENU_PIZZA);
+			Context::Get()->GetSceneManager()->LoadLeaderboardScene(false, 0, "Pizza");
 		}
-		else if (pointedButton == bodyText4) // Hard - Pasta
+		else if (pointedButton == bodyText4)
 		{
-			Context::Get()->GetSceneManager()->LoadGameScene(&FOOD_MENU_PASTA);
+			Context::Get()->GetSceneManager()->LoadLeaderboardScene(false, 0, "Pasta");
 		}
-		else if (pointedButton == bodyText5) // BACK
+		else if (pointedButton == bodyText5)
 		{
 			Context::Get()->GetSceneManager()->LoadMainMenuScene();
 		}
 	}
 }
 
-void LevelSelectScene::Update(float deltaTime)
+void PreLeaderboardScene::Update(float deltaTime)
 {
 	ManeuverMenu();
 	CheckButtonClick();
 
-	int noOfLevels = buttons.size() - 1;
 	int count = 0;
+	int noOfLevels = buttons.size() - 1;
 	topText->Draw(Vector2(0, 0));
-	
+
 	for (Text *button : buttons)
 	{
 		if (count == noOfLevels) // last button - BACK button
@@ -103,7 +103,7 @@ void LevelSelectScene::Update(float deltaTime)
 		}
 		else
 		{
-			button->Draw(Vector2(0, (GAME_HEIGHT*0.5f - (noOfLevels/2 * FONT_SIZE)) + (FONT_SIZE * count)));
+			button->Draw(Vector2(0, (GAME_HEIGHT*0.5f - (noOfLevels / 2 * FONT_SIZE)) + (FONT_SIZE * count)));
 		}
 		count++;
 	}

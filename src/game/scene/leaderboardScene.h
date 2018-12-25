@@ -22,6 +22,7 @@ class LeaderboardScene : public Scene
 {
 private:
 	int playerScore;
+	std::string currentLevel;
 	std::vector<PlayerScore> leaderboard;
 	std::string currentName;
 	bool requireAdditionOfPlayer;
@@ -33,7 +34,7 @@ private:
 	Text *bottomText;
 
 public:
-	LeaderboardScene(bool needAddPlayer, int totalScore);
+	LeaderboardScene(bool needAddPlayer, int totalScore, std::string level);
 	~LeaderboardScene();
 
 	void AddPlayer(int playerScore);

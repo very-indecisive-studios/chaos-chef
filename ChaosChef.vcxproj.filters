@@ -34,6 +34,7 @@
     <ClCompile Include="src\game\gameplay\vehicleSpawn\vehicleSpawner.cpp" />
     <ClCompile Include="src\game\entity\customer\customer.cpp" />
     <ClCompile Include="src\core\graphics\font.cpp" />
+    <ClCompile Include="src\game\scene\pre_leaderboardScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\constants.h" />
@@ -76,5 +77,6 @@
     <ClInclude Include="src\game\data\Layer.h" />
     <ClInclude Include="src\game\gameplay\vehicleSpawn\vehicleSpawner.h" />
     <ClInclude Include="src\game\entity\customer\customer.h" />
+    <ClInclude Include="src\game\scene\pre_leaderboardScene.h" />
   </ItemGroup>
 </Project>

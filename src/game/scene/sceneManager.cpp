@@ -23,6 +23,13 @@ void SceneManager::LoadMainMenuScene()
 	pendingSceneToLoad = mainMenuScene;
 }
 
+void SceneManager::LoadPreLeaderboardScene()
+{
+	Scene *preLeaderboardScene = new PreLeaderboardScene();
+
+	pendingSceneToLoad = preLeaderboardScene;
+}
+
 void SceneManager::LoadSelectLevelScene()
 {
 	Scene *levelSelectScene = new LevelSelectScene();
@@ -37,9 +44,9 @@ void SceneManager::LoadGameScene(const FoodMenu *foodMenu)
 	pendingSceneToLoad = gameScene;
 }
 
-void SceneManager::LoadLeaderboardScene(bool needAddPlayer, int playerScore)
+void SceneManager::LoadLeaderboardScene(bool needAddPlayer, int playerScore, std::string level)
 {
-	Scene *leaderboardScene = new LeaderboardScene(needAddPlayer, playerScore);
+	Scene *leaderboardScene = new LeaderboardScene(needAddPlayer, playerScore, level);
 
 	pendingSceneToLoad = leaderboardScene;
 }

@@ -8,12 +8,28 @@
 #include "context.h"
 #include "constants.h"
 
-LeaderboardScene::LeaderboardScene(bool needAddPlayer, int totalScore)
+LeaderboardScene::LeaderboardScene(bool needAddPlayer, int totalScore, std::string level)
 	: Scene(SceneType::LEADERBOARD)
 {
 	playerScore = totalScore;
 	requireAdditionOfPlayer = needAddPlayer;
-	topText = Text::Create("GAME OVER", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
+	currentLevel = level;
+	if (currentLevel == "Fried Basket")
+	{
+		topText = Text::Create("GAME OVER\nNewbie - Fried Basket", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
+	}
+	else if (currentLevel == "Sashimi & Sushi")
+	{
+		topText = Text::Create("GAME OVER\nEasy - Sashimi + Sushi", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
+	}
+	else if (currentLevel == "Pizza")
+	{
+		topText = Text::Create("GAME OVER\nMedium - Pizza", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
+	}
+	else if (currentLevel == "Pasta")
+	{
+		topText = Text::Create("GAME OVER\nHard - Pasta", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
+	}
 	bodyText = Text::Create("", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
 	bottomText = Text::Create("Press enter to continue", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
 }
@@ -50,7 +66,22 @@ void LeaderboardScene::AddPlayer(int playerScore)
 	else
 	{
 		std::ofstream leaderboardFile; // ofstream - write to file
-		leaderboardFile.open(LEADERBOARD_DATA,std::ios_base::app); // app - append
+		if (currentLevel == "Fried Basket")
+		{
+			leaderboardFile.open(LEADERBOARD_DATA_FRIED_BASKET, std::ios_base::app); // app - append
+		}
+		else if (currentLevel == "Sashimi & Sushi")
+		{
+			leaderboardFile.open(LEADERBOARD_DATA_S_AND_S, std::ios_base::app);
+		}
+		else if (currentLevel == "Pizza")
+		{
+			leaderboardFile.open(LEADERBOARD_DATA_PIZZA, std::ios_base::app);
+		}
+		else if (currentLevel == "Pasta")
+		{
+			leaderboardFile.open(LEADERBOARD_DATA_PASTA, std::ios_base::app);
+		}
 		leaderboardFile << currentName + "," + std::to_string(playerScore) + "\n";
 		leaderboardFile.close();
 
@@ -61,7 +92,7 @@ void LeaderboardScene::AddPlayer(int playerScore)
 
 void LeaderboardScene::PrintLeaderboard()
 {
-	std::string leaderboardString = "Leaderboard \n \n";
+	std::string leaderboardString;
 	int position = 0;
 	int previousPlayerScore = NULL;
 
@@ -70,7 +101,27 @@ void LeaderboardScene::PrintLeaderboard()
 	leaderboard.clear();
 
 	std::ifstream leaderboardFile; // ifstream - read from file
-	leaderboardFile.open(LEADERBOARD_DATA);
+
+	if (currentLevel == "Fried Basket")
+	{
+		leaderboardString = "Leaderboard - Fried Basket\n \n";
+		leaderboardFile.open(LEADERBOARD_DATA_FRIED_BASKET); // app - append
+	}
+	else if (currentLevel == "Sashimi & Sushi")
+	{
+		leaderboardString = "Leaderboard - Sashimi + Sushi\n \n";
+		leaderboardFile.open(LEADERBOARD_DATA_S_AND_S);
+	}
+	else if (currentLevel == "Pizza")
+	{
+		leaderboardString = "Leaderboard - Pizza\n \n";
+		leaderboardFile.open(LEADERBOARD_DATA_PIZZA);
+	}
+	else if (currentLevel == "Pasta")
+	{
+		leaderboardString = "Leaderboard - Pasta\n \n";
+		leaderboardFile.open(LEADERBOARD_DATA_PASTA);
+	}
 
 	while (std::getline(leaderboardFile, currentLine))
 	{
@@ -132,7 +183,7 @@ void LeaderboardScene::ProcessLeaderboard(int playerScore)
 			Context::Get()->GetSceneManager()->LoadMainMenuScene();
 		}
 	}
-	bodyText->Draw(Vector2(0, FONT_SIZE));
+	bodyText->Draw(Vector2(0, FONT_SIZE * 2.5));
 }
 
 void LeaderboardScene::Update(float deltaTime)

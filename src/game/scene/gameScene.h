@@ -23,7 +23,7 @@ private:
 	TrashBinArea *trashBinArea = nullptr;
 	std::vector<GameEntity *> entities;
 
-	const FoodMenu *foodMenu = &FOOD_MENU_SS;
+	const FoodMenu *currentFoodMenu;
 	bool isPaused = false;
 	Text *pauseText;
 

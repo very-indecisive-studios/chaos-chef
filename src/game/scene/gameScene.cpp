@@ -16,6 +16,7 @@
 GameScene::GameScene(const FoodMenu *foodMenu) 
 	: Scene(SceneType::GAME)
 {
+	currentFoodMenu = foodMenu;
 	map = Sprite::Create(GAME_SCENE_IMAGE, 0);
 	handText = Text::Create("Hand", "Pixel Operator", 0xFF000000, 16, 100, false, false, DT_LEFT);
 	ordersText = Text::Create("Orders", "Arial", 0xFF000000, 16, 100, false, false, DT_LEFT);
@@ -104,7 +105,7 @@ GameScene::~GameScene()
 
 void GameScene::SetFoodMenu(const FoodMenu *foodMenu)
 {
-	this->foodMenu = foodMenu;
+	this->currentFoodMenu = foodMenu;
 }
 
 void GameScene::Update(float deltaTime)
@@ -123,7 +124,8 @@ void GameScene::Update(float deltaTime)
 	if (orderManager->HasMissedOrder()||player->isDead())
 	{
 		int playerScore = orderManager->GetScore() - trashBinArea->GetTrashScore();
-		Context::Get()->GetSceneManager()->LoadLeaderboardScene(true, playerScore);
+		Context::Get()->GetInputManager()->ClearAll();
+		Context::Get()->GetSceneManager()->LoadLeaderboardScene(true, playerScore, currentFoodMenu->name);
 	}
 	orderManager->Update(deltaTime);
 

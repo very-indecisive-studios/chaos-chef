@@ -115,6 +115,7 @@
     <ClCompile Include="src\game\scene\leaderboardScene.cpp" />
     <ClCompile Include="src\game\scene\levelSelectScene.cpp" />
     <ClCompile Include="src\game\scene\mainMenuScene.cpp" />
+    <ClCompile Include="src\game\scene\pre_leaderboardScene.cpp" />
     <ClCompile Include="src\game\scene\scene.cpp" />
     <ClCompile Include="src\core\sprites\sprite.cpp" />
     <ClCompile Include="src\core\graphics\texture.cpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="src\game\scene\leaderboardScene.h" />
     <ClInclude Include="src\game\scene\levelSelectScene.h" />
     <ClInclude Include="src\game\scene\mainMenuScene.h" />
+    <ClInclude Include="src\game\scene\pre_leaderboardScene.h" />
     <ClInclude Include="src\game\scene\scene.h" />
     <ClInclude Include="src\core\sprites\sprite.h" />
     <ClInclude Include="src\core\graphics\texture.h" />
