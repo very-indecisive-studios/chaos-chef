@@ -33,6 +33,7 @@
     <ClCompile Include="src\game\entity\prop.cpp" />
     <ClCompile Include="src\game\gameplay\vehicleSpawn\vehicleSpawner.cpp" />
     <ClCompile Include="src\game\entity\customer\customer.cpp" />
+    <ClCompile Include="src\core\graphics\font.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\constants.h" />

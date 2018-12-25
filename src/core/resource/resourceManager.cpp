@@ -10,22 +10,48 @@ ResourceManager::~ResourceManager()
 	{
 		delete pair.second;
 	}
+
+	// Deallocate all fonts.
+	for (const auto& font : fontResourceList)
+	{
+		delete font;
+	}
 }
 
-Texture * ResourceManager::GetTexture(std::string textureName) 
+Texture * ResourceManager::GetTexture(const std::string &textureName)
 {
 	auto itr = textureResourceMap.find(textureName);
-	
-	if (itr != textureResourceMap.end()) 
+
+	if (itr != textureResourceMap.end())
 	{
 		return itr->second;
 	}
-	else 
+
+	Texture *loadedTexture = Context::Get()->GetGraphicsRenderer()->LoadTextureFromFile(textureName);
+
+	textureResourceMap[textureName] = loadedTexture;
+
+	return loadedTexture;
+}
+
+
+Font * ResourceManager::GetFont(const std::string& fontName, int height, UINT weight, BOOL italic)
+{
+	for (const auto font : fontResourceList)
 	{
-		Texture *loadedTexture = Context::Get()->GetGraphicsRenderer()->LoadTextureFromFile(textureName);
-
-		textureResourceMap[textureName] = loadedTexture;
-
-		return loadedTexture;
+		if (
+			font->GetFontName() == fontName &&
+			font->GetHeight() == height && 
+			font->GetWeight() == weight && 
+			font->GetItalic() == italic)
+		{
+			return font;
+		}
 	}
+
+	Font *loadedFont = Context::Get()->GetGraphicsRenderer()->LoadFont(fontName, height, weight, italic);
+
+	fontResourceList.push_back(loadedFont);
+
+	return loadedFont;
 }

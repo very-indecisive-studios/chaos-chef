@@ -17,7 +17,7 @@ GameScene::GameScene(const FoodMenu *foodMenu)
 	: Scene(SceneType::GAME)
 {
 	map = Sprite::Create(GAME_SCENE_IMAGE, 0);
-	handText = Text::Create("Hand", "Arial", 0xFF000000, 16, 100, false, false, DT_LEFT);
+	handText = Text::Create("Hand", "Pixel Operator", 0xFF000000, 16, 100, false, false, DT_LEFT);
 	ordersText = Text::Create("Orders", "Arial", 0xFF000000, 16, 100, false, false, DT_LEFT);
 
 	pauseText = Text::Create("PAUSED", FONT_TYPE, FONT_COLOR_WHITE, 64, 100, false, false);

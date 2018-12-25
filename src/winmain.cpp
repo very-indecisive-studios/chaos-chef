@@ -40,6 +40,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		return 1;
 	}
 
+	// Install fonts required by game.
+	AddFontResource(FONT_NAME.c_str());
+	AddFontResource(FONT_NAME_BOLD.c_str());
+
 	// Initialize application context.
 	Context::Initialize();
 
@@ -72,6 +76,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	}
 
 	Context::Get()->ReleaseAll();
+
+	// Uninstall fonts required by game.
+	RemoveFontResource(FONT_NAME.c_str());
+	RemoveFontResource(FONT_NAME_BOLD.c_str());
 
 	return msg.wParam;
 }

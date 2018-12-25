@@ -1,12 +1,14 @@
 #include "text.h"
 #include "context.h"
 
-Text::Text(const std::string &text, uint8_t layer, int color, int alignment, Font font)
+Text::Text(const std::string &text, uint8_t layer, int color, int alignment, Font *font)
 	: text(text), layer(layer), color(color), alignment(alignment), font(font)
 { }
 
 Text::~Text()
-{ }
+{ 
+	delete font;
+}
 
 void Text::Draw(Vector2 position)
 {
@@ -44,7 +46,7 @@ void Text::SetColor(int color)
 	this->color = color;
 }
 
-Font Text::GetFont()
+Font * Text::GetFont()
 {
 	return this->font;
 }
@@ -71,6 +73,6 @@ Text * Text::Create(
 		weight = weight | FW_BOLD;
 	}
 
-	Font font = Context::Get()->GetGraphicsRenderer()->LoadFont(fontName, size, weight, italic);
+	Font *font = Context::Get()->GetGraphicsRenderer()->LoadFont(fontName, size, weight, italic);
 	return new Text(text, layer, color, alignment, font);
 }

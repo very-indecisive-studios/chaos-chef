@@ -9,6 +9,7 @@
 #include "core/sprites/sprite.h"
 #include "core/text/text.h"
 
+
 enum class DrawJobType { TEXTURE, FONT };
 
 struct DrawJob
@@ -45,7 +46,7 @@ struct DrawTextureJob : public DrawJob
 
 struct DrawFontJob : public DrawJob
 {
-	Font font;
+	Font *font;
 	std::string text;
 	float angleDegrees = 0;
 	int color = 0xFFFFFFFF;
@@ -54,7 +55,7 @@ struct DrawFontJob : public DrawJob
 
 	DrawFontJob
 	(
-		Font font, 
+		Font *font, 
 		std::string text, 
 		float angleDegrees, 
 		int color,
@@ -116,7 +117,7 @@ public:
 
 	Texture * LoadTextureFromFile(std::string fileName);
 
-	Font LoadFont(const std::string& fontName, int height, UINT weight, BOOL italic);
+	Font * LoadFont(const std::string& fontName, int height, UINT weight, BOOL italic);
 
 	void ReleaseAll();
 };

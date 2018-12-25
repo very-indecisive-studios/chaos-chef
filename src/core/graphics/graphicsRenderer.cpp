@@ -263,7 +263,7 @@ HRESULT GraphicsRenderer::Render()
 				// Tell the sprite about the matrix.
 				spriteD3D->SetTransform(&matrix);
 				
-				textJob->font->DrawText(
+				textJob->font->GetFontD3D()->DrawText(
 					spriteD3D,
 					textJob->text.c_str(),
 					-1,
@@ -324,7 +324,7 @@ Texture * GraphicsRenderer::LoadTextureFromFile(std::string fileName)
 	return new Texture(textureD3D, imageInfo.Width, imageInfo.Height);
 }
 
-Font GraphicsRenderer::LoadFont(const std::string& fontName, int height, UINT weight, BOOL italic)
+Font * GraphicsRenderer::LoadFont(const std::string& fontName, int height, UINT weight, BOOL italic)
 {
 	HRESULT result = E_FAIL;
 	
@@ -346,7 +346,7 @@ Font GraphicsRenderer::LoadFont(const std::string& fontName, int height, UINT we
 	
 	ThrowIfFailed(result);
 
-	return fontD3D;
+	return new Font(fontD3D, fontName, height, weight, italic);
 }
 
 void GraphicsRenderer::QueueDrawJob(DrawJob *job) 

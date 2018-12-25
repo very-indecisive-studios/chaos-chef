@@ -5,6 +5,10 @@
 //-----------------------------------------------
 //                  Constants
 //-----------------------------------------------
+// font name
+const std::string FONT_NAME = "assets\\font\\PixelOperator.ttf";
+const std::string FONT_NAME_BOLD = "assets\\font\\PixelOperator-Bold.ttf";
+
 // plate sprite
 const std::string EMPTY_PLATE_IMAGE = "assets\\food\\plated food\\plate.png";
 
