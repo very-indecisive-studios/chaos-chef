@@ -85,6 +85,7 @@ const std::string FONT_TYPE = "Arial";
 const int FONT_SIZE = 24;
 const int FONT_COLOR_WHITE = 0xFFFFFFFF;
 const int FONT_COLOR_RED = 0xFFFF0000;
+const int FONT_COLOR_BLACK = 0xFF000000;
 
 // leaderboard
 const int NAME_INPUT_LIMIT = 12;
@@ -93,3 +94,6 @@ const std::string LEADERBOARD_DATA_S_AND_S = "assets\\leaderboard\\data2.txt";
 const std::string LEADERBOARD_DATA_PIZZA = "assets\\leaderboard\\data3.txt";
 const std::string LEADERBOARD_DATA_PASTA = "assets\\leaderboard\\data4.txt";
 const char CHAR_LIMIT = ',';
+
+// instructions
+const std::string INSTRUCTION_IMAGE = "assets\\tutorial\\tutorial.png";

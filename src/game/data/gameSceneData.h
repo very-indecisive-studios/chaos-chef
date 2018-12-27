@@ -18,7 +18,7 @@ namespace GameSceneData
 		{
 			static const Vector2 LOCATION = Vector2(0, 0) * TILE_SIZE;
 
-			static const Vector2	HAND_TEXT_LOCATION				= Vector2(0, 0) * TILE_SIZE;
+			static const Vector2	HAND_TEXT_LOCATION				= Vector2(0.5, 0) * TILE_SIZE;
 
 			static const Vector2	HAND_COMB_HUD_LOCATION			= Vector2(0, 1) * TILE_SIZE;
 			
@@ -39,7 +39,7 @@ namespace GameSceneData
 		namespace Bottom
 		{
 			static const Vector2 LOCATION = Vector2(0, 24) * TILE_SIZE;
-			static const Vector2 ORDER_TEXT_LOCATION = Vector2(0, 24) * TILE_SIZE;
+			static const Vector2 ORDER_TEXT_LOCATION = Vector2(0.6, 24) * TILE_SIZE;
 
 			static const Vector2	ORDER_HUD_NEXT			= Vector2(10, 0) * TILE_SIZE;
 			static const Vector2	ORDER_HUD_LOCATION_1	= Vector2(0, 24) * TILE_SIZE;

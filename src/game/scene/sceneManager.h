@@ -5,6 +5,7 @@
 #include "gameScene.h"
 #include "leaderboardScene.h"
 #include "pre_leaderboardScene.h"
+#include "instructionScene.h"
 
 class SceneManager
 {
@@ -20,6 +21,7 @@ public:
 	void Initialize();
 
 	void LoadMainMenuScene();
+	void LoadInstructionScene();
 	void LoadPreLeaderboardScene();
 	void LoadSelectLevelScene();
 	void LoadGameScene(const FoodMenu *foodMenu);

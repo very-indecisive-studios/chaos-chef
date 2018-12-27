@@ -23,6 +23,13 @@ void SceneManager::LoadMainMenuScene()
 	pendingSceneToLoad = mainMenuScene;
 }
 
+void SceneManager::LoadInstructionScene()
+{
+	Scene *instructionScene = new InstructionScene();
+
+	pendingSceneToLoad = instructionScene;
+}
+
 void SceneManager::LoadPreLeaderboardScene()
 {
 	Scene *preLeaderboardScene = new PreLeaderboardScene();
