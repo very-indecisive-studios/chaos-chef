@@ -1,6 +1,7 @@
 #pragma once
 #include "scene.h"
 #include "core/text/text.h"
+#include "core/sprites/sprite.h"
 
 class PreLeaderboardScene : public Scene
 {
@@ -10,6 +11,7 @@ public:
 	PreLeaderboardScene();
 	~PreLeaderboardScene();
 
+	Sprite *background = nullptr;
 	Text *topText;
 
 	Text *bodyText1;

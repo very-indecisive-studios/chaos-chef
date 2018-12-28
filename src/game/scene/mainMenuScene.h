@@ -1,6 +1,7 @@
 #pragma once
 #include "scene.h"
 #include "core/text/text.h"
+#include "core/sprites/sprite.h"
 
 class MainMenuScene : public Scene
 {
@@ -10,7 +11,7 @@ public:
 	MainMenuScene();
 	~MainMenuScene();
 
-	Text *topText;
+	Sprite *background = nullptr;
 	
 	Text *bodyText1;
 	Text *bodyText2;

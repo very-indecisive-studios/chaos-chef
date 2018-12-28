@@ -7,7 +7,7 @@
 MainMenuScene::MainMenuScene() 
 	: Scene(SceneType::MAIN_MENU)
 {
-	topText = Text::Create("CHAOS CHEF", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
+	background = Sprite::Create(BACKGROUND_IMAGE_MAIN_MENU, 0);
 
 	bodyText1 = Text::Create("PLAY", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
 	bodyText2 = Text::Create("HOW TO PLAY", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
@@ -27,7 +27,7 @@ MainMenuScene::~MainMenuScene()
 		delete text;
 	}
 
-	delete topText;
+	delete background;
 }
 
 void MainMenuScene::ManeuverMenu() 
@@ -80,7 +80,7 @@ void MainMenuScene::Update(float deltaTime)
 	CheckButtonClick();
 
 	int count = 0;
-	topText->Draw(Vector2(0, 0));
+	background->Draw(Vector2(0, 0));
 
 	for (Text *button : buttons) 
 	{

@@ -4,6 +4,7 @@
 #include <map>
 #include <string>
 #include "core/text/text.h"
+#include "core/sprites/sprite.h"
 
 struct PlayerScore
 {
@@ -32,6 +33,8 @@ private:
 	Text *topText;
 	Text *bodyText;
 	Text *bottomText;
+	
+	Sprite *background = nullptr;
 
 public:
 	LeaderboardScene(bool needAddPlayer, int totalScore, std::string level);

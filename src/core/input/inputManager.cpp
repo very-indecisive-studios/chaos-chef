@@ -1,4 +1,5 @@
 #include "inputManager.h"
+#include <iostream>
 
 InputManager::InputManager() 
 {
@@ -158,11 +159,12 @@ std::string InputManager::GetTextInWithLimit(int limit, char charLimit)
 	{
 		textIn.erase(textIn.size() - 1);
 	}
-	
-	if (charIn == charLimit) 
+
+	if (!textIn.empty() && textIn[textIn.size() - 1] == charLimit) // if last char is charLimit 
 	{
 		textIn.erase(textIn.size() - 1);
 	}
+
 	return textIn;
 }
 

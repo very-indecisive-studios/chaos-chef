@@ -11,6 +11,8 @@
 LeaderboardScene::LeaderboardScene(bool needAddPlayer, int totalScore, std::string level)
 	: Scene(SceneType::LEADERBOARD)
 {
+	background = Sprite::Create(BACKGROUND_IMAGE_OTHERS, 0);
+
 	playerScore = totalScore;
 	requireAdditionOfPlayer = needAddPlayer;
 	currentLevel = level;
@@ -44,6 +46,9 @@ LeaderboardScene::~LeaderboardScene()
 
 	delete bottomText;
 	bottomText = nullptr;
+
+	delete background;
+	background = nullptr;
 }
 
 void LeaderboardScene::AddPlayer(int playerScore)
@@ -188,6 +193,8 @@ void LeaderboardScene::ProcessLeaderboard(int playerScore)
 
 void LeaderboardScene::Update(float deltaTime)
 {
+	background->Draw(Vector2(0, 0));
+
 	ProcessLeaderboard(playerScore);
 
 	bottomText->Draw(Vector2(0, GAME_HEIGHT - FONT_SIZE));

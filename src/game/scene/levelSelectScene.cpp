@@ -7,6 +7,8 @@
 LevelSelectScene::LevelSelectScene() 
 	: Scene(SceneType::LEVEL_SELECT)
 {
+	background = Sprite::Create(BACKGROUND_IMAGE_OTHERS, 0);
+
 	topText = Text::Create("Select a level", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
 
 	bodyText1 = Text::Create("Newbie - Fried Basket", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
@@ -32,6 +34,8 @@ LevelSelectScene::~LevelSelectScene()
 	}
 
 	delete topText;
+
+	delete background;
 }
 
 void LevelSelectScene::ManeuverMenu()
@@ -88,6 +92,8 @@ void LevelSelectScene::CheckButtonClick()
 
 void LevelSelectScene::Update(float deltaTime)
 {
+	background->Draw(Vector2(0, 0));
+
 	ManeuverMenu();
 	CheckButtonClick();
 

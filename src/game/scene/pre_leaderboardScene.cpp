@@ -7,6 +7,8 @@
 PreLeaderboardScene::PreLeaderboardScene()
 	: Scene(SceneType::PRE_LEADERBOARD)
 {
+	background = Sprite::Create(BACKGROUND_IMAGE_OTHERS, 0);
+
 	topText = Text::Create("Leaderboard Levels", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
 
 	bodyText1 = Text::Create("Newbie - Fried Basket", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
@@ -32,6 +34,8 @@ PreLeaderboardScene::~PreLeaderboardScene()
 	}
 
 	delete topText;
+
+	delete background;
 }
 
 void PreLeaderboardScene::ManeuverMenu()
@@ -88,6 +92,8 @@ void PreLeaderboardScene::CheckButtonClick()
 
 void PreLeaderboardScene::Update(float deltaTime)
 {
+	background->Draw(Vector2(0, 0));
+
 	ManeuverMenu();
 	CheckButtonClick();
 

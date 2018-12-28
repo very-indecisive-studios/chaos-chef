@@ -1,12 +1,14 @@
 #pragma once
 #include "scene.h"
 #include "core/text/text.h"
+#include "core/sprites/sprite.h"
 
 class LevelSelectScene : public Scene
 {
 private:
 	std::vector<Text *> buttons;
 
+	Sprite *background = nullptr;
 	Text *topText;
 
 	Text *bodyText1;
