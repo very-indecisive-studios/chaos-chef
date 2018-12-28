@@ -8,7 +8,7 @@ Vehicle::Vehicle(std::string textureName, VehicleDirection vd) : GameEntity(Game
 	vehicleD = vd;
 	
 	collisionBounds.topLeft = Vector2(0, 0);
-	collisionBounds.bottomRight = Vector2(32, 64);
+	collisionBounds.bottomRight = Vector2(30, 55);
 
 
 	if (textureName == VEHICLE1_UP_IMAGE)

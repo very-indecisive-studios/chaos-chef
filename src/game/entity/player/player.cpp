@@ -13,7 +13,7 @@ Player::Player()
 	: GameEntity(GameEntityType::PLAYER) 
 {
 	collisionBounds.topLeft		= Vector2(0, 0);
-	collisionBounds.bottomRight = Vector2(32, 32);
+	collisionBounds.bottomRight = Vector2(25, 26);
 
 	currentAnimSprite = southAnimSprite; // starting direction
 }

@@ -157,16 +157,27 @@ void LeaderboardScene::PrintLeaderboard()
 
 	std::sort(leaderboard.begin(), leaderboard.end(), std::greater<PlayerScore>());
 
+	int count = 0;
+
 	for (PlayerScore playerInLeaderboard : leaderboard)
 	{
-		if (playerInLeaderboard.score != previousPlayerScore) // if current player has same score as previous player, position do not change
+		count++;
+
+		if (count > leaderboardLimit) 
 		{
-			position++;
+			break;
 		}
+		else
+		{
+			if (playerInLeaderboard.score != previousPlayerScore) // if current player has same score as previous player, position do not change
+			{
+				position++;
+			}
 
-		previousPlayerScore = playerInLeaderboard.score; // keep track of player score to check if next player has the same score
+			previousPlayerScore = playerInLeaderboard.score; // keep track of player score to check if next player has the same score
 
-		leaderboardString += "#" + std::to_string(position) + "     " + playerInLeaderboard.name + ": " + std::to_string(playerInLeaderboard.score) + " points\n";
+			leaderboardString += "#" + std::to_string(position) + "     " + playerInLeaderboard.name + ": " + std::to_string(playerInLeaderboard.score) + " points\n";
+		}
 	}
 
 	bodyText->SetText(leaderboardString);

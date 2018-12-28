@@ -23,6 +23,7 @@ class LeaderboardScene : public Scene
 {
 private:
 	int playerScore;
+	int leaderboardLimit = 10;
 	std::string currentLevel;
 	std::vector<PlayerScore> leaderboard;
 	std::string currentName;
