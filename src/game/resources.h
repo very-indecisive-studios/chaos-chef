@@ -81,7 +81,7 @@ const int  CUSTOMER_HEIGHT = 32;             // height of customer image
 const std::string GAME_SCENE_IMAGE = "assets\\map\\final_map.png";
 
 // texts
-const std::string FONT_TYPE = "Arial";
+const std::string FONT_TYPE = "Pixel Operator";
 const int FONT_SIZE = 24;
 const int FONT_COLOR_WHITE = 0xFFFFFFFF;
 const int FONT_COLOR_RED = 0xFFFF0000;

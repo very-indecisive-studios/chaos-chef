@@ -26,6 +26,7 @@ private:
 	const FoodMenu *currentFoodMenu;
 	bool isPaused = false;
 	Text *pauseText;
+	Text *scoreText;
 
 	void ConductCollisionCheckingsButNotHandleIt(float deltaTime);
 public:

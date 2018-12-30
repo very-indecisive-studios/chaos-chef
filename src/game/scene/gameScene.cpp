@@ -18,10 +18,11 @@ GameScene::GameScene(const FoodMenu *foodMenu)
 {
 	currentFoodMenu = foodMenu;
 	map = Sprite::Create(GAME_SCENE_IMAGE, 0);
-	handText = Text::Create("Hand", "Pixel Operator", 0xFF000000, 16, 100, false, false, DT_LEFT);
-	ordersText = Text::Create("Orders", "Arial", 0xFF000000, 16, 100, false, false, DT_LEFT);
+	handText = Text::Create("HAND", FONT_TYPE, FONT_COLOR_BLACK, 16, 100, false, false, DT_LEFT);
+	ordersText = Text::Create("ORDERS", FONT_TYPE, FONT_COLOR_BLACK, 16, 100, false, false, DT_LEFT);
 
 	pauseText = Text::Create("PAUSED", FONT_TYPE, FONT_COLOR_WHITE, 64, 100, false, false);
+	scoreText = Text::Create("", FONT_TYPE, FONT_COLOR_BLACK, 24, 100, false, false);
 	orderManager = new OrderManager(foodMenu, 10);
 
 	// Initialize player.
@@ -93,6 +94,7 @@ GameScene::~GameScene()
 	delete map;
 	delete ordersText;
 	delete handText;
+	delete scoreText;
 
 	delete player;
 
@@ -110,6 +112,8 @@ void GameScene::SetFoodMenu(const FoodMenu *foodMenu)
 
 void GameScene::Update(float deltaTime)
 {
+	int playerScore = orderManager->GetScore() - trashBinArea->GetTrashScore();
+
 	if (Context::Get()->GetInputManager()->IsKeyDown(VK_ESCAPE)) 
 	{
 		Context::Get()->GetInputManager()->ClearAll();
@@ -118,12 +122,11 @@ void GameScene::Update(float deltaTime)
 	}
 	if (isPaused) 
 	{
-		pauseText->Draw(Vector2(0, GAME_HEIGHT / 2));
+		pauseText->Draw(Vector2(0, GAME_HEIGHT / 2 - 64/2));
 		return;
 	}
 	if (orderManager->HasMissedOrder()||player->isDead())
 	{
-		int playerScore = orderManager->GetScore() - trashBinArea->GetTrashScore();
 		Context::Get()->GetInputManager()->ClearAll();
 		Context::Get()->GetSceneManager()->LoadLeaderboardScene(true, playerScore, currentFoodMenu->name);
 	}
@@ -135,6 +138,9 @@ void GameScene::Update(float deltaTime)
 	handText->Draw(GameSceneData::Hud::Top::HAND_TEXT_LOCATION);
 	ordersText->Draw(GameSceneData::Hud::Bottom::ORDER_TEXT_LOCATION);
 
+	scoreText->SetText("SCORE: " + std::to_string(playerScore));
+	scoreText->Draw(Vector2(440, 22.25));
+	
 	player->Update(deltaTime);
 
 
