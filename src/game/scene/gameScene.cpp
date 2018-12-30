@@ -143,7 +143,6 @@ void GameScene::Update(float deltaTime)
 	
 	player->Update(deltaTime);
 
-
 	for (GameEntity *entity : entities)
 	{
 		entity->Update(deltaTime);

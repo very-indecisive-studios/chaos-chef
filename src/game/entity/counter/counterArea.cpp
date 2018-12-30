@@ -31,7 +31,7 @@ bool CounterArea::OrderSubmit(std::vector<const PlatedFood *> foodOnHand)
 
 	}
 
-	if (orderIngreInHandIngre == orderManager->GetCounterOrder(counterNo).size()) //success
+	if (orderIngreInHandIngre == orderManager->GetCounterOrder(counterNo).size() && orderManager->GetCounterOrder(counterNo).size() == foodOnHand.size()) //success
 	{
 		orderManager->ClearCounterOrder(counterNo);
 
