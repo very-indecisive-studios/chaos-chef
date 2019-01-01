@@ -3,31 +3,34 @@
 #include "core/graphics/graphicsRenderer.h"
 #include "core/resource/resourceManager.h"
 #include "core/input/inputManager.h"
+#include "core/audio/audio.h"
 #include "game/scene/sceneManager.h"
 #include "game.h"
 
 class Context 
 {
 private:
-	GraphicsRenderer	*graphicsRenderer;
-	ResourceManager		*resourceManager;
-	InputManager		*inputManager;
-	SceneManager		*sceneManager;
-	Game				*game;
+	GraphicsRenderer		*graphicsRenderer;
+	ResourceManager			*resourceManager;
+	InputManager			*inputManager;
+	AudioEngine				*audioEngine;
+	SceneManager			*sceneManager;
+	Game					*game;
 
 	Context();
 	~Context();
 		
-	static Context * instance;
+	static Context			*instance;
 public:
-	GraphicsRenderer	*const GetGraphicsRenderer();
-	ResourceManager		*const GetResourceManager();
-	InputManager		*const GetInputManager();
-	SceneManager		*const GetSceneManager();
-	Game				*const GetGame();
+	GraphicsRenderer	* GetGraphicsRenderer();
+	ResourceManager		* GetResourceManager();
+	InputManager		* GetInputManager();
+	AudioEngine			* GetAudioEngine();
+	SceneManager		* GetSceneManager();
+	Game				* GetGame();
 
 	static void ReleaseAll();
 
-	static Context *const Get();
+	static Context * Get();
 	static void Initialize();
 };

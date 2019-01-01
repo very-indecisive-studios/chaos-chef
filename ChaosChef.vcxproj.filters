@@ -36,6 +36,7 @@
     <ClCompile Include="src\core\graphics\font.cpp" />
     <ClCompile Include="src\game\scene\pre_leaderboardScene.cpp" />
     <ClCompile Include="src\game\scene\instructionScene.cpp" />
+    <ClCompile Include="src\core\audio\audio.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\constants.h" />
@@ -80,5 +81,6 @@
     <ClInclude Include="src\game\entity\customer\customer.h" />
     <ClInclude Include="src\game\scene\pre_leaderboardScene.h" />
     <ClInclude Include="src\game\scene\instructionScene.h" />
+    <ClInclude Include="src\core\audio\audio.h" />
   </ItemGroup>
 </Project>

@@ -3,43 +3,51 @@
 
 Context::Context()
 {
-	graphicsRenderer	= new GraphicsRenderer();
-	resourceManager		= new ResourceManager();
-	inputManager		= new InputManager();
-	sceneManager		= new SceneManager();
-	game				= new Game();
+	graphicsRenderer		= new GraphicsRenderer();
+	resourceManager			= new ResourceManager();
+	inputManager			= new InputManager();
+	audioEngine			= new AudioEngine();
+	sceneManager			= new SceneManager();
+	game					= new Game();
 }
 
 Context::~Context()
 {
-	delete graphicsRenderer;
-	delete resourceManager;
-	delete inputManager;
+	// Delete in order.
 	delete sceneManager;
 	delete game;
+	delete audioEngine;
+	delete graphicsRenderer;
+	delete inputManager;
+	delete resourceManager;
 }
 
-GraphicsRenderer *const Context::GetGraphicsRenderer()
+GraphicsRenderer * Context::GetGraphicsRenderer()
 {
 	return graphicsRenderer;
 }
 
-ResourceManager *const Context::GetResourceManager()
+ResourceManager * Context::GetResourceManager()
 {
 	return resourceManager;
 }
 
-InputManager *const Context::GetInputManager()
+InputManager * Context::GetInputManager()
 {
 	return inputManager;
 }
 
-SceneManager *const Context::GetSceneManager()
+AudioEngine	 * Context::GetAudioEngine()
+{
+	return audioEngine;
+}
+
+SceneManager * Context::GetSceneManager()
 {
 	return sceneManager;
 }
 
-Game *const Context::GetGame()
+Game * Context::GetGame()
 {
 	return game;
 }
@@ -50,7 +58,7 @@ Game *const Context::GetGame()
 
 Context * Context::instance = nullptr;
 
-Context *const Context::Get() 
+Context * Context::Get() 
 {
 	return instance;
 }

@@ -50,6 +50,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	// Initialize graphics.
 	Context::Get()->GetGraphicsRenderer()->Initialize(hwnd, GAME_WIDTH, GAME_HEIGHT, FULLSCREEN);
 	
+	// Initialize audio.
+	Context::Get()->GetAudioEngine()->Initialize();
+
 	// Initialize game.
 	Context::Get()->GetGame()->Initialize();
 
