@@ -297,3 +297,17 @@ AudioPlayer * AudioPlayer::Create(const std::wstring& audioFileName)
 {
 	return Context::Get()->GetAudioEngine()->CreateAudioPlayer(audioFileName);
 }
+
+AudioPlayer* AudioPlayer::CreatePersistent(const std::wstring& audioFileName, const std::string& tag)
+{
+	auto pAudioPlayer = Create(audioFileName);
+
+	Context::Get()->GetResourceManager()->StorePersistentAudioPlayer(pAudioPlayer, tag);
+
+	return pAudioPlayer;
+}
+
+AudioPlayer* AudioPlayer::GetPersistent(const std::string& tag)
+{
+	return Context::Get()->GetResourceManager()->GetPersistentAudioPlayer(tag);
+}

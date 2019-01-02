@@ -101,3 +101,7 @@ const std::string INSTRUCTION_IMAGE = "assets\\tutorial\\tutorial.png";
 // backgrounds
 const std::string BACKGROUND_IMAGE_MAIN_MENU = "assets\\backgrounds\\main_menu.png";
 const std::string BACKGROUND_IMAGE_OTHERS = "assets\\backgrounds\\others.png";
+
+// audio
+const std::wstring BG_AUDIO = L"assets/audio/bg_music.mp3";
+const std::string BG_AUDIO_TAG = "BG_AUDIO";

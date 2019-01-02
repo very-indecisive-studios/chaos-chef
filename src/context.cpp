@@ -6,20 +6,22 @@ Context::Context()
 	graphicsRenderer		= new GraphicsRenderer();
 	resourceManager			= new ResourceManager();
 	inputManager			= new InputManager();
-	audioEngine			= new AudioEngine();
+	audioEngine			    = new AudioEngine();
 	sceneManager			= new SceneManager();
 	game					= new Game();
 }
 
 Context::~Context()
 {
-	// Delete in order.
+	// Delete in this order.
 	delete sceneManager;
 	delete game;
+
+	delete resourceManager;
+
 	delete audioEngine;
 	delete graphicsRenderer;
 	delete inputManager;
-	delete resourceManager;
 }
 
 GraphicsRenderer * Context::GetGraphicsRenderer()

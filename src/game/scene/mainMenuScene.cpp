@@ -17,11 +17,14 @@ MainMenuScene::MainMenuScene()
 	buttons.push_back(bodyText2);
 	buttons.push_back(bodyText3);
 
-	bgMusicPlayer = AudioPlayer::Create(L"assets/audio/new_order.mp3");
-	bgMusicPlayer->SetLooping(true);
-	bgMusicPlayer->Play();
+	if (!AudioPlayer::GetPersistent(BG_AUDIO_TAG))
+	{
+		bgMusicPlayer = AudioPlayer::CreatePersistent(BG_AUDIO, BG_AUDIO_TAG);
+		bgMusicPlayer->SetLooping(true);
+		bgMusicPlayer->Play();
 
-	pointedButton = bodyText1;
+		pointedButton = bodyText1;
+	}
 }
 
 MainMenuScene::~MainMenuScene()
@@ -32,8 +35,6 @@ MainMenuScene::~MainMenuScene()
 	}
 
 	delete background;
-
-	delete bgMusicPlayer;
 }
 
 void MainMenuScene::ManeuverMenu() 

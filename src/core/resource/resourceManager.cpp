@@ -16,6 +16,12 @@ ResourceManager::~ResourceManager()
 	{
 		delete font;
 	}
+
+	// Deallocate all persistent audio.
+	for (const auto& pair : persistentAudioPlayerMap)
+	{
+		delete pair.second;
+	}
 }
 
 Texture * ResourceManager::GetTexture(const std::string &textureName)
@@ -54,4 +60,21 @@ Font * ResourceManager::GetFont(const std::string& fontName, int height, UINT we
 	fontResourceList.push_back(loadedFont);
 
 	return loadedFont;
+}
+
+AudioPlayer * ResourceManager::GetPersistentAudioPlayer(const std::string& tag)
+{
+	auto itr = persistentAudioPlayerMap.find(tag);
+
+	if (itr != persistentAudioPlayerMap.end())
+	{
+		return itr->second;
+	}
+
+	return nullptr;
+}
+
+void ResourceManager::StorePersistentAudioPlayer(AudioPlayer* pAudioPlayer, const std::string& tag)
+{
+	persistentAudioPlayerMap[tag] = pAudioPlayer;
 }

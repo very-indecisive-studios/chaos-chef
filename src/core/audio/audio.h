@@ -1,7 +1,6 @@
 #pragma once
 
 #include <string>
-#include <vector>
 #include <thread>
 #include <wrl.h>
 #include <mfapi.h>
@@ -138,6 +137,8 @@ public:
 	void SetLooping(bool willLoop);
 
 	static AudioPlayer * Create(const std::wstring &audioFileName);
+	static AudioPlayer * CreatePersistent(const std::wstring &audioFileName, const std::string &tag);
+	static AudioPlayer * GetPersistent(const std::string &tag);
 };
 
 class AudioEngine
@@ -174,6 +175,7 @@ private:
 		Microsoft::WRL::ComPtr<IMFSourceReader> &rpSourceReader,
 		AudioFormat &rAudioFormat
 	);
+
 public:
 	AudioEngine();
 	~AudioEngine();
