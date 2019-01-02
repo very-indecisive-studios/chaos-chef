@@ -166,11 +166,10 @@ private:
 	Microsoft::WRL::ComPtr<IXAudio2>		pXAudio2		= nullptr;
 	IXAudio2MasteringVoice				*pMasterVoice	= nullptr;
 
-	Microsoft::WRL::ComPtr<IMFAttributes>	pSourceReaderConfig = nullptr;
-
 	SourceVoiceCallback sourceVoiceCallback;
 
 	void CreateSourceReader(
+		Microsoft::WRL::ComPtr<IMFAttributes> &rpSourceReaderConfig,
 		std::wstring audioFileName,
 		Microsoft::WRL::ComPtr<IMFSourceReader> &rpSourceReader,
 		AudioFormat &rAudioFormat

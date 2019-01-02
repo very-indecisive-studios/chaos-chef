@@ -21,10 +21,6 @@ void AudioEngine::Initialize()
 	// WMF setup.
 	ThrowIfFailed(MFStartup(MF_VERSION), "Failed to start Windows Media Foundation");
 
-	ThrowIfFailed(MFCreateAttributes(&pSourceReaderConfig, 1), "Failed to create WMF config.");
-
-	ThrowIfFailed(pSourceReaderConfig->SetUINT32(MF_LOW_LATENCY, true), "Failed to alter WMF config.");
-
 	// XAudio2 setup.
 	ThrowIfFailed(XAudio2Create(&pXAudio2), "Failed to create XAudio2 engine.");
 
@@ -32,7 +28,8 @@ void AudioEngine::Initialize()
 }
 
 void AudioEngine::CreateSourceReader(
-	std::wstring audioFileName, 
+	Microsoft::WRL::ComPtr<IMFAttributes> &rpSourceReaderConfig,
+	std::wstring audioFileName,
 	Microsoft::WRL::ComPtr<IMFSourceReader> &rpSourceReader, 
 	AudioFormat &rAudioFormat
 )
@@ -40,7 +37,7 @@ void AudioEngine::CreateSourceReader(
 	// Create the source reader
 	IMFSourceReader *sourceReader;
 	ThrowIfFailed(
-		MFCreateSourceReaderFromURL(audioFileName.c_str(), pSourceReaderConfig.Get(), &sourceReader),
+		MFCreateSourceReaderFromURL(audioFileName.c_str(), rpSourceReaderConfig.Get(), &sourceReader),
 		"Cannot create source reader from filename."
 	);
 
@@ -137,8 +134,12 @@ AudioPlayer* AudioEngine::CreateAudioPlayer(const std::wstring& audioFileName)
 {
 	AudioData *pAudioData = new AudioData();
 
+	Microsoft::WRL::ComPtr<IMFAttributes> pSourceReaderConfig = nullptr;
+	MFCreateAttributes(&pSourceReaderConfig, 1);
+	pSourceReaderConfig->SetUINT32(MF_LOW_LATENCY, true);
 	pSourceReaderConfig->SetUnknown(MF_SOURCE_READER_ASYNC_CALLBACK, &pAudioData->asyncSourceReaderCallback);
-	CreateSourceReader(audioFileName, pAudioData->pAsyncSourceReader, pAudioData->format);
+	
+	CreateSourceReader(pSourceReaderConfig, audioFileName, pAudioData->pAsyncSourceReader, pAudioData->format);
 
 	IXAudio2SourceVoice *pSourceVoice = nullptr;
 	pXAudio2->CreateSourceVoice(&pSourceVoice, pAudioData->format.pWaveFormat, 0, XAUDIO2_DEFAULT_FREQ_RATIO, &sourceVoiceCallback);
