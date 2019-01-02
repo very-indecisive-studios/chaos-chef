@@ -190,6 +190,9 @@ void AudioPlayer::Work()
 
 	while (isPlaying)
 	{
+		// Update volume level.
+		pSourceVoice->SetVolume(volumeLevel);
+
 		// Use a buffer that is free.
 		auto &rCurrentBufferState = bufferStates[bufferIndex];
         if (!rCurrentBufferState.isFree)
@@ -264,7 +267,7 @@ void AudioPlayer::Work()
 	}
 
 	isPlaying = false;
-	
+
 	pSourceVoice->Stop();
 	pSourceVoice->FlushSourceBuffers();
 }
@@ -291,6 +294,11 @@ bool AudioPlayer::IsPlaying()
 void AudioPlayer::SetLooping(bool willLoop)
 {
 	isLooping = willLoop;
+}
+
+void AudioPlayer::SetVolume(float level)
+{
+	volumeLevel = level;
 }
 
 AudioPlayer * AudioPlayer::Create(const std::wstring& audioFileName)

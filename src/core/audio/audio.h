@@ -124,6 +124,8 @@ private:
 	bool				isPlaying	= false;
 	bool				isLooping	= false;
 
+	float volumeLevel = 1.0f;
+
 	void Work();
 public:
 	AudioPlayer(IXAudio2SourceVoice *pSourceVoice, AudioData *pAudioData);
@@ -135,6 +137,8 @@ public:
 	bool IsPlaying();
 
 	void SetLooping(bool willLoop);
+
+	void SetVolume(float level);
 
 	static AudioPlayer * Create(const std::wstring &audioFileName);
 	static AudioPlayer * CreatePersistent(const std::wstring &audioFileName, const std::string &tag);
