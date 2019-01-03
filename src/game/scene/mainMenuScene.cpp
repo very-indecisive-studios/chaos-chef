@@ -17,13 +17,13 @@ MainMenuScene::MainMenuScene()
 	buttons.push_back(bodyText2);
 	buttons.push_back(bodyText3);
 
+	pointedButton = bodyText1;
+
 	if (!AudioPlayer::GetPersistent(BG_AUDIO_TAG))
 	{
 		bgMusicPlayer = AudioPlayer::CreatePersistent(BG_AUDIO, BG_AUDIO_TAG);
 		bgMusicPlayer->SetLooping(true);
 		bgMusicPlayer->Play();
-
-		pointedButton = bodyText1;
 	}
 }
 
