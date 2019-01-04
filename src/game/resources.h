@@ -96,7 +96,12 @@ const std::string LEADERBOARD_DATA_PASTA = "assets\\leaderboard\\data4.txt";
 const char CHAR_LIMIT = ',';
 
 // instructions
-const std::string INSTRUCTION_IMAGE = "assets\\tutorial\\tutorial.png";
+const std::string INSTRUCTION_IMAGE_1 = "assets\\tutorial\\instruction_1.png";
+const std::string INSTRUCTION_IMAGE_2 = "assets\\tutorial\\instruction_2.png";
+const std::string INSTRUCTION_IMAGE_3 = "assets\\tutorial\\instruction_3.png";
+const std::string INSTRUCTION_IMAGE_4 = "assets\\tutorial\\instruction_4.png";
+const std::string INSTRUCTION_IMAGE_5 = "assets\\tutorial\\instruction_5.png";
+const std::string INSTRUCTION_IMAGE_6 = "assets\\tutorial\\instruction_6.png";
 
 // backgrounds
 const std::string BACKGROUND_IMAGE_MAIN_MENU = "assets\\backgrounds\\main_menu.png";

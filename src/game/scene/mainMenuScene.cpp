@@ -10,12 +10,10 @@ MainMenuScene::MainMenuScene()
 	background = Sprite::Create(BACKGROUND_IMAGE_MAIN_MENU, 0);
 
 	bodyText1 = Text::Create("PLAY", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
-	bodyText2 = Text::Create("HOW TO PLAY", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
-	bodyText3 = Text::Create("LEADERBOARD", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
+	bodyText2 = Text::Create("LEADERBOARD", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
 
 	buttons.push_back(bodyText1);
 	buttons.push_back(bodyText2);
-	buttons.push_back(bodyText3);
 
 	pointedButton = bodyText1;
 
@@ -68,13 +66,9 @@ void MainMenuScene::CheckButtonClick()
 		Context::Get()->GetInputManager()->ClearAll();
 		if (pointedButton == bodyText1) //transition to select level scene
 		{
-			Context::Get()->GetSceneManager()->LoadSelectLevelScene();
-		}
-		else if (pointedButton == bodyText2) //transition to instruction menu
-		{
 			Context::Get()->GetSceneManager()->LoadInstructionScene();
 		}
-		else if (pointedButton == bodyText3) //transition to leaderboard scene
+		else if (pointedButton == bodyText2) //transition to leaderboard scene
 		{
 			Context::Get()->GetSceneManager()->LoadPreLeaderboardScene();
 		}

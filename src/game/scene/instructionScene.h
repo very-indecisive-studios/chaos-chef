@@ -7,8 +7,20 @@
 class InstructionScene : public Scene
 {
 private:
-	Sprite *instructions = nullptr;
+	int currentNo = 1;
 
+	Sprite *instructions_1 = nullptr;
+	Sprite *instructions_2 = nullptr;
+	Sprite *instructions_3 = nullptr;
+	Sprite *instructions_4 = nullptr;
+	Sprite *instructions_5 = nullptr;
+	Sprite *instructions_6 = nullptr;
+
+	Text *text = nullptr;
+	Text *smaller_text = nullptr;
+
+	std::vector<Sprite *> list_of_instructions;
+	
 public:
 	InstructionScene();
 	~InstructionScene();

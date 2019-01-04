@@ -16,7 +16,6 @@ public:
 	
 	Text *bodyText1;
 	Text *bodyText2;
-	Text *bodyText3;
 	Text *pointedButton;
 	std::vector<Text *> buttons;
 	
