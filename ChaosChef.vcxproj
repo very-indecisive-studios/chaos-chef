@@ -113,6 +113,7 @@
     <ClCompile Include="src\game\hud\hud.cpp" />
     <ClCompile Include="src\game\hud\order\orderHud.cpp" />
     <ClCompile Include="src\game\gameplay\order\orderManager.cpp" />
+    <ClCompile Include="src\game\scene\gameOverScene.cpp" />
     <ClCompile Include="src\game\scene\gameScene.cpp" />
     <ClCompile Include="src\game\scene\instructionScene.cpp" />
     <ClCompile Include="src\game\scene\leaderboardScene.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="src\game\hud\order\orderHud.h" />
     <ClInclude Include="src\game\gameplay\order\order.h" />
     <ClInclude Include="src\game\gameplay\order\orderManager.h" />
+    <ClInclude Include="src\game\scene\gameOverScene.h" />
     <ClInclude Include="src\game\scene\gameScene.h" />
     <ClInclude Include="src\game\scene\instructionScene.h" />
     <ClInclude Include="src\game\scene\leaderboardScene.h" />

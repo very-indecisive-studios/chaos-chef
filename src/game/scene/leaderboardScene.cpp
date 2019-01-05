@@ -33,7 +33,7 @@ LeaderboardScene::LeaderboardScene(bool needAddPlayer, int totalScore, std::stri
 		topText = Text::Create("GAME OVER\nHard - Pasta", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
 	}
 	bodyText = Text::Create("", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
-	bottomText = Text::Create("Press enter to continue", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
+	bottomText = Text::Create("Press <ENTER> to continue", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
 }
 
 LeaderboardScene::~LeaderboardScene()

@@ -7,7 +7,7 @@ DispenserArea::DispenserArea()
 	: GameEntity(GameEntityType::DISPENSER_AREA)
 {
 	collisionBounds.topLeft		= Vector2(0, 0);
-	collisionBounds.bottomRight = Vector2(32, 32);
+	collisionBounds.bottomRight = Vector2(8, 8);
 }
 
 DispenserArea::~DispenserArea()

@@ -51,6 +51,13 @@ void SceneManager::LoadGameScene(const FoodMenu *foodMenu)
 	pendingSceneToLoad = gameScene;
 }
 
+void SceneManager::LoadGameOverScene(int reason, bool needAddPlayer, int playerScore, std::string level)
+{
+	Scene *gameOverScene = new GameOverScene(reason, needAddPlayer, playerScore, level);
+
+	pendingSceneToLoad = gameOverScene;
+}
+
 void SceneManager::LoadLeaderboardScene(bool needAddPlayer, int playerScore, std::string level)
 {
 	Scene *leaderboardScene = new LeaderboardScene(needAddPlayer, playerScore, level);

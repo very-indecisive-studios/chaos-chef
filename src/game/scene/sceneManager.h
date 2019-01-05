@@ -6,13 +6,13 @@
 #include "leaderboardScene.h"
 #include "pre_leaderboardScene.h"
 #include "instructionScene.h"
+#include "gameOverScene.h"
 
 class SceneManager
 {
 private:
 	Scene *currentScene = nullptr;
 	Scene *pendingSceneToLoad = nullptr;
-
 
 public:
 	SceneManager();
@@ -25,6 +25,7 @@ public:
 	void LoadPreLeaderboardScene();
 	void LoadSelectLevelScene();
 	void LoadGameScene(const FoodMenu *foodMenu);
+	void LoadGameOverScene(int reason, bool needAddPlayer, int playerScore, std::string level);
 	void LoadLeaderboardScene(bool needAddPlayer, int playerScore, std::string level);
 
 	void Update(float deltaTime);

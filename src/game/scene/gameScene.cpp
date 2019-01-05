@@ -18,8 +18,8 @@ GameScene::GameScene(const FoodMenu *foodMenu)
 {
 	currentFoodMenu = foodMenu;
 	map = Sprite::Create(GAME_SCENE_IMAGE, 0);
-	handText = Text::Create("HAND", FONT_TYPE, FONT_COLOR_BLACK, 16, 100, false, false, DT_LEFT);
-	ordersText = Text::Create("ORDERS", FONT_TYPE, FONT_COLOR_BLACK, 16, 100, false, false, DT_LEFT);
+	handText = Text::Create("HAND", FONT_TYPE, FONT_COLOR_BLACK, 16, 100, true, false, DT_LEFT);
+	ordersText = Text::Create("ORDERS", FONT_TYPE, FONT_COLOR_BLACK, 16, 100, true, false, DT_LEFT);
 
 	pauseText = Text::Create("PAUSED", FONT_TYPE, FONT_COLOR_WHITE, 64, 100, false, false);
 	scoreText = Text::Create("", FONT_TYPE, FONT_COLOR_BLACK, 24, 100, false, false);
@@ -125,10 +125,15 @@ void GameScene::Update(float deltaTime)
 		pauseText->Draw(Vector2(0, GAME_HEIGHT / 2 - 64/2));
 		return;
 	}
-	if (orderManager->HasMissedOrder()||player->isDead())
+	if (orderManager->HasMissedOrder())
 	{
 		Context::Get()->GetInputManager()->ClearAll();
-		Context::Get()->GetSceneManager()->LoadLeaderboardScene(true, playerScore, currentFoodMenu->name);
+		Context::Get()->GetSceneManager()->LoadGameOverScene(1, true, playerScore, currentFoodMenu->name);
+	}
+	if (player->isDead())
+	{
+		Context::Get()->GetInputManager()->ClearAll();
+		Context::Get()->GetSceneManager()->LoadGameOverScene(2, true, playerScore, currentFoodMenu->name);
 	}
 	orderManager->Update(deltaTime);
 

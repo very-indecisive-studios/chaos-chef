@@ -14,7 +14,7 @@ private:
 	Order *order = nullptr;
 	
 	Sprite *plateSprite = Sprite::Create(EMPTY_PLATE_IMAGE, Layer::PLATE, GameSceneData::Hud::Bottom::ORDER_HUD_PF_SCALE);
-	Text   *timerText = Text::Create("0:00", "Arial", 0xFF000000, 16, 100, false, false, DT_LEFT);
+	Text   *timerText = Text::Create("0:00", FONT_TYPE, FONT_COLOR_BLACK, 16, 100, false, false, DT_LEFT);
 	std::vector<Sprite *> platedFoodSprites;
 	std::vector<Sprite *> ingreSprites;
 

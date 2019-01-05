@@ -52,7 +52,7 @@ namespace GameSceneData
 
 			static const int	ORDER_HUD_TEXT_SIZE = 16;
 
-			static const Vector2	ORDER_HUD_TIME_REL_LOCATION = Vector2(5.5, 1) * TILE_SIZE;
+			static const Vector2	ORDER_HUD_TIME_REL_LOCATION = Vector2(5.5, 1.5) * TILE_SIZE;
 
 			static const int	ORDER_HUD_IG_SCALE = 1;
 			static const Vector2	ORDER_HUD_ING_REL_NEXT			= Vector2(2, 0) * TILE_SIZE;
