@@ -216,8 +216,8 @@ void AudioPlayer::Work()
 		// If reader reaches the end of file, set the seeker of the reader to the start of the media file.
 	    if (pAudioData->asyncSourceReaderState.isEOF)
 	    {
-		    if (isLooping)
-		    {
+			if (isLooping)
+			{
 				// Set the EOF state to false.
 				pAudioData->asyncSourceReaderState.isEOF = false;
 
@@ -226,10 +226,9 @@ void AudioPlayer::Work()
 				var.vt = VT_I8;
 
 				pAudioData->pAsyncSourceReader->SetCurrentPosition(GUID_NULL, var);
-		    }
+			}
 			else
 			{
-				// Break out of the playing loop.
 				break;
 			}
 	    }
@@ -266,6 +265,18 @@ void AudioPlayer::Work()
 		pSourceVoice->SubmitSourceBuffer(&buffer);
 	}
 
+	/*
+	 *  Reset the seeker of media file if the player is stopped
+	 */
+	// Set the EOF state to false.
+	pAudioData->asyncSourceReaderState.isEOF = false;
+
+	// Set the seeking position to start of media file.
+	PROPVARIANT var = { 0 };
+	var.vt = VT_I8;
+
+	pAudioData->pAsyncSourceReader->SetCurrentPosition(GUID_NULL, var);
+
 	isPlaying = false;
 
 	pSourceVoice->Stop();
@@ -274,8 +285,20 @@ void AudioPlayer::Work()
 
 void AudioPlayer::Play()
 {
-	if (!isPlaying && !pAudioPlayerThread)
+	if (!pAudioPlayerThread)
 	{
+		isPlaying = true;
+		pAudioPlayerThread = new std::thread(&AudioPlayer::Work, this);
+	}
+	else
+	{
+		isPlaying = false;
+		if (pAudioPlayerThread->joinable())
+		{
+			pAudioPlayerThread->join();
+		}
+		delete pAudioPlayerThread;
+
 		isPlaying = true;
 		pAudioPlayerThread = new std::thread(&AudioPlayer::Work, this);
 	}
