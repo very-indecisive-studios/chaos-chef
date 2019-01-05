@@ -16,6 +16,8 @@ Player::Player()
 	collisionBounds.bottomRight = Vector2(25, 26);
 
 	currentAnimSprite = southAnimSprite; // starting direction
+
+	splatSoundPlayer = AudioPlayer::Create(SPLAT_AUDIO);
 }
 
 Player::~Player()
@@ -162,6 +164,8 @@ void Player::HandleCollision(GameEntity *entity)
 	}
 	else if (entity->GetType() == GameEntityType::VEHICLE) // GAME OVER scene
 	{
+		splatSoundPlayer->Play();
+
 		playerDead = true;
 	}
 }

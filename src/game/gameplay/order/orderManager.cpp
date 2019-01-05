@@ -5,6 +5,8 @@ OrderManager::OrderManager(const FoodMenu* foodMenu, float nextOrderIntervalSeco
 	: foodMenu(foodMenu), nextOrderIntervalSeconds(nextOrderIntervalSeconds)
 {
 	srand(time(nullptr));
+
+	newOrderSoundPlayer = AudioPlayer::Create(NEW_ORDER_AUDIO);
 }
 
 OrderManager::~OrderManager()
@@ -15,6 +17,8 @@ OrderManager::~OrderManager()
 	}
 
 	orderQueue.clear();
+
+	delete newOrderSoundPlayer;
 }
 
 void OrderManager::Update(float deltaTime)
@@ -72,6 +76,7 @@ void OrderManager::Update(float deltaTime)
 			orderQueue.pop_back();
 			currentOrder[i] = newOrder;
 			orderHuds[i].SetOrder(newOrder);
+			newOrderSoundPlayer->Play();
 		}
 	}
 

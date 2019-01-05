@@ -10,6 +10,8 @@ CounterArea::CounterArea(int counterNo, OrderManager *orderManager)
 	this->orderManager = orderManager;
 	collisionBounds.topLeft = Vector2(0, 0);
 	collisionBounds.bottomRight = Vector2(10, 10);
+
+	orderSuccessSoundPlayer = AudioPlayer::Create(DONE_ORDER_AUDIO);
 }
 
 CounterArea::~CounterArea()
@@ -34,6 +36,8 @@ bool CounterArea::OrderSubmit(std::vector<const PlatedFood *> foodOnHand)
 	if (orderIngreInHandIngre == orderManager->GetCounterOrder(counterNo).size() && orderManager->GetCounterOrder(counterNo).size() == foodOnHand.size()) //success
 	{
 		orderManager->ClearCounterOrder(counterNo);
+
+		orderSuccessSoundPlayer->Play();
 
 		return true;
 	}

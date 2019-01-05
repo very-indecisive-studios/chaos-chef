@@ -5,6 +5,7 @@
 #include "game/resources.h"
 #include "playerHand.h"
 #include "game/entity/gameEntity.h"
+#include "core/audio/audio.h"
 
 class Player : public GameEntity
 {
@@ -21,6 +22,8 @@ private:
 	AnimatedSprite *eastAnimSprite = AnimatedSprite::Create(PLAYER_EAST_IMAGE, 1, PLAYER_WIDTH, PLAYER_HEIGHT, PLAYER_ANIMATION_DELAY);
 	AnimatedSprite *southAnimSprite = AnimatedSprite::Create(PLAYER_SOUTH_IMAGE, 1, PLAYER_WIDTH, PLAYER_HEIGHT, PLAYER_ANIMATION_DELAY);
 	AnimatedSprite *westAnimSprite = AnimatedSprite::Create(PLAYER_WEST_IMAGE, 1, PLAYER_WIDTH, PLAYER_HEIGHT, PLAYER_ANIMATION_DELAY);
+
+	AudioPlayer *splatSoundPlayer;
 
 	PlayerHand hand;
 	bool playerDead = false;
