@@ -26,6 +26,8 @@ Player::~Player()
 	delete eastAnimSprite;
 	delete southAnimSprite;
 	delete westAnimSprite;
+
+	delete splatSoundPlayer;
 }
 
 void Player::Move(float deltaTime)

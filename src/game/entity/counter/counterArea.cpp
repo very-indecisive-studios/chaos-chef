@@ -15,7 +15,9 @@ CounterArea::CounterArea(int counterNo, OrderManager *orderManager)
 }
 
 CounterArea::~CounterArea()
-{ }
+{
+	delete orderSuccessSoundPlayer;
+}
 
 bool CounterArea::OrderSubmit(std::vector<const PlatedFood *> foodOnHand)
 {
