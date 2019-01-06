@@ -23,7 +23,15 @@ CounterArea::~CounterArea()
 
 bool CounterArea::OrderSubmit(std::vector<const PlatedFood *> foodOnHand)
 {
-	if (orderManager->GetCounterOrder(counterNo).size() == 0) { return false; }
+	if (orderManager->GetCounterOrder(counterNo).size() == 0) 
+	{ 
+		if (!wrongOrderSoundPlayer->IsPlaying())
+		{
+			wrongOrderSoundPlayer->Play();
+		}
+		return false; 
+	}
+
 	int orderIngreInHandIngre = 0;
 	for (const PlatedFood *ingreOnCounter : orderManager->GetCounterOrder(counterNo))
 	{

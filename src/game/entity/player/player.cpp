@@ -125,8 +125,8 @@ void Player::Update(float deltaTime)
 
 void Player::HandleCollision(GameEntity *entity)
 {
-	std::cout << "player - x: " << position.x << " y :" << position.y << std::endl;
-	std::cout << "entity - x: " << entity->GetPosition().x << " y :" << entity->GetPosition().y << std::endl;
+	//std::cout << "player - x: " << position.x << " y :" << position.y << std::endl;
+	//std::cout << "entity - x: " << entity->GetPosition().x << " y :" << entity->GetPosition().y << std::endl;
 	if (
 		entity->GetType() == GameEntityType::DISPENSER ||
 		entity->GetType() == GameEntityType::PROP
@@ -145,7 +145,6 @@ void Player::HandleCollision(GameEntity *entity)
 	{
 		if (Context::Get()->GetInputManager()->IsKeyDown(actionKey))
 		{
-			std::cout << "REMOVE FOOD" << std::endl;
 			if (hand.GetCurrentPlatedFood().size())
 			{
 				hand.Empty();

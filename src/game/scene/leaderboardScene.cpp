@@ -56,7 +56,10 @@ void LeaderboardScene::AddPlayer(int playerScore)
 	topText->Draw(Vector2(0, 0));
 	if (Context::Get()->GetInputManager()->IsKeyDown(VK_RETURN)) 
 	{
-		enterPressed = true;
+		if (currentName != "")
+		{
+			enterPressed = true;
+		}
 		Context::Get()->GetInputManager()->ClearAll();
 	}
 
