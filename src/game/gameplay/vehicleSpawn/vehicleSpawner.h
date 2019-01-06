@@ -20,7 +20,8 @@ private:
 	std::vector <Vehicle *> vehiclesDown2;
 	const std::string VEHICLE_UP_IMAGES[3]{ VEHICLE1_UP_IMAGE, VEHICLE2_UP_IMAGE, VEHICLE3_UP_IMAGE };
 	const std::string VEHICLE_DOWN_IMAGES[3]{ VEHICLE1_DOWN_IMAGE, VEHICLE2_DOWN_IMAGE, VEHICLE3_DOWN_IMAGE };
-
+	
+	AudioPlayer *zoomSoundPlayer;
 public:
 	VehicleSpawner();
 	~VehicleSpawner();

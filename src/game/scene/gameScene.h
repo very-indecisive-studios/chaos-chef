@@ -28,6 +28,8 @@ private:
 	Text *pauseText;
 	Text *scoreText;
 
+	AudioPlayer *gameMusicPlayer;
+
 	void ConductCollisionCheckingsButNotHandleIt(float deltaTime);
 public:
 	GameScene(const FoodMenu *foodMenu);

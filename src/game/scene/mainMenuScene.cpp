@@ -17,12 +17,13 @@ MainMenuScene::MainMenuScene()
 
 	pointedButton = bodyText1;
 
-	if (!AudioPlayer::GetPersistent(BG_AUDIO_TAG))
+	if (!(bgMusicPlayer = AudioPlayer::GetPersistent(BG_AUDIO_TAG)))
 	{
 		bgMusicPlayer = AudioPlayer::CreatePersistent(BG_AUDIO, BG_AUDIO_TAG);
 		bgMusicPlayer->SetLooping(true);
-		bgMusicPlayer->Play();
 	}
+
+	bgMusicPlayer->Play();
 }
 
 MainMenuScene::~MainMenuScene()

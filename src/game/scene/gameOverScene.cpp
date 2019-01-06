@@ -26,6 +26,9 @@ GameOverScene::GameOverScene(int reason, bool addPlayer, int playerScore, std::s
 	bottomText = Text::Create("Press <ENTER> to continue", FONT_TYPE, FONT_COLOR_WHITE, FONT_SIZE, 100, false, false);
 
 	background = Sprite::Create(BACKGROUND_IMAGE_OTHERS, 0);
+
+	ripMusicPlayer = AudioPlayer::Create(RIP_AUDIO);
+	ripMusicPlayer->Play();
 }
 
 GameOverScene::~GameOverScene()
@@ -33,6 +36,7 @@ GameOverScene::~GameOverScene()
 	delete bodyText;
 	delete bottomText;
 	delete background;
+	delete ripMusicPlayer;
 }
 
 void GameOverScene::Update(float deltaTime)

@@ -16,7 +16,8 @@ private:
 	const FoodMenu *foodMenu;
 
 	AudioPlayer *newOrderSoundPlayer;
-	
+	AudioPlayer *tiktokSoundPlayer;
+
 	float nextOrderIntervalSeconds;
 	float timeElapsed = 0;
 	float totalTime = 0;
@@ -30,7 +31,7 @@ private:
 		{ GameSceneData::Hud::Bottom::ORDER_HUD_LOCATION_4 }
 	};
 
-	Order *currentOrder[4]{ nullptr };
+	Order *currentOrder[4] {  };
 public:
 	OrderManager(const FoodMenu *foodMenu, float nextOrderIntervalSeconds);
 	~OrderManager();

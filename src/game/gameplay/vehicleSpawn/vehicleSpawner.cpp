@@ -9,11 +9,16 @@
 VehicleSpawner::VehicleSpawner()
 {
 	srand(time(nullptr));
+
+	zoomSoundPlayer = AudioPlayer::Create(ZOOM_AUDIO);
+	zoomSoundPlayer->SetVolume(0.25f);
+	zoomSoundPlayer->SetLooping(true);
+	zoomSoundPlayer->Play();
 }
 
 VehicleSpawner::~VehicleSpawner()
 {
-
+	delete zoomSoundPlayer;
 }
 
 void VehicleSpawner::Update(float deltaTime)

@@ -1,7 +1,9 @@
 #include "playerHand.h"
 
 PlayerHand::PlayerHand()
-{ }
+{
+	pickupSoundPlayer = AudioPlayer::Create(PICKUP_AUDIO);
+}
 
 PlayerHand::~PlayerHand()
 {
@@ -11,6 +13,8 @@ PlayerHand::~PlayerHand()
 		delete s;
 	}
 	foodsOnPlateSprites.clear();
+
+	delete pickupSoundPlayer;
 }
 
 void PlayerHand::AddPlatedFoodToHuds(const PlatedFood * platedFood)
@@ -52,6 +56,8 @@ void PlayerHand::Add(const PlatedFood *platedFood)
 			return;
 		}
 	}
+
+	pickupSoundPlayer->Play();
 
 	foodsOnPlate.push_back(platedFood);
 	AddPlatedFoodToHuds(platedFood);

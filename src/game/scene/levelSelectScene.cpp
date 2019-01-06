@@ -66,22 +66,28 @@ void LevelSelectScene::CheckButtonClick()
 {
 	if (Context::Get()->GetInputManager()->IsKeyDown(VK_RETURN))
 	{
+		auto bgMusicPlayer = AudioPlayer::GetPersistent(BG_AUDIO_TAG);
+
 		Context::Get()->GetInputManager()->ClearAll();
 		if (pointedButton == bodyText1) // Newbie - Fried Basket
 		{
 			Context::Get()->GetSceneManager()->LoadGameScene(&FOOD_MENU_FB);
+			bgMusicPlayer->Stop();
 		}
 		else if (pointedButton == bodyText2) // Easy - Sashimi + Sushi
 		{
 			Context::Get()->GetSceneManager()->LoadGameScene(&FOOD_MENU_SS);
+			bgMusicPlayer->Stop();
 		}
 		else if (pointedButton == bodyText3) // Medium - Pizza
 		{
 			Context::Get()->GetSceneManager()->LoadGameScene(&FOOD_MENU_PIZZA);
+			bgMusicPlayer->Stop();
 		}
 		else if (pointedButton == bodyText4) // Hard - Pasta
 		{
 			Context::Get()->GetSceneManager()->LoadGameScene(&FOOD_MENU_PASTA);
+			bgMusicPlayer->Stop();
 		}
 		else if (pointedButton == bodyText5) // BACK
 		{

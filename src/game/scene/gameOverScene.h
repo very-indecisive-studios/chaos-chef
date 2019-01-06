@@ -3,6 +3,7 @@
 #include "scene.h"
 #include "core/sprites/sprite.h"
 #include "core/text/text.h"
+#include "core/audio/audio.h"
 
 class GameOverScene : public Scene
 {
@@ -15,6 +16,8 @@ private:
 	Text *topText = nullptr;
 	Text *bodyText = nullptr;
 	Text *bottomText = nullptr;
+
+	AudioPlayer *ripMusicPlayer;
 
 public:
 	GameOverScene(int reason, bool addPlayer, int playerScore, std::string level);

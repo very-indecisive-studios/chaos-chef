@@ -10,7 +10,9 @@ class CounterArea : public GameEntity
 private:
 	int counterNo;
 	OrderManager *orderManager;
+
 	AudioPlayer *orderSuccessSoundPlayer;
+	AudioPlayer *wrongOrderSoundPlayer;
 public:
 	CounterArea(int counterNo, OrderManager *orderManager);
 	~CounterArea();

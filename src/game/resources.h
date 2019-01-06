@@ -110,6 +110,14 @@ const std::string BACKGROUND_IMAGE_OTHERS = "assets\\backgrounds\\others.png";
 // audio
 const std::wstring BG_AUDIO = L"assets/audio/bg_music.mp3";
 const std::string BG_AUDIO_TAG = "BG_AUDIO";
-const std::wstring NEW_ORDER_AUDIO = L"assets/audio/new_order.mp3";
-const std::wstring DONE_ORDER_AUDIO = L"assets/audio/done_order.wav";
-const std::wstring SPLAT_AUDIO = L"assets/audio/splat.wav";
+const std::wstring NEW_ORDER_AUDIO = L"assets/audio/new_order.wav";
+const std::wstring ORDER_SUCCESS_AUDIO = L"assets/audio/order_success.wav";
+const std::wstring CHICKEN_SPLAT_AUDIO = L"assets/audio/chicken_splat.wav";
+const std::wstring CHICKEN_DED_AUDIO = L"assets/audio/chicken_ded.wav";
+const std::wstring TIKTOK_AUDIO = L"assets/audio/tiktok.mp3";
+const std::wstring PICKUP_AUDIO = L"assets/audio/pickup.wav";
+const std::wstring WRONG_ORDER_AUDIO = L"assets/audio/wrong_order.wav";
+const std::wstring TRASH_AUDIO = L"assets/audio/trash.wav";
+const std::wstring RIP_AUDIO = L"assets/audio/rip.wav";
+const std::wstring GAME_MUSIC_AUDIO = L"assets/audio/game_music.mp3";
+const std::wstring ZOOM_AUDIO = L"assets/audio/zoom.mp3";

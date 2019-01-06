@@ -24,6 +24,7 @@ private:
 	AnimatedSprite *westAnimSprite = AnimatedSprite::Create(PLAYER_WEST_IMAGE, 1, PLAYER_WIDTH, PLAYER_HEIGHT, PLAYER_ANIMATION_DELAY);
 
 	AudioPlayer *splatSoundPlayer;
+	AudioPlayer *deathSoundPlayer;
 
 	PlayerHand hand;
 	bool playerDead = false;

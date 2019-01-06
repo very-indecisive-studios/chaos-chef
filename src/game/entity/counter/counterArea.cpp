@@ -11,12 +11,14 @@ CounterArea::CounterArea(int counterNo, OrderManager *orderManager)
 	collisionBounds.topLeft = Vector2(0, 0);
 	collisionBounds.bottomRight = Vector2(10, 10);
 
-	orderSuccessSoundPlayer = AudioPlayer::Create(DONE_ORDER_AUDIO);
+	orderSuccessSoundPlayer = AudioPlayer::Create(ORDER_SUCCESS_AUDIO);
+	wrongOrderSoundPlayer = AudioPlayer::Create(WRONG_ORDER_AUDIO);
 }
 
 CounterArea::~CounterArea()
 {
 	delete orderSuccessSoundPlayer;
+	delete wrongOrderSoundPlayer;
 }
 
 bool CounterArea::OrderSubmit(std::vector<const PlatedFood *> foodOnHand)
@@ -45,6 +47,11 @@ bool CounterArea::OrderSubmit(std::vector<const PlatedFood *> foodOnHand)
 	}
 	else 
 	{
+		if (!wrongOrderSoundPlayer->IsPlaying())
+		{
+			wrongOrderSoundPlayer->Play();
+		}
+
 		return false;
 	}
 }

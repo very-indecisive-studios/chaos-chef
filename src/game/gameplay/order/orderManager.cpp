@@ -7,6 +7,8 @@ OrderManager::OrderManager(const FoodMenu* foodMenu, float nextOrderIntervalSeco
 	srand(time(nullptr));
 
 	newOrderSoundPlayer = AudioPlayer::Create(NEW_ORDER_AUDIO);
+	tiktokSoundPlayer = AudioPlayer::Create(TIKTOK_AUDIO);
+	tiktokSoundPlayer->SetLooping(true);
 }
 
 OrderManager::~OrderManager()
@@ -19,15 +21,26 @@ OrderManager::~OrderManager()
 	orderQueue.clear();
 
 	delete newOrderSoundPlayer;
+	delete tiktokSoundPlayer;
 }
 
 void OrderManager::Update(float deltaTime)
 {
-	for (Order *order : currentOrder)
+	for (int i = 0; i < 4; i++)
 	{
+		Order *&order = currentOrder[i];
+
 		if (order != nullptr)
 		{
 			order->timeRemainingSeconds -= deltaTime;
+
+			if (order->timeRemainingSeconds <= 15)
+			{
+				if (!tiktokSoundPlayer->IsPlaying())
+				{
+				    tiktokSoundPlayer->Play();
+				}
+			}
 
 			if (order->timeRemainingSeconds <= 0)
 			{

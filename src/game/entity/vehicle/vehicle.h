@@ -5,6 +5,7 @@
 #include "core/sprites/animatedSprite.h"
 #include "game/resources.h"
 #include "game/data/Layer.h"
+#include "core/audio/audio.h"
 
 enum class VehicleDirection { UP, DOWN };
 

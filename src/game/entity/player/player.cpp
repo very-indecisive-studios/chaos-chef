@@ -17,7 +17,8 @@ Player::Player()
 
 	currentAnimSprite = southAnimSprite; // starting direction
 
-	splatSoundPlayer = AudioPlayer::Create(SPLAT_AUDIO);
+	splatSoundPlayer = AudioPlayer::Create(CHICKEN_SPLAT_AUDIO);
+	deathSoundPlayer = AudioPlayer::Create(CHICKEN_DED_AUDIO);
 }
 
 Player::~Player()
@@ -28,6 +29,7 @@ Player::~Player()
 	delete westAnimSprite;
 
 	delete splatSoundPlayer;
+	delete deathSoundPlayer;
 }
 
 void Player::Move(float deltaTime)
@@ -167,6 +169,7 @@ void Player::HandleCollision(GameEntity *entity)
 	else if (entity->GetType() == GameEntityType::VEHICLE) // GAME OVER scene
 	{
 		splatSoundPlayer->Play();
+		deathSoundPlayer->Play();
 
 		playerDead = true;
 	}

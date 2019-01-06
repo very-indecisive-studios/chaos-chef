@@ -83,6 +83,10 @@ GameScene::GameScene(const FoodMenu *foodMenu)
 	entities.push_back(trashBinArea);
 
 	vehicleSpawner = new VehicleSpawner();
+
+	gameMusicPlayer = AudioPlayer::Create(GAME_MUSIC_AUDIO);
+	gameMusicPlayer->SetVolume(0.5f);
+	gameMusicPlayer->Play();
 }
 
 GameScene::~GameScene()
@@ -103,6 +107,8 @@ GameScene::~GameScene()
 		delete entity;
 	}
 	entities.clear();
+
+	delete gameMusicPlayer;
 }
 
 void GameScene::SetFoodMenu(const FoodMenu *foodMenu)

@@ -5,6 +5,7 @@
 #include "game/hud/hand/handIndvHud.h"
 #include "game/resources.h"
 #include "game/data/gameSceneData.h"
+#include "core/audio/audio.h"
 
 class PlayerHand
 {
@@ -23,6 +24,8 @@ private:
 		{ GameSceneData::Hud::Top::HAND_INDV_HUD_LOCATION_4 },
 		{ GameSceneData::Hud::Top::HAND_INDV_HUD_LOCATION_5 }
 	};
+
+	AudioPlayer *pickupSoundPlayer;
 
 	void AddPlatedFoodToHuds(const PlatedFood *platedFood);
 	void ResetHuds();
