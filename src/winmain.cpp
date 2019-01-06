@@ -153,8 +153,8 @@ bool CreateMainWindow(HWND &hwnd, HINSTANCE hInstance, int nCmdShow)
 		style,                  // window style
 		CW_USEDEFAULT,          // default horizontal position of window
 		CW_USEDEFAULT,          // default vertical position of window
-		GAME_WIDTH,             // width of window
-		GAME_HEIGHT,            // height of the window
+		GAME_WIDTH * GAME_WINDOW_SCALE,             // width of window
+		GAME_HEIGHT * GAME_WINDOW_SCALE,            // height of the window
 		(HWND)NULL,            // no parent window
 		(HMENU)NULL,           // no menu
 		hInstance,              // handle to application instance
@@ -173,8 +173,8 @@ bool CreateMainWindow(HWND &hwnd, HINSTANCE hInstance, int nCmdShow)
 			hwnd,
 			0,												// Left
 			0,												// Top
-			GAME_WIDTH + (GAME_WIDTH - clientRect.right),		// Right
-			GAME_HEIGHT + (GAME_HEIGHT - clientRect.bottom),	// Bottom
+			(GAME_WIDTH * GAME_WINDOW_SCALE) + (GAME_WIDTH * GAME_WINDOW_SCALE - clientRect.right),		// Right
+			(GAME_HEIGHT * GAME_WINDOW_SCALE) + (GAME_HEIGHT * GAME_WINDOW_SCALE - clientRect.bottom),	// Bottom
 			TRUE											// Repaint the window
 		);
 	}
