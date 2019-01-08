@@ -12,6 +12,7 @@
 #include "core/math.h"
 #include "core/sprites/animatedSprite.h"
 #include "game/data/food.h"
+#include "winresource.h"
 
 // Function prototypes
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int);
@@ -25,6 +26,12 @@ HWND hwnd = NULL;
 //=============================================================================
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
+	// Try creating a window.
+	if (!CreateMainWindow(hwnd, hInstance, nCmdShow)) 
+	{
+		return 1;
+	}
+
 #if defined(DEBUG) | defined(_DEBUG)
 	// Check for memory leak if debug build.
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
@@ -34,11 +41,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	AttachConsole(GetCurrentProcessId());
 	freopen("CON", "w", stdout);
 #endif
-
-	// Try creating a window.
-	if (!CreateMainWindow(hwnd, hInstance, nCmdShow)) {
-		return 1;
-	}
 
 	// Install fonts required by game.
 	AddFontResource(FONT_NAME.c_str());
@@ -127,12 +129,12 @@ bool CreateMainWindow(HWND &hwnd, HINSTANCE hInstance, int nCmdShow)
 	wcx.cbClsExtra = 0;                 // no extra class memory 
 	wcx.cbWndExtra = 0;                 // no extra window memory 
 	wcx.hInstance = hInstance;          // handle to instance 
-	wcx.hIcon = NULL;
+	wcx.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ICON1));
 	wcx.hCursor = LoadCursor(NULL, IDC_ARROW);   // predefined arrow 
 	wcx.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);    // black background 
 	wcx.lpszMenuName = NULL;           // name of menu resource 
 	wcx.lpszClassName = CLASS_NAME;     // name of window class 
-	wcx.hIconSm = NULL;                 // small class icon 
+	wcx.hIconSm = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ICON1)); // small class icon 
 
 	// Register the window class. 
 	// RegisterClassEx returns 0 on error.
