@@ -26,7 +26,7 @@ namespace GameSceneData
 			static const int		HAND_COMB_HUD_PF_SCALE			= 2;
 
 			static const Vector2	HAND_INDV_HUD_NEXT				= Vector2(4, 0) * TILE_SIZE;
-			static const Vector2	HAND_INDV_HUD_LOCATION_1		= Vector2(10, 1) * TILE_SIZE;
+			static const Vector2	HAND_INDV_HUD_LOCATION_1		= Vector2(6, 1) * TILE_SIZE;
 			static const Vector2	HAND_INDV_HUD_LOCATION_2		= HAND_INDV_HUD_LOCATION_1 + HAND_INDV_HUD_NEXT;
 			static const Vector2	HAND_INDV_HUD_LOCATION_3		= HAND_INDV_HUD_LOCATION_2 + HAND_INDV_HUD_NEXT;
 			static const Vector2	HAND_INDV_HUD_LOCATION_4		= HAND_INDV_HUD_LOCATION_3 + HAND_INDV_HUD_NEXT;
