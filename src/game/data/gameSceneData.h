@@ -79,10 +79,10 @@ namespace GameSceneData
 		static const int WIDTH		= 640;
 		static const CollisionBounds BOUNDS = { LOCATION, LOCATION + Vector2(WIDTH, HEIGHT) };
 
-		static const Vector2 VEHICLE_SPAWN_LOCATION1 = Vector2(11, 21) * TILE_SIZE;
-		static const Vector2 VEHICLE_SPAWN_LOCATION2 = Vector2(17, 4) * TILE_SIZE;
-		static const Vector2 VEHICLE_SPAWN_LOCATION3 = Vector2(23, 21) * TILE_SIZE;
-		static const Vector2 VEHICLE_SPAWN_LOCATION4 = Vector2(29, 4) * TILE_SIZE;
+		static const Vector2 VEHICLE_SPAWN_LOCATION1 = Vector2(11, 24) * TILE_SIZE;
+		static const Vector2 VEHICLE_SPAWN_LOCATION2 = Vector2(17, 0) * TILE_SIZE;
+		static const Vector2 VEHICLE_SPAWN_LOCATION3 = Vector2(23, 24) * TILE_SIZE;
+		static const Vector2 VEHICLE_SPAWN_LOCATION4 = Vector2(29, 0) * TILE_SIZE;
 
 		static const Vector2 PLAYER_SPAWN_LOCATION = Vector2(7, 14) * TILE_SIZE;
 

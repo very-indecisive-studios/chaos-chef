@@ -80,6 +80,8 @@ const int  CUSTOMER_HEIGHT = 32;             // height of customer image
 // sprites for map
 const std::string GAME_SCENE_IMAGE = "assets\\map\\final_map.png";
 
+const std::string GAME_SCENE_HUD_IMAGE = "assets\\map\\hud.png";
+
 // texts
 const std::string FONT_TYPE = "Pixel Operator";
 const int FONT_SIZE = 24;

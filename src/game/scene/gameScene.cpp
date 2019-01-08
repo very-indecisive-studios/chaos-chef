@@ -17,7 +17,8 @@ GameScene::GameScene(const FoodMenu *foodMenu)
 	: Scene(SceneType::GAME)
 {
 	currentFoodMenu = foodMenu;
-	map = Sprite::Create(GAME_SCENE_IMAGE, 0);
+	map = Sprite::Create(GAME_SCENE_IMAGE, Layer::BACKGROUND);
+	hud = Sprite::Create(GAME_SCENE_HUD_IMAGE, Layer::HUD);
 	handText = Text::Create("HAND", FONT_TYPE, FONT_COLOR_BLACK, 16, 100, true, false, DT_LEFT);
 	ordersText = Text::Create("ORDERS", FONT_TYPE, FONT_COLOR_BLACK, 16, 100, true, false, DT_LEFT);
 
@@ -96,6 +97,7 @@ GameScene::~GameScene()
 	delete vehicleSpawner;
 
 	delete map;
+	delete hud;
 	delete ordersText;
 	delete handText;
 	delete scoreText;
@@ -109,6 +111,7 @@ GameScene::~GameScene()
 	entities.clear();
 
 	delete gameMusicPlayer;
+
 }
 
 void GameScene::SetFoodMenu(const FoodMenu *foodMenu)
@@ -146,6 +149,7 @@ void GameScene::Update(float deltaTime)
 	vehicleSpawner->Update(deltaTime);
 
 	map->Draw(Vector2(0, 0));
+	hud->Draw(Vector2(0, 0));
 	handText->Draw(GameSceneData::Hud::Top::HAND_TEXT_LOCATION);
 	ordersText->Draw(GameSceneData::Hud::Bottom::ORDER_TEXT_LOCATION);
 
