@@ -154,7 +154,7 @@ void GameScene::Update(float deltaTime)
 	ordersText->Draw(GameSceneData::Hud::Bottom::ORDER_TEXT_LOCATION);
 
 	scoreText->SetText("SCORE: " + std::to_string(playerScore));
-	scoreText->Draw(Vector2(440, 22.25));
+	scoreText->Draw(Vector2(400, 22.25));
 	
 	player->Update(deltaTime);
 
