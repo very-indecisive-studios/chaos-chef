@@ -146,7 +146,7 @@ bool CreateMainWindow(HWND &hwnd, HINSTANCE hInstance, int nCmdShow)
 	if (FULLSCREEN)
 		style = WS_EX_TOPMOST | WS_VISIBLE | WS_POPUP;
 	else
-		style = WS_OVERLAPPEDWINDOW;
+		style = WS_OVERLAPPED | WS_MINIMIZEBOX | WS_SYSMENU;
 
 	// Create window
 	hwnd = CreateWindow(
