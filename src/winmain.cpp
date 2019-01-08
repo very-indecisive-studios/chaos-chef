@@ -26,12 +26,6 @@ HWND hwnd = NULL;
 //=============================================================================
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-	// Try creating a window.
-	if (!CreateMainWindow(hwnd, hInstance, nCmdShow)) 
-	{
-		return 1;
-	}
-
 #if defined(DEBUG) | defined(_DEBUG)
 	// Check for memory leak if debug build.
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
@@ -41,6 +35,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	AttachConsole(GetCurrentProcessId());
 	freopen("CON", "w", stdout);
 #endif
+
+	// Try creating a window.
+	if (!CreateMainWindow(hwnd, hInstance, nCmdShow)) 
+	{
+		return 1;
+	}
 
 	// Install fonts required by game.
 	AddFontResource(FONT_NAME.c_str());
