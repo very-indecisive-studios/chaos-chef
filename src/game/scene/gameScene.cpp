@@ -121,6 +121,7 @@ void GameScene::SetFoodMenu(const FoodMenu *foodMenu)
 
 void GameScene::Update(float deltaTime)
 {
+	totalTime += deltaTime;
 	int playerScore = orderManager->GetScore() - trashBinArea->GetTrashScore();
 
 	if (Context::Get()->GetInputManager()->IsKeyDown(VK_ESCAPE)) 
@@ -139,10 +140,19 @@ void GameScene::Update(float deltaTime)
 		Context::Get()->GetInputManager()->ClearAll();
 		Context::Get()->GetSceneManager()->LoadGameOverScene(1, true, playerScore, currentFoodMenu->name);
 	}
+
 	if (player->isDead())
 	{
-		Context::Get()->GetInputManager()->ClearAll();
-		Context::Get()->GetSceneManager()->LoadGameOverScene(2, true, playerScore, currentFoodMenu->name);
+		if (!gotTime) 
+		{
+			currentTime = totalTime;
+			gotTime = true;
+		}
+
+		if (totalTime - currentTime > 1) 
+		{
+			Context::Get()->GetSceneManager()->LoadGameOverScene(2, true, playerScore, currentFoodMenu->name);
+		}
 	}
 	orderManager->Update(deltaTime);
 

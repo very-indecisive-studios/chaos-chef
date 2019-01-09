@@ -34,83 +34,86 @@ Player::~Player()
 
 void Player::Move(float deltaTime)
 {
-	// SOUTH == DOWN
-	if (Context::Get()->GetInputManager()->IsKeyDown(playerKeyDown))
+	if (!playerDead) 
 	{
-		if (currentAnimSprite != southAnimSprite) // changing direction of player
+		// SOUTH == DOWN
+		if (Context::Get()->GetInputManager()->IsKeyDown(playerKeyDown))
 		{
-			currentAnimSprite = southAnimSprite;
-		}
-		else
-		{
-			position.y += deltaTime * playerSpeed;
-
-			if (position.y >= (GameSceneData::Map::BOUNDS.bottomRight.y - currentAnimSprite->GetHeight())) // if off screen at bottom
+			if (currentAnimSprite != southAnimSprite) // changing direction of player
 			{
-				position.y = GameSceneData::Map::BOUNDS.bottomRight.y - currentAnimSprite->GetHeight(); // position back to the bottom limit
+				currentAnimSprite = southAnimSprite;
 			}
-		}
-
-		currentAnimSprite->Play();
-	}
-	// NORTH == UP
-	else if (Context::Get()->GetInputManager()->IsKeyDown(playerKeyUp))
-	{
-		if (currentAnimSprite != northAnimSprite)
-		{
-			currentAnimSprite = northAnimSprite;
-		}
-		else
-		{
-			position.y -= deltaTime * playerSpeed;
-
-			if (position.y <= GameSceneData::Map::BOUNDS.topLeft.y) // if off screen at top
+			else
 			{
-				position.y = GameSceneData::Map::BOUNDS.topLeft.y; // position back to the top limit
-			}
-		}
+				position.y += deltaTime * playerSpeed;
 
-		currentAnimSprite->Play();
-	}
-	// EAST == RIGHT
-	else if (Context::Get()->GetInputManager()->IsKeyDown(playerKeyRight))
-	{
-		if (currentAnimSprite != eastAnimSprite)
-		{
-			currentAnimSprite = eastAnimSprite;
+				if (position.y >= (GameSceneData::Map::BOUNDS.bottomRight.y - currentAnimSprite->GetHeight())) // if off screen at bottom
+				{
+					position.y = GameSceneData::Map::BOUNDS.bottomRight.y - currentAnimSprite->GetHeight(); // position back to the bottom limit
+				}
+			}
+
+			currentAnimSprite->Play();
 		}
-		else
+		// NORTH == UP
+		else if (Context::Get()->GetInputManager()->IsKeyDown(playerKeyUp))
 		{
-			position.x += deltaTime * playerSpeed;
-			if (position.x >= (GameSceneData::Map::BOUNDS.bottomRight.x - currentAnimSprite->GetWidth())) // if off screen at right
+			if (currentAnimSprite != northAnimSprite)
 			{
-				position.x = GameSceneData::Map::BOUNDS.bottomRight.x - currentAnimSprite->GetWidth(); // position back to the right limit
+				currentAnimSprite = northAnimSprite;
 			}
-		}
-
-		currentAnimSprite->Play();
-	}
-	// WEST == LEFT
-	else if (Context::Get()->GetInputManager()->IsKeyDown(playerKeyLeft))
-	{
-		if (currentAnimSprite != westAnimSprite)
-		{
-			currentAnimSprite = westAnimSprite;
-		}
-		else
-		{
-			position.x -= deltaTime * playerSpeed;
-			if (position.x <= GameSceneData::Map::BOUNDS.topLeft.x) // if off screen at left
+			else
 			{
-				position.x = GameSceneData::Map::BOUNDS.topLeft.x; // position back to the left limit
-			}
-		}
+				position.y -= deltaTime * playerSpeed;
 
-		currentAnimSprite->Play();
-	}
-	else // if movement keys are not pressed
-	{
-		currentAnimSprite->Stop();
+				if (position.y <= GameSceneData::Map::BOUNDS.topLeft.y) // if off screen at top
+				{
+					position.y = GameSceneData::Map::BOUNDS.topLeft.y; // position back to the top limit
+				}
+			}
+
+			currentAnimSprite->Play();
+		}
+		// EAST == RIGHT
+		else if (Context::Get()->GetInputManager()->IsKeyDown(playerKeyRight))
+		{
+			if (currentAnimSprite != eastAnimSprite)
+			{
+				currentAnimSprite = eastAnimSprite;
+			}
+			else
+			{
+				position.x += deltaTime * playerSpeed;
+				if (position.x >= (GameSceneData::Map::BOUNDS.bottomRight.x - currentAnimSprite->GetWidth())) // if off screen at right
+				{
+					position.x = GameSceneData::Map::BOUNDS.bottomRight.x - currentAnimSprite->GetWidth(); // position back to the right limit
+				}
+			}
+
+			currentAnimSprite->Play();
+		}
+		// WEST == LEFT
+		else if (Context::Get()->GetInputManager()->IsKeyDown(playerKeyLeft))
+		{
+			if (currentAnimSprite != westAnimSprite)
+			{
+				currentAnimSprite = westAnimSprite;
+			}
+			else
+			{
+				position.x -= deltaTime * playerSpeed;
+				if (position.x <= GameSceneData::Map::BOUNDS.topLeft.x) // if off screen at left
+				{
+					position.x = GameSceneData::Map::BOUNDS.topLeft.x; // position back to the left limit
+				}
+			}
+
+			currentAnimSprite->Play();
+		}
+		else // if movement keys are not pressed
+		{
+			currentAnimSprite->Stop();
+		}
 	}
 }
 
@@ -168,10 +171,14 @@ void Player::HandleCollision(GameEntity *entity)
 	}
 	else if (entity->GetType() == GameEntityType::VEHICLE) // GAME OVER scene
 	{
-		splatSoundPlayer->Play();
-		deathSoundPlayer->Play();
+		if (!playerDead)
+		{
+			splatSoundPlayer->Play();
+			deathSoundPlayer->Play();
+			currentAnimSprite = deadAnimSprite;
 
-		playerDead = true;
+			playerDead = true;
+		}
 	}
 }
 

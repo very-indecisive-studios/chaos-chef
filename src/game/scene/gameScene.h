@@ -31,6 +31,10 @@ private:
 
 	AudioPlayer *gameMusicPlayer;
 
+	float totalTime = 0;
+	bool gotTime = false;
+	float currentTime;
+
 	void ConductCollisionCheckingsButNotHandleIt(float deltaTime);
 public:
 	GameScene(const FoodMenu *foodMenu);

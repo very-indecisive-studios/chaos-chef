@@ -64,6 +64,7 @@ const std::string PLAYER_NORTH_IMAGE	= "assets\\player\\north.png";
 const std::string PLAYER_SOUTH_IMAGE	= "assets\\player\\south.png";
 const std::string PLAYER_EAST_IMAGE		= "assets\\player\\east.png";
 const std::string PLAYER_WEST_IMAGE		= "assets\\player\\west.png";
+const std::string PLAYER_DEAD_IMAGE		= "assets\\player\\dead.png";
 
 const float PLAYER_ANIMATION_DELAY = 0.1f; // time between frames of player animation
 const int  PLAYER_WIDTH	= 32;              // width of player image
