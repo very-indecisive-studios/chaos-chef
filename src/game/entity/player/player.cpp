@@ -158,6 +158,7 @@ void Player::HandleCollision(GameEntity *entity)
 	{
 		if (Context::Get()->GetInputManager()->IsKeyDown(actionKey))
 		{
+			Context::Get()->GetInputManager()->ClearAll();
 			CounterArea *counterArea = (CounterArea *)entity;
 			if (counterArea->OrderSubmit(this->Give())) // if correct order - remove plated food on hand
 			{
