@@ -143,7 +143,7 @@
     <ClInclude Include="src\game\entity\dispenser\dispenser.h" />
     <ClInclude Include="src\game\entity\dispenser\dispenserArea.h" />
     <ClInclude Include="src\game\data\food.h" />
-    <ClInclude Include="src\game\data\Layer.h" />
+    <ClInclude Include="src\game\data\layer.h" />
     <ClInclude Include="src\game\entity\gameEntity.h" />
     <ClInclude Include="src\core\gameException.h" />
     <ClInclude Include="src\core\graphics\graphicsRenderer.h" />
