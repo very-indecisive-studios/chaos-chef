@@ -2,8 +2,9 @@
 A DirectX 9 game for Games Programming Assignment 1. This game is inspired by these games: Overcooked and Crossy Roads. The objective of the game is to serve the correct orders to the respective counters before the order's time limit expires. Players have to be careful not to get hit by cars as the cross the road to deliver the orders.
 
 This project demonstrates a game engine that:
-- Renders 2D sprites with layering support
-- Audio support
+- Renders 2D sprites with layering
+- Plays audio for music and sound effects
+- Provides collision system
 - Has modular and clean architecture for maintainable codebase
 
 ## Screenshots
